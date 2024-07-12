@@ -3,6 +3,7 @@ body {
   overflow-x: hidden;
 }
 
-#page {
-  border-collapse: collapse;
-}
+html, body {
+  margin: 0;
+  padding: 0;
+} 
