@@ -2,3 +2,7 @@ body {
   overflow-y: hidden;
   overflow-x: hidden;
 }
+
+#page {
+  border-collapse: collapse;
+}
