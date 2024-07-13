@@ -45,7 +45,7 @@ function mouseClicked(){
 		if(mouseX > win[0]/2-px*7.1 && mouseX < win[0]/2-px*0.9){
 			window.open('https://thegraycuber.github.io/gaussian.html', '_blank');
 		} else if(mouseX > win[0]/2+px*0.9 && mouseX < win[0]/2+px*7.1){
-			window.open('https://openprocessing.org/sketch/2297125', '_blank');
+			window.open('https://thegraycuber.github.io/quadratic.html', '_blank');
 		}
 	}
 }
