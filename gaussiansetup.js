@@ -64,7 +64,7 @@ function setup() {
 	infoBox.Items.push(new textItem(6,'This page displays\nGaussian Primes.\n\nIf you are unfamiliar\n with the topic,\nI recommend viewing',px*0.15));
 	infoBox.Items.push(new textItem(1,'this Brilliant page',px*0.15,'',white,atkinsonBold,'https://brilliant.org/wiki/gaussian-integers/'));
 	infoBox.Items.push(new textItem(1,'or',px*0.15));
-	infoBox.Items.push(new textItem(1,'my YouTube video.',px*0.15,'',white,atkinsonBold,'https://brilliant.org/wiki/gaussian-integers/'));
+	infoBox.Items.push(new textItem(1,'my YouTube video.',px*0.15,'',white,atkinsonBold,'https://youtu.be/PkWY3fLy4oI'));
 	infoBox.Items.push(new textItem(5,'\nHover your mouse over\na number to see\ninformation about it in\nthe lower left info box.',px*0.15));
 	infoBox.Items.push(new textItem(3,'Hovering over a prime\nwill highlight its\nmultiples in white.',px*0.15));
 	infoBox.Items.push(new textItem(4,'Hovering over a\n composite will highlight\nits prime factors\n in white.',px*0.15));
