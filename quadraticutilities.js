@@ -178,6 +178,10 @@ function highlightAssociates(walkValue,mouseA){
 				var imCoeff =  ints[mouseIdx].Coeffs[0][1]*fRow.Coeffs[0][0] - ints[mouseIdx].Coeffs[0][0]*fRow.Coeffs[0][1];
 				if ((reCoeff % absNorm + absNorm) % absNorm == 0 && (imCoeff % absNorm + absNorm) % absNorm == 0){
 					fRow.Walkable = walkValue;
+				} else if (setting.GridMult[setting.W] == 0.5 && (reCoeff % absNorm + absNorm) % absNorm != 0 && (imCoeff % absNorm + absNorm) % absNorm != 0){
+					if (((reCoeff*2) % absNorm + absNorm) % absNorm == 0 && ((imCoeff*2) % absNorm + absNorm) % absNorm == 0){
+						fRow.Walkable = walkValue;
+					}
 				}
 			}		
 		}
