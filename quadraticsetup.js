@@ -65,10 +65,10 @@ function setup() {
 	infoBox.giveSizes();
 	
 	infoBox = new Box([-43,7],[setting.sq*6,setting.sq*16],setting.sq);
-	infoBox.Items.push(new textItem(6,'This page displays\nQuadratic Primes.\n\nIf you are unfamiliar\n with the topic,\nI recommend viewing',px*0.15));
-	infoBox.Items.push(new textItem(1,'this OEIS page.',px*0.15,'',white,atkinsonBold,'https://oeis.org/wiki/Quadratic_integer_rings'));
-	//infoBox.Items.push(new textItem(1,'or',px*0.15));
-	//infoBox.Items.push(new textItem(1,'my YouTube video.',px*0.15,'',white,atkinsonBold,'https://oeis.org/wiki/Quadratic_integer_rings'));
+	infoBox.Items.push(new textItem(6,'This page displays\nQuadratic Primes.\n\nIf you are unfamiliar\n with the topic,\nI recommend viewing\none of the following:',px*0.15));
+	infoBox.Items.push(new textItem(1,'this OEIS page',px*0.15,'',white,atkinsonBold,'https://oeis.org/wiki/Quadratic_integer_rings'));
+	infoBox.Items.push(new textItem(1,'or',px*0.15));
+	infoBox.Items.push(new textItem(1,'my video series.',px*0.15,'',white,atkinsonBold,'https://www.youtube.com/playlist?list=PLRcOL8MUr-pcIbez7ZRalqnSmYvLT00Fd'));
 	infoBox.Items.push(new textItem(5,'\nHover your mouse over\na number to see\ninformation about it in\nthe lower left info box.',px*0.15));
 	infoBox.Items.push(new textItem(3,'Hovering over a prime\nwill highlight its\nmultiples in white.',px*0.15));
 	infoBox.Items.push(new textItem(4,'Hovering over a\n composite will highlight\nits prime factors\n in white.',px*0.15));
