@@ -111,9 +111,10 @@ class arrowItem {
 		this.Index = 0;
 		this.Size = displaySize;
 		this.Id = id;
+		this.Active = true;
 	}
 	show(){
-		fill(white);
+		if (this.Active){fill(white);} else {fill(white*0.4);}
 		textSize(this.Size);
 		text(this.List[this.Index],this.Coords[0],this.Coords[1]);
 		triangle(this.Sides[0]-this.Size,this.Coords[1],this.Sides[0],this.Coords[1]-this.Size*0.5,this.Sides[0],this.Coords[1]+this.Size*0.5);
@@ -125,9 +126,9 @@ class arrowItem {
 		this.Sides = [this.Coords[0]-this.Radius[0]+this.Size*2,this.Coords[0]+this.Radius[0]-this.Size*2];
 	}
 	clicked(){
-		if(mouseX > this.Sides[0]-this.Size*2 && mouseX < this.Sides[0]+this.Size){
+		if(this.Active && mouseX > this.Sides[0]-this.Size*2 && mouseX < this.Sides[0]+this.Size){
 			this.giveValue((this.List.length - 1 + this.Index) % this.List.length);
-		} else if(mouseX < this.Sides[1] + this.Size*2 && mouseX > this.Sides[1]-this.Size){
+		} else if(this.Active && mouseX < this.Sides[1] + this.Size*2 && mouseX > this.Sides[1]-this.Size){
 			this.giveValue((1 + this.Index) % this.List.length);
 		}
 	}
@@ -187,7 +188,7 @@ class binaryItem {
 	show(){
 		
 		if (this.Active){fill(white-20);} else {fill(white*0.4);}
-		rect(this.Sides[this.Index],this.Coords[1],this.Radius[0]*0.9,this.Radius[1]*1.8,this.Size*0.5);
+		rect(this.Sides[this.Index],this.Coords[1],this.Radius[0]*0.9,this.Radius[1]*2,this.Size*0.5);
 		textSize(this.Size);
 		fill(black);
 		text(this.List[this.Index],this.Sides[this.Index],this.Coords[1]);

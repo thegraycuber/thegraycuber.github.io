@@ -4,6 +4,7 @@ function preload() {
 	atkinsonRegular = loadFont("Atkinson-Hyperlegible-Regular-102.ttf");
 	openSans = loadFont("OpenSans-Bold.ttf");
 	data = loadTable('2dInts-1.4.csv', 'csv', 'header');
+	zoomdata = loadTable('2dZoomData.csv', 'csv', 'header');
 }
 
 function setup() {
@@ -27,7 +28,7 @@ function setup() {
 	
 	var bigText = px*0.18;
 	var smallText = px*0.14;
-	menuBox = new Box([-43,7],[setting.sq*6,setting.sq*16],setting.sq);
+	menuBox = new Box([-43,5],[setting.sq*6,setting.sq*18],setting.sq);
 	menuBox.Items.push(new textItem(0.6,'',0));
 	menuBox.Items.push(new textItem(1,'Ring',bigText));
 	menuBox.Items.push(new arrowItem(1,setting.RingNames,smallText,'ring'));
@@ -49,6 +50,9 @@ function setup() {
 	menuBox.Items.push(new textItem(0.8,'',0));
 	menuBox.Items.push(new textItem(1,'Gridlines',bigText));
 	menuBox.Items.push(new binaryItem(1,['On','Off'],smallText,'gridlines',1));
+	menuBox.Items.push(new textItem(0.8,'',0));
+	menuBox.Items.push(new textItem(1,'Zoom Out',bigText));
+	menuBox.Items.push(new binaryItem(1,['On','Off'],smallText,'zoomout',1));
 	menuBox.Items.push(new textItem(0.8,'',0));
 	menuBox.Items.push(new textItem(1,'Hover Display',bigText));
 	menuBox.Items.push(new arrowItem(1,['Factors/Multiples','Associates'],smallText,'hover'));

@@ -8,6 +8,7 @@ class Settings {
 		this.Labels = 1;
 		this.ShowGrid = 0;
 		this.ShowAssoc = 0;
+		this.ZoomOut = 0;
 		this.DataRows = 2022;
 		this.Gridlines = [];
 		this.MouseCoeff = [0,0];
@@ -22,7 +23,7 @@ class Settings {
 		this.W = 0;
 		this.WVals = [-1,-2,-3,-7,-11,-19,-43,-67,-163, 17, 33, 41, 57, 73, 89, 97, 113, 129, 137, 3, 11, 19, 43, 59, 67, 83, 107, 131, 139,
 			 5, 13, 21, 29, 37, 53, 61, 69, 77, 93, 101, 109, 133, 141, 149, 6, 14, 22, 38, 46, 62, 86, 94, 118, 134, 7, 23, 31, 47, 71, 103, 127, 2]
-		//this.WVals = [-1,-2,-3]
+		//this.WVals = [-1,-2,-3,5]
 		this.WAssocs = [4,2,6];
 		this.WUnitInv = [[0,-1],[-1,0],[0.5,-0.5]];
 		this.WUnit = [[0,1],[-1,0],[0.5,0.5]];
@@ -85,6 +86,33 @@ class Settings {
 			this.ShowGrid = (listIndex + 1) % 2;
 		} else if (id == 'hoverbox'){
 			hoverBox.Active = (listIndex + 1) % 2;
+		} else if (id == 'zoomout'){
+			
+			this.ZoomOut = (listIndex + 1) % 2;
+			if(listIndex == 1){
+				menuBox.Items[menuBox.getIndex('displaying')].Active = true;
+				menuBox.Items[menuBox.getIndex('colorType')].Active = true;
+				menuBox.Items[menuBox.getIndex('animate')].Active = true;
+				menuBox.Items[menuBox.getIndex('labels')].Active = true;
+				menuBox.Items[menuBox.getIndex('gridlines')].Active = true;
+				menuBox.Items[menuBox.getIndex('hover')].Active = true;
+				menuBox.Items[menuBox.getIndex('hoverbox')].Active = true;
+			} else {
+				menuBox.Items[menuBox.getIndex('colorType')].Active = false;
+				menuBox.Items[menuBox.getIndex('colorType')].giveValue(3);
+				menuBox.Items[menuBox.getIndex('animate')].Active = false;
+				menuBox.Items[menuBox.getIndex('animate')].giveValue(1);
+				menuBox.Items[menuBox.getIndex('labels')].Active = false;
+				menuBox.Items[menuBox.getIndex('labels')].giveValue(1);
+				menuBox.Items[menuBox.getIndex('gridlines')].Active = false;
+				menuBox.Items[menuBox.getIndex('gridlines')].giveValue(1);
+				menuBox.Items[menuBox.getIndex('hover')].Active = false;
+				menuBox.Items[menuBox.getIndex('hoverbox')].Active = false;
+				menuBox.Items[menuBox.getIndex('hoverbox')].giveValue(1);
+				menuBox.Items[menuBox.getIndex('displaying')].Active = false;
+				menuBox.Items[menuBox.getIndex('displaying')].giveValue(0);
+			}
+			
 		} else if (id == '='){
 			menuBox.Active = listIndex;
 			if(menuBox.Active == 1 && infoBox.Active == 1){

@@ -8,7 +8,7 @@ class Gauss {
 		this.ColorFactor = [data.getNum(data_index,6)+data.getNum(data_index,7),data.getNum(data_index,7)];
 		this.MainDesc = data.getNum(data_index,9);
 		this.Walkable = (this.IsPrime + setting.Prime) % 2;
-		this.Coeffs = [[data.getNum(data_index,0),data.getNum(data_index,1)]]
+		this.Coeffs = [[data.getNum(data_index,0),data.getNum(data_index,1)]];
 		this.Type = 'Composite';
 		this.DistColor = [300-((15-data.getNum(data_index,6)+data.getNum(data_index,7))**2)*0.6,80,100-((15-data.getNum(data_index,6))**2)*0.5];
 		if (abs(this.Norm) == 1){

@@ -12,6 +12,15 @@ function intsLoad(){
 	for (var drow = 0; drow < data.getRowCount(); drow++){
 		ints.push(new Gauss(data,drow,setting.W));
 	}
+	zoomz = [];
+	for (drow = 0; drow < zoomdata.getRowCount(); drow++){
+		if(zoomdata.getString(drow,setting.W+2)=='1'){
+			zoomz.push(new Zoom(zoomdata,drow,setting.W));
+		}
+	}
+	if(setting.ZoomOut == 2){
+		setting.ZoomOut = 1;
+	}
 }
 
 function coordToCoeff(x_c, y_c,w = setting.W) {
@@ -20,8 +29,8 @@ function coordToCoeff(x_c, y_c,w = setting.W) {
   return nearest_point;
 }
 
-function coeffToCoord(coeff_input,w = setting.W) {
-	return_coord = [coeff_input[0]*setting.sq + win[0]/2, -coeff_input[1]*setting.sq*setting.WY[w] + win[1]/2];
+function coeffToCoord(coeff_input,w = setting.W,divfact = 1) {
+	return_coord = [coeff_input[0]*setting.sq/divfact + win[0]/2, -coeff_input[1]*setting.sq*setting.WY[w]/divfact + win[1]/2];
   return return_coord;
 }
 
@@ -48,8 +57,8 @@ function getAssociate(input_Assoc){
 	return [ints[intIndex(input_Assoc)].Coeffs[0][0],ints[intIndex(input_Assoc)].Coeffs[0][1],a];
 }
 
-function goodCoeff(checkCoeff,w = setting.W){
-	return abs(checkCoeff[0]) <= 50 && abs(checkCoeff[1]) <= setting.YMax[w] ;
+function goodCoeff(checkCoeff,w = setting.W,mult = 1){
+	return abs(checkCoeff[0]) <= 50*mult && abs(checkCoeff[1]) <= setting.YMax[w]*mult ;
 }
 
 function getNearest(findcoeffs){
