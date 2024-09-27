@@ -1,7 +1,7 @@
 
-win = [];
-px = 0;
-todraw = true;
+var win = [];
+var px = 0;
+var todraw = true;
 
 
 function preload() {
