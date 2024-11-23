@@ -1,17 +1,3 @@
-var px,ticker;
-var logo_info = [['Gray',0.25,5,1,1,0.15,-0.1],['The',0.15,3,0,0.7,0.25,-0.8],['Cuber',0.35,3,2,0.7,0.25,0.72]];
-var palette = [];
-var pages = [];
-var p = 1;
-var color_list = ['Current','Sunset','Electric'];
-var intro_len = 16;
-var primes = [2,3];
-var main_list = [];
-var old_index = 1;
-var sunset = [];
-var sunlen = 120;
-var ticker_add = 0.15;
-var quad_colors;
 
 function preload() {
 	atkinsonBold = loadFont("Atkinson-Hyperlegible-Bold-102.ttf");
