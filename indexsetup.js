@@ -38,7 +38,7 @@ function setup() {
 
 		
 	pages.push(new Page('Groups of Units','Forest','https://thegraycuber.github.io/groupsofunits.html'));
-	pages.push(new Page('Complex Primes','Sunset','https://thegraycuber.github.io/gauss.html'));
+	pages.push(new Page('Complex Primes','Sunset','https://thegraycuber.github.io/gaussian.html'));
 	pages.push(new Page('Complex Grapher','Electric','https://thegraycuber.github.io/grapher.html'));
 	pages.push(new Page('Quadratic Primes','Sunset','https://thegraycuber.github.io/quadratic.html'));
 
