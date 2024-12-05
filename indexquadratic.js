@@ -1,4 +1,4 @@
-var quad_options = [-3,5,13,21,29,37,53,61,69,77,93,101,109,133,141,149,-7,-11,-19,-43,-67,-163,17,33,41,57,];
+var quad_options = [-3,5,13,21,29,37,-7,-11,-19,-43,17,33,41];
 
 function makeQuad(dindex,colorindex){
 	//var gauss_rand = random();
@@ -6,10 +6,10 @@ function makeQuad(dindex,colorindex){
 	
 	var wmax = ceil(1+width/px);
 	var hmax = ceil(1+height/(px*1.732051));
-	for (var re = -wmax; re <= wmax; re+= 0.5){
+	for (var re = 0; re <= wmax; re+= 0.5){
 		var parity = mod(re*2,2)/2;
 		
-		for (var im = -hmax + parity; im <= hmax - parity; im++){
+		for (var im =  parity; im <= hmax - parity; im++){
 			
 			//console.log(im);
 			
@@ -41,6 +41,15 @@ function makeQuad(dindex,colorindex){
 		
 			if (isPrime){
 				main_list.push(new Quad(re,im,colorindex));
+				if (re != 0){
+					main_list.push(new Quad(-re,im,colorindex));
+				}
+				if (im != 0){
+					main_list.push(new Quad(re,-im,colorindex));
+				}
+				if (re != 0 && im != 0){
+					main_list.push(new Quad(-re,-im,colorindex));
+				}
 			}
 			
 		}
@@ -63,11 +72,19 @@ function isNotSquare(pcheck,ncheck){
 	if(mod(ncheck,pcheck)==0){
 		return false;
 	}
+	if(pcheck==2){
+		return (ncheck % 4) != 1;
+	}
 	
-	
+	var p_exp = int((pcheck - 1)/2);
 	var echeck = 1;
-	for (var eval = 0; eval < (pcheck - 1)/2; eval++){
-		echeck = mod(echeck * ncheck , pcheck);
+	while (p_exp > 0){
+		if (p_exp % 2 == 1){
+			echeck = mod(echeck * ncheck , pcheck);
+			p_exp -= 1;
+		}
+		p_exp = int(p_exp / 2);
+		ncheck = mod(ncheck ** 2 , pcheck);
 	}
 	
 	return echeck != 1;

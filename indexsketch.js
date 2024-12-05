@@ -6,20 +6,8 @@ var comp_range = [0, 0];
 var quad_len = 10;
 var quad_show = [false,false,false];
 var page_count = 0;
-var px,ticker;
-var logo_info = [['Gray',0.25,5,1,1,0.15,-0.1],['The',0.15,3,0,0.7,0.25,-0.8],['Cuber',0.35,3,2,0.7,0.25,0.72]];
-var palette = [];
-var pages = [];
-var p = 1;
-var color_list = ['Current','Sunset','Electric'];
-var intro_len = 16;
-var primes = [2,3];
-var main_list = [];
-var old_index = 1;
-var sunset = [];
-var sunlen = 120;
-var ticker_add = 0.15;
-var quad_colors;
+var unit_mod = 0;
+
 
 function draw() {
 	//console.log(main_list.length);
@@ -101,6 +89,30 @@ function draw() {
 			endShape();
 
 			pop();
+		} else if (pages[p].title == 'Groups of Units') {
+			
+			unit_mod = (unit_mod + 1)%5;
+			if (ticker > 3 && ticker < 23 && unit_mod == 0){
+				main_list.push(new Bubble(main_list.length,main_list.length+3,(random()*0.9+0.05)*width,(random()*0.9+0.05)*height,px));	
+				findContainers(main_list.length-1);
+				main_list[main_list.length-1].checkRep();
+				if (main_list.length > 1){findContainers(main_list.length-1);}
+			} else if (ticker > 23 && ticker < 27){
+				if (main_list.length > 0){main_list.splice(main_list.length - 1, 1);}
+			}
+			
+			for(var bubby of main_list){
+				bubby.pull();
+				bubby.push();
+				bubby.pushMouse();
+			}
+			for(bubby of main_list){
+				bubby.move();
+				bubby.displayLines();
+			}
+			for(bubby of main_list){
+				bubby.display();
+			}
 		}
 
 		textAlign(CENTER, CENTER);
@@ -156,13 +168,22 @@ function draw() {
 			} else if (pages[p].title == 'Quadratic Primes') {
 				quad_len = page_time/3;
 				main_list = [];
-				makeQuad(int(random(quad_options.length)),0);
-				makeQuad(int(random(quad_options.length)),1);
-				makeQuad(int(random(quad_options.length)),2);
+				var rands = [];
+				for (var rand_add = 0; rand_add < 3; rand_add++){
+					var new_rand = int(random(quad_options.length));
+					while (rands.includes(new_rand)){
+						new_rand = int(random(quad_options.length));
+					}
+					rands.push(new_rand);
+					makeQuad(rands[rand_add],rand_add);
+				}
 			} else if (pages[p].title == 'Complex Grapher') {
 				comp_range = [0, 0];
 				page_rand = int(random() * 7) + 3;
 				makePentagon(page_rand);
+			} else if (pages[p].title == 'Groups of Units') {
+				main_list = [];
+				unit_mod = 0;
 			}
 
 		}

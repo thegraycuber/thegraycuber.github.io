@@ -50,7 +50,7 @@ class Icon {
 				window.open(this.Link, '_blank');
 			} else {
 				this.Active = (this.Active + 1) % 2;
-				settings.arrowClick(this.DisplayChar[0],this.Active,'');
+				arrowClick(this.DisplayChar[0],this.Active,'');
 			}
 		}
 	}
@@ -82,10 +82,10 @@ class Box {
 		}
 		
 	}
-	show(){
+	show(outline=palette.backlight){
 		if (this.Active == 1){
 		
-			fill(palette.backlight);
+			fill(outline);
 			rect(this.Coords[0],this.Coords[1],this.Radius[0]*2+this.Pad,this.Radius[1]*2+this.Pad);
 			fill(palette.back);
 			rect(this.Coords[0],this.Coords[1],this.Radius[0]*2,this.Radius[1]*2);
@@ -133,7 +133,6 @@ class arrowItem {
 		this.Font = font;
 	}
 	show(){
-		if (this.Id == 'Sequence' && settings.custom){return;}
 		textFont(this.Font);
 		if (this.Active){fill(palette.front);} else {fill(palette.backlight);}
 		textSize(this.Size);
@@ -159,7 +158,7 @@ class arrowItem {
 	giveValue(indexVal){
 		if (this.Index != indexVal){
 			this.Index = indexVal;
-			settings.arrowClick(this.Id,this.Index,this.List[this.Index]);
+			arrowClick(this.Id,this.Index,this.List[this.Index]);
 		}
 	}
 }
@@ -235,7 +234,7 @@ class binaryItem {
 	giveValue(indexVal){
 		if (this.Index != indexVal){
 			this.Index = indexVal;
-			settings.arrowClick(this.Id,this.Index,this.List[this.Index]);
+			arrowClick(this.Id,this.Index,this.List[this.Index]);
 		}
 	}
 }
@@ -261,12 +260,7 @@ class sliderItem {
 		if (this.Active){fill(palette.front);} else {fill(palette.backlight);}
 		var point_x  = this.Coords[0] + this.Radius[0]*(1.6*(this.Value - this.Range[0])/(this.Range[1] - this.Range[0]) - 0.8);
 		circle(point_x,this.Coords[1]-0.2*this.Radius[1],this.Radius[1]);
-		textSize(this.Size);
-		var slider_text = str(round(this.Value,2));
-		if (this.Id == 'Radius'){
-			slider_text = str(round(2**this.Value,2))
-		}
-		text(slider_text,point_x,this.Coords[1]+this.Radius[1]);
+
 	}
 	update(coords,radius){
 		this.Coords = coords;
@@ -280,8 +274,8 @@ class sliderItem {
 	}
 	giveValue(indexVal){
 		if (this.Value != indexVal){
-			this.Value = indexVal;
-			settings.arrowClick(this.Id,this.Value,'');
+			this.Value = int(indexVal);
+			arrowClick(this.Id,this.Value,'');
 		}
 	}
 }

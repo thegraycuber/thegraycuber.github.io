@@ -75,6 +75,53 @@ function add_prime(){
 		
 }
 
+function add_prime_wf(){
+	
+	var test_value = primeswf[primeswf.length - 1][0];
+	while (true){
+		var is_prime = true;
+		for (var p_check of primeswf){
+			if(test_value % p_check[0] == 0){
+				is_prime = false;
+				break;
+			}
+		}
+		
+		if(is_prime){
+			var p_fact = prime_factorization(test_value-1);
+			primeswf.push([test_value,p_fact])
+			break;
+		}
+		test_value++;
+	}
+		
+}
+
+
+function prime_factorization(num_to_factor){
+	
+	var p = 0;
+	var factorization = [];
+	while(num_to_factor != 1){
+		//console.log(primeswf,factorization);
+		if(p == primeswf.length){
+			add_prime_wf();
+		}
+		while(num_to_factor % primeswf[p][0] == 0){
+			if(factorization.length == 0 || factorization[factorization.length - 1][0] != primeswf[p][0]){
+				factorization.push([primeswf[p][0],1]);
+			}else{
+				factorization[factorization.length - 1][1]++;
+			}
+			num_to_factor = int(num_to_factor/primeswf[p][0]);
+		}
+		
+		p++;
+	}
+	
+	return(factorization);
+}
+
 
 class Page {
 	constructor(title,scheme,link) {

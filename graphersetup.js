@@ -7,6 +7,7 @@ function preload() {
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
+
 	var px = min(windowWidth/16,windowHeight/9);
 	settings = new Settings(px);
 	
@@ -24,6 +25,7 @@ function setup() {
 	points = make_points();
 	
 	icons.push(new Icon('=',[px*0.4,px*0.36],px*0.3,[win[0]/2-px*7.5,win[1]/2-px*4],[0,0]));
+	icons.push(new Icon('y',[px*0.4,px*0.28],px*0.4,[win[0]/2-px*6.8,win[1]/2-px*3.97],[0,0],'https://www.youtube.com/watch?v=_KInQ1aTLRk'));
 	
 	var bigText = px*0.18;
 	var smallText = px*0.14;
