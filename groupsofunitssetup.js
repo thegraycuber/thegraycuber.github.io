@@ -53,12 +53,12 @@ function setup() {
 	palette.getColors('Forest');
 
 
-	icons.push(new Icon('=',[px*0.4,px*0.36],px*0.3,[win[0]/2-px*7.5,win[1]/2-px*4],[0,0]));
-	icons.push(new Icon('y',[px*0.4,px*0.28],px*0.4,[win[0]/2-px*6.8,win[1]/2-px*3.97],[0,0],'https://www.youtube.com/@TheGrayCuber'));
+	icons.push(new Icon('=',[px*0.4,px*0.36],px*0.3,[win[0]/2-px*7.2,win[1]/2-px*4],[0,0]));
+	icons.push(new Icon('y',[px*0.4,px*0.28],px*0.4,[win[0]/2-px*6.5,win[1]/2-px*3.97],[0,0],'https://www.youtube.com/@TheGrayCuber'));
 	
 	var bigText = px*0.18;
 	var smallText = px*0.14;
-	menuBox = new Box([win[0]/2-px*6.6,win[1]/2],[px*1,px*3.5],px*0.1);
+	menuBox = new Box([win[0]/2-px*6.3,win[1]/2],[px*1,px*3.5],px*0.1);
 	menuBox.Items.push(new textItem(0.6,'',0));
 	
 	menuBox.Items.push(new textItem(1,'Color Scheme',bigText));
@@ -99,7 +99,7 @@ function setup() {
 	menuBox.Items.push(new binaryItem(1.5,['On','Off'],smallText,'Info',0));
 	menuBox.Items.push(new textItem(0.8,'',0));
 
-	hoverBox = new Box([win[0]/2+px*6.5,win[1]/2+px*3],[px*1.2,px*1],px*0.1);
+	hoverBox = new Box([win[0]/2+px*6.2,win[1]/2+px*3],[px*1.2,px*1],px*0.1);
 	hoverBox.Items.push(new textItem(1.5,'',bigText*2,'',openSans));
 	hoverBox.Items.push(new textItem(1,'',bigText*1.2,'',openSans));
 	hoverBox.Items.push(new textItem(1,'',bigText*1.2,'',openSans));
