@@ -54,7 +54,7 @@ function setup() {
 
 
 	icons.push(new Icon('=',[px*0.4,px*0.36],px*0.3,[win[0]/2-px*7.2,win[1]/2-px*4],[0,0]));
-	icons.push(new Icon('y',[px*0.4,px*0.28],px*0.4,[win[0]/2-px*6.5,win[1]/2-px*3.97],[0,0],'https://www.youtube.com/@TheGrayCuber'));
+	icons.push(new Icon('y',[px*0.4,px*0.28],px*0.4,[win[0]/2-px*6.5,win[1]/2-px*3.97],[0,0],'https://youtu.be/8zD6sxhpvLc'));
 	
 	var bigText = px*0.18;
 	var smallText = px*0.14;
