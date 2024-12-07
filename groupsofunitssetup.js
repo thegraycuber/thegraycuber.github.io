@@ -48,7 +48,7 @@ function setup() {
 	
 	
 	textFont(atkinsonBold);
-	
+	 
 	palette = new Palette();
 	palette.getColors('Forest');
 
@@ -79,7 +79,7 @@ function setup() {
 	menuBox.Items.push(new textItem(0.8,'',0));
 	
 	menuBox.Items.push(new textItem(1,'Speed',bigText));
-	menuBox.Items.push(new sliderItem(1.6,smallText,[0,max_speed-10],'Speed',0));
+	menuBox.Items.push(new sliderItem(1.6,smallText,[0,max_speed-3],'Speed',0));
 	menuBox.Items.push(new textItem(0.8,'',0));
 	
 	menuBox.Items.push(new textItem(1,'Label Mode',bigText));

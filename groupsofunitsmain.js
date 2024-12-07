@@ -123,7 +123,9 @@ function mouseClicked(){
 
 function mouseWheel(event) {
   if(!autozoom){
-		coord_adjust *= pow(2,-event.delta/px);
+		coord_adjust *= pow(2,-0.16*event.delta/px);
+		var mouseLoc = coordsToLoc(mouseX,mouseY);
+		coord_offset = [coord_offset[0] + mouseLoc[0]*(c - coord_adjust*coord_scale),coord_offset[1] + mouseLoc[1]*(c - coord_adjust*coord_scale)];
 		c = coord_adjust*coord_scale;
 	}
 }

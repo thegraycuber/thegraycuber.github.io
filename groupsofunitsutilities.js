@@ -1,7 +1,7 @@
 
 function pointDist(x1,y1,x2,y2){
 	var dist_mag = ((x2-x1)**2 + (y2-y1)**2)**0.5;
-	return([(x2-x1)/dist_mag,(y2-y1)/dist_mag,dist_mag**2]);
+	return([(x2-x1)/dist_mag,(y2-y1)/dist_mag,max(dist_mag**2,1)]);
 }
 
 function locToCoords(x,y){
