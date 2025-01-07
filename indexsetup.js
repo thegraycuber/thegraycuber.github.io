@@ -48,7 +48,7 @@ function setup() {
 	
 	var links;
 	if (prod){
-		imgs.push(new Icon([windowWidth/2,windowHeight-px*2],px*1.5,2,'https://thegraycuber.github.io/about.html','_self'));
+		imgs.push(new Icon([windowWidth/2,windowHeight-px*2],px*0.5,2,'https://thegraycuber.github.io/about.html','_self'));
 		links = ['https://thegraycuber.github.io/groupsofunits.html', //groups of units
 								'https://thegraycuber.github.io/gaussian.html', //complex primes
 								'https://thegraycuber.github.io/grapher.html', //complex grapher
