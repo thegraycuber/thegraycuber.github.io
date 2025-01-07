@@ -129,7 +129,7 @@ function draw() {
 		for (var shad = 0.02; shad < 1; shad += 0.02) {
 			rect(width / 2, height / 2 - px * 3, shad * px * 8, shad * px * 4.5, shad * px / 2);
 			rect(width / 2, height / 2 + px * (1.2+ 0.25*message), shad * tw * 1.2, shad * px * 2, shad * px * (0.6+0.5*message));
-			rect(width / 2, height - px*2, shad * px * 8, shad * px * 2, shad * px * 0.6);
+			rect(width / 2, min(height-px*2,height/2+px*8), shad * px * 10, shad * px * 2.5, shad * px * 0.4);
 		}
 
 		noStroke();
