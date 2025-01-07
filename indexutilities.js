@@ -131,3 +131,64 @@ class Page {
 		this.link = link;
 	}
 }
+
+
+
+class Icon{
+	constructor(coords,size,index,link,type) {
+		this.img = createImage(533,533);
+		this.coords = createVector(coords[0],coords[1]);
+		this.size = size;
+		this.mouseMin = createVector(this.coords.x-this.size*0.8,this.coords.y-this.size*0.8);
+		this.mouseMax = createVector(this.coords.x+this.size*0.8,this.coords.y+this.size*0.8);
+		this.mult = 1;
+		this.index = index;
+		this.link = link;
+		this.type = type;
+	}
+	
+	display(){
+		if (this.index == 2){
+			fill(palette[0].front);
+			noStroke();
+			textSize(this.size*this.mult);
+			text('About\nMe',this.coords.x,this.coords.y);
+		} else {
+			image(this.img,this.coords.x,this.coords.y,this.size*this.mult,this.size*this.mult);
+		}
+	}
+	
+	check(clicked = false){
+		if(mouseX > this.mouseMin.x && mouseX < this.mouseMax.x && mouseY > this.mouseMin.y && mouseY < this.mouseMax.y){
+			if(clicked){
+				window.open(this.link, this.type);
+				return true;
+			} 
+			
+			if (this.mult==1){
+				this.mult = 1.2;
+			}
+			
+		} else if (this.mult > 1) {
+			this.mult = 1;
+		}
+		return false;
+	}
+	
+}
+
+
+function update_imgs(){
+	
+	var flat = createImage(1,1);
+	flat.loadPixels();
+	flat.pixels[0] = red(palette[0].accent1);
+	flat.pixels[1] = green(palette[0].accent1);
+	flat.pixels[2] = blue(palette[0].accent1);
+	flat.pixels[3] = 255;
+	flat.updatePixels();
+	for (img = 0; img < 2; img++){
+		imgs[img].img.copy(flat,0,0,1,1,0,0,533,533);
+		imgs[img].img.mask(buttons[img]);		
+	}
+}

@@ -7,7 +7,7 @@ var quad_len = 10;
 var quad_show = [false,false,false];
 var page_count = 0;
 var unit_mod = 0;
-
+var logos = false;
 
 function draw() {
 	//console.log(main_list.length);
@@ -129,17 +129,24 @@ function draw() {
 		for (var shad = 0.02; shad < 1; shad += 0.02) {
 			rect(width / 2, height / 2 - px * 3, shad * px * 8, shad * px * 4.5, shad * px / 2);
 			rect(width / 2, height / 2 + px * (1.2+ 0.25*message), shad * tw * 1.2, shad * px * 2, shad * px * (0.6+0.5*message));
+			rect(width / 2, height - px*2, shad * px * 8, shad * px * 2, shad * px * 0.6);
 		}
 
 		noStroke();
 		fill(palette[0].front);
 		text(pages[p].title, width / 2, height / 2 + px);
-		textSize(px * 0.4);
 		
+		
+		textSize(px * 0.4);
 		if (message == 1){
 			text("click to view this page or wait for more previews",width/2,height/2+px*2);
 		}
-
+		if (!logos){
+			for (var i of imgs){
+				i.check();
+				i.display();
+			}
+		}
 
 		var updater = false;
 		if (ticker < page_trans) {
@@ -147,14 +154,23 @@ function draw() {
 			updater = true;
 			background(palette[0].back);
 			palette[0].refresh(old_index, pages[p].index, (ticker / page_trans + 1) * 0.5);
+			update_imgs();
 		} else if (ticker + page_trans > page_time) {
+			logos = true;
 			palette[0].back.setAlpha((ticker + page_trans - page_time) * 255 / page_trans);
 			updater = true;
 			background(palette[0].back);
 			palette[0].refresh(pages[p].index, pages[mod(p + 1, pages.length)].index, 0.5 * (ticker + page_trans - page_time) / page_trans);
+			update_imgs();
 		}
 		palette[0].back.setAlpha(255);
-
+		
+		if (logos){
+			for (var i of imgs){
+				i.check();
+				i.display();
+			}
+		}
 
 		if (ticker >= page_time) {
 			page_count += 1;
@@ -187,15 +203,22 @@ function draw() {
 			}
 
 		}
+		
 
 	}
-
 	logo([width / 2, height / 2 - px * 3], px * 1.5);
 }
 
 
 function mouseClicked(){
-	if(ticker > page_trans && ticker < page_time - page_trans){
+	
+	var linked = false;
+	for (var i of imgs){
+		if(i.check(true)){
+			linked = true;
+		}
+	}
+	if(!linked && ticker > page_trans && ticker < page_time - page_trans){
 		window.open(pages[p].link, '_self');
 	}
 }
