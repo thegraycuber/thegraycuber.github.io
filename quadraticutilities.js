@@ -196,3 +196,9 @@ function highlightAssociates(walkValue,mouseA){
 		}
 	}
 }
+
+
+function touchStarted() {
+	mouseClicked();
+	return false;
+}

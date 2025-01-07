@@ -192,3 +192,9 @@ function make_points(vertices = settings.vertices,steps = settings.step,volume =
 	
 	return point_list;
 }
+
+
+function touchStarted() {
+	mouseClicked();
+	return false;
+}

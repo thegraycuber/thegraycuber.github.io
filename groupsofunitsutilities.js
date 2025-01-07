@@ -210,3 +210,10 @@ function textWithMax(textString,textX,textY,textSizeTry,textMax){
 	
 	text(textString,textX,textY);
 }
+
+
+function touchStarted() {
+	mouseClicked();
+	return false;
+}
+

@@ -65,13 +65,13 @@ class Icon{
 	check(clicked = false){
 		if(mouseX - windowWidth/2 > this.mouseMin.x && mouseX - windowWidth/2 < this.mouseMax.x && mouseY - windowHeight/2 > this.mouseMin.y && mouseY - windowHeight/2  < this.mouseMax.y){
 			if(clicked){
-				window.open(links[this.index - 7], link_types[this.index - 7]);
+				return true;
 			} 
 			
 			if (this.mult==1){
 				this.mult = 1.2;
 				
-				if (this.index < 7 && adjust_counter == -1 && curr_color != this.index){
+				if (this.index < 7 && curr_color != this.index){// && adjust_counter == -1
 					new_color = this.index;
 					adjust_counter = 0;
 					adjust_wait = true;
@@ -93,6 +93,7 @@ class Icon{
 			fill(palette[0].back[2]);
 			circle(this.coords.x,this.coords.y,this.size*1.5);
 		}
+		return false;
 	}
 	
 }

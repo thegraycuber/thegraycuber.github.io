@@ -163,6 +163,8 @@ function update_imgs(){
 
 function mousePressed(){
 	for (var i = 6; i < imgs.length; i++)	{
-		imgs[i].check(true);
+		if(imgs[i].check(true)){
+			window.open(links[imgs[i].index - 7], link_types[imgs[i].index - 7]);
+		}
 	}	
 }
