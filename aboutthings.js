@@ -105,3 +105,8 @@ function n_gon(center,radius,start,step){
 	}
 	endShape(CLOSE);
 }
+
+function touchStarted() {
+	mouseClicked();
+	return false;
+}

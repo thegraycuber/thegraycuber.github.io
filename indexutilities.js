@@ -192,3 +192,8 @@ function update_imgs(){
 		imgs[img].img.mask(buttons[img]);		
 	}
 }
+
+function touchStarted() {
+	mouseClicked();
+	return false;
+}
