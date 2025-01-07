@@ -172,7 +172,7 @@ class Settings {
 		
 		for (var i = -4; i <= 4; i++) {
 			var vert_coords = ztoCoords([i*h_div,0]);
-			if (vert_coords[0] <= windowWidth/2 + this.px*8 && vert_coords[0] >= windowWidth/2 - this.px*8){
+			if (vert_coords[0] <= win[0]/2 + this.px*8 && vert_coords[0] >= win[0]/2 - this.px*8){
 				this.gridlines.push([vert_coords[0],vert_coords[1],this.px*0.05,this.px*9]);
 				if (h_log>6 && i != 0){
 					this.labels.push([vert_coords[0]+settings.px*0.1,vert_coords[1]+settings.px*0.3,str(i*h_pre)+'e'+str(h_log)]);

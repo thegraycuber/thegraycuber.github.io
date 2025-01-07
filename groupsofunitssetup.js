@@ -37,7 +37,8 @@ function setup() {
 	white = color('#d6ddcc');
 	createCanvas(windowWidth, windowHeight);
 	win = [windowWidth,windowHeight];
-	px = min(windowWidth/16,windowHeight/9);
+	//px = min(windowWidth/16,windowHeight/9);
+	px = min(windowWidth/6,windowHeight/9);
 	noStroke();
 	textSize(16);
 	bubbles.push(new Bubble(0,3,0,0,40));
@@ -48,17 +49,21 @@ function setup() {
 	
 	
 	textFont(atkinsonBold);
-	 
+	
 	palette = new Palette();
 	palette.getColors('Forest');
 
 
-	icons.push(new Icon('=',[px*0.4,px*0.36],px*0.3,[win[0]/2-px*7.2,win[1]/2-px*4],[0,0]));
-	icons.push(new Icon('y',[px*0.4,px*0.28],px*0.4,[win[0]/2-px*6.5,win[1]/2-px*3.97],[0,0],'https://youtu.be/8zD6sxhpvLc'));
+	//icons.push(new Icon('=',[px*0.4,px*0.36],px*0.3,[win[0]/2-px*7.2,win[1]/2-px*4],[0,0]));
+	//icons.push(new Icon('y',[px*0.4,px*0.28],px*0.4,[win[0]/2-px*6.5,win[1]/2-px*3.97],[0,0],'https://www.youtube.com/@TheGrayCuber'));
+	
+	icons.push(new Icon('=',[px*0.4,px*0.36],px*0.3,[px*0.8,px*0.5],[0,0]));
+	icons.push(new Icon('y',[px*0.4,px*0.28],px*0.4,[px*1.5,px*0.53],[0,0],'https://www.youtube.com/@TheGrayCuber'));
 	
 	var bigText = px*0.18;
 	var smallText = px*0.14;
-	menuBox = new Box([win[0]/2-px*6.3,win[1]/2],[px*1,px*3.5],px*0.1);
+	//menuBox = new Box([win[0]/2-px*6.3,win[1]/2],[px*1,px*3.5],px*0.1);
+	menuBox = new Box([px*1.7,px*4.5],[px*1,px*3.5],px*0.1);
 	menuBox.Items.push(new textItem(0.6,'',0));
 	
 	menuBox.Items.push(new textItem(1,'Color Scheme',bigText));
@@ -99,7 +104,8 @@ function setup() {
 	menuBox.Items.push(new binaryItem(1.5,['On','Off'],smallText,'Info',0));
 	menuBox.Items.push(new textItem(0.8,'',0));
 
-	hoverBox = new Box([win[0]/2+px*6.2,win[1]/2+px*3],[px*1.2,px*1],px*0.1);
+	//hoverBox = new Box([win[0]/2+px*6.2,win[1]/2+px*3],[px*1.2,px*1],px*0.1);
+	hoverBox = new Box([windowWidth-px*1.8,windowHeight-px*1.5],[px*1.2,px*1],px*0.1);
 	hoverBox.Items.push(new textItem(1.5,'',bigText*2,'',openSans));
 	hoverBox.Items.push(new textItem(1,'',bigText*1.2,'',openSans));
 	hoverBox.Items.push(new textItem(1,'',bigText*1.2,'',openSans));

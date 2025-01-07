@@ -1,4 +1,4 @@
-
+ 
 function pointDist(x1,y1,x2,y2){
 	var dist_mag = ((x2-x1)**2 + (y2-y1)**2)**0.5;
 	return([(x2-x1)/dist_mag,(y2-y1)/dist_mag,max(dist_mag**2,1)]);
@@ -37,7 +37,7 @@ function updateScale(){
 	coord_offset[1] += (-maxy-miny)*c/100;
 	coord_scale = coord_scale*0.95+min(width*0.45/max(-minx,maxx),height*0.45/max(-miny,maxy))*0.05;
 	coord_adjust = (coord_adjust+0.02)/1.02;
-	c = coord_adjust*coord_scale;
+	c = min(coord_adjust*coord_scale,4);
 }
 
 function findContainers(new_idx){

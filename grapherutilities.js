@@ -8,11 +8,11 @@ function add(alpha,beta){
 }
 
 function ztoCoords(z,h_val=h){
-	return([windowWidth/2 + z[0]*windowHeight/h_val, windowHeight/2 - z[1]*windowHeight/h_val]);
+	return([win[0]/2 + z[0]*px9/h_val, win[1]/2 - z[1]*px9/h_val]);
 }
 
 function coordsToZ(coordx,coordy){
-	return([(coordx - windowWidth/2)*h/windowHeight, (- coordy + windowHeight/2)*h/windowHeight]);
+	return([(coordx - win[0]/2)*h/px9, (- coordy + win[1]/2)*h/px9]);
 }
 
 function complex_str(z_str){

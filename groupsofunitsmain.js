@@ -28,7 +28,7 @@ function draw() {
 		bubby.move();
 	}
 	if(autozoom){
-		updateScale()
+		updateScale();
 	}
 	
 	

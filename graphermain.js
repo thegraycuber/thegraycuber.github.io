@@ -9,6 +9,7 @@ var h = h_factor;
 var ratcos = 0;
 var ratio = 1;
 var polyidx = 0;
+var px9;
 
 
 function draw() {
@@ -63,7 +64,7 @@ function draw() {
 
 	if(menuBox.Items[menuBox.getIndex('Input')].Index == 2){
 		fill(palette.back);
-		rect(windowWidth/2 + settings.px * 5,windowHeight/2 - settings.px * 3.5,settings.px*6,settings.px*2);
+		rect(win[0]/2 + settings.px * 5,win[1]/2 - settings.px * 3.5,settings.px*6,settings.px*2);
 	}
 	
 	if (menuBox.Items[menuBox.getIndex('Zoom')].Index == 0){
@@ -81,11 +82,11 @@ function draw() {
 	}
 	output = points_to_coords(output);
 	stroke(palette.backlight);	
-	strokeWeight(windowHeight/75);
+	strokeWeight(settings.px/8);
 	noFill();
 	
 	if(menuBox.Items[menuBox.getIndex('Input')].Index == 2 && settings.custom == false){
-		strokeWeight(windowHeight/120);
+		strokeWeight(settings.px/15);
 		input = process_output([0,1],[],true);
 		if (settings.animate != 'Trace'){
 			stroke(palette.input);
@@ -95,7 +96,7 @@ function draw() {
 			vertex(inpu[0],inpu[1]);
 		}
 		endShape(CLOSE);
-		strokeWeight(windowHeight/75);
+		strokeWeight(settings.px/9);
 	} else if (menuBox.Items[menuBox.getIndex('Input')].Index == 1){
 		if (settings.animate != 'Trace'){
 			stroke(palette.input);
@@ -150,9 +151,9 @@ function draw() {
 	}
 	
 	if (menuBox.Items[menuBox.getIndex('Points')].Index % 2 == 1 && (settings.custom == false || menuBox.Items[menuBox.getIndex('Input')].Index == 1)){
-		var circ_rad = windowHeight/36;
+		var circ_rad = settings.px/4;
 		if(menuBox.Items[menuBox.getIndex('Input')].Index == 2){
-			circ_rad = windowHeight/72;
+			circ_rad = settings.px/8;
 		}
 		noStroke();
 		fill(palette.focus);
@@ -165,7 +166,7 @@ function draw() {
 		noStroke();
 		fill(palette.focus);
 		for (o_idx = 0; o_idx < dots.length; o_idx++){
-			circle(output[dots[o_idx]][0]+settings.shift[1],output[dots[o_idx]][1],windowHeight/36);
+			circle(output[dots[o_idx]][0]+settings.shift[1],output[dots[o_idx]][1],settings.px/4);
 		}
 	}
 	
@@ -255,7 +256,7 @@ function draw() {
 			stroke(palette.back);
 			strokeWeight(settings.px*0.06);
 			textSize(settings.px*0.25);
-			text('Enter a polynomial in the form:   2x^5 - x^4 + 3x + 10    or    10,3,0,0,-1,2',windowWidth/2,windowHeight/2 + settings.px*4);
+			text('Enter a polynomial in the form:   2x^5 - x^4 + 3x + 10    or    10,3,0,0,-1,2',win[0]/2,win[1]/2 + settings.px*4);
 			noStroke();
 		} else {
 			var seq_idx = menuBox.getIndex('Sequence');

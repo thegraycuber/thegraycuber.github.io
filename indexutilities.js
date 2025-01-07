@@ -139,8 +139,8 @@ class Icon{
 		this.img = createImage(533,533);
 		this.coords = createVector(coords[0],coords[1]);
 		this.size = size;
-		this.mouseMin = createVector(this.coords.x-this.size*0.8,this.coords.y-this.size*0.8);
-		this.mouseMax = createVector(this.coords.x+this.size*0.8,this.coords.y+this.size*0.8);
+		this.mouseMin = createVector(this.coords.x-this.size*1.2,this.coords.y-this.size*1.2);
+		this.mouseMax = createVector(this.coords.x+this.size*1.2,this.coords.y+this.size*1.2);
 		this.mult = 1;
 		this.index = index;
 		this.link = link;

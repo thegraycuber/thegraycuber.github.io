@@ -10,10 +10,10 @@ function setup() {
 
 	var px = min(windowWidth/16,windowHeight/9);
 	settings = new Settings(px);
-	
+	px9 = px*9;
 	rectMode(CENTER);
 	textFont(atkinsonBold);
-	textSize(windowHeight/16);
+	textSize(px*1.8);
 	textAlign(CENTER,CENTER);
 	
 	palette = new Palette();
