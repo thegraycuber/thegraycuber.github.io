@@ -41,8 +41,6 @@ function setup() {
 	
 	imgs.push(new Icon([windowWidth/2-px*2.4,windowHeight-px*2],px*1.2,0,'https://www.youtube.com/@TheGrayCuber','_blank'));
 	imgs.push(new Icon([windowWidth/2+px*2.4,windowHeight-px*2],px*1.2,1,'https://github.com/thegraycuber','_blank'));
-	//imgs.push(new Icon([windowWidth/2,windowHeight-px*2],px*1.5,2,'https://thegraycuber.github.io/about.html','_self'));
-	imgs.push(new Icon([windowWidth/2,windowHeight-px*2],px*0.5,2,'https://openprocessing.org/sketch/2499975','_self'));
 	update_imgs();
 	
 	textFont(atkinsonRegular);
@@ -50,12 +48,14 @@ function setup() {
 	
 	var links;
 	if (prod){
+		imgs.push(new Icon([windowWidth/2,windowHeight-px*2],px*1.5,2,'https://thegraycuber.github.io/about.html','_self'));
 		links = ['https://thegraycuber.github.io/groupsofunits.html', //groups of units
 								'https://thegraycuber.github.io/gaussian.html', //complex primes
 								'https://thegraycuber.github.io/grapher.html', //complex grapher
 								'https://thegraycuber.github.io/quadratic.html' //quadratic primes
 								];	
 	} else {
+		imgs.push(new Icon([windowWidth/2,windowHeight-px*2],px*0.5,2,'https://openprocessing.org/sketch/2499975','_self'));
 		links = ['https://openprocessing.org/sketch/2434673', //groups of units
 								'https://openprocessing.org/sketch/2287058', //complex primes
 								'https://openprocessing.org/sketch/2350648', //complex grapher
