@@ -161,7 +161,6 @@ class Icon{
 	check(clicked = false){
 		if(mouseX > this.mouseMin.x && mouseX < this.mouseMax.x && mouseY > this.mouseMin.y && mouseY < this.mouseMax.y){
 			if(clicked){
-				window.open(this.link, this.type);
 				return true;
 			} 
 			

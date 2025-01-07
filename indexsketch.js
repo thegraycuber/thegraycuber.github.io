@@ -216,6 +216,7 @@ function mouseClicked(){
 	for (var i of imgs){
 		if(i.check(true)){
 			linked = true;
+			window.open(i.link, i.type);
 		}
 	}
 	if(!linked && ticker > page_trans && ticker < page_time - page_trans){
