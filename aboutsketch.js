@@ -163,7 +163,8 @@ function update_imgs(){
 
 function mousePressed(){
 	for (var i = 6; i < imgs.length; i++)	{
-		if(imgs[i].check(true)){
+		var test_click = imgs[i].check(true);
+		if(test_click){
 			window.open(links[imgs[i].index - 7], link_types[imgs[i].index - 7]);
 		}
 	}	
