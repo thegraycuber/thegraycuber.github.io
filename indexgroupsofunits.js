@@ -112,7 +112,7 @@ class Bubble {
 			if (cont[3] == 0 || cont[0] >= main_list.length){
 				continue;
 			}
-			var pull_strength = 1/cont[1];
+			var pull_strength = min(1/cont[1],px);
 			var dist_info = pointDist(this.x,this.y,main_list[cont[0]].x,main_list[cont[0]].y);
 			this.a[0] += dist_info[0]*pull_strength;
 			this.a[1] += dist_info[1]*pull_strength;

@@ -210,7 +210,7 @@ function draw() {
 }
 
 
-function mouseClicked(){
+function touchStarted(){
 	
 	var linked = false;
 	for (var i of imgs){
