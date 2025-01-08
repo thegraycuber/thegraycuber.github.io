@@ -53,12 +53,11 @@ function setup() {
 	palette = new Palette();
 	palette.getColors('Forest');
 
-
 	//icons.push(new Icon('=',[px*0.4,px*0.36],px*0.3,[win[0]/2-px*7.2,win[1]/2-px*4],[0,0]));
-	//icons.push(new Icon('y',[px*0.4,px*0.28],px*0.4,[win[0]/2-px*6.5,win[1]/2-px*3.97],[0,0],'https://www.youtube.com/@TheGrayCuber'));
+	//icons.push(new Icon('y',[px*0.4,px*0.28],px*0.4,[win[0]/2-px*6.5,win[1]/2-px*3.97],[0,0],'https://www.youtube.com/watch?v=8zD6sxhpvLc&t=10s'));
 	
 	icons.push(new Icon('=',[px*0.4,px*0.36],px*0.3,[px*0.8,px*0.5],[0,0]));
-	icons.push(new Icon('y',[px*0.4,px*0.28],px*0.4,[px*1.5,px*0.53],[0,0],'https://youtu.be/dYj0rPQeRkA?si=-1AJPy1bZMWynzv1'));
+	icons.push(new Icon('y',[px*0.4,px*0.28],px*0.4,[px*1.5,px*0.53],[0,0],'https://www.youtube.com/watch?v=8zD6sxhpvLc&t=10s'));
 	
 	var bigText = px*0.18;
 	var smallText = px*0.14;
