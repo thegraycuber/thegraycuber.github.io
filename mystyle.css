@@ -7,3 +7,12 @@ html, body {
   margin: 0;
   padding: 0;
 } 
+header {
+  color-scheme: dark;
+}
+main {
+  color-scheme: dark;
+}
+footer {
+  color-scheme: dark;
+}
