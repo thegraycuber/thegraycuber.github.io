@@ -1,4 +1,4 @@
-prod = false;
+prod = true;
 win = [];
 setting = 0;
 ints = [[]];

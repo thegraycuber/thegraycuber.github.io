@@ -34,7 +34,7 @@ function setup() {
 	var bigText = px*0.18;
 	var smallText = px*0.14;
 	//menuBox = new Box([-43,5],[setting.sq*6,setting.sq*18],setting.sq);
-	menuBox = new Box([origin.x+7,origin.y-21],[setting.sq*6,setting.sq*16],setting.sq);
+	menuBox = new Box([origin.x+7,origin.y-25],[setting.sq*6,setting.sq*20],setting.sq);
 	menuBox.Items.push(new textItem(0.6,'',0));
 	menuBox.Items.push(new textItem(1,'Ring',bigText));
 	menuBox.Items.push(new arrowItem(1,setting.RingNames,smallText,'ring'));
@@ -71,7 +71,7 @@ function setup() {
 	menuBox.giveSizes();
 	
 	//infoBox = new Box([-43,7],[setting.sq*6,setting.sq*16],setting.sq);
-	infoBox = new Box([origin.x+7,origin.y-20],[setting.sq*6,setting.sq*16],setting.sq);
+	infoBox = new Box([origin.x+7,origin.y-21],[setting.sq*6,setting.sq*16],setting.sq);
 	infoBox.Items.push(new textItem(6,'This page displays\nQuadratic Primes.\n\nIf you are unfamiliar\n with the topic,\nI recommend viewing\none of the following:',px*0.15));
 	infoBox.Items.push(new textItem(1,'this OEIS page',px*0.15,'',white,atkinsonBold,'https://oeis.org/wiki/Quadratic_integer_rings'));
 	infoBox.Items.push(new textItem(1,'or',px*0.15));
