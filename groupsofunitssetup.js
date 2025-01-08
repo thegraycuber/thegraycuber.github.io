@@ -35,10 +35,10 @@ function preload() {
 function setup() {
 	
 	white = color('#d6ddcc');
-	createCanvas(windowWidth, windowHeight);
-	win = [windowWidth,windowHeight];
+	createCanvas(window.innerWidth, window.innerHeight);
+	win = [window.innerWidth, window.innerHeight];
 	//px = min(windowWidth/16,windowHeight/9);
-	px = min(windowWidth/6,windowHeight/9);
+	px = min(win[0]/6,win[1]/9);
 	noStroke();
 	textSize(16);
 	bubbles.push(new Bubble(0,3,0,0,40));
@@ -105,7 +105,7 @@ function setup() {
 	menuBox.Items.push(new textItem(0.8,'',0));
 
 	//hoverBox = new Box([win[0]/2+px*6.2,win[1]/2+px*3],[px*1.2,px*1],px*0.1);
-	hoverBox = new Box([windowWidth-px*1.8,windowHeight-px*1.5],[px*1.2,px*1],px*0.1);
+	hoverBox = new Box([win[0]-px*1.8,win[1]-px*1.5],[px*1.2,px*1],px*0.1);
 	hoverBox.Items.push(new textItem(1.5,'',bigText*2,'',openSans));
 	hoverBox.Items.push(new textItem(1,'',bigText*1.2,'',openSans));
 	hoverBox.Items.push(new textItem(1,'',bigText*1.2,'',openSans));

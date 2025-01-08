@@ -3,9 +3,8 @@ var polylist, polydesc = [[0],[0],[0],[0],[0]];
 var icons = [];
 var palette = 0;
 var settings = 0;
-
-var h_factor = 2.5;
-var h = h_factor;
+var poly_warn = 'Enter a polynomial in the form:\n  2x^5 - x^4 + 3x + 10    or    10,3,0,0,-1,2';
+var h_factor, h, note_size;
 var ratcos = 0;
 var ratio = 1;
 var polyidx = 0;
@@ -55,7 +54,7 @@ function draw() {
 		
 		
 		textAlign(LEFT,CENTER);
-		textSize(settings.px*0.3);
+		textSize(note_size);
 		for (var lab of settings.labels) {
 			text(lab[2],lab[0],lab[1]);
 		}
@@ -64,7 +63,7 @@ function draw() {
 
 	if(menuBox.Items[menuBox.getIndex('Input')].Index == 2){
 		fill(palette.back);
-		rect(win[0]/2 + settings.px * 5,win[1]/2 - settings.px * 3.5,settings.px*6,settings.px*2);
+		rect(win[0] - settings.px * 2,settings.px * 1,settings.px*4,settings.px*2);
 	}
 	
 	if (menuBox.Items[menuBox.getIndex('Zoom')].Index == 0){
@@ -97,6 +96,7 @@ function draw() {
 		}
 		endShape(CLOSE);
 		strokeWeight(settings.px/9);
+		
 	} else if (menuBox.Items[menuBox.getIndex('Input')].Index == 1){
 		if (settings.animate != 'Trace'){
 			stroke(palette.input);
@@ -171,7 +171,7 @@ function draw() {
 	}
 	
 	fill(palette.front);
-	textSize(settings.px*0.6);
+	textSize(note_size*1.2);
 	textFont(openSans);
 	stroke(palette.back);
 	strokeWeight(settings.px*0.1);
@@ -181,23 +181,23 @@ function draw() {
 		
 		if (settings.custom){
 			var t_wid = textWidth(function_desc);
-			if (t_wid > settings.px*4.5){
-				textSize(settings.px*2.7*settings.px/t_wid);
+			if (t_wid > note_size*7.5){
+				textSize(note_size*note_size*9/t_wid);
 			}
 			text(function_desc,settings.display[0],settings.display[1]);
 		}else{
 			var x_ind = function_desc.indexOf('x');
 
 			textAlign(LEFT);
-			text(function_desc.substring(x_ind+1,function_desc.length),settings.display[0]+settings.px*0.8,settings.display[1]+settings.px*0.1);
+			text(function_desc.substring(x_ind+1,function_desc.length),settings.display[0]+note_size*1.6,settings.display[1]+note_size/4);
 
 			textAlign(RIGHT);
-			text(function_desc.substring(0,x_ind),settings.display[0]-settings.px*0.8,settings.display[1]+settings.px*0.1);
+			text(function_desc.substring(0,x_ind),settings.display[0]-note_size*1.6,settings.display[1]+note_size/4);
 		}
 		
 		textAlign(CENTER);
 		textFont(atkinsonBold);	
-		textSize(settings.px*0.3);
+		textSize(note_size*0.75);
 		
 		var rad_str = menuBox.Items[menuBox.getIndex('Radius')].List[menuBox.Items[menuBox.getIndex('Radius')].Index];
 		if (settings.animate == 'Radius'){
@@ -206,17 +206,17 @@ function draw() {
 		}
 		
 		fill(palette.input);
-		text('Radius ' + rad_str,settings.display[0],settings.display[1]+settings.px*1.3);
-		textSize(settings.px*0.4);
+		text('Radius ' + rad_str,settings.display[0],settings.display[1]+settings.px*1.2);
+		textSize(note_size);
 		fill(palette.output);
-		text('Output',settings.display[0],settings.display[1]+settings.px*1.9);
+		text('Output',settings.display[0],settings.display[1]+settings.px*1.2+note_size*1.6);
 		
 	} else {
 		
 		if (settings.custom){
 			var t_wi = textWidth(function_desc);
-			if (t_wi > settings.px*4.5){
-				textSize(settings.px*2.7*settings.px/t_wi);
+			if (t_wi > note_size*7.5){
+				textSize(note_size*9*note_size/t_wi);
 			}
 		}
 		
@@ -224,13 +224,13 @@ function draw() {
 		
 		textAlign(CENTER);
 		textFont(atkinsonBold);	
-		textSize(settings.px*0.4);
+		textSize(note_size);
 		
 		if(menuBox.Items[menuBox.getIndex('Input')].Index == 1){
 			fill(palette.input);
-			text('Input',settings.display[0],settings.display[1]+settings.px*0.8);
+			text('Input',settings.display[0],settings.display[1]+note_size*2);
 			fill(palette.output);
-			text('Output',settings.display[0],settings.display[1]+settings.px*1.4);
+			text('Output',settings.display[0],settings.display[1]+note_size*3.5);
 		}
 
 	}
@@ -256,7 +256,12 @@ function draw() {
 			stroke(palette.back);
 			strokeWeight(settings.px*0.06);
 			textSize(settings.px*0.25);
-			text('Enter a polynomial in the form:   2x^5 - x^4 + 3x + 10    or    10,3,0,0,-1,2',win[0]/2,win[1]/2 + settings.px*4);
+			fill(palette.front);
+			var warn_wid = textWidth(poly_warn);
+			if (warn_wid > win[0]*0.9){
+				textSize(settings.px*0.225*win[0]/warn_wid);
+			}
+			text(poly_warn,win[0]/2,win[1] - settings.px*0.6);
 			noStroke();
 		} else {
 			var seq_idx = menuBox.getIndex('Sequence');
@@ -270,7 +275,7 @@ function draw() {
 }
 
 
-function mouseClicked(){
+function touchStarted(){
 	
 	if (mouseCheck()){
 		menuBox.clicked();

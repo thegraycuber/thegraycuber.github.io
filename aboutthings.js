@@ -37,8 +37,8 @@ class Icon{
 		this.img = createImage(533,533);
 		this.coords = createVector(px*coords[0],px*coords[1]);
 		this.size = size;
-		this.mouseMin = createVector(this.coords.x-this.size*0.8,this.coords.y-this.size*0.8);
-		this.mouseMax = createVector(this.coords.x+this.size*0.8,this.coords.y+this.size*0.8);
+		this.mouseMin = createVector(this.coords.x-this.size*0.8+win[0],this.coords.y+win[1]-this.size*0.8);
+		this.mouseMax = createVector(this.coords.x+this.size*0.8+win[0],this.coords.y+win[1]+this.size*0.8);
 		this.mult = 1;
 		this.index = index;
 	}
@@ -63,7 +63,7 @@ class Icon{
 	}
 	
 	check(clicked = false){
-		if(mouseX - windowWidth/2 > this.mouseMin.x && mouseX - windowWidth/2 < this.mouseMax.x && mouseY - windowHeight/2 > this.mouseMin.y && mouseY - windowHeight/2  < this.mouseMax.y){
+		if(mouseX> this.mouseMin.x && mouseX< this.mouseMax.x && mouseY > this.mouseMin.y && mouseY < this.mouseMax.y){
 			if(clicked){
 				return true;
 			} 

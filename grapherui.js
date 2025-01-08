@@ -24,7 +24,7 @@ class Icon {
 				rect(this.Coords[0],this.Coords[1]+this.Radius*0.24,this.Radius,this.Radius*0.01);
 				
 			} else if (this.DisplayChar[this.Active] == 'y'){
-				noStroke(this.Radius*0.1);
+				noStroke();
 				fill(palette.front);
 				rect(this.Coords[0],this.Coords[1],this.Size[0],this.Size[1],this.Radius*0.2);
 				fill(palette.back);

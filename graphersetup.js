@@ -6,30 +6,34 @@ function preload() {
 
 
 function setup() {
-	createCanvas(windowWidth, windowHeight);
-
-	var px = min(windowWidth/16,windowHeight/9);
+	createCanvas(window.innerWidth,window.innerHeight);
+	win = [window.innerWidth,window.innerHeight];
+	var px = max(win[0]/16,win[1]/9);
+	note_size = min(px*0.4,win[0]*0.04);
+	h_factor = 3*max(win[1]/win[0],0.9);
+	h = h_factor;
 	settings = new Settings(px);
 	px9 = px*9;
 	rectMode(CENTER);
 	textFont(atkinsonBold);
-	textSize(px*1.8);
 	textAlign(CENTER,CENTER);
 	
 	palette = new Palette();
 	palette.getColors('Electric');
-	win = [windowWidth,windowHeight];
 	settings.makeGrid();
 
 	
 	points = make_points();
 	
-	icons.push(new Icon('=',[px*0.4,px*0.36],px*0.3,[win[0]/2-px*7.5,win[1]/2-px*4],[0,0]));
-	icons.push(new Icon('y',[px*0.4,px*0.28],px*0.4,[win[0]/2-px*6.8,win[1]/2-px*3.97],[0,0],'https://www.youtube.com/watch?v=_KInQ1aTLRk'));
+	//icons.push(new Icon('=',[px*0.4,px*0.36],px*0.3,[win[0]/2-px*7.5,win[1]/2-px*4],[0,0]));
+	//icons.push(new Icon('y',[px*0.4,px*0.28],px*0.4,[win[0]/2-px*6.8,win[1]/2-px*3.97],[0,0],'https://www.youtube.com/watch?v=_KInQ1aTLRk'));
+	icons.push(new Icon('=',[px*0.4,px*0.36],px*0.3,[px*0.5,px*0.5],[0,0]));
+	icons.push(new Icon('y',[px*0.4,px*0.28],px*0.4,[px*1.2,px*0.53],[0,0],'https://www.youtube.com/watch?v=_KInQ1aTLRk'));
 	
-	var bigText = px*0.18;
-	var smallText = px*0.14;
-	menuBox = new Box([win[0]/2-px*6.6,win[1]/2+px*0.4],[px*1,px*3.8],px*0.1);
+	var bigText = min(px*0.18,win[1]*0.02);
+	var smallText = min(px*0.14,win[1]*0.016);
+	//menuBox = new Box([win[0]/2-px*6.6,win[1]/2+px*0.4],[px*1,px*3.8],px*0.1);
+	menuBox = new Box([px*1.4,min(win[1]*0.55,win[1]*0.38+px)],[min(win[1]*0.12,px),min(px*3.5,win[1]*0.4)],px*0.1);
 	menuBox.Items.push(new textItem(0.6,'',0));
 	
 	menuBox.Items.push(new textItem(1,'Color Scheme',bigText));

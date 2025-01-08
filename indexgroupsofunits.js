@@ -112,7 +112,7 @@ class Bubble {
 			if (cont[3] == 0 || cont[0] >= main_list.length){
 				continue;
 			}
-			var pull_strength = min(1/cont[1],px);
+			var pull_strength = 1/cont[1];
 			var dist_info = pointDist(this.x,this.y,main_list[cont[0]].x,main_list[cont[0]].y);
 			this.a[0] += dist_info[0]*pull_strength;
 			this.a[1] += dist_info[1]*pull_strength;
@@ -167,7 +167,7 @@ class Bubble {
 
 function pointDist(x1,y1,x2,y2){
 	var dist_mag = ((x2-x1)**2 + (y2-y1)**2)**0.5;
-	return([(x2-x1)/dist_mag,(y2-y1)/dist_mag,dist_mag**2/px]);
+	return([(x2-x1)/dist_mag,(y2-y1)/dist_mag,max(dist_mag**2/px,1)]);
 }
 
 
@@ -207,7 +207,7 @@ function findContainers(new_idx){
 				mark = 2;
 			}
 			
-			main_list[a].contains.push([b,(log(main_list[a].order/main_list[b].order)+1)**3*px/128,ord,mark]);
+			main_list[a].contains.push([b,(log(main_list[a].order/main_list[b].order)+1)**3*px/64,ord,mark]);
 			main_list[a].connections++;
 			main_list[b].connections++;
 		}

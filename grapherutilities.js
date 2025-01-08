@@ -131,9 +131,10 @@ function process_output(proc_poly,proc_next = [],display = false){
 		h_out = 10;
 		
 		output_coords = [];
+		var or = 128/sqrt(note_size);
 		for (var op of output_points){
-			output_raw = ztoCoords(op,15);
-			output_raw = add(output_raw,[settings.px*5.6,-settings.px*3.5]);
+			output_raw = ztoCoords(op,or);
+			output_raw = add(output_raw,[-win[0]*0.5+settings.display[0],note_size*0.8-win[1]*0.5+settings.display[1]]);
 			output_coords.push(output_raw);
 		}
 		
@@ -193,8 +194,9 @@ function make_points(vertices = settings.vertices,steps = settings.step,volume =
 	return point_list;
 }
 
-
+/*
 function touchStarted() {
 	mouseClicked();
 	return false;
 }
+*/

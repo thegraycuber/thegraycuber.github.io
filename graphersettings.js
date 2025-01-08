@@ -14,7 +14,7 @@ class Settings {
 		this.radii = [1,1.570796326,2,2.7182818284,3,3.1415926535,4,4.7123889803,5,6.283185307,0.2,0.25,0.33333333333,0.3678794411,0.5];
 		this.radius_range = [-4,4]
 		this.exponent = ['⁰','¹','²','³','⁴','⁵','⁶','⁷','⁸','⁹'];
-		this.display = [windowWidth/2+px*5.6,windowHeight/2-px*3.75];
+		this.display = [win[0]-note_size*4,px];
 		this.display_jump = 0;
 		for (var exp_ten = 1; exp_ten < 10; exp_ten++){
 			for (var exp_unit = 0; exp_unit < 10; exp_unit++){
@@ -182,7 +182,7 @@ class Settings {
 			}
 			
 			var hor_coords = ztoCoords([0,i*h_div]);
-			if (hor_coords[1] <= windowHeight/2 + this.px*4.5 && hor_coords[1] >= windowHeight/2 - this.px*4.5){
+			if (hor_coords[1] <= win[1]/2 + this.px*4.5 && hor_coords[1] >= win[1]/2 - this.px*4.5){
 				this.gridlines.push([hor_coords[0],hor_coords[1],this.px*16,this.px*0.05]);
 				if (h_log>6 && i != 0) {
 					this.labels.push([hor_coords[0]+settings.px*0.1,hor_coords[1]+settings.px*0.3,str(i*h_pre)+'e'+str(h_log)+'i']);

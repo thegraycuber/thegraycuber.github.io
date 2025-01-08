@@ -12,14 +12,17 @@ function intsLoad(){
 	for (var drow = 0; drow < data.getRowCount(); drow++){
 		ints.push(new Gauss(data,drow,setting.W));
 	}
-	zoomz = [];
-	for (drow = 0; drow < zoomdata.getRowCount(); drow++){
-		if(zoomdata.getString(drow,setting.W+2)=='1'){
-			zoomz.push(new Zoom(zoomdata,drow,setting.W));
+	if (prod){
+		zoomz = [];
+		for (drow = 0; drow < zoomdata.getRowCount(); drow++){
+			if(zoomdata.getString(drow,setting.W+2)=='1'){
+				zoomz.push(new Zoom(zoomdata,drow,setting.W));
+			}
 		}
-	}
-	if(setting.ZoomOut == 2){
-		setting.ZoomOut = 1;
+
+		if(setting.ZoomOut == 2){
+			setting.ZoomOut = 1;
+		}
 	}
 }
 
@@ -154,7 +157,6 @@ function mouseCheck(){
 	foundMouse += menuBox.mouseInside();
 	foundMouse += infoBox.mouseInside();
 	foundMouse += hoverBox.mouseInside();
-	foundMouse += messageBox.mouseInside();
 	
 	if (foundMouse > 0){return true;}
 	else{return false;}
@@ -195,10 +197,4 @@ function highlightAssociates(walkValue,mouseA){
 			}		
 		}
 	}
-}
-
-
-function touchStarted() {
-	mouseClicked();
-	return false;
 }

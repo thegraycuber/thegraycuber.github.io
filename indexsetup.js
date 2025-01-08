@@ -50,7 +50,7 @@ imgs.push(new Icon([window.innerWidth/2-px*2.6,min(window.innerHeight-px*2,windo
 	if (prod){
 		imgs.push(new Icon([window.innerWidth/2,min(window.innerHeight-px*2,window.innerHeight/2+px*8)],px*0.6,2,'https://thegraycuber.github.io/about.html','_self'));
 		links = ['https://thegraycuber.github.io/groupsofunits.html', //groups of units
-								'https://thegraycuber.github.io/gaussian.html', //complex primes
+								'https://thegraycuber.github.io/quadratic.html', //complex primes
 								'https://thegraycuber.github.io/grapher.html', //complex grapher
 								'https://thegraycuber.github.io/quadratic.html' //quadratic primes
 								];	
@@ -66,6 +66,6 @@ imgs.push(new Icon([window.innerWidth/2-px*2.6,min(window.innerHeight-px*2,windo
 	pages.push(new Page('Groups of Units','Forest',links[0]));
 	pages.push(new Page('Complex Primes','Sunset',links[1]));
 	pages.push(new Page('Complex Grapher','Electric',links[2]));
-	pages.push(new Page('Quadratic Primes','Sunset',links[3]));
+	//pages.push(new Page('Quadratic Primes','Sunset',links[3]));
 
 }

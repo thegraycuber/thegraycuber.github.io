@@ -211,7 +211,7 @@ function draw() {
 
 
 function touchStarted(){
-	
+
 	var linked = false;
 	for (var i of imgs){
 		if(i.check(true)){

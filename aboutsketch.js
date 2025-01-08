@@ -25,9 +25,9 @@ var textValues = [
 	"",
 	""
 ];
-var winw, winh;
 var links = ['https://www.youtube.com/@TheGrayCuber','https://github.com/thegraycuber','https://thegraycuber.github.io/'];
 var link_types = ['_blank', '_blank', '_self'];
+var win;
 
 function preload() {
 	atkinsonRegular = loadFont("Atkinson-Hyperlegible-Regular-102.ttf");
@@ -54,13 +54,12 @@ function setup() {
 	color_move = random()*2000;
 	color_a = createVector(random()*2000,random()*2000);
 	color_v = createVector(random()*2000,random()*2000);
-	createCanvas(windowWidth, windowHeight);
+	createCanvas(window.innerWidth, window.innerHeight);
+	win = [window.innerWidth/2,window.innerHeight/2];
 	background(palette[0].back[2]);
-	px = min(windowWidth,windowHeight);
-	winw = windowWidth;
-	winh = windowHeight;
-	if (winw*1.1 < winh){
-		px*= min(1.3,0.9*winh/winw);
+	px = min(window.innerWidth,window.innerHeight);
+	if (window.innerWidth*1.1 < window.innerHeight){
+		px*= min(1.3,0.9*window.innerHeight/window.innerWidth);
 		icon_coords = icon_mobile;
 	}
 	for (var img = 0; img < color_list.length-1; img++){
@@ -69,9 +68,9 @@ function setup() {
 	imgs.push(new Icon([0,0.3],px,9,px*0.06));
 	update_imgs();
 	noStroke();
-	for(x = 0; x < windowWidth; x += px/60){
-		for(y = 0; y < windowHeight; y += px/60){
-			points.push(new Point(x-windowWidth/2,y-windowHeight/2,px/60));
+	for(x = 0; x < window.innerWidth; x += px/60){
+		for(y = 0; y < window.innerHeight; y += px/60){
+			points.push(new Point(x,y,px/60));
 		}	
 	}
 }
@@ -79,13 +78,6 @@ function setup() {
 function draw() {
 
 	random_add = 0.002;
-	if (abs(winw - windowWidth) > 1 || abs(winh - windowHeight) > 1){
-		background(palette[0].back[2]);
-		winw = windowWidth;
-		winh = windowHeight;
-		random_add = 0.125;
-	}
-	translate(windowWidth/2,windowHeight/2);
 	
 	if(adjust_counter >= 0){
 		
@@ -115,6 +107,7 @@ function draw() {
 			p.display();
 		}
 	}
+	translate(win[0],win[1]);
 	strokeWeight(px*0.005);
 	stroke(palette[0].back[2]);
 	fill(palette[0].accent2);
@@ -161,10 +154,9 @@ function update_imgs(){
 	}
 }
 
-function mousePressed(){
+function touchStarted(){
 	for (var i = 6; i < imgs.length; i++)	{
-		var test_click = imgs[i].check(true);
-		if(test_click){
+		if(imgs[i].check(true)){
 			window.open(links[imgs[i].index - 7], link_types[imgs[i].index - 7]);
 		}
 	}	

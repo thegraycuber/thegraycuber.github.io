@@ -182,7 +182,7 @@ function draw() {
 }
 
 
-function mouseClicked(){
+function touchStarted(){
 	
 	var isMove;
 	endScreenSaver();

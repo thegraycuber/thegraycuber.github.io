@@ -83,8 +83,9 @@ function draw() {
 	}
 }
 
-function mouseClicked(){
+function touchStarted(){
 	
+	console.log('here');
 	if (mouseCheck()){
 		menuBox.clicked();
 		//infoBox.clicked();

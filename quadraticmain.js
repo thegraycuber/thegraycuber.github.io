@@ -1,3 +1,4 @@
+prod = false;
 win = [];
 setting = 0;
 ints = [[]];
@@ -8,7 +9,6 @@ icons = [];
 menuBox = [];
 infoBox = [];
 hoverBox = [];
-messageBox = [];
 black = 10;
 white = 85;
 data = [];
@@ -22,7 +22,7 @@ function draw() {
 		setting.DataRows = data.getRowCount();
 	}
 	
-	if (setting.ZoomOut == 1){
+	if (setting.ZoomOut == 1 && prod){
 		background(black);
 		for (var zRow of zoomz) {
 			zRow.showAll();
@@ -55,7 +55,7 @@ function draw() {
 			hoverBox.Items[hoverBox.getIndex('hovertext')].DisplayText = ints[mouseIdx].Desc[mouseA[2]];
 			hoverBox.Items[hoverBox.getIndex('factortitle')].DisplayText = ints[mouseIdx].Type + '       Norm ' + ints[mouseIdx].Norm;
 			hoverBox.Items[hoverBox.getIndex('primefactorization')].DisplayText = 'Prime Factorization:'
-			var unitText = ''
+			var unitText = '';
 			if (ints[mouseIdx].FactorA > -1){
 				unitText = '(' + setting.UnitsText[(ints[mouseIdx].FactorA + mouseA[2]) % setting.UnitsText.length + ints[mouseIdx].FactorA - (ints[mouseIdx].FactorA) % setting.UnitsText.length] + ') '; 
 			}
@@ -130,11 +130,10 @@ function draw() {
 	menuBox.show();
 	infoBox.show();
 	hoverBox.show();
-	messageBox.show();
 }
 
 
-function mouseClicked(){
+function touchStarted(){
 	
 	if(setting.ZoomOut == 2){
 		setting.ZoomOut = 1;
