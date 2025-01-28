@@ -10,18 +10,26 @@ var powers = [
 	[9,3,[1,2]],
 	[16,2,[1],[0,1,0,2121211,0,606061,0,303031,0,1212121,0,909091,0,1818181,0,1515151]]
 ];
-var yt;
+var YouTube, Theme;
+var palette = [];
 
 function preload() {
 	atkinsonBold = loadFont("Atkinson-Hyperlegible-Bold-102.ttf");
+	atkinsonRegular = loadFont("Atkinson-Hyperlegible-Regular-102.ttf");
 	//openSans = loadFont("OpenSans-Regular.ttf");
 	
-	alg_list = loadTable('n_alg.csv', 'csv');//, 'header');
-	alg_compress = loadTable('n_alg_compress.csv');//, 'csv', 'header');
+	alg_list = loadTable('cubecalculator/n_alg.csv', 'csv');//, 'header');
+	alg_compress = loadTable('cubecalculator/n_alg_compress.csv');//, 'csv', 'header');
 }
 
 
 function setup() {
+	
+	palette.push(new Palette('#063a2a','#d6ddcc',['#d6ddcc','#d8b801','#3fbd75','#449d9d','#af5757','#b88153'],'#3fbd75'));
+	palette.push(new Palette('#292929','#bbb',['#bbb','#999','#373737','#222','#575757','#797979'],'#797979'));
+	palette.push(new Palette('#2f3052','#d8d9ff',['#d8d9ff','#e1e485','#2cda9d','#8498f0','#d86f9a','#e4b37f'],'#8498f0'));
+	//palette.push(new Palette('#2a2b2e','#6b7b86',['#6b7b86','#7c765b','#465541','#435168','#72454e','#6f5949'],'#6f5949'));
+	palette.push(new Palette('#e4e4e4','#94a0b4',['#bac4cc','#ecdd90','#99df92','#accdff','#eeb5cf','#dac2f3'],'#eeb5cf','#e4e4e4'));
 	
 	px = windowHeight / (9 * pxfact);
 	w = px*8/n;
@@ -29,39 +37,37 @@ function setup() {
 	createCanvas(windowWidth, windowHeight, WEBGL);
 	rectMode(CENTER);
 	frameRate(24);
-	textFont(atkinsonBold);
+	textFont(atkinsonRegular);
 	textAlign(CENTER,CENTER);
-	background(colors[0]);
+	background(palette[0].back);
 	noStroke();
 	
 	
-	yt = new YouTube([win[1]*0.05,win[1]*0.035],win[1]*0.015,[win[1]*0.18,win[1]*0.42],'https://www.youtube.com/watch?v=dYj0rPQeRkA');
+	YouTube = new Icon('yt',[win[1]*0.05,win[1]*0.035],win[1]*0.015,[win[1]*0.2,win[1]*0.425],'https://www.youtube.com/watch?v=dYj0rPQeRkA');
+	Theme = new Icon('th',[win[1]*0.035,win[1]*0.035],win[1]*0.0025,[-win[1]*0.195,win[1]*0.425]);
 	
 	input_unit = createInput('');
 	input_unit.attribute("placeholder","Enter a Unit");
-	button_style(input_unit,colors[0],colors[1],true,-0.12,0.78,0.24,0.04,0.03);
 	mult_button = createButton("Multiply");
 	mult_button.mousePressed(play_mult);
-	button_style(mult_button,colors[1],colors[0],false,-0.21,0.9,0.1,0.04,0.02);
 	div_button = createButton("Divide");
 	div_button.mousePressed(play_div);
-	button_style(div_button,colors[1],colors[0],false,-0.09,0.9,0.1,0.04,0.02);
 	rand_button = createButton("Random");
 	rand_button.mousePressed(give_rand);
-	button_style(rand_button,colors[1],colors[0],false,0.03,0.9,0.1,0.04,0.02);
+	button_input_setup();
 	
 	var edge = 0;
 	for (var i = -w*(n-1)/2; i <= w*(n-0.999)/2; i += w){
 		for (var j = -w*(n-1)/2; j <= w*(n-0.999)/2; j += w){
-			cube.push(new sticker([i,-w*n/2,j],colors[1],w*0.9,[1,0],edge));
-			cube.push(new sticker([i,w*n/2,j],colors[2],w*0.9,[1,0],edge));
-			cube.push(new sticker([i,j,w*n/2],colors[3],w*0.9,[0,0],edge));
-			cube.push(new sticker([i,j,-w*n/2],colors[4],w*0.9,[0,0],edge));
-			cube.push(new sticker([w*n/2,i,j],colors[5],w*0.9,[0,1],edge));
-			cube.push(new sticker([-w*n/2,i,j],colors[6 ],w*0.9,[0,1],edge));
+			cube.push(new sticker([i,-w*n/2,j],0,w*0.9,[1,0],edge));
+			cube.push(new sticker([i,w*n/2,j],1,w*0.9,[1,0],edge));
+			cube.push(new sticker([i,j,w*n/2],2,w*0.9,[0,0],edge));
+			cube.push(new sticker([i,j,-w*n/2],3,w*0.9,[0,0],edge));
+			cube.push(new sticker([w*n/2,i,j],4,w*0.9,[0,1],edge));
+			cube.push(new sticker([-w*n/2,i,j],5,w*0.9,[0,1],edge));
 			
 			for (var k =  -w*(n-1)/2; k <=  w*(n-0.999)/2; k += w){
-				boxes.push(new cubie([i*0.99,j*0.99,k*0.99],colors[0],w*0.99));
+				boxes.push(new cubie([i*0.99,j*0.99,k*0.99],palette[0].back,w*0.99));
 			}
 			edge = 1 - edge;
 		}
@@ -93,4 +99,11 @@ function setup() {
 		
 	}
 	
+}
+
+function button_input_setup(){
+	button_style(input_unit,palette[0].back,palette[0].front,true,-0.12,0.78,0.24,0.04,0.03);
+	button_style(mult_button,palette[0].front,palette[0].back,false,-0.14,0.91,0.08,0.03,0.018);
+	button_style(div_button,palette[0].front,palette[0].back,false,-0.04,0.91,0.08,0.03,0.018);
+	button_style(rand_button,palette[0].front,palette[0].back,false,0.06,0.91,0.08,0.03,0.018);
 }

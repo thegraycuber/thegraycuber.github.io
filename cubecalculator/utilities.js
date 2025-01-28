@@ -95,10 +95,13 @@ function movethem(moveinput,rotateinput){
 function button_style(button_in,back,front,input,x,y,w,h,fontsize){
   button_in.style("font-size", int(win[1]*fontsize) + "px");
   button_in.style("border-radius", int(win[1]*0.01) + "px");
+  button_in.style("background-color", back);
+  button_in.style("color", front);
   button_in.size(win[1]*w, win[1]*h);
 	button_in.position(win[0]*0.5+win[1]*x, win[1]*y);
 	if (input){
   	button_in.style("border", int(win[1]*0.004) + "px solid");
+  	button_in.style("border-color", front);
 		button_in.addClass('calc_input');
 	} else {
 		button_in.addClass('calc_button');

@@ -18,21 +18,16 @@ footer {
 }
 
 .calc_input{
-	font-family: "Atkinson-Hyperlegible-Bold-102";
-  background-color: #063a2a;
-	color: #d6ddcc;
+	font-family: "Atkinson-Hyperlegible-Regular-102";
 	text-align: center;
-	border-color: #d6ddcc;
 }
 
 .calc_input::placeholder{
-	color: #478f67;
+	color: #ffffff77;
 }
 
 .calc_button{
-	font-family: "Atkinson-Hyperlegible-Bold-102";
-  background-color: #d6ddcc;
-	color: #063a2a;
+	font-family: "Atkinson-Hyperlegible-Regular-102";
 	text-align: center;
 	border: none;
 }
