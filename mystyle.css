@@ -16,3 +16,23 @@ main {
 footer {
   color-scheme: dark;
 }
+
+.calc_input{
+	font-family: "Atkinson-Hyperlegible-Bold-102";
+  background-color: #063a2a;
+	color: #d6ddcc;
+	text-align: center;
+	border-color: #d6ddcc;
+}
+
+.calc_input::placeholder{
+	color: #478f67;
+}
+
+.calc_button{
+	font-family: "Atkinson-Hyperlegible-Bold-102";
+  background-color: #d6ddcc;
+	color: #063a2a;
+	text-align: center;
+	border: none;
+}

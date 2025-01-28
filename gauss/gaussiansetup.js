@@ -1,7 +1,7 @@
 
 function preload() {
-	data = loadTable('Gaussian1.3.csv', 'csv', 'header');
-	gameData = loadTable('GameData1.18.csv', 'csv', 'header');
+	data = loadTable('gauss/Gaussian1.3.csv', 'csv', 'header');
+	gameData = loadTable('gauss/GameData1.18.csv', 'csv', 'header');
 	atkinsonBold = loadFont("Atkinson-Hyperlegible-Bold-102.ttf");
 	atkinsonRegular = loadFont("Atkinson-Hyperlegible-Regular-102.ttf");
 	openSans = loadFont("OpenSans-Bold.ttf");
