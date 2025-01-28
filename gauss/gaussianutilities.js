@@ -191,9 +191,3 @@ function tryMove(){
 	}
 	return true;
 }
-
-
-function touchStarted() {
-	mouseClicked();
-	return false;
-}
