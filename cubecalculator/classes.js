@@ -7,19 +7,19 @@ class sticker {
 		this.edge = edge;
 	}
 	display(moving = true) {
-		if (moving == (moveaxis == -1 || this.pos[moveaxis] * movefact < w * 0.9)) {
+		if (moving == (moveaxis == -1 || this.pos[moveaxis] * movefact < 0.9)) {
 			fill(palette[0].colors[this.hex]);
-			translate(this.pos[0], this.pos[1], this.pos[2]);
+			translate(this.pos[0]*w, this.pos[1]*w, this.pos[2]*w);
 			rotateX(this.rotate[0] * PI / 2);
 			rotateY(this.rotate[1] * PI / 2);
-			rect(0, 0, this.size, this.size, this.size * 0.2);
+			rect(0, 0, this.size*w, this.size*w, this.size*w * 0.2);
 			rotateY(-this.rotate[1] * PI / 2);
 			rotateX(-this.rotate[0] * PI / 2);
-			translate(-this.pos[0], -this.pos[1], -this.pos[2]);
+			translate(-this.pos[0]*w, -this.pos[1]*w, -this.pos[2]*w);
 		}
 	}
 	move() {
-		if (this.pos[moveaxis] * movefact >= w) {
+		if (this.pos[moveaxis] * movefact >= 1) {
 			var moveout = movethem(this.pos, this.rotate);
 			this.pos = moveout[0];
 			this.rotate = moveout[1];
@@ -34,15 +34,15 @@ class cubie {
 		this.size = size;
 	}
 	display(moving = true) {
-		if (moving == (moveaxis == -1 || this.pos[moveaxis] * movefact < w * 0.8)) {
+		if (moving == (moveaxis == -1 || this.pos[moveaxis] * movefact < 0.8)) {
 			fill(palette[0].back);
-			translate(this.pos[0], this.pos[1], this.pos[2]);
-			box(this.size, this.size, this.size);
-			translate(-this.pos[0], -this.pos[1], -this.pos[2]);
+			translate(this.pos[0]*w, this.pos[1]*w, this.pos[2]*w);
+			box(this.size*w, this.size*w, this.size*w);
+			translate(-this.pos[0]*w, -this.pos[1]*w, -this.pos[2]*w);
 		}
 	}
 	move() {
-		if (this.pos[moveaxis] * movefact >= w) {
+		if (this.pos[moveaxis] * movefact >= 1) {
 			var moveout = movethem(this.pos, [0, 0, 0]);
 			this.pos = moveout[0];
 			this.rotate = moveout[1];

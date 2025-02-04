@@ -57,17 +57,17 @@ function setup() {
 	button_input_setup();
 	
 	var edge = 0;
-	for (var i = -w*(n-1)/2; i <= w*(n-0.999)/2; i += w){
-		for (var j = -w*(n-1)/2; j <= w*(n-0.999)/2; j += w){
-			cube.push(new sticker([i,-w*n/2,j],0,w*0.9,[1,0],edge));
-			cube.push(new sticker([i,w*n/2,j],1,w*0.9,[1,0],edge));
-			cube.push(new sticker([i,j,w*n/2],2,w*0.9,[0,0],edge));
-			cube.push(new sticker([i,j,-w*n/2],3,w*0.9,[0,0],edge));
-			cube.push(new sticker([w*n/2,i,j],4,w*0.9,[0,1],edge));
-			cube.push(new sticker([-w*n/2,i,j],5,w*0.9,[0,1],edge));
+	for (var i = -(n-1)/2; i <= (n-0.999)/2; i += 1){
+		for (var j = -(n-1)/2; j <= (n-0.999)/2; j += 1){
+			cube.push(new sticker([i,-n/2,j],0,0.9,[1,0],edge));
+			cube.push(new sticker([i,n/2,j],1,0.9,[1,0],edge));
+			cube.push(new sticker([i,j,n/2],2,0.9,[0,0],edge));
+			cube.push(new sticker([i,j,-n/2],3,0.9,[0,0],edge));
+			cube.push(new sticker([n/2,i,j],4,0.9,[0,1],edge));
+			cube.push(new sticker([-n/2,i,j],5,0.9,[0,1],edge));
 			
-			for (var k =  -w*(n-1)/2; k <=  w*(n-0.999)/2; k += w){
-				boxes.push(new cubie([i*0.99,j*0.99,k*0.99],palette[0].back,w*0.99));
+			for (var k =  -(n-1)/2; k <=  (n-0.999)/2; k += 1){
+				boxes.push(new cubie([i*0.99,j*0.99,k*0.99],palette[0].back,0.99));
 			}
 			edge = 1 - edge;
 		}
@@ -103,7 +103,14 @@ function setup() {
 
 function button_input_setup(){
 	button_style(input_unit,palette[0].back,palette[0].front,true,-0.12,0.78,0.24,0.04,0.03);
-	button_style(mult_button,palette[0].front,palette[0].back,false,-0.14,0.91,0.08,0.03,0.018);
-	button_style(div_button,palette[0].front,palette[0].back,false,-0.04,0.91,0.08,0.03,0.018);
-	button_style(rand_button,palette[0].front,palette[0].back,false,0.06,0.91,0.08,0.03,0.018);
+	button_style(mult_button,palette[0].front,palette[0].back,false,-0.14,0.91,0.08,0.03,0.015);
+	button_style(div_button,palette[0].front,palette[0].back,false,-0.04,0.91,0.08,0.03,0.015);
+	button_style(rand_button,palette[0].front,palette[0].back,false,0.06,0.91,0.08,0.03,0.015);
+}
+
+function windowResized(){
+	resizeCanvas(windowWidth, windowHeight); px = windowHeight / (9 * pxfact);
+	w = px*8/n;
+	win = [windowWidth, windowHeight];
+	button_input_setup();
 }
