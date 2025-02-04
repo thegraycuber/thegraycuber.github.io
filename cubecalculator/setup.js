@@ -24,7 +24,6 @@ function preload() {
 
 function setup() {
 	alg_list = loadTable('cubecalculator/n_alg.csv', 'csv');//, 'header');
-	
 	palette.push(new Palette('#063a2a','#d6ddcc',['#d6ddcc','#d8b801','#3fbd75','#449d9d','#af5757','#b88153'],'#3fbd75'));
 	palette.push(new Palette('#292929','#bbb',['#bbb','#999','#373737','#222','#575757','#797979'],'#797979'));
 	palette.push(new Palette('#2f3052','#d8d9ff',['#d8d9ff','#e1e485','#2cda9d','#8498f0','#d86f9a','#e4b37f'],'#8498f0'));
@@ -34,7 +33,7 @@ function setup() {
 	px = windowHeight / (9 * pxfact);
 	w = px*8/n;
 	win = [windowWidth, windowHeight];
-	createCanvas(windowWidth, windowHeight, WEBGL);
+	createCanvas(windowWidth+100, windowHeight+100, WEBGL);
 	rectMode(CENTER);
 	frameRate(24);
 	textFont(atkinsonRegular);
@@ -109,8 +108,11 @@ function button_input_setup(){
 }
 
 function windowResized(){
-	resizeCanvas(windowWidth, windowHeight); px = windowHeight / (9 * pxfact);
+	resizeCanvas(windowWidth+100, windowHeight+100); 
+	px = windowHeight / (9 * pxfact);
 	w = px*8/n;
 	win = [windowWidth, windowHeight];
 	button_input_setup();
+	YouTube = new Icon('yt',[win[1]*0.05,win[1]*0.035],win[1]*0.015,[win[1]*0.2,win[1]*0.425],'https://www.youtube.com/watch?v=dYj0rPQeRkA');
+	Theme = new Icon('th',[win[1]*0.035,win[1]*0.035],win[1]*0.0025,[-win[1]*0.195,win[1]*0.425]);
 }

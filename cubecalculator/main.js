@@ -28,6 +28,7 @@ var move_allowed = false;
 
 
 function draw() {
+	translate(-50,-50,0);
 	process_input();
 	if (playalg.length > 0 && moveaxis == -1){
 		keytoMove(playalg.substring(0,1));
@@ -106,4 +107,5 @@ function touchStarted(){
 	YouTube.clicked();
 	Theme.clicked();
 }
+
 

@@ -58,8 +58,8 @@ class Icon {
 		this.Size = displaySize;
 		this.Radius = radius;
 		this.Coords = coords;
-		this.UpperLeft = [width / 2 + this.Coords[0] - displaySize[0] / 2, height / 2 + this.Coords[1] - displaySize[1] / 2];
-		this.LowerRight = [width / 2 + this.Coords[0] + displaySize[0] / 2, height / 2 + this.Coords[1] + displaySize[1] / 2];
+		this.UpperLeft = [width / 2 + this.Coords[0] - displaySize[0] / 2 -50, height / 2 + this.Coords[1] - displaySize[1] / 2 -50];
+		this.LowerRight = [width / 2 + this.Coords[0] + displaySize[0] / 2 -50, height / 2 + this.Coords[1] + displaySize[1] / 2 -50];
 		this.Link = link;
 	}
 	showIcon() {
