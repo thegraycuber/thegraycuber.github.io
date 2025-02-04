@@ -103,9 +103,9 @@ function setup() {
 
 function button_input_setup(){
 	button_style(input_unit,palette[0].back,palette[0].front,true,-0.12,0.78,0.24,0.04,0.03);
-	button_style(mult_button,palette[0].front,palette[0].back,false,-0.14,0.91,0.08,0.03,0.015);
-	button_style(div_button,palette[0].front,palette[0].back,false,-0.04,0.91,0.08,0.03,0.015);
-	button_style(rand_button,palette[0].front,palette[0].back,false,0.06,0.91,0.08,0.03,0.015);
+	button_style(mult_button,palette[0].front,palette[0].back,false,-0.14,0.91,0.08,0.03,0.016);
+	button_style(div_button,palette[0].front,palette[0].back,false,-0.04,0.91,0.08,0.03,0.016);
+	button_style(rand_button,palette[0].front,palette[0].back,false,0.06,0.91,0.08,0.03,0.016);
 }
 
 function windowResized(){
