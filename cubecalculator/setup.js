@@ -18,12 +18,12 @@ function preload() {
 	atkinsonRegular = loadFont("Atkinson-Hyperlegible-Regular-102.ttf");
 	//openSans = loadFont("OpenSans-Regular.ttf");
 	
-	alg_list = loadTable('cubecalculator/n_alg.csv', 'csv');//, 'header');
 	alg_compress = loadTable('cubecalculator/n_alg_compress.csv');//, 'csv', 'header');
 }
 
 
 function setup() {
+	alg_list = loadTable('cubecalculator/n_alg.csv', 'csv');//, 'header');
 	
 	palette.push(new Palette('#063a2a','#d6ddcc',['#d6ddcc','#d8b801','#3fbd75','#449d9d','#af5757','#b88153'],'#3fbd75'));
 	palette.push(new Palette('#292929','#bbb',['#bbb','#999','#373737','#222','#575757','#797979'],'#797979'));
