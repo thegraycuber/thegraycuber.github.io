@@ -136,6 +136,7 @@ function play_alg(multiply){
 	if (isNaN(input_val) || playalg.length > 0 || !move_allowed){
 		return;
 	}
+	update_allowed(false);
 	var compressed_alg;
 	var input_inv = inverse(input_val);
 	if (multiply)	{
@@ -154,15 +155,16 @@ function process_input(){
 	if (input_unit.value() == last_input){
 		return;
 	}
-	move_allowed = false;
 	last_input = input_unit.value();
 	if (last_input == ''){
 		input_alg = '';
+		update_allowed(false);
 		return;
 	}
 	input_val = parseInt(last_input);
 	if (isNaN(input_val)){
 		input_alg = 'Please enter a number.';
+		update_allowed(false);
 		return;
 	} 
 	input_val = (input_val%2424240+2424240)%2424240;
@@ -176,9 +178,10 @@ function process_input(){
 	
 	if (is_unit != -1){
 		input_alg = 'Not a Unit. ' + str(is_unit) + ' divides both '+ str(input_val) + ' and 2424240.';
+		update_allowed(false);
 		return;
 	}
-	move_allowed = true;
+	update_allowed(true);
 	input_machine = getAlg(input_val);
 	input_alg = userAlg(compressed_alg);
 }
@@ -206,4 +209,18 @@ function textMax(textValue,x,y,trysize){
 		textSize(win[1]*trysize*win[0]*0.9/tw);
 	}
 	text(textValue,x,y);
+}
+
+function update_allowed(new_value){
+	if (new_value == move_allowed){
+		return;
+	}
+	move_allowed = new_value;
+	if (move_allowed && playalg.length == 0){
+		mult_button.style("background-color", palette[0].front);
+		div_button.style("background-color", palette[0].front);
+	} else {
+		mult_button.style("background-color", palette[0].backlight);
+		div_button.style("background-color", palette[0].backlight);
+	}
 }

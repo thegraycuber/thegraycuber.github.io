@@ -28,14 +28,17 @@ var move_allowed = false;
 
 
 function draw() {
-	translate(-50,-50,0);
 	process_input();
 	if (playalg.length > 0 && moveaxis == -1){
 		keytoMove(playalg.substring(0,1));
 		playalg = playalg.substring(1,playalg.length);
+		if (playalg.length == 0){
+			last_input = '';
+		}
 	}
 	background(palette[0].back);
 
+	translate(0,win[1]*0.05,0);
 	push();
 	rotateX(rotx);
 	rotateY(roty);
@@ -84,28 +87,32 @@ function draw() {
 	
 	pop();
 	
+	translate(0,-win[1]*0.05,0);
+	
 	textFont(atkinsonBold);
 	fill(palette[0].head);
 	textMax("Mod 2424240 Calculator",0,-win[1]*0.43,0.035);
 	
 	fill(palette[0].front);
 	if (playalg.length > 0){
-		textMax("Calculating...",0,-win[1]*0.33,0.04);
+		textMax("Calculating...",0,win[1]*0.38,0.04);
 	} else {
-		textMax("Current State: " + str(curr_value),0,-win[1]*0.365,0.04);
+		textMax("Current State: " + str(curr_value),0,win[1]*0.38,0.04);
 		textFont(atkinsonRegular);
-		textMax(curr_alg,0,-win[1]*0.3,0.025);
+		textMax(curr_alg,0,win[1]*0.44,0.025);
 	}
 	textFont(atkinsonRegular);
-	textMax(input_alg,0,win[1]*0.365,0.025);
+	textMax(input_alg,0,-win[1]*0.23,0.025);
 	YouTube.showIcon();
 	Theme.showIcon();
+	rand_button.showIcon();
 }
 
 
 function touchStarted(){
 	YouTube.clicked();
 	Theme.clicked();
+	rand_button.clicked();
 }
 
 

@@ -18,22 +18,23 @@ function preload() {
 	atkinsonRegular = loadFont("Atkinson-Hyperlegible-Regular-102.ttf");
 	//openSans = loadFont("OpenSans-Regular.ttf");
 	
-	alg_compress = loadTable('cubecalculator/n_alg_compress.csv');//, 'csv', 'header');
+	alg_compress = loadTable('cubecalculator/n_alg_compress.csv');//cubecalculator/
 }
 
 
 function setup() {
+	
 	alg_list = loadTable('cubecalculator/n_alg.csv', 'csv');//, 'header');
-	palette.push(new Palette('#063a2a','#d6ddcc',['#d6ddcc','#d8b801','#3fbd75','#449d9d','#af5757','#b88153'],'#3fbd75'));
-	palette.push(new Palette('#292929','#bbb',['#bbb','#999','#373737','#222','#575757','#797979'],'#797979'));
-	palette.push(new Palette('#2f3052','#d8d9ff',['#d8d9ff','#e1e485','#2cda9d','#8498f0','#d86f9a','#e4b37f'],'#8498f0'));
+	palette.push(new Palette('#063a2a','#d6ddcc',['#d6ddcc','#d8b801','#3fbd75','#449d9d','#af5757','#b88153'],'#3fbd75','#095a44'));
+	palette.push(new Palette('#292929','#bbb',['#bbb','#999','#777','#222','#575757','#373737'],'#797979','#4f4f4f'));
+	palette.push(new Palette('#2f3052','#d8d9ff',['#d8d9ff','#e1e485','#2cda9d','#8498f0','#d86f9a','#e4b37f'],'#8498f0','#434c72'));
 	//palette.push(new Palette('#2a2b2e','#6b7b86',['#6b7b86','#7c765b','#465541','#435168','#72454e','#6f5949'],'#6f5949'));
-	palette.push(new Palette('#e4e4e4','#94a0b4',['#bac4cc','#ecdd90','#99df92','#accdff','#eeb5cf','#dac2f3'],'#eeb5cf','#e4e4e4'));
+	palette.push(new Palette('#e4e4e4','#94a0b4',['#bac4cc','#ecdd90','#99df92','#accdff','#eeb5cf','#dac2f3'],'#eeb5cf','#d6d4df','#e4e4e4'));
 	
 	px = windowHeight / (9 * pxfact);
 	w = px*8/n;
 	win = [windowWidth, windowHeight];
-	createCanvas(windowWidth+100, windowHeight+100, WEBGL);
+	createCanvas(windowWidth, windowHeight, WEBGL);
 	rectMode(CENTER);
 	frameRate(24);
 	textFont(atkinsonRegular);
@@ -42,17 +43,12 @@ function setup() {
 	noStroke();
 	
 	
-	YouTube = new Icon('yt',[win[1]*0.05,win[1]*0.035],win[1]*0.015,[win[1]*0.2,win[1]*0.425],'https://www.youtube.com/watch?v=dYj0rPQeRkA');
-	Theme = new Icon('th',[win[1]*0.035,win[1]*0.035],win[1]*0.0025,[-win[1]*0.195,win[1]*0.425]);
-	
 	input_unit = createInput('');
 	input_unit.attribute("placeholder","Enter a Unit");
 	mult_button = createButton("Multiply");
 	mult_button.mousePressed(play_mult);
 	div_button = createButton("Divide");
 	div_button.mousePressed(play_div);
-	rand_button = createButton("Random");
-	rand_button.mousePressed(give_rand);
 	button_input_setup();
 	
 	var edge = 0;
@@ -101,14 +97,20 @@ function setup() {
 }
 
 function button_input_setup(){
-	button_style(input_unit,palette[0].back,palette[0].front,true,-0.12,0.78,0.24,0.04,0.03);
-	button_style(mult_button,palette[0].front,palette[0].back,false,-0.14,0.91,0.08,0.03,0.016);
-	button_style(div_button,palette[0].front,palette[0].back,false,-0.04,0.91,0.08,0.03,0.016);
-	button_style(rand_button,palette[0].front,palette[0].back,false,0.06,0.91,0.08,0.03,0.016);
+	var allowed_color = palette[0].backlight;
+	if (move_allowed){
+		allowed_color = palette[0].front;
+	}
+	button_style(input_unit,palette[0].back,palette[0].front,true,-0.14,0.135,0.24,0.04,0.03);
+	button_style(mult_button,allowed_color,palette[0].back,false,-0.14,0.2,0.11,0.03,0.018);
+	button_style(div_button,allowed_color,palette[0].back,false,0,0.2,0.11,0.03,0.018);
+	YouTube = new Icon('yt',[win[1]*0.05,win[1]*0.035],win[1]*0.015,[win[1]*0.18,win[1]*0.31],'https://www.youtube.com/watch?v=dYj0rPQeRkA');
+	Theme = new Icon('th',[win[1]*0.035,win[1]*0.035],win[1]*0.0025,[-win[1]*0.18,win[1]*0.31]);
+	rand_button = new Icon('die',[win[1]*0.04,win[1]*0.04],win[1]*0.0025,[win[1]*0.15,-win[1]*0.3425]);
 }
 
 function windowResized(){
-	resizeCanvas(windowWidth+100, windowHeight+100); 
+	resizeCanvas(windowWidth, windowHeight); 
 	px = windowHeight / (9 * pxfact);
 	w = px*8/n;
 	win = [windowWidth, windowHeight];
