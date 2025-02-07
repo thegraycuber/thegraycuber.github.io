@@ -101,7 +101,11 @@ function button_input_setup(){
 	if (move_allowed){
 		allowed_color = palette[0].front;
 	}
-	button_style(input_unit,palette[0].back,palette[0].front,true,-0.14,0.135,0.24,0.04,0.03);
+	if (width > height){
+		button_style(input_unit,palette[0].back,palette[0].front,true,-0.14,0.135,0.24,0.04,0.03,0.003);
+	} else {
+		button_style(input_unit,palette[0].back,palette[0].front,true,-0.14,0.135,0.22,0.03,0.03,0.004);
+	}
 	button_style(mult_button,allowed_color,palette[0].back,false,-0.14,0.2,0.11,0.03,0.018);
 	button_style(div_button,allowed_color,palette[0].back,false,0,0.2,0.11,0.03,0.018);
 	YouTube = new Icon('yt',[win[1]*0.05,win[1]*0.035],win[1]*0.015,[win[1]*0.18,win[1]*0.31],'https://www.youtube.com/watch?v=dYj0rPQeRkA');
