@@ -108,7 +108,7 @@ function button_input_setup(){
 	}
 	button_style(mult_button,allowed_color,palette[0].back,false,-0.14,0.2,0.11,0.03,0.018);
 	button_style(div_button,allowed_color,palette[0].back,false,0,0.2,0.11,0.03,0.018);
-	YouTube = new Icon('yt',[win[1]*0.05,win[1]*0.035],win[1]*0.015,[win[1]*0.18,win[1]*0.31],'https://www.youtube.com/watch?v=dYj0rPQeRkA');
+	YouTube = new Icon('yt',[win[1]*0.05,win[1]*0.035],win[1]*0.015,[win[1]*0.18,win[1]*0.31],'https://youtu.be/Dq4z--4pVFY');
 	Theme = new Icon('th',[win[1]*0.035,win[1]*0.035],win[1]*0.0025,[-win[1]*0.18,win[1]*0.31]);
 	rand_button = new Icon('die',[win[1]*0.04,win[1]*0.04],win[1]*0.0025,[win[1]*0.15,-win[1]*0.3425]);
 }
@@ -119,6 +119,4 @@ function windowResized(){
 	w = px*8/n;
 	win = [windowWidth, windowHeight];
 	button_input_setup();
-	YouTube = new Icon('yt',[win[1]*0.05,win[1]*0.035],win[1]*0.015,[win[1]*0.2,win[1]*0.425],'https://www.youtube.com/watch?v=dYj0rPQeRkA');
-	Theme = new Icon('th',[win[1]*0.035,win[1]*0.035],win[1]*0.0025,[-win[1]*0.195,win[1]*0.425]);
 }
