@@ -28,3 +28,37 @@ function makePoints(vertices = 5,steps = 1,volume = 240){
 function mult(alpha,beta){
 	return([alpha[0]*beta[0] - alpha[1]*beta[1], alpha[0]*beta[1] + alpha[1]*beta[0]]);
 }
+
+function grapherDraw(){
+	
+		if (ticker > page_trans && ticker < page_trans*3+ticker_add){
+			comp_range[1] = min(0.5*main_list.length*(ticker - page_trans)/page_trans,main_list.length);
+		} else if (ticker > page_time - page_trans*3 && ticker < page_time - page_trans+ticker_add){
+			comp_range[0] = min(int(0.5*main_list.length*(ticker - page_time + page_trans*3)/page_trans),main_list.length);
+		}
+
+
+		rot -= 0.01;
+
+		pent_rad = min(px * 6,width*0.4);
+		noFill();
+		strokeWeight(px * 0.2);
+		stroke(palette[0].accent1);
+		push();
+		translate(width / 2, height / 2);
+		rotate(rot);
+		beginShape();
+		for (var cpoint = comp_range[0]; cpoint < comp_range[1]; cpoint++) {
+			vertex(main_list[cpoint][0][0] * pent_rad, -main_list[cpoint][0][1] * pent_rad);
+		}
+		endShape();
+		stroke(palette[0].accent2);
+		rotate(rot * (page_rand - 2));
+		beginShape();
+		for (cpoint = comp_range[0]; cpoint < comp_range[1]; cpoint++) {
+			vertex(main_list[cpoint][1][0] * pent_rad, -main_list[cpoint][1][1] * pent_rad);
+		}
+		endShape();
+
+		pop();
+}

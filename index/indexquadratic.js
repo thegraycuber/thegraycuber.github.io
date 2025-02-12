@@ -102,3 +102,37 @@ function hexagon(xcenter,ycenter,hexrad){
 	vertex(xcenter-hexrad*0.5,ycenter-hexrad*0.2886);
 	endShape(CLOSE);
 }
+
+function quadraticDraw(){
+	
+		noStroke();
+
+		if (ticker > page_trans && ticker <= page_trans*2){
+			quad_show = [true,false,false];
+			quad_colors[0].setAlpha(int(255*(ticker-page_trans)/page_trans));
+		} else if (ticker > quad_len && ticker <= quad_len + page_trans){
+			quad_show = [true,true,false];
+			quad_colors[0].setAlpha(int(255*(quad_len+page_trans-ticker)/page_trans));
+			quad_colors[1].setAlpha(int(255*(ticker-quad_len)/page_trans));
+		} else if (ticker > quad_len + page_trans && ticker <= quad_len*2 - page_trans){
+			quad_show = [false,true,false];
+		} else if (ticker > quad_len*2 - page_trans && ticker <= quad_len*2){
+			quad_show = [false,true,true];
+			quad_colors[1].setAlpha(int(255*(quad_len*2-ticker)/page_trans));
+			quad_colors[2].setAlpha(int(255*(ticker-quad_len*2+page_trans)/page_trans));
+		} else if (ticker > quad_len*2 && ticker <= page_time - page_trans*2){
+			quad_show = [false,false,true];
+		} else if (ticker > page_time - page_trans*2 && ticker <= page_time - page_trans){
+			quad_colors[2].setAlpha(int(255*(page_time-page_trans-ticker)/page_trans));
+		} else if (ticker > page_time - page_trans){
+			quad_show = [false,false,false];
+		}
+
+		for (var qd of main_list) {
+			if (quad_show[qd.colorindex]){
+				fill(quad_colors[qd.colorindex]);
+				hexagon(qd.coords[0], qd.coords[1], px/2);
+			}
+		}
+			
+}

@@ -17,30 +17,37 @@ function n_gon(center,radius,start,step){
 }
 
 
-function logo(logo_center,logo_rad) {
+function logo(c) {
 	
 	textAlign(LEFT,CENTER);
 	
-	var rad_adj;
-	var shape_center = [logo_center[0]-logo_rad*1.2,logo_center[1]];
+	var shape_center = [c[0],c[1]];
 	var logo_col = [palette[0].gray,palette[0].accent1,palette[0].accent1];
-	var logo_alpha = [palette[0].grayalpha,palette[0].accent1alpha,palette[0].accent1alpha];
+	//var logo_alpha = [palette[0].grayalpha,palette[0].accent1alpha,palette[0].accent1alpha];
 	
-	for (var l = 0; l < logo_info.length; l++){
+
+	translate(0,0,-3);
+	noStroke();
+	fill(palette[0].backlight);
+	for (l = 0; l < logo_rect.length; l++){
+		rect(logo_rect[l][0],logo_rect[l][1],logo_rect[l][2],logo_rect[l][3],logo_rect[l][4],logo_rect[l][5],logo_rect[l][6],logo_rect[l][7]);
+		//rect(width-logo_rect[l][0],height-logo_rect[l][1],logo_rect[l][2],logo_rect[l][3],logo_rect[l][6],logo_rect[l][7],logo_rect[l][4],logo_rect[l][5]);
+	}
+	translate(0,0,3);
+	
+	noFill();
+	strokeWeight(px*0.06);
+	for (l = 0; l < logo_info.length; l++){
 		if (ticker > logo_info[l][3]*3.5 - intro_len){
-			rad_adj = radius_adjust(logo_rad,ticker + intro_len - logo_info[l][3]*3.5);
-			
-			strokeWeight(logo_rad/12);
-			fill(logo_alpha[l]);
 			stroke(logo_col[l]);
-			n_gon(shape_center,rad_adj,logo_info[l][1],logo_info[l][2]);	
-			
+			rad_adj = radius_adjust(px*0.64,ticker + intro_len - logo_info[l][3]*3.5);
+			noFill();
+			n_gon(shape_center,rad_adj,logo_info[l][1],logo_info[l][2]);
 			if (ticker > 4+logo_info[l][3]*3.5 - intro_len){
 				fill(logo_col[l]);
-				noStroke();
-				textSize(logo_rad*logo_info[l][4]);
-				text(logo_info[l][0],logo_center[0]+logo_rad*logo_info[l][5],logo_center[1]+logo_rad*logo_info[l][6])
-			}
+				textSize(logo_info[l][4]);
+				text(logo_info[l][0],logo_info[l][5],logo_info[l][6]);
+			}	
 		}
 	}
 	
@@ -191,3 +198,4 @@ function update_imgs(){
 		imgs[img].img.mask(buttons[img]);		
 	}
 }
+

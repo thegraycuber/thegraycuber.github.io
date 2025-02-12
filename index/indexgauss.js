@@ -85,3 +85,15 @@ class Gauss {
 		
 	}
 }
+
+function gaussDraw(){
+	sunset.push(sunset[0]);
+	sunset.splice(0, 1);
+	for (var gp of main_list) {
+		if (gp.colorshow[page_rand][0] < ticker && gp.colorshow[page_rand][1] > ticker) {
+			noStroke();
+			fill(sunset[gp.colorvalue[page_rand]]);
+			rect(gp.coords[0], gp.coords[1], px / 2);
+		}
+	}
+}

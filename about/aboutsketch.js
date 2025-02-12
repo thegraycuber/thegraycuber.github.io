@@ -33,7 +33,7 @@ function preload() {
 	atkinsonRegular = loadFont("Atkinson-Hyperlegible-Regular-102.ttf");
 	openSans = loadFont("OpenSans-Regular.ttf");
 	for (var img = 1; img < color_list.length; img++){
-		masks.push(loadImage('Color' + color_list[img] + '.png'));	
+		masks.push(loadImage('about/Color' + color_list[img] + '.png'));	// about/
 	}
 	
 }

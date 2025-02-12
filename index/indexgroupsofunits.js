@@ -214,3 +214,30 @@ function findContainers(new_idx){
 	}
 	
 }
+
+function unitsDraw(){
+	unit_mod = (unit_mod + 1)%5;
+	if (ticker > 3 && ticker < 23 && unit_mod == 0){
+		main_list.push(new Bubble(main_list.length,main_list.length+3,(random()*0.9+0.05)*width,(random()*0.9+0.05)*height,px));	
+		findContainers(main_list.length-1);
+		main_list[main_list.length-1].checkRep();
+		if (main_list.length > 1){findContainers(main_list.length-1);}
+	} else if (ticker > 23 && ticker < 27){
+		if (main_list.length > 0){main_list.splice(main_list.length - 1, 1);}
+	}
+
+	for(var bubby of main_list){
+		bubby.pull();
+		bubby.push();
+		bubby.pushMouse();
+	}
+	translate(0,0,-2);
+	for(bubby of main_list){
+		bubby.move();
+		bubby.displayLines();
+	}
+	translate(0,0,2);
+	for(bubby of main_list){
+		bubby.display();
+	}
+}

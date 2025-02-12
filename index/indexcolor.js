@@ -5,7 +5,7 @@ class Palette {
 		if (scheme == 'Electric'){
 			this.front = color(186,219,243);
 			this.back = color(18,10,92);
-			this.backlight = color(50,75,150);
+			this.backlight = color(20,15,110);
 			this.accent1 = color(35,210,231);
 			this.accent2 = color(225,133,220);
 			this.accent3 = color(215,247,91);
@@ -14,7 +14,7 @@ class Palette {
 		} else if (scheme == 'Sunset'){
 			this.front = color(220,216,241);
 			this.back = color(43,23,82);
-			this.backlight = color(84,68,136);
+			this.backlight = color(50,29,98);
 			this.accent1 = color(242,199,111);
 			this.accent2 = color(229,104,110);
 			this.accent3 = color(160,132,220);
@@ -34,7 +34,7 @@ class Palette {
 		} else if (scheme == 'Forest' || scheme == 'Current'){
 			this.front = color(214,221,204);
 			this.back = color(6,58,42);
-			this.backlight = color(44,82,63);
+			this.backlight = color(10,70,55);
 			this.accent1 = color(63,189,117);
 			this.accent2 = color(216,184,1);
 			this.accent3 = color(185,95,95);
@@ -60,7 +60,8 @@ class Palette {
 		
 		this.grayalpha.setAlpha(50);
 		this.accent1alpha.setAlpha(50);
-		this.backalpha.setAlpha(20);
+		this.backalpha.setAlpha(5);
+		//is.backlight.setAlpha(20);
 	}
 	
 }
