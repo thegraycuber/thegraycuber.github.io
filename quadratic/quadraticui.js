@@ -61,7 +61,7 @@ class Box {
 			run_vol += item.Volume;
 			var update_coords = [this.Coords[0],this.Coords[1] + this.Radius[1]*(run_vol/volume-1)];
 			run_vol += item.Volume;
-			var update_radius = [this.Radius[0],this.Radius[1]*item.Volume*2/volume];
+			var update_radius = [this.Radius[0],this.Radius[1]*item.Volume/volume];
 			item.update(update_coords,update_radius);
 		}
 		
@@ -188,7 +188,7 @@ class binaryItem {
 	show(){
 		
 		if (this.Active){fill(white-20);} else {fill(white*0.4);}
-		rect(this.Sides[this.Index],this.Coords[1],this.Radius[0]*0.9,this.Radius[1]*2,this.Size*0.5);
+		rect(this.Sides[this.Index],this.Coords[1],this.Radius[0]*0.9,this.Radius[1]*1.8,this.Size*0.5);
 		textSize(this.Size);
 		fill(black);
 		text(this.List[this.Index],this.Sides[this.Index],this.Coords[1]);

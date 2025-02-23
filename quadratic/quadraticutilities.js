@@ -1,5 +1,5 @@
 function tableLoad(){
-	data = loadTable('quadratic/2dInts' + str(setting.WVals[setting.PreW]) + '.4.csv', 'csv', 'header');
+	data = loadTable('quadratic/files/2dInts' + str(setting.WVals[setting.PreW]) + '.4.csv', 'csv', 'header');
 	setting.DataRows = 0;
 }
 
