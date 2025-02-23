@@ -90,7 +90,7 @@ class Box {
 			run_vol += item.Volume;
 			var update_coords = [this.Coords[0],this.Coords[1] + this.Radius[1]*(run_vol/volume-1)];
 			run_vol += item.Volume;
-			var update_radius = [this.Radius[0],this.Radius[0]*item.Volume*2/volume];
+			var update_radius = [this.Radius[0],this.Radius[1]*item.Volume*2/volume];
 			item.update(update_coords,update_radius);
 		}
 		
