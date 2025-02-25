@@ -72,15 +72,6 @@ function keytoMove(keyValue) {
 	}
 }
 
-function mouseDragged() {
-	var flip = -1
-	if (rotx > PI / 2 && rotx < PI * 3 / 2) {
-		flip = 1;
-	}
-
-	rotx = (rotx + TAU + (pmouseY - mouseY) * 0.01) % TAU;
-	roty = (roty + TAU + (pmouseX - mouseX) * 0.01 * flip) % TAU;
-}
 
 function movethem(moveinput,rotateinput){
 	if (moveaxis == 0){
