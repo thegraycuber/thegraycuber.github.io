@@ -103,7 +103,7 @@ function draw() {
 		}
 		beginShape();
 		for (var inp of input){
-			vertex(inp[0]+settings.shift[0],inp[1]);
+			vertex(inp[0],inp[1]);
 		}
 		endShape(CLOSE);
 	}
@@ -127,11 +127,11 @@ function draw() {
 			for (o_idx = settings.animate_val; o_idx < settings.animate_val + grad_pts; o_idx++){
 				palette.input.setAlpha(alp);
 				stroke(palette.input);
-				vertex(input[o_idx%points.length][0]+settings.shift[1],input[o_idx%points.length][1]);
+				vertex(input[o_idx%points.length][0],input[o_idx%points.length][1]);
 				alp += 240/grad_pts;
 				endShape();
 				beginShape();
-				vertex(input[o_idx%points.length][0]+settings.shift[1],input[o_idx%points.length][1]);
+				vertex(input[o_idx%points.length][0],input[o_idx%points.length][1]);
 			}
 			endShape();
 		}
@@ -141,11 +141,11 @@ function draw() {
 		for (o_idx = settings.animate_val; o_idx < settings.animate_val + grad_pts; o_idx++){
 			palette.output.setAlpha(alp);
 			stroke(palette.output);
-			vertex(output[o_idx%points.length][0]+settings.shift[1],output[o_idx%points.length][1]);
+			vertex(output[o_idx%points.length][0],output[o_idx%points.length][1]);
 			alp += 240/grad_pts;
 			endShape();
 			beginShape();
-			vertex(output[o_idx%points.length][0]+settings.shift[1],output[o_idx%points.length][1]);
+			vertex(output[o_idx%points.length][0],output[o_idx%points.length][1]);
 		}
 		endShape();
 	}
@@ -158,7 +158,7 @@ function draw() {
 		noStroke();
 		fill(palette.focus);
 		for (o_idx = 0; o_idx < dots.length; o_idx++){
-			circle(input[dots[o_idx]][0]+settings.shift[1],input[dots[o_idx]][1],circ_rad);
+			circle(input[dots[o_idx]][0],input[dots[o_idx]][1],circ_rad);
 		}
 	} 
 	
@@ -166,7 +166,7 @@ function draw() {
 		noStroke();
 		fill(palette.focus);
 		for (o_idx = 0; o_idx < dots.length; o_idx++){
-			circle(output[dots[o_idx]][0]+settings.shift[1],output[dots[o_idx]][1],settings.px/4);
+			circle(output[dots[o_idx]][0],output[dots[o_idx]][1],settings.px/4);
 		}
 	}
 	

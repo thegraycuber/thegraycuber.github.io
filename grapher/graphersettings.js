@@ -3,7 +3,6 @@ class Settings {
 		this.point_count = 360;
 		this.radius = 1;
 		this.px = px;
-		this.shift = [0,0];
 		this.hpower = 0;
 		this.vertices = 5;
 		this.step = 1;
