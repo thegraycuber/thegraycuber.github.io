@@ -137,3 +137,7 @@ function mouseDragged() {
 		coord_offset[1] += (mouseY - pmouseY);
 	}
 }
+
+function touchMoved(event){
+	event.preventDefault(); 
+}

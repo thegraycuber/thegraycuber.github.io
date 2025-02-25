@@ -115,4 +115,7 @@ function touchStarted(){
 	rand_button.clicked();
 }
 
+function touchMoved(event){
+	event.preventDefault(); 
+}
 

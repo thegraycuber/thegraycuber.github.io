@@ -147,3 +147,7 @@ function touchStarted(){
 		}
 	}
 }
+
+function touchMoved(event){
+	event.preventDefault(); 
+}

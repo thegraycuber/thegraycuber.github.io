@@ -242,7 +242,6 @@ function touchStarted(){
 	if (setting.ClickEra != -1){setting.newEra(setting.ClickEra,1)}
 }
 
-
-
-
-
+function touchMoved(event){
+	event.preventDefault(); 
+}

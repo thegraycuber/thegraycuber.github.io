@@ -292,3 +292,7 @@ function mouseWheel(event) {
 		h = h_factor*(2**settings.hpower);
 	}
 }
+
+function touchMoved(event){
+	event.preventDefault(); 
+}
