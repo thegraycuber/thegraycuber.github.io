@@ -287,7 +287,7 @@ function touchStarted(){
 }
 
 function mouseWheel(event) {
-  if(menuBox.Items[menuBox.getIndex('Zoom')].Index == 1){
+	if(menuBox.Items[menuBox.getIndex('Zoom')].Index == 1){
 		settings.hpower += event.delta/200;
 		h = h_factor*(2**settings.hpower);
 	}
@@ -295,4 +295,9 @@ function mouseWheel(event) {
 
 function touchMoved(event){
 	event.preventDefault(); 
+
+	if(menuBox.Items[menuBox.getIndex('Zoom')].Index == 1 && touches.length > 0){
+		settings.hpower += (mouseY-pmouseY)/200;
+		h = h_factor*(2**settings.hpower);
+	}
 }
