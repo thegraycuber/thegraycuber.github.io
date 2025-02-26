@@ -5,10 +5,6 @@ var palette;
 var primes = [[2,[]]];
 var bubbles = [];
 var ticker = -1;
-var coord_scale = 4;
-var coord_adjust = 1;
-var c = 4;
-var coord_offset = [0,0];
 var coord_gen = [20,20];
 var mouseLoc = [];
 var win;
@@ -34,7 +30,6 @@ function preload() {
 
 function setup() {
 	
-	white = color('#d6ddcc');
 	createCanvas(window.innerWidth, window.innerHeight);
 	win = [window.innerWidth, window.innerHeight];
 	//px = min(windowWidth/16,windowHeight/9);
@@ -45,7 +40,7 @@ function setup() {
 	bubbles[0].checkRep();
 	rectMode(CENTER);
 	textAlign(CENTER,CENTER);
-
+	origin = createVector(width/2,height/2);
 	
 	
 	textFont(atkinsonBold);

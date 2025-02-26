@@ -5,11 +5,11 @@ function pointDist(x1,y1,x2,y2){
 }
 
 function locToCoords(x,y){
-	return([width/2+coord_offset[0]+c*x,height/2+coord_offset[1]+c*y]);
+	return([origin.x+c*x,origin.y+c*y]);
 }
 
 function coordsToLoc(xc,yc){
-	return([(xc-coord_offset[0]-win[0]/2)/c,(yc-coord_offset[1]-win[1]/2)/c]);
+	return([(xc-origin.x)/c,(yc-origin.y)/c]);
 }
 
 function updateScale(){
@@ -17,7 +17,7 @@ function updateScale(){
 	var minx = -1;
 	var maxy = 1;
 	var miny = -1;
-	var os = [coord_offset[0]/c,coord_offset[1]/c]
+	var os = [(origin.x-width/2)/c,(origin.y-height/2)/c]
 	
 	for (var bubber of bubbles){
 
@@ -33,8 +33,8 @@ function updateScale(){
 		}
 	}
 	
-	coord_offset[0] += (-maxx-minx)*c/100;
-	coord_offset[1] += (-maxy-miny)*c/100;
+	origin.x += (-maxx-minx)*c/100;
+	origin.y += (-maxy-miny)*c/100;
 	coord_scale = coord_scale*0.95+min(width*0.45/max(-minx,maxx),height*0.45/max(-miny,maxy))*0.05;
 	coord_adjust = (coord_adjust+0.02)/1.02;
 	c = min(coord_adjust*coord_scale,4);
