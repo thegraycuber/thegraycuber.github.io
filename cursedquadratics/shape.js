@@ -78,7 +78,7 @@ class Shape {
 					phi = 0;
 					increment = TWO_PI*vertices*3/resolution;
 					for (p = 0; p < resolution; p++){
-						this.mags[p] *= cos(phi)*0.08+0.92;
+						this.mags[p] *= cos(phi)*0.1+0.9;
 						phi += increment;
 					} 
 
@@ -99,19 +99,20 @@ class Shape {
 	
 	display(center,size){
 		
-		var pt = this.start;
 		var increment = TWO_PI*this.step/resolution;
-		var theta = 0;
+		var theta = -increment*this.start;
 		size *= pow(this.radius,0.25);
 		var pt_size = circle_width*0.6;
 		
-		for (var _ = 0; _ < resolution; _++){
+		beginShape();
+		for (var pt = 0; pt < resolution; pt++){
 			
-			circle(center.x+cos(theta)*size*this.mags[pt],center.y+sin(theta)*size*this.mags[pt],pt_size);
+			//circle(center.x+cos(theta)*size*this.mags[pt],center.y+sin(theta)*size*this.mags[pt],pt_size);
+			vertex(center.x+cos(theta)*size*this.mags[pt],center.y+sin(theta)*size*this.mags[pt]);
 			
-			pt = (pt + 1)% resolution;
 			theta += increment;
 		}
+		endShape();
 		
 	}
 	

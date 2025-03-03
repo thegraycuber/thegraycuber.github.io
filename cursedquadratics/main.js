@@ -51,11 +51,36 @@ function draw() {
 
 	settingBox.show();
 	shapeBox[activeShape].show();
-	label.show();
+	iconBox.show();
 	
-	for (var sh = 0; sh < 3; sh++){
-		fill(palette.accent[sh]);
-		shapes[sh].display(shape_locs[sh],shape_size);
+	if (show_label){
+		textFont(atkinsonRegular);
+		labelBox.show();
+		fill(palette.back);
+		strokeWeight(shape_size*0.15);
+		for (var sh = 0; sh < 3; sh++){
+			stroke(palette.accent[sh]);
+			shapes[sh].display(shape_locs[sh],shape_size);
+		}
 	}
+	
+	
+	if (pasting){
+		background(palette.backalpha);
+	}
+	
+	if (invalid_text.length > 0){
+		textSize(unit*0.16);
+		strokeWeight(unit*0.05);
+		stroke(palette.back);
+		fill(palette.accent[2]);
+		text(invalid_text,default_origin.x,default_origin.y);
+		invalid_tick--;
+		if (invalid_tick == 0){
+			invalid_text = "";
+		}
+	}
+	noStroke();
+	textFont(atkinsonBold);
 	
 }

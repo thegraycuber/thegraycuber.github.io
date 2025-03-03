@@ -1,70 +1,3 @@
-class Label{
-	constructor(x,y,w,h,size,pad){
-		this.Pos = createVector(x,y);
-		this.Size = createVector(w,h);
-		this.Text = '     x² +      x +      = 0';
-		this.TextSize = size;
-		this.Pad = pad;
-	}
-	
-	show(){
-		fill(palette.backlight);
-		rect(this.Pos.x,this.Pos.y,this.Size.x+this.Pad,this.Size.y+this.Pad);
-		fill(palette.back);
-		rect(this.Pos.x,this.Pos.y,this.Size.x,this.Size.y);
-		textSize(this.TextSize);
-		fill(palette.front);
-		textFont(atkinsonRegular);
-		text(this.Text,this.Pos.x,this.Pos.y);
-		textFont(atkinsonBold);
-	}
-	
-}
-
-
-/*
-class Icon {
-	constructor(displayChar,displaySize,radius,coords,yoffset) {
-		this.DisplayChar = [displayChar,'X'];
-		this.Size = displaySize;
-		this.Radius = radius;
-		this.Coords = coords;
-		this.UpperLeft = [this.Coords[0]-radius,this.Coords[1]-radius];
-		this.LowerRight = [this.Coords[0]+radius,this.Coords[1]+radius];
-		this.Active = 0;
-		this.YOffset = yoffset;
-		this.Time = 0;
-	}
-	showIcon(){
-		if (this.Active > -1){
-			
-			fill(palette.front);
-			stroke(palette.back);
-			
-			if (this.DisplayChar[this.Active] == '='){
-				strokeWeight(this.Radius*0.1);
-				rect(this.Coords[0],this.Coords[1]+this.Radius*0.1,this.Radius,this.Radius*0.8);
-				rect(this.Coords[0],this.Coords[1]-this.Radius*0.04,this.Radius,this.Radius*0.01);
-				rect(this.Coords[0],this.Coords[1]+this.Radius*0.24,this.Radius,this.Radius*0.01);
-				
-			} else {
-				strokeWeight(this.Radius*0.1);
-				textSize(this.Size[this.Active]);
-				text(this.DisplayChar[this.Active],this.Coords[0],this.Coords[1]+this.YOffset[this.Active]);
-			}
-			
-			noStroke();
-		}
-	}
-	clicked(){
-		if(this.Active > -1 && mouseX > this.UpperLeft[0] && mouseX < this.LowerRight[0] && mouseY > this.UpperLeft[1] && mouseY < this.LowerRight[1]){
-			this.Active = (this.Active + 1) % 2;
-			action(this.DisplayChar[0],this.Active,'');
-		}
-	}
-}
-*/
-
 class Box {
 	constructor(coords,radius,pad) {
 		this.Items = [];
@@ -104,7 +37,7 @@ class Box {
 	clicked(click = true){
 		if(this.mouseInside() == 1){
 			for (var item of this.Items){
-				if(mouseY < item.Coords[1] + item.Radius[1] && mouseY > item.Coords[1] - item.Radius[1] && (click || item.Type == 'slider')){
+				if(mouseY < item.Coords[1] + item.Radius[1] && mouseY > item.Coords[1] - item.Radius[1]){
 					item.clicked();
 				}
 			}
@@ -126,7 +59,7 @@ class Box {
 }
 
 class arrowItem {
-	constructor(volume,list,displaySize,id,index = 0,color = -1) {
+	constructor(volume,list,displaySize,id,shape = -1,index = 0,color = -1) {
 		this.Volume = volume;
 		this.Coords = [0,0];
 		this.Radius = [0,0];
@@ -138,6 +71,7 @@ class arrowItem {
 		this.Active = true;
 		this.Type = 'arrow';
 		this.Color = color;
+		this.Shape = shape;
 	}
 	show(){
 		if (this.Id == 'Sequence' && settings.custom){return;}
@@ -165,9 +99,22 @@ class arrowItem {
 	giveValue(indexVal){
 		if (this.Index != indexVal){
 			this.Index = indexVal;
-			action(this.Id,this.Index,this.List[this.Index]);
+			action(this.Id,this.Index,this.List[this.Index],this.Shape);
 		}
 	}
+	randomize(){
+		this.giveValue(int(random(this.List.length)));
+	}
+	tryGive(try_str){
+		for (var l_idx = 0; l_idx < this.List.length; l_idx++){
+			if (this.List[l_idx].substring(0,3) == try_str){
+				this.giveValue(l_idx);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }
 
 class textItem {
@@ -199,7 +146,7 @@ class textItem {
 }
 
 class binaryItem {
-	constructor(volume,list,displaySize,id,index) {
+	constructor(volume,list,displaySize,id,index,shape = -1) {
 		this.Volume = volume;
 		this.Coords = [0,0];
 		this.Radius = [0,0];
@@ -210,11 +157,12 @@ class binaryItem {
 		this.Id = id;
 		this.Active = true;
 		this.Type = 'binary';
+		this.Shape = shape;
 	}
 	show(){
 		
 		fill(palette.front);
-		rect(this.Sides[this.Index],this.Coords[1],this.Radius[0]*0.45,this.Radius[1]*1.8,this.Size*0.5);
+		rect(this.Sides[this.Index],this.Coords[1],this.Radius[0]*0.8,this.Radius[1]*1.8,this.Size*0.5);
 		textSize(this.Size);
 		fill(palette.back);
 		text(this.List[this.Index],this.Sides[this.Index],this.Coords[1]);
@@ -236,8 +184,20 @@ class binaryItem {
 	giveValue(indexVal){
 		if (this.Index != indexVal){
 			this.Index = indexVal;
-			action(this.Id,this.Index,this.List[this.Index]);
+			action(this.Id,this.Index,this.List[this.Index],this.Shape);
 		}
+	}
+	randomize(){
+		this.giveValue(int(random(2)));
+	}
+	tryGive(try_str){
+		for (var l_idx = 0; l_idx < this.List.length; l_idx++){
+			if (this.List[l_idx].substring(0,3) == try_str){
+				this.giveValue(l_idx);
+				return true;
+			}
+		}
+		return false;
 	}
 }
 
@@ -320,3 +280,4 @@ class Grid{
 	}
 
 }
+

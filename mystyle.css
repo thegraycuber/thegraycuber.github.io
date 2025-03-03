@@ -31,3 +31,19 @@ footer {
 	text-align: center;
 	border: none;
 }
+
+
+.cursed_input{
+	font-family: "Atkinson-Hyperlegible-Regular-102";
+	text-align: center;
+}
+
+.cursed_input::placeholder{
+	color: #ffffff77;
+}
+
+.cursed_button{
+	font-family: "Atkinson-Hyperlegible-Regular-102";
+	text-align: center;
+	border: none;
+}

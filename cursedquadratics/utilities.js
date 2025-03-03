@@ -81,9 +81,11 @@ function quadratic(){
 	
 }
 
-function action(id,index,value){
+function action(id,index,value,s){
+	
 	
 	var vst;
+	
 	if (id == 'shape'){
 		activeShape = index;
 		for (var box of shapeBox){
@@ -91,7 +93,7 @@ function action(id,index,value){
 		}
 	} else if (id == 'vertices'){
 		
-		var step_item = shapeBox[activeShape].Items[shapeBox[activeShape].getIndex('step')];
+		var step_item = shapeBox[s].Items[shapeBox[s].getIndex('step')];
 		var step = int(step_item.List[step_item.Index]);
 		step_item.List = allowed_steps(index_to_verts[index]);
 		if (step > 0){
@@ -105,30 +107,30 @@ function action(id,index,value){
 				step_item.Index++;
 			}
 		}
-		vst = shape_info(shapeBox[activeShape]);
+		vst = shape_info(shapeBox[s]);
 		
-		var type_item = shapeBox[activeShape].Items[shapeBox[activeShape].getIndex('type')];
+		var type_item = shapeBox[s].Items[shapeBox[s].getIndex('type')];
 		if (index_to_verts[index] > 0){
 			type_item.List = ['Regular','Flower','Wiggle','Smooth'];
 		} else {
 			type_item.List = ['Regular'];
 			type_item.giveValue(0);
 		}
-		shapes[activeShape] = new Shape(index_to_verts[index],vst[1],shapes[activeShape].rotation,shapes[activeShape].radius_theta,vst[2]);
+		shapes[s] = new Shape(index_to_verts[index],vst[1],shapes[s].rotation,shapes[s].radius_theta,vst[2]);
 		
 	} else if (id == 'step'){
 	
-		vst = shape_info(shapeBox[activeShape]);
-		shapes[activeShape] = new Shape(vst[0],int(value),shapes[activeShape].rotation,shapes[activeShape].radius_theta,vst[2]);
+		vst = shape_info(shapeBox[s]);
+		shapes[s] = new Shape(vst[0],int(value),shapes[s].rotation,shapes[s].radius_theta,vst[2]);
 		
 	} else if (id == 'type'){
 		
-		vst = shape_info(shapeBox[activeShape]);
-		shapes[activeShape] = new Shape(vst[0],vst[1],shapes[activeShape].rotation,shapes[activeShape].radius_theta,value);
+		vst = shape_info(shapeBox[s]);
+		shapes[s] = new Shape(vst[0],vst[1],shapes[s].rotation,shapes[s].radius_theta,value);
 		
 	} else if (id == 'resoution'){
 		resolution = int(value);
-		for (var s = 0; s < 3; s++){
+		for (s = 0; s < 3; s++){
 			vst = shape_info(shapeBox[s]);
 			shapes[s] = new Shape(vst[0],vst[1],shapes[s].rotation,shapes[s].radius_theta,vst[2]);
 			
@@ -136,13 +138,13 @@ function action(id,index,value){
 		
 	} else if (id == 'autozoom'){
 		
-		if (value == 'On'){
+		if (value == 'Off'){
+			auto_zoom = false;
+		} else {
 			auto_zoom = true;
 			origin = default_origin.copy();
 			process = true;
 			scalar = unit/max_mag;
-		} else {
-			auto_zoom = false;
 		}
 		
 	} else if (id == 'grid'){		
@@ -153,6 +155,11 @@ function action(id,index,value){
 		
 	} else if (id == 'color'){	
 		palette.getColors(value);
+		button_color(paste_input,palette.back,palette.front,true);
+		button_color(paste_go,palette.front,palette.back,false);
+
+	} else if (id == 'label'){	
+		show_label = index == 0;
 		
 	}
 }
@@ -163,7 +170,7 @@ function allowed_steps(vertices){
 	var step;
 	
 	if (vertices == -1){
-		return [-1,1]; 
+		return ['-1','1']; 
 		
 	} else if (vertices <= 0){
 		for (step = -4; step <= 4; step++){
@@ -191,3 +198,4 @@ function shape_info(box){
 	var type_item = box.Items[box.getIndex('type')];
 	return([index_to_verts[vert_item.Index],int(step_item.List[step_item.Index]),type_item.List[type_item.Index]]);
 }
+

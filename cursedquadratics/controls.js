@@ -9,8 +9,11 @@ function pixel_to_principal(pixels){
 
 // trigger updates when touches are started, stopped, or moved
 function touchStarted(){
-	settingBox.clicked();
-	shapeBox[activeShape].clicked();
+	if(!pasting){
+		settingBox.clicked();
+		shapeBox[activeShape].clicked();
+		iconBox.clicked();
+	}
 	
 	updateTouchInfo();
 }
@@ -19,7 +22,7 @@ function touchEnded(){
 }
 function touchMoved(event){
 	event.preventDefault(); 
-	if (auto_zoom == false){updateMovement();}
+	if (auto_zoom == false && pasting == false){updateMovement();}
 }
 
 
