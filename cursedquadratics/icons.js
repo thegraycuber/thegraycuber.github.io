@@ -198,6 +198,7 @@ var favorites = [
 	'13g,-1,Rad,Wig,12g,-5,Rot,Flo,Tri,1,Rot,Flo,Off,Poi', // patrick rave
 	'10g,3,Off,Flo,Spi,2,Rot,Reg,Tri,1,Off,Smo,Gri,Off',// kid drew a sun
 	'12g,1,Off,Wig,Cir,-4,Off,Reg,12g,-5,Rot,Flo,Off,Poi',//bounce
-	'12g,5,Rot,Reg,Cir,3,Off,Reg,Tri,1,Rad,Smo,Off,Poi'// flower
+	'12g,5,Rot,Reg,Cir,3,Off,Reg,Tri,1,Rad,Smo,Off,Poi',// flower
+	'Tri,1,Off,Reg,Cir,4,Off,Reg,Oct,-3,Rot,Reg,Off,Poi'
 ]
 var fav = 0;

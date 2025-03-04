@@ -8,8 +8,6 @@ class CursedShape {
 		this.radius = 2**(sin(radius_theta)*2);
 		this.mags = [];
 		this.isvertex = [];
-		this.rotation = rotation;
-		this.start = round(this.rotation*cursed_resolution/TWO_PI);
 		
 		var p, increment;
 		var phi = 0;
@@ -75,15 +73,9 @@ class CursedShape {
 		}
 	}
 	
-	rotate(angle){
-		this.rotation = (angle+this.rotation) % TWO_PI;
-		this.start = round(this.rotation*cursed_resolution/TWO_PI);
-	}
-
 }
 
-var out_cursed, vert_cursed, rotation_angle, max_mag, curse_tick;
-
+var out_cursed, vert_cursed, rotation_angle, max_mag, curse_tick, cursed_rot;
 function cursedDraw(){
 	
 	if (ticker < page_time/2 && curse_tick < cursed_resolution){
@@ -92,9 +84,17 @@ function cursedDraw(){
 			curse_tick = max(int(curse_tick - cursed_resolution/32),0);
 	}
 	
+	cursed_rot[3] += 1;
 	for (var fi = 0; fi < 3; fi++){
 		if (cursed_favorites[fav][2+4*fi] == 1){
-			shapes[fi].rotate(rotation_angle[fi]);
+			var rot_speed = [1,0.75,1.5];
+			while (cursed_rot[3] > cursed_rot[fi]){
+				cursed_rot[fi] += rot_speed[fi];
+				shapes[fi].mags.push(shapes[fi].mags[0]);
+				shapes[fi].mags.splice(0,1);
+				shapes[fi].isvertex.push(shapes[fi].isvertex[0]);
+				shapes[fi].isvertex.splice(0,1);
+			}
 		} else if (cursed_favorites[fav][2+4*fi] == 2){
 			shapes[fi].radius_theta += rotation_angle[fi]*2;
 			shapes[fi].radius = 2**(sin(shapes[fi].radius_theta)*2);
@@ -145,7 +145,7 @@ function cursed_quadratic(){
 	var inc_a = shapes[0].step*TWO_PI/cursed_resolution;
 	var rad02 = shapes[0].radius*shapes[2].radius;
 	var rad11 = shapes[1].radius**2;
-	var q = [shapes[0].start-1,shapes[1].start-1,shapes[2].start-1];
+	var q = [0,0,0];
 
 	for (var p = 0; p < cursed_resolution; p++){
 		
@@ -195,7 +195,8 @@ function cursed_quadratic(){
 var cursed_favorites;
 function cursedPrep(){
     
-    rotation_angle = [TWO_PI/840,TWO_PI/720,TWO_PI/600];
+	cursed_rot = [0,0,0,0];
+    rotation_angle = [TWO_PI/480,TWO_PI/420,TWO_PI/360];
     cursed_favorites = [
         [4,1,1,0,0,-1,0,0,8,-3,2,1,true],
         [6,-1,0,0,11,-4,1,0,0,3,0,0,true],
