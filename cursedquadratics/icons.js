@@ -93,7 +93,6 @@ class Icon {
 		} else if (this.Type == 'paste'){
 			pasting = true;
 			input_setup();
-			reset_shapes();
 		} else if (this.Type == 'heart'){
 			fav = (fav + 1)%favorites.length;
 			input_settings(favorites[fav]);
@@ -177,8 +176,9 @@ function get_paste(){
 	invalid_text = input_settings(paste_input.value());
 	paste_input.value('');
 	pasting = false;
-  paste_input.style("visibility", "hidden");
-  paste_go.style("visibility", "hidden");
+	paste_input.style("visibility", "hidden");
+	paste_go.style("visibility", "hidden");
+	reset_shapes();
 	
 	if (invalid_text.length > 0){
 		invalid_tick = 50;
@@ -199,6 +199,10 @@ var favorites = [
 	'10g,3,Off,Flo,Spi,2,Rot,Reg,Tri,1,Off,Smo,Gri,Off',// kid drew a sun
 	'12g,1,Off,Wig,Cir,-4,Off,Reg,12g,-5,Rot,Flo,Off,Poi',//bounce
 	'12g,5,Rot,Reg,Cir,3,Off,Reg,Tri,1,Rad,Smo,Off,Poi',// flower
-	'Tri,1,Off,Reg,Cir,4,Off,Reg,Oct,-3,Rot,Reg,Off,Poi'
+	'Tri,1,Off,Reg,Cir,4,Off,Reg,Oct,-3,Rot,Reg,Off,Poi',
+	'11g,-3,Off,Wig,Hex,-1,Rot,Wig,11g,1,Off,Flo,Off,Poi',
+	//Hex,-1,Rad,Wig,Squ,-1,Off,Wig,Oct,3,Rot,Smo,Off,Off
+	//Cir,-4,Off,Reg,Pen,1,Rot,Reg,Spi,-4,Rot,Reg,Off,Poi
+	'Hep,2,Rot,Smo,Cir,-4,Off,Reg,Cir,-3,Rad,Reg,Off,Poi'
 ]
 var fav = 0;
