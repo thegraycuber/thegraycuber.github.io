@@ -134,16 +134,6 @@ class Bubble {
 		}
 	}
 	
-	pushMouse(){
-		for (var pusher = 0; pusher < this.index; pusher++){
-			var dist_info = pointDist(this.x,this.y,mouseX,mouseY);
-			if (dist_info[2] < px2*8){
-				var push_strength = min(px*4/dist_info[2],px*0.25);
-				this.a[0] -= dist_info[0]*push_strength;
-				this.a[1] -= dist_info[1]*push_strength;
-			}
-		}
-	}
 
 	move(){
 		this.v = [this.v[0]*0.75 + this.a[0],this.v[1]*0.75 + this.a[1]];
@@ -229,7 +219,6 @@ function unitsDraw(){
 	for(var bubby of main_list){
 		bubby.pull();
 		bubby.push();
-		bubby.pushMouse();
 	}
 	translate(0,0,-2);
 	for(bubby of main_list){

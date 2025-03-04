@@ -83,6 +83,7 @@ class Icon {
 		
 		if (this.Type == 'rand'){
 			randomize();
+			reset_shapes();
 		} else if (this.Type == 'copy'){
 			var code = ''
 			for (var mi of main_items){
@@ -92,9 +93,11 @@ class Icon {
 		} else if (this.Type == 'paste'){
 			pasting = true;
 			input_setup();
+			reset_shapes();
 		} else if (this.Type == 'heart'){
 			fav = (fav + 1)%favorites.length;
 			input_settings(favorites[fav]);
+			reset_shapes();
 		}
 	}
 }
@@ -185,17 +188,16 @@ function get_paste(){
 var favorites = [
 	'Squ,1,Rot,Reg,Cir,-1,Off,Reg,Oct,-3,Rad,Flo,Off,Poi', //dual flower
 	'Hex,-1,Off,Reg,11g,-4,Rot,Reg,Cir,3,Off,Reg,Off,Poi', //sunburst
-	'Hex,1,Rot,Wig,13g,5,Off,Smo,Cir,2,Rad,Reg,Gri,Off', //wobbly leaf
 	'Pen,-1,Rot,Smo,10g,1,Rot,Flo,Pen,-2,Rad,Smo,Off,Poi', //
 	'13g,-1,Rot,Reg,Spi,2,Rot,Reg,Spi,-2,Rot,Reg,Off,Off', // doodle
 	'Oct,1,Rot,Reg,13g,-6,Off,Flo,Cir,2,Off,Reg,Off,Poi', // framed
 	'Pen,2,Rot,Flo,Cir,-1,Off,Reg,Pen,1,Off,Flo,Gri,Poi', // folding petals
+	'Hex,1,Rot,Wig,13g,5,Off,Smo,Cir,2,Rad,Reg,Gri,Off', //wobbly leaf
 	'Hex,-1,Rad,Wig,Hex,-1,Rot,Wig,Tri,-1,Off,Wig,Gri,Poi', // worm gemini
 	'10g,3,Off,Smo,Tri,1,Rad,Smo,10g,-1,Off,Smo,Gri,Off', // secret circle
 	'13g,-1,Rad,Wig,12g,-5,Rot,Flo,Tri,1,Rot,Flo,Off,Poi', // patrick rave
-	'10g,3,Off,Flo,Spi,2,Off,Reg,Tri,1,Off,Smo,Gri,Off',// kid drew a sun
+	'10g,3,Off,Flo,Spi,2,Rot,Reg,Tri,1,Off,Smo,Gri,Off',// kid drew a sun
 	'12g,1,Off,Wig,Cir,-4,Off,Reg,12g,-5,Rot,Flo,Off,Poi',//bounce
-	'10g,1,Rot,Smo,Cir,-4,Off,Reg,11g,-1,Rad,Wig,Off,Poi',//cell
-	'10g,1,Rot,Reg,Spi,-2,Rot,Reg,9go,2,Rad,Wig,Gri,Off'//disrupt
+	'12g,5,Rot,Reg,Cir,3,Off,Reg,Tri,1,Rad,Smo,Off,Poi'// flower
 ]
 var fav = 0;

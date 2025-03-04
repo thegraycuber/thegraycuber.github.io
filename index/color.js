@@ -2,13 +2,16 @@
 class Palette {
 	constructor(scheme) {
 		
-		if (scheme == 'Electric'){
+		if (scheme == 'Electric' || scheme == 'Current'){
 			this.front = color(186,219,243);
 			this.back = color(18,10,92);
 			this.backlight = color(20,15,110);
 			this.accent1 = color(35,210,231);
 			this.accent2 = color(225,133,220);
 			this.accent3 = color(215,247,91);
+			this.accent = [color(215,247,91),
+				color(35,210,231),
+				color(225,133,220)];
 			this.gray = color(161,185,212);
 			
 		} else if (scheme == 'Sunset'){
@@ -31,7 +34,7 @@ class Palette {
 				sunset.push(lerpColor(this.accent1,this.backlight,3*suns/sunlen));
 			}
 		
-		} else if (scheme == 'Forest' || scheme == 'Current'){
+		} else if (scheme == 'Forest'){
 			this.front = color(214,221,204);
 			this.back = color(6,58,42);
 			this.backlight = color(10,70,55);
@@ -61,6 +64,7 @@ class Palette {
 		this.grayalpha.setAlpha(50);
 		this.accent1alpha.setAlpha(50);
 		this.backalpha.setAlpha(5);
+		this.medium = lerpColor(this.back,this.accent1,0.5);
 		//is.backlight.setAlpha(20);
 	}
 	

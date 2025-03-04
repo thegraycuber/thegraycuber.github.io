@@ -8,10 +8,11 @@ var quad_show = [false,false,false];
 var page_count = 0;
 var unit_mod = 0;
 var logos = false;
+var display_title = '                              ';
+var disp_update, new_display_title;
 
 function draw() {
 
-	
 	translate(-width/2,-height/2,-5);
 	background(palette[0].back);
 			
@@ -32,6 +33,8 @@ function draw() {
 			unitsDraw();
 		} else if (pages[p].title == "Rubik's Cube Calculator") {
 			calculatorDraw();
+		} else if (pages[p].title == "Cursed Quadratic Equations") {
+			cursedDraw();
 		}
 
 		textAlign(CENTER, CENTER);
@@ -45,12 +48,15 @@ function draw() {
 		noStroke();
 		translate(0,0,10);
 		fill(palette[0].front);
-		textSize(px * 0.6);
+		textSize(px * 0.56);
 		var tw = textWidth(pages[p].title);
 		if (tw > px*8){
-			textSize(px2*6.4/tw);
+			textSize(px2*6/tw);
 		}
-		text(pages[p].title, width - px*5.5, height - px*2.2);
+		text(display_title, width - px*5.5, height - px*2.3);
+		textSize(px * 0.38);
+		fill(palette[0].medium);
+		text('click to view this page', width - px*5.5, height - px*1.7);
 		/*
 		textSize(px * 0.4);
 		if (message == 1){
@@ -67,8 +73,12 @@ function draw() {
 		
 		var updater = false;
 		if (ticker < page_trans) {
-			//palette[0].back.setAlpha((page_trans - ticker) * 255 / page_trans);
-			//background(palette[0].back);
+			for (var d = 0; d < disp_update.length; d++){
+				if (disp_update[d] < ticker){
+					disp_update[d] = page_trans;
+					display_title = display_title.substring(0,d) + new_display_title.substring(d,d+1) + display_title.substring(d+1,display_title.length);
+				}
+			}
 			updater = true;
 			palette[0].refresh(old_index, pages[p].index, (ticker / page_trans + 1) * 0.5);
 			update_imgs();
@@ -95,6 +105,7 @@ function draw() {
 			old_index = pages[p].index;
 			ticker = 0;
 			p = (p + 1) % pages.length;
+			title_refresh();
 
 			if (pages[p].title == 'Complex Primes') {
 				makeGauss();
@@ -115,11 +126,21 @@ function draw() {
 				comp_range = [0, 0];
 				page_rand = int(random() * 5) + 3;
 				makePentagon(page_rand);
+
 			} else if (pages[p].title == 'Groups of Units') {
 				main_list = [];
 				unit_mod = 0;
+
 			} else if (pages[p].title == "Rubik's Cube Calculator"){
+				calculatorPrep();
 				playalg = 'UlBBDfrDBurDLUlBDfrDBuuRfLdd';
+				var dummy = int(random(25));
+				playalg = playalg.substring(dummy,playalg.length) + playalg.substring(0,dummy);
+					
+
+			} else if (pages[p].title == "Cursed Quadratic Equations"){
+				cursedPrep();
+
 			}
 
 		}
@@ -139,11 +160,19 @@ function touchStarted(){
 			window.open(i.link, i.type);
 		}
 	}
-	if(!linked && ticker > page_trans && ticker < page_time - page_trans){
+	if(!linked && ticker > 0){
 		window.open(pages[p].link, '_self');
 	}
 }
 
 function touchMoved(event){
 	event.preventDefault(); 
+}
+
+function title_refresh(){
+	new_display_title = pages[p].full_title;
+	disp_update = [];
+	while (disp_update.length < new_display_title.length){
+		disp_update.push(random(page_trans*0.8));
+	}
 }

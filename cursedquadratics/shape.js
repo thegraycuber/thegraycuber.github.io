@@ -102,7 +102,6 @@ class Shape {
 		var increment = TWO_PI*this.step/resolution;
 		var theta = -increment*this.start;
 		size *= pow(this.radius,0.25);
-		var pt_size = circle_width*0.6;
 		
 		beginShape();
 		for (var pt = 0; pt < resolution; pt++){
@@ -116,4 +115,13 @@ class Shape {
 		
 	}
 	
+}
+
+
+function reset_shapes(){
+	for (var s of shapes){
+		s.start = 0;
+		s.radius_theta = 0;
+		s.radius = 1;
+	}
 }

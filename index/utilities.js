@@ -136,6 +136,14 @@ class Page {
 		this.scheme = scheme;
 		this.index = color_list.indexOf(scheme);
 		this.link = link;
+		this.full_title = title;
+		while (this.full_title.length < 30){
+			if (this.full_title.length % 2 == 0){
+				this.full_title += ' ';
+			} else {
+				this.full_title = ' ' + this.full_title;
+			}
+		}
 	}
 }
 

@@ -199,3 +199,4 @@ function shape_info(box){
 	return([index_to_verts[vert_item.Index],int(step_item.List[step_item.Index]),type_item.List[type_item.Index]]);
 }
 
+

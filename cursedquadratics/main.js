@@ -57,7 +57,7 @@ function draw() {
 		textFont(atkinsonRegular);
 		labelBox.show();
 		fill(palette.back);
-		strokeWeight(shape_size*0.15);
+		strokeWeight(shape_size*0.12);
 		for (var sh = 0; sh < 3; sh++){
 			stroke(palette.accent[sh]);
 			shapes[sh].display(shape_locs[sh],shape_size);

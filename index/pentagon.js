@@ -40,7 +40,7 @@ function grapherDraw(){
 
 		rot -= 0.01;
 
-		pent_rad = min(px * 6,width*0.4);
+		pent_rad = min(px * 5,width*0.4);
 		noFill();
 		strokeWeight(px * 0.2);
 		stroke(palette[0].accent1);
