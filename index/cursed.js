@@ -195,7 +195,7 @@ function cursed_quadratic(){
 var cursed_favorites;
 function cursedPrep(){
     
-	cursed_rot = [0,0,0,0];
+		cursed_rot = [0,0,0,0];
     rotation_angle = [TWO_PI/480,TWO_PI/420,TWO_PI/360];
     cursed_favorites = [
         [4,1,1,0,0,-1,0,0,8,-3,2,1,true],
