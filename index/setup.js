@@ -25,8 +25,8 @@ var plaque;
 function preload() {
 	atkinsonBold = loadFont("Atkinson-Hyperlegible-Bold-102.ttf");
 	atkinsonRegular = loadFont("Atkinson-Hyperlegible-Regular-102.ttf");
-	buttons.push(loadImage('ColorYouTube.png'));
-	buttons.push(loadImage('ColorGithub.png'));
+	buttons.push(loadImage('about/ColorYouTube.png'));
+	buttons.push(loadImage('about/ColorGithub.png'));
 }
 
 
