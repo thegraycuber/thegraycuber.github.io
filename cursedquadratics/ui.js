@@ -41,7 +41,9 @@ class Box {
 					item.clicked();
 				}
 			}
+			return true;
 		}
+		return false;
 	}
 	
 	mouseInside(){
