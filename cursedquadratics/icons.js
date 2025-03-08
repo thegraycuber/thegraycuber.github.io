@@ -200,7 +200,7 @@ var favorites = [
 	'12g,1,Off,Wig,Cir,-4,Off,Reg,12g,-5,Rot,Flo,Off,Poi',//bounce
 	'12g,5,Rot,Reg,Cir,3,Off,Reg,Tri,1,Rad,Smo,Off,Poi',// flower
 	'Tri,1,Off,Reg,Cir,4,Off,Reg,Oct,-3,Rot,Reg,Off,Poi',
-	'11g,-3,Off,Wig,Hex,-1,Rot,Wig,11g,1,Off,Flo,Off,Poi',
+	//'11g,-3,Off,Wig,Hex,-1,Rot,Wig,11g,1,Off,Flo,Off,Poi',
 	//Hex,-1,Rad,Wig,Squ,-1,Off,Wig,Oct,3,Rot,Smo,Off,Off
 	//Cir,-4,Off,Reg,Pen,1,Rot,Reg,Spi,-4,Rot,Reg,Off,Poi
 	'Hep,2,Rot,Smo,Cir,-4,Off,Reg,Cir,-3,Rad,Reg,Off,Poi',
