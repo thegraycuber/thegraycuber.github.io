@@ -94,7 +94,7 @@ function setup() {
 		iconBox.Items.push(new Icon('paste',[height*0.035,height*0.035],height*0.003,[unit*0.57,height*0.04]));
 		
 		
-		grid = new Grid(unit*0.59,height,width,0);
+		grid = new Grid(0,height,width,0);
 		unit = min(unit,0.4*(width-unit*0.62));
 		lab_h = height-unit*0.16;
 		labelBox = new Box([default_origin.x,lab_h],[unit*0.92,unit*0.125],pad);
@@ -179,10 +179,10 @@ function setup() {
 	//settingBox.Items.push(new textItem(1,'Vertices',bigText));
 	settingBox.Items.push(new binaryItem(1,['Label','Off'],smallText,'label',0));
 	settingBox.Items.push(new textItem(0.8,'',0));
-	/*
-	settingBox.Items.push(new textItem(0.8,'About This Page',smallText,'','https://www.youtube.com/@TheGrayCuber'));
+	
+	settingBox.Items.push(new textItem(0.8,'About This Page',smallText,'','https://youtu.be/ocDnfeFAsCg'));
 	settingBox.Items.push(new textItem(0.4,'',0));
-	*/
+	
 	settingBox.giveSizes();
 	labelBox.giveSizes();
 	

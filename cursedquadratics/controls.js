@@ -8,11 +8,13 @@ function pixel_to_principal(pixels){
 
 
 // trigger updates when touches are started, stopped, or moved
+var in_a_box = false;
 function touchStarted(){
+	in_a_box = false;
 	if(!pasting){
-		settingBox.clicked();
-		shapeBox[activeShape].clicked();
-		iconBox.clicked();
+		in_a_box = in_a_box || settingBox.clicked();
+		in_a_box = in_a_box || shapeBox[activeShape].clicked();
+		in_a_box = in_a_box || iconBox.clicked();
 	}
 	
 	updateTouchInfo();
@@ -22,7 +24,7 @@ function touchEnded(){
 }
 function touchMoved(event){
 	event.preventDefault(); 
-	if (auto_zoom == false && pasting == false){updateMovement();}
+	if (auto_zoom == false && pasting == false && !in_a_box){updateMovement();}
 }
 
 

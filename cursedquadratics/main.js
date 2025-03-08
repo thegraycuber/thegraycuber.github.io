@@ -49,10 +49,13 @@ function draw() {
 		}
 	}
 
-	settingBox.show();
-	shapeBox[activeShape].show();
-	iconBox.show();
+	if (show_stuff){
+		settingBox.show();
+		shapeBox[activeShape].show();
+		iconBox.show();
 	
+	}
+
 	if (show_label){
 		textFont(atkinsonRegular);
 		labelBox.show();
@@ -83,4 +86,12 @@ function draw() {
 	noStroke();
 	textFont(atkinsonBold);
 	
+}
+
+
+show_stuff = true;
+function keyPressed() {
+	if (keyCode === 32 && mobile == false){
+		show_stuff = !show_stuff;
+	}
 }

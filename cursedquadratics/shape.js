@@ -123,5 +123,6 @@ function reset_shapes(){
 		s.start = 0;
 		s.radius_theta = 0;
 		s.radius = 1;
+		s.rotation = 0;
 	}
 }

@@ -52,7 +52,9 @@ class Icon {
 				this.Active = (this.Active + 1) % 2;
 				arrowClick(this.DisplayChar[0],this.Active,'');
 			}
+			return true;
 		}
+		return false;
 	}
 }
 
@@ -97,11 +99,13 @@ class Box {
 	clicked(click = true){
 		if(this.mouseInside() == 1){
 			for (var item of this.Items){
-				if(mouseY < item.Coords[1] + item.Radius[1] && mouseY > item.Coords[1] - item.Radius[1] && (click || item.Type == 'slider')){
+				if(mouseY < item.Coords[1] + item.Radius[1] && mouseY > item.Coords[1] - item.Radius[1] && (item.Type == 'slider' || click)){
 					item.clicked();
 				}
 			}
+			return true;
 		}
+		return false;
 	}
 	
 	mouseInside(){

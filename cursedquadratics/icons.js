@@ -203,6 +203,10 @@ var favorites = [
 	'11g,-3,Off,Wig,Hex,-1,Rot,Wig,11g,1,Off,Flo,Off,Poi',
 	//Hex,-1,Rad,Wig,Squ,-1,Off,Wig,Oct,3,Rot,Smo,Off,Off
 	//Cir,-4,Off,Reg,Pen,1,Rot,Reg,Spi,-4,Rot,Reg,Off,Poi
-	'Hep,2,Rot,Smo,Cir,-4,Off,Reg,Cir,-3,Rad,Reg,Off,Poi'
+	'Hep,2,Rot,Smo,Cir,-4,Off,Reg,Cir,-3,Rad,Reg,Off,Poi',
+	'Hep,3,Off,Smo,12g,5,Rot,Flo,12g,-5,Rad,Flo,Gri,Poi',
+	'Cir,4,Rot,Reg,13g,3,Off,Flo,Hep,2,Rot,Smo,Off,Poi',
+	'Roc,1,Rad,Reg,12g,-5,Rad,Wig,9go,2,Rad,Reg,Gri,Off'
+
 ]
 var fav = 0;

@@ -9,15 +9,17 @@ function pixel_to_principal(pixels){
 	return pixels.sub(origin).div(c);
 }
 
+var in_a_box = false;
 
 function touchStarted(){
+	in_a_box = false;
 
 	updateTouchInfo();
 
 	if (mouseCheck()){
-		menuBox.clicked();
+		in_a_box = in_a_box || menuBox.clicked();
 		for (var icon of icons){
-			icon.clicked();
+			in_a_box = in_a_box || icon.clicked();
 		}
 	} else {
 		if (focus.substring(focus.length-7,focus.length) == 'Clicked'){
@@ -54,9 +56,7 @@ function touchEnded(){
 
 function touchMoved(event){
 	event.preventDefault();
-	if(!autozoom){
-		updateMovement();
-	}
+	if (!autozoom && !in_a_box){updateMovement();}
 }
 
 
