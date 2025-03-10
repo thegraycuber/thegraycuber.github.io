@@ -95,7 +95,9 @@ class Icon {
 			input_setup();
 		} else if (this.Type == 'heart'){
 			fav = (fav + 1)%favorites.length;
-			input_settings(favorites[fav]);
+			input_settings(favorites[fav][0]);
+			at_text = favorites[fav][1];
+			at_ticker = 400;
 			reset_shapes();
 		}
 	}
@@ -186,27 +188,31 @@ function get_paste(){
 }
 
 var favorites = [
-	'Squ,1,Rot,Reg,Cir,-1,Off,Reg,Oct,-3,Rad,Flo,Off,Poi', //dual flower
-	'Hex,-1,Off,Reg,11g,-4,Rot,Reg,Cir,3,Off,Reg,Off,Poi', //sunburst
-	'Pen,-1,Rot,Smo,10g,1,Rot,Flo,Pen,-2,Rad,Smo,Off,Poi', //
-	'13g,-1,Rot,Reg,Spi,2,Rot,Reg,Spi,-2,Rot,Reg,Off,Off', // doodle
-	'Oct,1,Rot,Reg,13g,-6,Off,Flo,Cir,2,Off,Reg,Off,Poi', // framed
-	'Pen,2,Rot,Flo,Cir,-1,Off,Reg,Pen,1,Off,Flo,Gri,Poi', // folding petals
-	'Hex,1,Rot,Wig,13g,5,Off,Smo,Cir,2,Rad,Reg,Gri,Off', //wobbly leaf
-	'Hex,-1,Rad,Wig,Hex,-1,Rot,Wig,Tri,-1,Off,Wig,Gri,Poi', // worm gemini
-	'10g,3,Off,Smo,Tri,1,Rad,Smo,10g,-1,Off,Smo,Gri,Off', // secret circle
-	'13g,-1,Rad,Wig,12g,-5,Rot,Flo,Tri,1,Rot,Flo,Off,Poi', // patrick rave
-	'10g,3,Off,Flo,Spi,2,Rot,Reg,Tri,1,Off,Smo,Gri,Off',// kid drew a sun
-	'12g,1,Off,Wig,Cir,-4,Off,Reg,12g,-5,Rot,Flo,Off,Poi',//bounce
-	'12g,5,Rot,Reg,Cir,3,Off,Reg,Tri,1,Rad,Smo,Off,Poi',// flower
-	'Tri,1,Off,Reg,Cir,4,Off,Reg,Oct,-3,Rot,Reg,Off,Poi',
-	//'11g,-3,Off,Wig,Hex,-1,Rot,Wig,11g,1,Off,Flo,Off,Poi',
-	//Hex,-1,Rad,Wig,Squ,-1,Off,Wig,Oct,3,Rot,Smo,Off,Off
-	//Cir,-4,Off,Reg,Pen,1,Rot,Reg,Spi,-4,Rot,Reg,Off,Poi
-	'Hep,2,Rot,Smo,Cir,-4,Off,Reg,Cir,-3,Rad,Reg,Off,Poi',
-	'Hep,3,Off,Smo,12g,5,Rot,Flo,12g,-5,Rad,Flo,Gri,Poi',
-	'Cir,4,Rot,Reg,13g,3,Off,Flo,Hep,2,Rot,Smo,Off,Poi',
-	'Roc,1,Rad,Reg,12g,-5,Rad,Wig,9go,2,Rad,Reg,Gri,Off'
+	['Squ,1,Rot,Reg,Cir,-1,Off,Reg,Oct,-3,Rad,Flo,Off,Poi',''],
+	['12g,5,Rot,Reg,Hex,-1,Rad,Smo,12g,-5,Rad,Reg,Gri,Poi','@oxSoul99'],
+	['Oct,-3,Rot,Wig,Pen,2,Off,Reg,Cir,2,Off,Reg,Gri,Off','@Detteraleon'],
+	['Hex,-1,Rad,Wig,Hex,-1,Rot,Wig,Tri,-1,Off,Wig,Gri,Poi',''],
+	['12g,5,Rot,Flo,12g,1,Rad,Wig,Roc,-1,Off,Reg,Off,Off','@mutuio5841'],
+	['13g,1,Rot,Wig,Cir,-1,Off,Reg,Oct,-3,Rad,Flo,Off,Poi','@memeing_donkey'],
+	['Cir,4,Rot,Reg,13g,3,Off,Flo,Hep,2,Rot,Smo,Off,Poi',''],
+	['12g,-1,Rad,Reg,Pen,2,Rot,Reg,13g,6,Rad,Wig,Gri,Poi','@hdhejeje9681'],
+	['11g,5,Rad,Reg,Squ,-1,Off,Reg,11g,-1,Rot,Wig,Off,Off','@steamedeggeggegg'],
+	['Hep,3,Off,Smo,12g,5,Rot,Flo,12g,-5,Rad,Flo,Gri,Poi',''],
+	['Cir,-4,Rot,Reg,Spi,1,Rot,Reg,Spi,-3,Rot,Reg,Off,Off','@EnricoRodolico'],
+	['13g,-6,Rad,Wig,13g,5,Rot,Wig,13g,3,Rad,Smo,Off,Off','@22vasudevajith2'],
+	['Hex,-1,Off,Reg,11g,-4,Rot,Reg,Cir,3,Off,Reg,Off,Poi',''],
+	['10g,3,Off,Smo,Tri,1,Off,Smo,10g,-1,Rot,Smo,Gri,Poi','@Charred_Pickles'],
+	['9go,-4,Off,Wig,12g,-1,Rot,Wig,12g,1,Rad,Smo,Off,Poi','@Guys-s5v'],
+	['Pen,-1,Rot,Smo,10g,1,Rot,Flo,Pen,-2,Rad,Smo,Off,Poi',''],
+	['Oct,-1,Rot,Flo,Cir,4,Rad,Reg,Tri,-1,Rot,Smo,Gri,Poi','@Nathan-rhino'],
+	['12g,-1,Rot,Wig,13g,-2,Off,Wig,11g,2,Rot,Flo,Off,Off','@a71ficial'],
+	['12g,5,Rot,Reg,Cir,3,Off,Reg,Tri,1,Rad,Smo,Off,Poi',''],
+	['Spi,-2,Rot,Reg,Hep,1,Rot,Reg,Hep,-3,Off,Smo,Gri,Poi','@camfunme'],
+	['11g,-2,Rot,Wig,Hex,1,Rad,Flo,11g,4,Off,Reg,Gri,Off','@lukesquire263'],
+	['10g,3,Off,Smo,Tri,1,Rad,Smo,10g,-1,Off,Smo,Gri,Off',''],
+	['Pen,1,Rot,Smo,Cir,4,Rad,Reg,Hep,-2,Rot,Flo,Off,Poi','@R.B.'],
+	['Oct,1,Rot,Reg,Spi,1,Rad,Reg,12g,-1,Rot,Wig,Gri,Off','@bruh6942'],
+	['Oct,1,Rot,Reg,13g,-6,Off,Flo,Cir,2,Off,Reg,Off,Poi','']
 
 ]
 var fav = 0;

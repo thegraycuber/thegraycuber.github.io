@@ -1,5 +1,5 @@
 var palette, settingBox, shapeBox, iconBox, labelBox, shapes, shape_locs, shape_size, output, output_vertices, main_items;
-var unit, circle_width, vert_width, rotation_angle, max_mag, mouse_data, grid, mobile, invalid_tick;
+var unit, circle_width, vert_width, rotation_angle, max_mag, mouse_data, grid, mobile, invalid_tick, at_location;
 var resolution = 840;
 var activeShape = 0;
 var auto_zoom = true;
@@ -7,6 +7,8 @@ var show_grid = false;
 var show_vertices = true;
 var show_label = true;
 var invalid_text = '';
+var at_text = '';
+var at_ticker = 0;
 
 function preload() {
 	
@@ -65,6 +67,7 @@ function setup() {
 		lab_h -= unit*0.14;
 		labelBox = new Box([width*0.5,lab_h],[width*0.47,unit*0.15],pad);
 		labelBox.Items.push(new textItem(1,'     x² +      x +      = 0',unit*0.2));
+		at_location = createVector(default_origin.x,lab_h-unit*0.25,unit*0.12);
 
 		shape_locs = [createVector(width*0.5 - unit*0.83,lab_h),
 								 createVector(width*0.5 - unit*0.13,lab_h),
@@ -99,7 +102,8 @@ function setup() {
 		lab_h = height-unit*0.16;
 		labelBox = new Box([default_origin.x,lab_h],[unit*0.92,unit*0.125],pad);
 		labelBox.Items.push(new textItem(1,'     x² +      x +      = 0',unit*0.18));
-		
+		at_location = createVector(default_origin.x,lab_h-unit*0.2,unit*0.08);
+
 		shape_locs = [createVector(default_origin.x - unit*0.73,lab_h),
 								 createVector(default_origin.x - unit*0.12,lab_h),
 								 createVector(default_origin.x + unit*0.41,lab_h)];

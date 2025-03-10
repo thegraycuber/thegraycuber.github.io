@@ -83,8 +83,15 @@ function draw() {
 			invalid_text = "";
 		}
 	}
-	noStroke();
+	stroke(palette.back);
 	textFont(atkinsonBold);
+	if (at_ticker > 0){
+		fill(palette.front);
+		textSize(at_location.z);
+		text(at_text.substring(0,at_ticker),at_location.x,at_location.y);
+		at_ticker--;
+	}
+	noStroke();
 	
 }
 
