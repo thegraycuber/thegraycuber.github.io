@@ -209,6 +209,7 @@ var favorites = [
 ['Pen,-1,Rot,Smo,10g,1,Rot,Flo,Pen,-2,Rad,Smo,Off,Poi',''],
 ['Oct,-1,Rot,Flo,Cir,4,Rad,Reg,Tri,-1,Rot,Smo,Gri,Poi','@Nathan-rhino'],
 ['12g,-1,Rot,Wig,13g,-2,Off,Wig,11g,2,Rot,Flo,Off,Off','@a71ficial'],
+['Pen,-1,Off,Wig,Squ,-1,Rot,Smo,Spi,-1,Rot,Reg,Gri,Off','@lichenenrichedfrenchtoast'],
 ['12g,5,Rot,Reg,Cir,3,Off,Reg,Tri,1,Rad,Smo,Off,Poi',''],
 ['Spi,-2,Rot,Reg,Hep,1,Rot,Reg,Hep,-3,Off,Smo,Gri,Poi','@camfunme'],
 ['11g,-2,Rot,Wig,Hex,1,Rad,Flo,11g,4,Off,Reg,Gri,Off','@lukesquire263'],
@@ -216,7 +217,9 @@ var favorites = [
 ['10g,3,Off,Smo,Tri,1,Rad,Smo,10g,-1,Off,Smo,Gri,Off',''],
 ['Pen,1,Rot,Smo,Cir,4,Rad,Reg,Hep,-2,Rot,Flo,Off,Poi','@R.B.'],
 ['Oct,1,Rot,Reg,Spi,1,Rad,Reg,12g,-1,Rot,Wig,Gri,Off','@bruh6942'],
-['Oct,1,Rot,Reg,13g,-6,Off,Flo,Cir,2,Off,Reg,Off,Poi','']
+['Oct,1,Rot,Reg,13g,-6,Off,Flo,Cir,2,Off,Reg,Off,Poi',''],
+['13g,2,Off,Flo,Tri,1,Rad,Smo,9go,1,Rot,Wig,Off,Poi','@wcodelyoko'],
+['13g,1,Rot,Smo,13g,-3,Off,Reg,Cir,1,Rot,Reg,Off,Off','@lunaamora1794']
 
 ]
 var fav = 0;
