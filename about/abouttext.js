@@ -14,7 +14,7 @@ var infoText = [
 ["Ik hou niet alleen van wiskunde!",
 "I love learning other languages.",
 "I'm pretty good with Dutch, and",
-"working on Russian and Afrikaans."],
+"currently working on Russian."],
 ["My logo is a representation of",
 "the 15th cyclotomic polynomial.",
 "Why 15? It's the first interesting case,",
