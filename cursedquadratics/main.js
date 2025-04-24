@@ -65,12 +65,12 @@ function draw() {
 			stroke(palette.accent[sh]);
 			shapes[sh].display(shape_locs[sh],shape_size);
 		}
+		textFont(atkinsonBold);
 	}
 	
 	
 	stroke(palette.back);
 	if (at_ticker > 0){
-		textFont(atkinsonBold);
 		fill(palette.front);
 		textSize(at_location.z);
 		text(at_text.substring(0,at_ticker),at_location.x,at_location.y);
