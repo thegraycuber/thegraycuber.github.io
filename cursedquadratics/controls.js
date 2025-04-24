@@ -10,7 +10,7 @@ function pixel_to_principal(pixels){
 // trigger updates when touches are started, stopped, or moved
 var in_a_box = false;
 function touchStarted(){
-	at_ticker = max(at_ticker,at_text.length);
+	at_ticker = min(at_ticker,at_text.length);
 	in_a_box = false;
 	if(!pasting){
 		in_a_box = in_a_box || settingBox.clicked();
