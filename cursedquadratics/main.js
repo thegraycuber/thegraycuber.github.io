@@ -68,6 +68,15 @@ function draw() {
 	}
 	
 	
+	stroke(palette.back);
+	if (at_ticker > 0){
+		textFont(atkinsonBold);
+		fill(palette.front);
+		textSize(at_location.z);
+		text(at_text.substring(0,at_ticker),at_location.x,at_location.y);
+		at_ticker--;
+	}
+	
 	if (pasting){
 		background(palette.backalpha);
 	}
@@ -75,21 +84,12 @@ function draw() {
 	if (invalid_text.length > 0){
 		textSize(unit*0.16);
 		strokeWeight(unit*0.05);
-		stroke(palette.back);
 		fill(palette.accent[2]);
 		text(invalid_text,default_origin.x,default_origin.y);
 		invalid_tick--;
 		if (invalid_tick == 0){
 			invalid_text = "";
 		}
-	}
-	stroke(palette.back);
-	textFont(atkinsonBold);
-	if (at_ticker > 0){
-		fill(palette.front);
-		textSize(at_location.z);
-		text(at_text.substring(0,at_ticker),at_location.x,at_location.y);
-		at_ticker--;
 	}
 	noStroke();
 	
