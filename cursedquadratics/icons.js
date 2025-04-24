@@ -194,7 +194,6 @@ var favorites = [
 ['13g,1,Rot,Wig,Cir,-1,Off,Reg,Oct,-3,Rad,Flo,Off,Poi','@memeing_donkey'],
 ['Squ,1,Rot,Flo,Cir,-4,Rad,Reg,Oct,3,Rot,Flo,Off,Off','@hollow7549'],
 ['Hex,-1,Rad,Wig,Hex,-1,Rot,Wig,Tri,-1,Off,Wig,Gri,Poi',''],
-['13g,1,Rad,Wig,13g,6,Rad,Wig,13g,-1,Rot,Flo,Off,Poi','@mmmlol-bb1be'],
 ['12g,5,Rot,Flo,12g,1,Rad,Wig,Roc,-1,Off,Reg,Off,Off','@mutuio5841'],
 ['11g,5,Rad,Smo,Hex,-1,Rot,Smo,9go,-1,Rad,Reg,Gri,Poi','@atomikiki'],
 ['11g,5,Rad,Reg,Squ,-1,Off,Reg,11g,-1,Rot,Wig,Off,Off','@steamedeggeggegg'],
