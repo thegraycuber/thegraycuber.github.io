@@ -9,10 +9,8 @@ var ticker = 0;
 var prod = false;
 
 function preload() {
-	/*
 	atkinsonBold = loadFont("media/Atkinson-Hyperlegible-Bold-102.ttf");
 	atkinsonRegular = loadFont("media/Atkinson-Hyperlegible-Regular-102.ttf");
-	*/
 }
 
 
@@ -30,7 +28,7 @@ function setup() {
 	frameRate(30);
 	imageMode(CENTER);
 	rectMode(CENTER);
-	//textFont(atkinsonRegular);
+	textFont(atkinsonRegular);
 	
 	
 	logo_os = new Offset(createVector(-px,-px));
