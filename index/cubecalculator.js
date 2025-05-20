@@ -2,10 +2,10 @@ var moveaxis = -1;
 var movedir = 0;
 var moveang = 0;
 var moveframes = 12;
-var cube, boxes;
+var cube, boxes, playalg;
 var rotx = 0.43;
 var roty = -0.65;
-var playalg = 'UlBBDfrDBurDLUlBDfrDBuuRfLdd';
+var cube_moves = ['u','U','d','D','l','L','r','R','f','F','b','B'];
 
 function calculatorPrep(){
 	var edge = 0;
@@ -27,27 +27,34 @@ function calculatorPrep(){
 			edge = 1 - edge;
 		}
 	}
+	
+	playalg = cube_moves[int(random(12))];
+	/*
+	for (let _ = 0; _ < 5; _++){
+		keytoMove(cube_moves[int(random(12))]);
+		makeMove();
+	}
+	*/
 }
 
 function calculatorDraw(){
 	
-	if (ticker < page_trans || ticker + page_trans > page_time){
-		return;
-	}
-	
 	if (playalg.length > 0 && moveaxis == -1){
 		keytoMove(playalg.substring(0,1));
-		playalg = playalg.substring(1,playalg.length);
+		let new_move = cube_moves[int(random(12))];
+		while (new_move.toUpperCase() == playalg.toUpperCase()) {
+			new_move = cube_moves[int(random(12))];
+		}
+		playalg = new_move;
 	}
 	
-	translate(width/2,height/2);
 	rotx += 0.04;
 	roty += 0.01;
-	push();
+	
+	
 	rotateX(rotx);
 	rotateY(roty);
 	noStroke();
-	
 	
 	for (var boxy of boxes){
 		boxy.display();
@@ -56,10 +63,7 @@ function calculatorDraw(){
 	for (var sticky of cube){
 		sticky.display();
 	}
-	/*
-	for (sticky of cube2){
-		sticky.display();
-	}*/
+	
 	if(moveaxis != -1){
 		moveang += 1;
 		moveportion = (-cos(PI*moveang/moveframes)+1)/4;
@@ -80,26 +84,23 @@ function calculatorDraw(){
 	for (var sticky1 of cube){
 		sticky1.display(false);
 	}
-	/*
-	for (sticky1 of cube2){
-		sticky1.display(false);
-	}*/
 	
 	if (moveang == moveframes){
-			for (var boxy2 of boxes){
-				boxy2.move();
-			}
-
-			for (var sticky2 of cube){
-				sticky2.move();
-			}
-			moveang = 0;
-			moveaxis = -1;
+			makeMove();
 	}
-	
-	pop();
-	
-	translate(-width/2,-height/2);
+
+}
+
+function makeMove(){
+		for (var boxy2 of boxes){
+			boxy2.move();
+		}
+
+		for (var sticky2 of cube){
+			sticky2.move();
+		}
+		moveang = 0;
+		moveaxis = -1;
 }
 
 function keytoMove(keyValue) {
@@ -139,13 +140,15 @@ class sticker {
 		this.size = size;
 		this.rotate = rotate;
 		this.edge = edge;
-		this.enter = page_trans*(1+1.5*random());
-		this.exit = page_time - page_trans*(1+1.5*random());
+		//this.enter = page_trans*(1+1.5*random());
+		//this.exit = page_time - page_trans*(1+1.5*random());
 	}
 	display(moving = true) {
+		/*
 		if (ticker < this.enter || ticker > this.exit){
 			return;
 		}
+		*/
 		if (moving == (moveaxis == -1 || this.pos[moveaxis] * movefact < w*0.9)) {
 			fill(this.hex);
 			translate(this.pos[0], this.pos[1], this.pos[2]);

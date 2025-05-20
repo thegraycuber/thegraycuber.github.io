@@ -78,11 +78,11 @@ class CursedShape {
 var out_cursed, vert_cursed, rotation_angle, max_mag, curse_tick, cursed_rot;
 function cursedDraw(){
 	
-	if (ticker < page_time/2 && curse_tick < cursed_resolution){
+	if (ticker < 2 && curse_tick < cursed_resolution){
 			curse_tick = min(int(curse_tick + cursed_resolution/32),cursed_resolution);
-	} else if (ticker + ticker_add*50 > page_time && curse_tick > 0){
+	} /*else if (ticker + ticker_add*50 > page_time && curse_tick > 0){
 			curse_tick = max(int(curse_tick - cursed_resolution/32),0);
-	}
+	} */
 	
 	cursed_rot[3] += 1;
 	for (var fi = 0; fi < 3; fi++){
@@ -198,12 +198,11 @@ function cursedPrep(){
 		cursed_rot = [0,0,0,0];
     rotation_angle = [TWO_PI/480,TWO_PI/420,TWO_PI/360];
     cursed_favorites = [
-        [4,1,1,0,0,-1,0,0,8,-3,2,1,true],
-        [6,-1,0,0,11,-4,1,0,0,3,0,0,true],
-        [6,1,1,2,13,5,0,3,0,2,2,0,false],
-        [5,-1,1,2,10,1,0,1,5,-2,2,3,true],
-        [5,2,1,1,0,-1,0,0,5,1,0,1,true],
-        [13,-1,2,3,12,-5,1,1,3,1,1,1,true]
+        [4,1,1,0,0,-1,0,0,8,-3,2,1,true], //flower
+        [6,-1,0,0,11,-4,1,0,0,3,0,0,true], //sunny
+      	[5,-1,1,2,10,1,0,1,5,-2,2,3,true], //better star
+        [12,5,1,0,0,3,0,0,3,1,2,3,true], //atom
+				[7,3,0,3,12,5,1,1,12,-5,2,1,true] //cursed
     ];
     
     var new_fav = int(random(cursed_favorites.length));

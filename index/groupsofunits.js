@@ -1,3 +1,4 @@
+
 class Bubble {
 	constructor(index, n, x, y, size) {
 		this.index = index;
@@ -88,7 +89,7 @@ class Bubble {
 				continue;
 			}
 
-			stroke(palette[0].accent1alpha);
+			stroke(palette[0].medium);
 			noFill();
 			strokeWeight(px * 0.15);
 			line(this.x, this.y, main_list[cont[0]].x, main_list[cont[0]].y);
@@ -128,7 +129,7 @@ class Bubble {
 	push() {
 		for (var pusher = 0; pusher < this.index; pusher++) {
 			var dist_info = pointDist(this.x, this.y, main_list[pusher].x, main_list[pusher].y);
-			if (dist_info[2] < px2 * 8) {
+			if (dist_info[2] < px2 * 4) {
 				var push_strength = min(px * 8 / dist_info[2], px * 0.4);
 				this.a[0] -= dist_info[0] * push_strength;
 				this.a[1] -= dist_info[1] * push_strength;
@@ -201,7 +202,7 @@ function findContainers(new_idx) {
 				mark = 2;
 			}
 
-			main_list[a].contains.push([b, (log(main_list[a].order / main_list[b].order) + 1) ** 3 * px / 128, ord, mark]);
+			main_list[a].contains.push([b, (log(main_list[a].order / main_list[b].order) + 1) ** 3 * px * 0.006, ord, mark]);
 			main_list[a].connections++;
 			main_list[b].connections++;
 		}
@@ -209,8 +210,10 @@ function findContainers(new_idx) {
 
 }
 
+
 function unitsDraw() {
-	unit_mod = (unit_mod + 1) % 8;
+	
+	/*
 	if (ticker > 3 && ticker < 23 && unit_mod == 0) {
 		main_list.push(new Bubble(main_list.length, main_list.length + 3, (random() * 0.9 + 0.05) * width, (random() * 0.9 + 0.05) * height, px*1.25));
 		findContainers(main_list.length - 1);
@@ -223,6 +226,15 @@ function unitsDraw() {
 			main_list.splice(main_list.length - 1, 1);
 		}
 	}
+	*/
+	if (main_list.length**2 < ticker*30-10) {
+		main_list.push(new Bubble(main_list.length, main_list.length + 3, random(-0.4,0.4) * width, random(-0.4,0.4) * height, px*1.25));
+		findContainers(main_list.length - 1);
+		main_list[main_list.length - 1].checkRep();
+		if (main_list.length > 1) {
+			findContainers(main_list.length - 1);
+		}
+	} 
 
 	for (var bubby of main_list) {
 		bubby.pull();

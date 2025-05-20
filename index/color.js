@@ -1,4 +1,6 @@
 
+var color_trans;
+
 class Palette {
 	constructor(scheme) {
 		
@@ -18,9 +20,9 @@ class Palette {
 			this.front = color(220,216,241);
 			this.back = color(43,23,82);
 			this.backlight = color(50,29,98);
+			this.accent3 = color(160,132,220);
 			this.accent1 = color(242,199,111);
 			this.accent2 = color(229,104,110);
-			this.accent3 = color(160,132,220);
 			this.gray = color(156,147,173);
 			this.grayalpha = color(156,147,173,50);
 			
@@ -40,32 +42,49 @@ class Palette {
 			this.backlight = color(10,70,55);
 			this.accent1 = color(63,189,117);
 			this.accent2 = color(216,184,1);
-			this.accent3 = color(185,95,95);
+			this.accent3 = color(238,150,93);
 			this.gray = color(173,178,173);
 			
 		}
 		
-		
 	}
 	
-	refresh(index1,index2,iterate = 0){
-		this.front = lerpColor(palette[index1].front,palette[index2].front,iterate);
-		this.back = lerpColor(palette[index1].back,palette[index2].back,iterate);
-		this.backlight = lerpColor(palette[index1].backlight,palette[index2].backlight,iterate);
-		this.accent1 = lerpColor(palette[index1].accent1,palette[index2].accent1,iterate);
-		this.accent2 = lerpColor(palette[index1].accent2,palette[index2].accent2,iterate);
-		this.accent3 = lerpColor(palette[index1].accent3,palette[index2].accent3,iterate);
-		this.gray = lerpColor(palette[index1].gray,palette[index2].gray,iterate);
+	refresh(){
 		
-		this.grayalpha = lerpColor(palette[index1].gray,palette[index2].gray,iterate);
-		this.accent1alpha = lerpColor(palette[index1].accent1,palette[index2].accent1,iterate);
-		this.backalpha = lerpColor(palette[index1].back,palette[index2].back,iterate);
+		if (color_trans[2] == -1){return;}
 		
-		this.grayalpha.setAlpha(50);
-		this.accent1alpha.setAlpha(50);
-		this.backalpha.setAlpha(5);
+		color_trans[2] += 0.02;
+		let pal_a = palette[color_trans[0]];
+		let pal_b = palette[color_trans[1]];
+		
+		this.front = lerpColor(pal_a.front,pal_b.front,color_trans[2]);
+		this.back = lerpColor(pal_a.back,pal_b.back,color_trans[2]);
+		this.backlight = lerpColor(pal_a.backlight,pal_b.backlight,color_trans[2]);
+		this.accent1 = lerpColor(pal_a.accent1,pal_b.accent1,color_trans[2]);
+		this.accent2 = lerpColor(pal_a.accent2,pal_b.accent2,color_trans[2]);
+		this.accent3 = lerpColor(pal_a.accent3,pal_b.accent3,color_trans[2]);
+		this.gray = lerpColor(pal_a.gray,pal_b.gray,color_trans[2]);
+	
+		//this.grayalpha = lerpColor(pal_a.gray,pal_b.gray,color_trans[2]);
+		//this.accent1alpha = lerpColor(pal_a.accent1,pal_b.accent1,color_trans[2]);
+		//this.backalpha = lerpColor(pal_a.back,pal_b.back,color_trans[2]);
+		
+		//this.grayalpha.setAlpha(50);
+		//this.accent1alpha.setAlpha(50);
+		//this.backalpha.setAlpha(5);
+		//this.medium = lerpColor(this.back,this.accent1,0.5);
 		this.medium = lerpColor(this.back,this.accent1,0.5);
 		//is.backlight.setAlpha(20);
+		
+		if (color_trans[2] >= 1){
+			color_trans[2] = -1;
+			color_trans[0] = color_trans[1];
+			update_icons(0,icons.length);
+		}
+		//u_index = (u_index + 1) % icons.length;
+		//update_icons(u_index, u_index + 1);
+		
 	}
 	
 }
+//let u_index = 0;

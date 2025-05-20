@@ -4,12 +4,15 @@ function makeGauss(){
 	main_list = [];
 	var gauss_rand = random();
 	
-	var wmax = ceil(1+width/px);
-	var hmax = ceil(1+height/px);
+	var wmax = 15;//ceil(1+width/px);
+	var hmax = 15;//ceil(1+height/px);
 	for (var re = -wmax; re <= wmax; re++){
 		for (var im = -hmax; im <= hmax; im++){
 			//console.log(re,im);
 			var gaussN = re**2 + im**2;
+			if (gaussN > 200){
+				continue;
+			}
 			var isPrime = false;
 			var gaussP = 0;
 			if (re == 0){
@@ -56,11 +59,11 @@ function makeGauss(){
 
 class Gauss {
 	constructor(re,im,norm,gauss_rand) {
-		this.coords = [width/2+re*px/2,height/2+im*px/2];
+		this.coords = [re*px*0.35, im*px*0.35];
 		this.colorvalue = [0];
-		this.colorshow = [[page_trans,page_time-page_trans]];
+		//this.colorshow = [[page_trans,page_time-page_trans]];
 		
-		this.colorvalue.push(int(norm/8)%sunlen);
+		this.colorvalue.push(int(norm/16)%sunlen);
 		var thetacolor = 0;
 		if(re == 0 && im > 0){
 			thetacolor = PI/2;
@@ -78,22 +81,25 @@ class Gauss {
 		this.colorvalue.push(mod((abs(re)-abs(im)+160)*3,sunlen));
 		this.colorvalue.push(int(noise(re/16+75*gauss_rand,im/16+120*gauss_rand)*sunlen));
 	
-		
+		/*
 		for (var cv = 1; cv < this.colorvalue.length; cv++){
 			this.colorshow.push([page_trans*(1+this.colorvalue[cv]/40),page_time-page_trans*(4-this.colorvalue[cv]/40)]);
-		}
+		}*/
 		
 	}
 }
 
+
+var sunset = [];
+var sunlen = 120;
 function gaussDraw(){
 	sunset.push(sunset[0]);
 	sunset.splice(0, 1);
 	for (var gp of main_list) {
-		if (gp.colorshow[page_rand][0] < ticker && gp.colorshow[page_rand][1] > ticker) {
+		//if (gp.colorshow[page_rand][0] < ticker && gp.colorshow[page_rand][1] > ticker) {
 			noStroke();
 			fill(sunset[gp.colorvalue[page_rand]]);
-			rect(gp.coords[0], gp.coords[1], px / 2);
-		}
+			rect(gp.coords[0], gp.coords[1], px*0.35);
+		//}
 	}
 }
