@@ -34,7 +34,7 @@ class Point {
 
 class Icon{
 	constructor(coords,px,index,size) {
-		this.img = createImage(533,533);
+		this.img = createImage(200,200);
 		this.coords = createVector(px*coords[0],px*coords[1]);
 		this.size = size;
 		this.mouseMin = createVector(this.coords.x-this.size*0.8+win[0],this.coords.y+win[1]-this.size*0.8);
@@ -44,7 +44,7 @@ class Icon{
 	}
 	
 	display(){
-		if (this.index == 9){
+		if (this.index == 7){
 			fill(palette[0].back[2]);
 			circle(this.coords.x,this.coords.y,this.size*1.2*this.mult);
 			strokeWeight(this.size/20);

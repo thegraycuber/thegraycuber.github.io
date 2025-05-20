@@ -14,9 +14,9 @@ var YouTube, Theme;
 var palette = [];
 
 function preload() {
-	atkinsonBold = loadFont("Atkinson-Hyperlegible-Bold-102.ttf");
-	atkinsonRegular = loadFont("Atkinson-Hyperlegible-Regular-102.ttf");
-	//openSans = loadFont("OpenSans-Regular.ttf");
+	atkinsonBold = loadFont("media/Atkinson-Hyperlegible-Bold-102.ttf");
+	atkinsonRegular = loadFont("media/Atkinson-Hyperlegible-Regular-102.ttf");
+	//openSans = loadFont("media/OpenSans-Regular.ttf");
 	
 	alg_compress = loadTable('cubecalculator/n_alg_compress.csv');//cubecalculator/
 }

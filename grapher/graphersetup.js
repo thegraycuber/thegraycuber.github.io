@@ -1,7 +1,7 @@
 
 function preload() {
-	openSans = loadFont("OpenSans-Bold.ttf");
-	atkinsonBold = loadFont("Atkinson-Hyperlegible-Bold-102.ttf");
+	openSans = loadFont("media/OpenSans-Bold.ttf");
+	atkinsonBold = loadFont("media/Atkinson-Hyperlegible-Bold-102.ttf");
 }
 
 

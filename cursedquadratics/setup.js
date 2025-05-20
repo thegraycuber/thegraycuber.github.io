@@ -12,9 +12,9 @@ var at_ticker = 0;
 
 function preload() {
 	
-	openSans = loadFont("OpenSans-Bold.ttf");
-	atkinsonBold = loadFont("Atkinson-Hyperlegible-Bold-102.ttf");
-	atkinsonRegular = loadFont("Atkinson-Hyperlegible-Regular-102.ttf");
+	openSans = loadFont("media/OpenSans-Bold.ttf");
+	atkinsonBold = loadFont("media/Atkinson-Hyperlegible-Bold-102.ttf");
+	atkinsonRegular = loadFont("media/Atkinson-Hyperlegible-Regular-102.ttf");
 	
 }
 

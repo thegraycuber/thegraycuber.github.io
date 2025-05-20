@@ -2,9 +2,9 @@
 function preload() {
 	data = loadTable('gauss/Gaussian1.3.csv', 'csv', 'header');
 	gameData = loadTable('gauss/GameData1.18.csv', 'csv', 'header');
-	atkinsonBold = loadFont("Atkinson-Hyperlegible-Bold-102.ttf");
-	atkinsonRegular = loadFont("Atkinson-Hyperlegible-Regular-102.ttf");
-	openSans = loadFont("OpenSans-Bold.ttf");
+	atkinsonBold = loadFont("media/Atkinson-Hyperlegible-Bold-102.ttf");
+	atkinsonRegular = loadFont("media/Atkinson-Hyperlegible-Regular-102.ttf");
+	openSans = loadFont("media/OpenSans-Bold.ttf");
 }
 
 function setup() {

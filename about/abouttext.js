@@ -1,3 +1,15 @@
+
+var textValues = [	
+	"Hi, I'm Asher",
+	"Math is beautiful.",
+	"I love to study and experiment with it.",
+	"I create videos about the interesting\n things that I learn and find, and write\n programs to make cool visualizations.",
+	"",
+	"",
+	"",
+	""
+];
+
 var infoText = [
 	["You can often find me with Hayley,",
 "my fiancée, watching thrillers, playing",
@@ -24,6 +36,7 @@ var infoText = [
 "my bases, but I didn't expect",
 "anyone to actually select it."]
 ];
+
 var info_rand = [];
 var info_text_len = 45;
 

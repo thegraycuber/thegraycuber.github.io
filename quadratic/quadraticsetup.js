@@ -1,8 +1,8 @@
 
 function preload() {
-	atkinsonBold = loadFont("Atkinson-Hyperlegible-Bold-102.ttf");
-	atkinsonRegular = loadFont("Atkinson-Hyperlegible-Regular-102.ttf");
-	openSans = loadFont("OpenSans-Bold.ttf");
+	atkinsonBold = loadFont("media/Atkinson-Hyperlegible-Bold-102.ttf");
+	atkinsonRegular = loadFont("media/Atkinson-Hyperlegible-Regular-102.ttf");
+	openSans = loadFont("media/OpenSans-Bold.ttf");
 	data = loadTable('quadratic/files/2dInts-1.4.csv', 'csv', 'header');
 	if (prod){
 		zoomdata = loadTable('quadratic/files/2dZoomData.csv', 'csv', 'header');

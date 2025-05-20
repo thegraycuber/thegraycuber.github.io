@@ -1,41 +1,24 @@
 var bucket_min = [];
 var points = [];
-var color_v, color_a, color_noise, color_theta, color_move;
 var adder = [0.0005,0.0005];
-var palette = [];
 var adjust_counter = 6;
 var adjust_wait = false;
-var curr_color = 3;
-var new_color = 3;
-var color_list = ['Current','Sunset','Electric','Forest','Autumn','Dark','Light','YouTube','Github'];
-var icon_coords = [[-0.4,-0.2],[-0.4,0],[-0.4,0.2],[0.4,-0.2],[0.4,0],[0.4,0.2],[-0.12,0.3],[0.12,0.3]];
-var icon_mobile = [[-0.2,-0.46],[0,-0.46],[0.2,-0.46],[-0.2,0.46],[0,0.46],[0.2,0.46],[-0.12,0.3],[0.12,0.3]];
-var icon_sizes = [0.08,0.08,0.08,0.08,0.08,0.08,0.06,0.06];
+var icon_coords = [[-0.4,-0.2],[-0.4,0],[-0.4,0.2],[0.4,-0.2],[0.4,0],[0.4,0.2]];
+var icon_mobile = [[-0.2,-0.46],[0,-0.46],[0.2,-0.46],[-0.2,0.46],[0,0.46],[0.2,0.46]];
+var icon_sizes = [0.08,0.08,0.08,0.08,0.08,0.08];
 var imgs = [];
 var masks = [];
 var random_add = 0;
 var size_mult = 1;
-var textValues = [	
-	"Hi, I'm Asher",
-	"Math is beautiful.",
-	"I love to study and experiment with it.",
-	"I create videos about the interesting\n things that I learn and find, and write\n programs to make cool visualizations.",
-	"",
-	"",
-	"",
-	""
-];
-var links = ['https://www.youtube.com/@TheGrayCuber','https://github.com/thegraycuber','https://thegraycuber.github.io/'];
-var link_types = ['_blank', '_blank', '_self'];
 var win;
 
 function preload() {
-	atkinsonRegular = loadFont("Atkinson-Hyperlegible-Regular-102.ttf");
-	openSans = loadFont("OpenSans-Regular.ttf");
+	atkinsonRegular = loadFont("media/Atkinson-Hyperlegible-Regular-102.ttf");
+	openSans = loadFont("media/OpenSans-Regular.ttf");
 	for (var img = 1; img < color_list.length; img++){
-		masks.push(loadImage('about/Color' + color_list[img] + '.png'));	// about/
+		masks.push(loadImage('media/icon_' + color_list[img].toLowerCase() + '.png'));	
 	}
-	
+
 }
 
 function setup() {
@@ -65,7 +48,7 @@ function setup() {
 	for (var img = 0; img < color_list.length-1; img++){
 		imgs.push(new Icon(icon_coords[img],px,img+1,px*icon_sizes[img]));
 	}
-	imgs.push(new Icon([0,0.3],px,9,px*0.06));
+	imgs.push(new Icon([0,0.3],px,7,px*0.08));
 	update_imgs();
 	noStroke();
 	for(x = 0; x < window.innerWidth; x += px/60){
@@ -131,37 +114,28 @@ function draw() {
 
 function update_imgs(){
 	
-	var flat = createImage(1,1);
-	flat.loadPixels();
-	flat.pixels[0] = red(palette[0].backlight);
-	flat.pixels[1] = green(palette[0].backlight);
-	flat.pixels[2] = blue(palette[0].backlight);
-	flat.pixels[3] = 255;
-	flat.updatePixels();
+	var flat = make_solid(palette[0].backlight);
 	for (var img = 0; img < 6; img++){
-		imgs[img].img.copy(flat,0,0,1,1,0,0,533,533);
+		imgs[img].img.copy(flat,0,0,1,1,0,0,200,200);
 		imgs[img].img.mask(masks[img]);		
 	}
-	flat.loadPixels();
-	flat.pixels[0] = red(palette[0].accent3);
-	flat.pixels[1] = green(palette[0].accent3);
-	flat.pixels[2] = blue(palette[0].accent3);
-	flat.pixels[3] = 255;
-	flat.updatePixels();
-	for (img = 6; img < 8; img++){
-		imgs[img].img.copy(flat,0,0,1,1,0,0,533,533);
-		imgs[img].img.mask(masks[img]);		
-	}
+}
+
+function make_solid(solid_color){
+	let solid = createImage(1,1);
+	solid.loadPixels();
+	solid.pixels[0] = red(solid_color);
+	solid.pixels[1] = green(solid_color);
+	solid.pixels[2] = blue(solid_color);
+	solid.pixels[3] = 255;
+	solid.updatePixels();
+	return solid;
 }
 
 function touchStarted(){
 	for (var i = 6; i < imgs.length; i++)	{
 		if(imgs[i].check(true)){
-			window.open(links[imgs[i].index - 7], link_types[imgs[i].index - 7]);
+			window.open('https://thegraycuber.github.io/', '_self');
 		}
 	}	
-}
-
-function touchMoved(event){
-	event.preventDefault(); 
 }

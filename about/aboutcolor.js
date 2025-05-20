@@ -1,4 +1,10 @@
 
+var palette = [];
+var curr_color = 3;
+var new_color = 3;
+var color_list = ['Current','Sunset','Electric','Forest','Autumn','Dark','Light'];
+var color_v, color_a, color_noise, color_theta, color_move;
+
 class Palette {
 	constructor(scheme) {
 		
