@@ -6,7 +6,7 @@ var comp_range = [0, 0];
 //var page_count = 0;
 
 function draw() {
-	ticker += 0.04;
+	ticker += 0.035;
 	palette[0].refresh();
 	
 	background(palette[0].back);
