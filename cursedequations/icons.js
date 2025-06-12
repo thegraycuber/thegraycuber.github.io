@@ -1,12 +1,13 @@
 
 
 class Icon {
-	constructor(type, displaySize, stroke, coords) {
+	constructor(type, displaySize, stroke, coords, direction = 1) {
 		this.Type = type;
 		this.Size = displaySize;
 		this.Radius = [displaySize[0]/2,displaySize[1]/2];
 		this.Stroke = stroke;
 		this.Coords = coords;
+		this.Direction = direction;
 	}
 	show() {
 		if (this.Type == 'copy') {
@@ -74,6 +75,13 @@ class Icon {
 			ellipse(this.Coords[0]+this.Size[0]*0.23, this.Coords[1]+this.Size[1]*0.12,this.Size[0]*0.03, this.Size[1]*0.05);
 			ellipse(this.Coords[0]+this.Size[0]*0.14, this.Coords[1]+this.Size[1]*0.26,this.Size[0]*0.03, this.Size[1]*0.05);
 			noStroke();
+		} else if (this.Type == 'arrow'){
+			fill(palette.front);
+			beginShape();
+			vertex(this.Coords[0]+this.Radius[0]*this.Direction,this.Coords[1]);
+			vertex(this.Coords[0]-0.5*this.Radius[0]*this.Direction,this.Coords[1]+this.Radius[1]*0.866);
+			vertex(this.Coords[0]-0.5*this.Radius[0]*this.Direction,this.Coords[1]-this.Radius[1]*0.866);
+			endShape(CLOSE);	
 		}
 	}
 	clicked() {
@@ -84,15 +92,24 @@ class Icon {
 		if (this.Type == 'rand'){
 			randomize();
 			reset_shapes();
+			
 		} else if (this.Type == 'copy'){
 			var code = ''
 			for (var mi of main_items){
-				code += mi.List[mi.Index].substring(0,3) + ",";
+				if (mi.Shape >= funk_shapes[active_funk]){
+					break;
+				} else if (mi.Id == 'function'){
+					code += funk_codes[mi.Index] + ",";
+				} else {
+					code += mi.List[mi.Index].substring(0,3) + ",";	
+				}
 			}
 			copyToClipboard(code.substring(0,code.length-1));
+			
 		} else if (this.Type == 'paste'){
 			pasting = true;
 			input_setup();
+			
 		} else if (this.Type == 'heart'){
 			fav = (fav + 1)%favorites.length;
 			input_settings(favorites[fav][0]);
@@ -111,13 +128,26 @@ function randomize(){
 }
 
 function input_settings(input_str){
-	var input_values = input_str.trim().split(',');
-	if (main_items.length != input_values.length){
+	
+	process = true;
+	input_str = input_str.trim();
+	if (input_str.length < 39){
+		return "Invalid Input Length";
+	}
+	
+	if (input_str.substring(0,1) != 'f'){
+		let cut = input_str.length - 8;
+		input_str = 'fQua' + input_str.substring(cut,input_str.length) + ',' + input_str.substring(0,cut);
+	}
+	
+	var input_values = input_str.split(',');
+	
+	if (main_items.length < input_values.length){
 		return "Invalid Input Length";
 	}
 	
 	var input_fail = 0;
-	for (var m = 0; m < main_items.length; m++){
+	for (var m = 0; m < input_values.length; m++){
 		var try_result = main_items[m].tryGive(input_values[m]);
 		if (!try_result){
 			input_fail++;
@@ -131,7 +161,7 @@ function input_settings(input_str){
 		}
 		return "";
 	} else {
-		return str(input_fail) + "/14 Codes Invalid";
+		return "Invalid Input";
 	}
 }
 var pasting = false;
@@ -188,48 +218,63 @@ function get_paste(){
 }
 
 var favorites = [
-['Squ,1,Rot,Reg,Cir,-1,Off,Reg,Oct,-3,Rad,Flo,Off,Poi',''],
-['12g,5,Rot,Reg,Hex,-1,Rad,Smo,12g,-5,Rad,Reg,Gri,Poi','@oxSoul99'],
-['Oct,-3,Rot,Wig,Pen,2,Off,Reg,Cir,2,Off,Reg,Gri,Off','@Detteraleon'],
-['13g,1,Rot,Wig,Cir,-1,Off,Reg,Oct,-3,Rad,Flo,Off,Poi','@memeing_donkey'],
-['Squ,1,Rot,Flo,Cir,-4,Rad,Reg,Oct,3,Rot,Flo,Off,Off','@hollow7549'],
-['Hex,-1,Rad,Wig,Hex,-1,Rot,Wig,Tri,-1,Off,Wig,Gri,Poi',''],
-['12g,5,Rot,Flo,12g,1,Rad,Wig,Roc,-1,Off,Reg,Off,Off','@mutuio5841'],
-['11g,5,Rad,Smo,Hex,-1,Rot,Smo,9go,-1,Rad,Reg,Gri,Poi','@atomikiki'],
-['11g,5,Rad,Reg,Squ,-1,Off,Reg,11g,-1,Rot,Wig,Off,Off','@steamedeggeggegg'],
-['Oct,1,Rot,Flo,Pen,-2,Rad,Reg,Spi,2,Rot,Reg,Off,Poi','@Novacozmo'],
-['Cir,4,Rot,Reg,13g,3,Off,Flo,Hep,2,Rot,Smo,Off,Poi',''],
-['Spi,1,Rot,Reg,Spi,4,Rad,Reg,Cir,-4,Rad,Reg,Gri,Poi','@refiredspace6930'],
-['Cir,-4,Rot,Reg,9go,4,Rot,Reg,Cir,-3,Rad,Reg,Gri,Poi','@MunawwarMusic'],
-['13g,1,Rad,Wig,13g,6,Rad,Wig,13g,-1,Rot,Flo,Off,Poi','@moretto6575'],
-['Tri,-1,Rad,Wig,9go,1,Rad,Wig,Spi,3,Rot,Reg,Off,Off','@SmokeTranspicuators'],
-['Oct,-3,Rot,Wig,12g,5,Rad,Reg,Cir,2,Off,Reg,Gri,Off','@16alpakas'],
-['Hep,3,Off,Smo,12g,5,Rot,Flo,12g,-5,Rad,Flo,Gri,Poi',''],
-['Tri,1,Off,Wig,Pen,2,Rad,Flo,Oct,-3,Rot,Smo,Off,Poi','@JunglinGuitarJourney'],
-['Cir,-4,Rot,Reg,Spi,1,Rot,Reg,Spi,-3,Rot,Reg,Off,Off','@EnricoRodolico'],
-['13g,1,Off,Reg,13g,1,Rot,Reg,13g,4,Rot,Smo,Gri,Poi','@yousseftamer4943'],
-['13g,-6,Rad,Wig,13g,5,Rot,Wig,13g,3,Rad,Smo,Off,Off','@22vasudevajith2'],
-['10g,3,Off,Smo,Tri,1,Off,Smo,10g,-1,Rot,Smo,Gri,Poi','@Charred_Pickles'],
-['Hex,-1,Off,Reg,11g,-4,Rot,Reg,Cir,3,Off,Reg,Off,Poi',''],
-['Hex,1,Rot,Smo,Spi,4,Off,Reg,13g,-6,Off,Reg,Gri,Off','@halojack2904'],
-['9go,-4,Off,Wig,12g,-1,Rot,Wig,12g,1,Rad,Smo,Off,Poi','@Guys-s5v'],
-['Tri,1,Rad,Reg,Cir,1,Rad,Reg,13g,-2,Rot,Flo,Gri,Poi','@cosmnik472'],
-['10g,-1,Off,Reg,Squ,1,Rad,Reg,9go,-4,Rot,Reg,Off,Off','@evanurquhart9225'],
-['Spi,4,Rot,Reg,Spi,-4,Rot,Reg,Spi,4,Rot,Reg,Off,Off','@joerivanlimpt9642'],
-['Pen,-1,Rot,Smo,10g,1,Rot,Flo,Pen,-2,Rad,Smo,Off,Poi',''],
-['Oct,-1,Rot,Flo,Cir,4,Rad,Reg,Tri,-1,Rot,Smo,Gri,Poi','@Nathan-rhino'],
-['12g,-1,Rot,Wig,13g,-2,Off,Wig,11g,2,Rot,Flo,Off,Off','@a71ficial'],
-['Pen,-1,Off,Wig,Squ,-1,Rot,Smo,Spi,-1,Rot,Reg,Gri,Off','@lichenenrichedfrenchtoast'],
-['11g,2,Rot,Smo,11g,4,Rad,Flo,11g,-5,Rot,Smo,Off,Poi','@Greenfire44'],
-['12g,5,Rot,Reg,Cir,3,Off,Reg,Tri,1,Rad,Smo,Off,Poi',''],
-['Cir,2,Rot,Reg,Hep,3,Rot,Wig,12g,-5,Rad,Flo,Gri,Poi','@jakobesparza'],
-['Spi,-2,Rot,Reg,Hep,1,Rot,Reg,Hep,-3,Off,Smo,Gri,Poi','@camfunme'],
-['11g,-2,Rot,Wig,Hex,1,Rad,Flo,11g,4,Off,Reg,Gri,Off','@lukesquire263'],
-['12g,-1,Rad,Reg,Pen,2,Rot,Reg,13g,6,Rad,Wig,Gri,Poi','@hdhejeje9681'],
-['10g,3,Off,Smo,Tri,1,Rad,Smo,10g,-1,Off,Smo,Gri,Off',''],
-['Pen,1,Rot,Smo,Cir,4,Rad,Reg,Hep,-2,Rot,Flo,Off,Poi','@R.B.'],
-['Oct,1,Rot,Reg,Spi,1,Rad,Reg,12g,-1,Rot,Wig,Gri,Off','@bruh6942'],
-['13g,2,Off,Flo,Tri,1,Rad,Smo,9go,1,Rot,Wig,Off,Poi','@wcodelyoko'],
-['13g,1,Rot,Smo,13g,-3,Off,Reg,Cir,1,Rot,Reg,Off,Off','@lunaamora1794']
+	['fPyt,Gri,Poi,Hex,1,Tra,Wig,Hex,1,Rot,Wig',''],
+	['fPy3,Off,Poi,Hex,-1,Off,Reg,12g,5,Rot,Smo,Cir,3,Off,Reg',''],
+	['fPyt,Gri,Poi,Pen,-1,Tra,Smo,Hex,1,Rot,Smo',''],
+	['fPy3,Off,Off,12g,5,Rot,Flo,Cir,-1,Tra,Reg,Spi,-1,Off,Reg',''],
+	['fPyt,Off,Off,9go,-1,Rot,Wig,11g,-2,Off,Wig',''],
+	['Squ,1,Rot,Reg,Cir,-1,Off,Reg,Oct,-3,Rad,Flo,Off,Poi',''],
+	['12g,5,Rot,Reg,Hex,-1,Rad,Smo,12g,-5,Rad,Reg,Gri,Poi','@oxSoul99'],
+	['Oct,-3,Rot,Wig,Pen,2,Off,Reg,Cir,2,Off,Reg,Gri,Off','@Detteraleon'],
+	['fPy3,Off,Poi,13g,-1,Rot,Smo,Hep,-2,Off,Flo,Spi,2,Off,Reg',''],
+	['13g,1,Rot,Wig,Cir,-1,Off,Reg,Oct,-3,Rad,Flo,Off,Poi','@memeing_donkey'],
+	['Squ,1,Rot,Flo,Cir,-4,Rad,Reg,Oct,3,Rot,Flo,Off,Off','@hollow7549'],
+	['Hex,-1,Rad,Wig,Hex,-1,Rot,Wig,Tri,-1,Off,Wig,Gri,Poi',''],
+	['12g,5,Rot,Flo,12g,1,Rad,Wig,Roc,-1,Off,Reg,Off,Off','@mutuio5841'],
+	['11g,5,Rad,Smo,Hex,-1,Rot,Smo,9go,-1,Rad,Reg,Gri,Poi','@atomikiki'],
+	['fPyt,Off,Poi,Hep,2,Rot,Wig,Cir,-4,Off,Reg',''],
+	['11g,5,Rad,Reg,Squ,-1,Off,Reg,11g,-1,Rot,Wig,Off,Off','@steamedeggeggegg'],
+	['Oct,1,Rot,Flo,Pen,-2,Rad,Reg,Spi,2,Rot,Reg,Off,Poi','@Novacozmo'],
+	['Cir,4,Rot,Reg,13g,3,Off,Flo,Hep,2,Rot,Smo,Off,Poi',''],
+	['Spi,1,Rot,Reg,Spi,4,Rad,Reg,Cir,-4,Rad,Reg,Gri,Poi','@refiredspace6930'],
+	['Cir,-4,Rot,Reg,9go,4,Rot,Reg,Cir,-3,Rad,Reg,Gri,Poi','@MunawwarMusic'],
+	['fPy3,Gri,Poi,10g,1,Tra,Flo,Squ,1,Rad,Flo,Hex,-1,Rot,Reg',''],
+	['13g,1,Rad,Wig,13g,6,Rad,Wig,13g,-1,Rot,Flo,Off,Poi','@moretto6575'],
+	['Tri,-1,Rad,Wig,9go,1,Rad,Wig,Spi,3,Rot,Reg,Off,Off','@SmokeTranspicuators'],
+	['Oct,-3,Rot,Wig,12g,5,Rad,Reg,Cir,2,Off,Reg,Gri,Off','@16alpakas'],
+	['Hep,3,Off,Smo,12g,5,Rot,Flo,12g,-5,Rad,Flo,Gri,Poi',''],
+	['Tri,1,Off,Wig,Pen,2,Rad,Flo,Oct,-3,Rot,Smo,Off,Poi','@JunglinGuitarJourney'],
+	['Cir,-4,Rot,Reg,Spi,1,Rot,Reg,Spi,-3,Rot,Reg,Off,Off','@EnricoRodolico'],
+	['fPyt,Gri,Poi,9go,2,Rad,Reg,9go,-2,Rot,Smo',''],
+	['13g,1,Off,Reg,13g,1,Rot,Reg,13g,4,Rot,Smo,Gri,Poi','@yousseftamer4943'],
+	['13g,-6,Rad,Wig,13g,5,Rot,Wig,13g,3,Rad,Smo,Off,Off','@22vasudevajith2'],
+	['fPy3,Off,Poi,10g,3,Tra,Wig,10g,3,Rot,Smo,Pen,-2,Rot,Reg',''],
+	['10g,3,Off,Smo,Tri,1,Off,Smo,10g,-1,Rot,Smo,Gri,Poi','@Charred_Pickles'],
+	['Spi,4,Rot,Reg,Spi,-4,Rot,Reg,Spi,4,Rot,Reg,Off,Off','@joerivanlimpt9642'],
+	['Hex,-1,Off,Reg,11g,-4,Rot,Reg,Cir,3,Off,Reg,Off,Poi',''],
+	['Hex,1,Rot,Smo,Spi,4,Off,Reg,13g,-6,Off,Reg,Gri,Off','@halojack2904'],
+	['9go,-4,Off,Wig,12g,-1,Rot,Wig,12g,1,Rad,Smo,Off,Poi','@Guys-s5v'],
+	['fPy3,Gri,Off,Cir,-2,Rot,Reg,Oct,1,Rad,Flo,9go,-1,Rad,Smo',''],
+	['Tri,1,Rad,Reg,Cir,1,Rad,Reg,13g,-2,Rot,Flo,Gri,Poi','@cosmnik472'],
+	['10g,-1,Off,Reg,Squ,1,Rad,Reg,9go,-4,Rot,Reg,Off,Off','@evanurquhart9225'],
+	['Pen,-1,Rot,Smo,10g,1,Rot,Flo,Pen,-2,Rad,Smo,Off,Poi',''],
+	['Oct,-1,Rot,Flo,Cir,4,Rad,Reg,Tri,-1,Rot,Smo,Gri,Poi','@Nathan-rhino'],
+	['12g,-1,Rot,Wig,13g,-2,Off,Wig,11g,2,Rot,Flo,Off,Off','@a71ficial'],
+	['fPyt,Gri,Off,Spi,-2,Rad,Reg,Spi,3,Rad,Reg',''],
+	['Pen,-1,Off,Wig,Squ,-1,Rot,Smo,Spi,-1,Rot,Reg,Gri,Off','@lichenenrichedfrenchtoast'],
+	['11g,2,Rot,Smo,11g,4,Rad,Flo,11g,-5,Rot,Smo,Off,Poi','@Greenfire44'],
+	['12g,5,Rot,Reg,Cir,3,Off,Reg,Tri,1,Rad,Smo,Off,Poi',''],
+	['Cir,2,Rot,Reg,Hep,3,Rot,Wig,12g,-5,Rad,Flo,Gri,Poi','@jakobesparza'],
+	['Spi,-2,Rot,Reg,Hep,1,Rot,Reg,Hep,-3,Off,Smo,Gri,Poi','@camfunme'],
+	['fPy3,Gri,Poi,Hex,-1,Off,Smo,Hex,1,Rot,Smo,12g,-5,Rot,Smo',''],
+	['11g,-2,Rot,Wig,Hex,1,Rad,Flo,11g,4,Off,Reg,Gri,Off','@lukesquire263'],
+	['12g,-1,Rad,Reg,Pen,2,Rot,Reg,13g,6,Rad,Wig,Gri,Poi','@hdhejeje9681'],
+	['10g,3,Off,Smo,Tri,1,Rad,Smo,10g,-1,Off,Smo,Gri,Off',''],
+	['Pen,1,Rot,Smo,Cir,4,Rad,Reg,Hep,-2,Rot,Flo,Off,Poi','@R.B.'],
+	['Oct,1,Rot,Reg,Spi,1,Rad,Reg,12g,-1,Rot,Wig,Gri,Off','@bruh6942'],
+	['fPyt,Off,Poi,9go,-4,Off,Wig,12g,-1,Rot,Wig',''],
+	['13g,2,Off,Flo,Tri,1,Rad,Smo,9go,1,Rot,Wig,Off,Poi','@wcodelyoko'],
+	['13g,1,Rot,Smo,13g,-3,Off,Reg,Cir,1,Rot,Reg,Off,Off','@lunaamora1794']
 ]
-var fav = 0;
+var fav = -1;
+

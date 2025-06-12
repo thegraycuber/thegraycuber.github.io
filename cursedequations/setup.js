@@ -1,5 +1,5 @@
 var palette, settingBox, shapeBox, iconBox, labelBox, shapes, shape_locs, shape_size, output, output_vertices, main_items;
-var unit, circle_width, vert_width, rotation_angle, max_mag, mouse_data, grid, mobile, invalid_tick, at_location;
+var unit, circle_width, vert_width, rotation_angle, max_mag, new_max_mag, mouse_data, grid, mobile, invalid_tick, at_location;
 var resolution = 840;
 var activeShape = 0;
 var auto_zoom = true;
@@ -20,11 +20,10 @@ function preload() {
 
 
 function setup() {
+	frameRate(30);
 	palette = new Palette('Electric');
-	//palette.getColors('Electric');
-	
-	//createCanvas(window.innerWidth, window.innerHeight);
-	createCanvas(windowWidth, windowHeight);
+
+	createCanvas(window.innerWidth, window.innerHeight);
 	smooth();
 	rectMode(CENTER);
 	textFont(atkinsonBold);
@@ -38,8 +37,6 @@ function setup() {
 	paste_go = createButton("Submit");
 	paste_go.mousePressed(get_paste);
 	
-	//shapes = [new Shape(4,1,0,0,'Regular'),new Shape(0,-1),new Shape(8,-3,0,0,'Flower')];
-	//shapes = [new Shape(6,-1,0,0,'Regular'),new Shape(11,-4,0,0,'Regular'),new Shape(0,3)];
 	shapes = [new Shape(0,1),new Shape(0,1),new Shape(0,1)];
 	shapeBox = [];
 	icons = [];
@@ -66,13 +63,21 @@ function setup() {
 		unit = min(unit,0.4*(height-unit*1.7));
 		lab_h -= unit*0.14;
 		labelBox = new Box([width*0.5,lab_h],[width*0.47,unit*0.15],pad);
-		labelBox.Items.push(new textItem(1,'     x² +      x +      = 0',unit*0.2));
+		let funk_texts = ['     x² +      x +      = 0','√(     ² +      ²)','√(     ² +      ² +      ²)'];
+		labelBox.Items.push(new arrowItem(1,funk_texts,unit*0.2,'function'));
 		at_location = createVector(default_origin.x,lab_h-unit*0.25,unit*0.12);
-
-		shape_locs = [createVector(width*0.5 - unit*0.83,lab_h),
-								 createVector(width*0.5 - unit*0.13,lab_h),
-								 createVector(width*0.5 + unit*0.47,lab_h)];
-		shape_size = unit*0.0875;
+		
+		shape_locs = [[createVector(default_origin.x - unit*0.8,lab_h),
+								 createVector(default_origin.x - unit*0.12,lab_h),
+								 createVector(default_origin.x + unit*0.46,lab_h)],
+									
+								 [createVector(default_origin.x - unit*0.27,lab_h),
+								 createVector(default_origin.x + unit*0.32,lab_h)],
+									
+								 [createVector(default_origin.x - unit*0.56,lab_h),
+								 createVector(default_origin.x + unit*0.02,lab_h),
+								 createVector(default_origin.x + unit*0.6,lab_h)]];
+		shape_size = unit*0.1;
 		
 		grid = new Grid(0,lab_h-unit*0.16,width,0);
 		
@@ -86,6 +91,7 @@ function setup() {
 		smallText = unit * 0.05;
 		pad = unit * 0.02;
 		default_origin = createVector(width*0.5+unit*0.27,height*0.5);
+
 		settingBox = new Box([unit*0.35,height*0.77],[unit*0.3,height*0.22],pad);
 		for (s = 0; s < 3; s++){
 			shapeBox.push(new Box([unit*0.35,height*0.31],[unit*0.3,height*0.22],pad));
@@ -95,19 +101,25 @@ function setup() {
 		iconBox.Items.push(new Icon('heart',[height*0.035,height*0.035],height*0.002,[unit*0.29,height*0.04]));
 		iconBox.Items.push(new Icon('copy',[height*0.035,height*0.035],height*0.003,[unit*0.43,height*0.04]));
 		iconBox.Items.push(new Icon('paste',[height*0.035,height*0.035],height*0.003,[unit*0.57,height*0.04]));
-		
-		
+
 		grid = new Grid(0,height,width,0);
 		unit = min(unit,0.4*(width-unit*0.62));
 		lab_h = height-unit*0.16;
 		labelBox = new Box([default_origin.x,lab_h],[unit*0.92,unit*0.125],pad);
-		labelBox.Items.push(new textItem(1,'     x² +      x +      = 0',unit*0.18));
+		labelBox.Items.push(new arrowItem(1,['     x² +      x +      = 0','√(      ² +       ²)','√(      ² +       ² +       ²)'],unit*0.14,'function'));
 		at_location = createVector(default_origin.x,lab_h-unit*0.2,unit*0.08);
 
-		shape_locs = [createVector(default_origin.x - unit*0.73,lab_h),
-								 createVector(default_origin.x - unit*0.12,lab_h),
-								 createVector(default_origin.x + unit*0.41,lab_h)];
-		shape_size = unit*0.075;
+		shape_locs = [[createVector(default_origin.x - unit*0.56,lab_h),
+								 createVector(default_origin.x - unit*0.08,lab_h),
+								 createVector(default_origin.x + unit*0.32,lab_h)],
+									
+								 [createVector(default_origin.x - unit*0.2,lab_h),
+								 createVector(default_origin.x + unit*0.25,lab_h)],
+									
+								 [createVector(default_origin.x - unit*0.43,lab_h),
+								 createVector(default_origin.x + unit*0.02,lab_h),
+								 createVector(default_origin.x + unit*0.46,lab_h)]];
+		shape_size = unit*0.07;
 	
 		button_style(paste_input,palette.back,palette.front,true,unit*0.06,unit*0.06,0.8,0.12,0.08,0.01,0.05);
 		button_style(paste_go,palette.front,palette.back,false,unit*0.92,unit*0.08,0.4,0.12,0.08,0,0.05);
@@ -120,42 +132,7 @@ function setup() {
 	origin = default_origin.copy();
 	
 	main_items = [];
-	var letters = ['A','B','C'];
-	for (s = 0; s < 3; s++){
-		shapeBox[s].Items.push(new textItem(0.6,'',0));
-		shapeBox[s].Items.push(new arrowItem(1,[letters[s],letters[s],letters[s]],bigText,'shape',-1,0,s));
-		shapeBox[s].Items.push(new textItem(0.6,'',0));
-
-		shapeBox[s].Items.push(new textItem(1,'Shape',bigText));
-		shapeBox[s].Items.push(new arrowItem(1,['Circle','Triangle','Square','Pentagon','Hexagon','Heptagon','Octagon','9gon','10gon','11gon','12gon','13gon','Rock','Spiral'],smallText,'vertices',s));
-		if (shapes[s].vertices > 0){
-			shapeBox[s].Items[shapeBox[s].Items.length - 1].Index = shapes[s].vertices - 2;
-		}
-		main_items.push(shapeBox[s].Items[shapeBox[s].Items.length - 1]);
-		shapeBox[s].Items.push(new textItem(0.6,'',0));
-		
-
-		shapeBox[s].Items.push(new textItem(1,'Step Size',bigText));
-		shapeBox[s].Items.push(new arrowItem(1,allowed_steps(shapes[s].vertices),smallText,'step',s));
-
-		while(shapeBox[s].Items[shapeBox[s].Items.length-1].List[shapeBox[s].Items[shapeBox[s].Items.length-1].Index] != str(shapes[s].step)){
-			shapeBox[s].Items[shapeBox[s].Items.length-1].Index += 1;
-		}
-		main_items.push(shapeBox[s].Items[shapeBox[s].Items.length - 1]);
-		shapeBox[s].Items.push(new textItem(0.6,'',0));
-		
-		shapeBox[s].Items.push(new textItem(1,'Animation',bigText));
-		shapeBox[s].Items.push(new arrowItem(1,['Off','Rotate','Radius'],smallText,'animation',s));
-		main_items.push(shapeBox[s].Items[shapeBox[s].Items.length - 1]);
-		shapeBox[s].Items.push(new textItem(0.6,'',0));
-		
-		shapeBox[s].Items.push(new textItem(1,'Shape Type',bigText));
-		shapeBox[s].Items.push(new arrowItem(1,['Regular','Flower','Wiggle','Smooth'],smallText,'type',s));
-		main_items.push(shapeBox[s].Items[shapeBox[s].Items.length - 1]);
-		shapeBox[s].Items.push(new textItem(0.6,'',0));
-		
-		shapeBox[s].giveSizes();
-	}
+	main_items.push(labelBox.Items[0]);
 	
 	settingBox.Items.push(new textItem(0.6,'',0));
 	settingBox.Items.push(new textItem(1,'Color',bigText));
@@ -187,10 +164,47 @@ function setup() {
 	settingBox.Items.push(new textItem(0.8,'About This Page',smallText,'','https://youtu.be/ocDnfeFAsCg'));
 	settingBox.Items.push(new textItem(0.4,'',0));
 	
-	settingBox.giveSizes();
-	labelBox.giveSizes();
+	var letters = ['A','B','C'];
+	for (s = 0; s < 3; s++){
+		shapeBox[s].Items.push(new textItem(0.6,'',0));
+		shapeBox[s].Items.push(new arrowItem(1,[letters[s],letters[s],letters[s]],bigText,'shape',-1,0,s));
+		shapeBox[s].Items.push(new textItem(0.6,'',0));
+
+		shapeBox[s].Items.push(new textItem(1,'Shape',bigText));
+		shapeBox[s].Items.push(new arrowItem(1,['Circle','Triangle','Square','Pentagon','Hexagon','Heptagon','Octagon','9gon','10gon','11gon','12gon','13gon','Rock','Spiral'],smallText,'vertices',s));
+		if (shapes[s].vertices > 0){
+			shapeBox[s].Items[shapeBox[s].Items.length - 1].Index = shapes[s].vertices - 2;
+		}
+		main_items.push(shapeBox[s].Items[shapeBox[s].Items.length - 1]);
+		shapeBox[s].Items.push(new textItem(0.6,'',0));
+		
+
+		shapeBox[s].Items.push(new textItem(1,'Step Size',bigText));
+		shapeBox[s].Items.push(new arrowItem(1,allowed_steps(shapes[s].vertices),smallText,'step',s));
+
+		while(shapeBox[s].Items[shapeBox[s].Items.length-1].List[shapeBox[s].Items[shapeBox[s].Items.length-1].Index] != str(shapes[s].step)){
+			shapeBox[s].Items[shapeBox[s].Items.length-1].Index += 1;
+		}
+		main_items.push(shapeBox[s].Items[shapeBox[s].Items.length - 1]);
+		shapeBox[s].Items.push(new textItem(0.6,'',0));
+		
+		shapeBox[s].Items.push(new textItem(1,'Animation',bigText));
+		shapeBox[s].Items.push(new arrowItem(1,['Off','Rotate','Radius','Translate'],smallText,'animation',s));
+		main_items.push(shapeBox[s].Items[shapeBox[s].Items.length - 1]);
+		shapeBox[s].Items.push(new textItem(0.6,'',0));
+		
+		shapeBox[s].Items.push(new textItem(1,'Shape Type',bigText));
+		shapeBox[s].Items.push(new arrowItem(1,['Regular','Flower','Wiggle','Smooth'],smallText,'type',s));
+		main_items.push(shapeBox[s].Items[shapeBox[s].Items.length - 1]);
+		shapeBox[s].Items.push(new textItem(0.6,'',0));
+		
+		shapeBox[s].giveSizes();
+	}
 	
-
-	input_settings('Squ,1,Rot,Reg,Cir,-1,Off,Reg,Oct,-3,Rad,Flo,Off,Poi');
-
+	settingBox.giveSizes();
+	labelBox.giveSizes(1.16);
+	labelBox.Items[0].Size*=0.6;
+	
+	//input_settings('Squ,1,Rot,Reg,Cir,-1,Off,Reg,Oct,-3,Rad,Flo,Off,Poi');
+	randomize();
 }

@@ -8,7 +8,7 @@ class Box {
 		this.Pad = pad;
 		this.Active = 1;
 	}
-	giveSizes(){
+	giveSizes(rad_adjust = 1){
 		var volume = 0;
 		for (var item of this.Items){
 			volume += item.Volume;
@@ -18,7 +18,7 @@ class Box {
 			run_vol += item.Volume;
 			var update_coords = [this.Coords[0],this.Coords[1] + this.Radius[1]*(run_vol/volume-1)];
 			run_vol += item.Volume;
-			var update_radius = [this.Radius[0],this.Radius[1]*item.Volume/volume];
+			var update_radius = [this.Radius[0]*rad_adjust,this.Radius[1]*item.Volume/volume];
 			item.update(update_coords,update_radius);
 		}
 		
@@ -26,9 +26,9 @@ class Box {
 	show(){
 		if (this.Active == 1){
 			fill(palette.backlight);
-			rect(this.Coords[0],this.Coords[1],this.Radius[0]*2+this.Pad,this.Radius[1]*2+this.Pad);
+			rect(this.Coords[0],this.Coords[1],this.Radius[0]*2+this.Pad,this.Radius[1]*2+this.Pad,this.Pad*1.6);
 			fill(palette.back);
-			rect(this.Coords[0],this.Coords[1],this.Radius[0]*2,this.Radius[1]*2);
+			rect(this.Coords[0],this.Coords[1],this.Radius[0]*2,this.Radius[1]*2,this.Pad*1.2);
 			for (var item of this.Items){
 				item.show();
 			}
@@ -69,6 +69,7 @@ class arrowItem {
 		this.List = list;
 		this.Index = index;
 		this.Size = displaySize;
+		this.TextSize = displaySize;
 		this.Id = id;
 		this.Active = true;
 		this.Type = 'arrow';
@@ -78,10 +79,10 @@ class arrowItem {
 	show(){
 		if (this.Id == 'Sequence' && settings.custom){return;}
 		if (this.Active){give_fill(this.Color);} else {fill(palette.backlight);}
-		textSize(this.Size);
+		textSize(this.TextSize);
 		text(this.List[this.Index],this.Coords[0],this.Coords[1]);
 		
-		if (this.List.length > 1){
+		if (this.List.length > 1 && show_stuff){
 			triangle(this.Sides[0]-this.Size,this.Coords[1],this.Sides[0],this.Coords[1]-this.Size*0.5,this.Sides[0],this.Coords[1]+this.Size*0.5);
 			triangle(this.Sides[1]+this.Size,this.Coords[1],this.Sides[1],this.Coords[1]-this.Size*0.5,this.Sides[1],this.Coords[1]+this.Size*0.5);
 		}
@@ -108,6 +109,17 @@ class arrowItem {
 		this.giveValue(int(random(this.List.length)));
 	}
 	tryGive(try_str){
+		
+		if (this.Id == 'function'){
+			for (let f_idx = 0; f_idx < funk_codes.length; f_idx++){
+				if (funk_codes[f_idx] == try_str){
+					this.giveValue(f_idx);
+					return true;
+				}
+			}
+			return false;
+		}
+		
 		for (var l_idx = 0; l_idx < this.List.length; l_idx++){
 			if (this.List[l_idx].substring(0,3) == try_str){
 				this.giveValue(l_idx);
@@ -139,11 +151,29 @@ class textItem {
 	update(coords,radius){
 		this.Coords = coords;
 		this.Radius = radius;
+		if(this.Link != ''){
+			this.make_button();
+		}
 	}
+	
+
 	clicked(){
+		/*
 		if(this.Link != ''){
 			window.open(this.Link, '_blank');
-		}
+		}*/
+	}
+	make_button(){
+		this.button = createElement('a');
+		this.button.attribute("href",this.Link);
+		this.button.attribute("target","_blank");
+		this.button.style("background-color", "#00000000");
+		this.button.size(this.Radius[0]*2, this.Radius[1]*2);
+		this.button.position(this.Coords[0]-this.Radius[0],this.Coords[1]-this.Radius[1]);
+	}
+	
+	update_button(){
+		if (this.anchor.length == 0){return;}
 	}
 }
 
@@ -220,14 +250,16 @@ class Grid{
 		var scale_log = floor(log(scale)/log(10))
 		var scale_mag = 10**scale_log;
 		var scale_val = scale/scale_mag;
-		if (scale_val > 5){
+		if (scale_val > 3.5){
 			scale = scale_mag*10;
 			scale_log += 1;
-		} else if (scale_val > 2){
+		} else {
+			scale = scale_mag*3;
+		} /*else if (scale_val > 2){
 			scale = scale_mag*5;
 		} else {
 			scale = scale_mag * 2;
-		}
+		}*/
 		scale_log = max(0,-scale_log);
 
 		fill(palette.backlight);
@@ -282,4 +314,3 @@ class Grid{
 	}
 
 }
-

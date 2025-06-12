@@ -129,7 +129,7 @@ function draw() {
 			unitsDraw();
 		} else if (pages[pg].title == "Rubik's Cube Calculator") {
 			calculatorDraw();
-		} else if (pages[pg].title == "Cursed Quadratic Equations") {
+		} else if (pages[pg].title == "Cursed Equations") {
 			cursedDraw();
 		}
 		pop();
@@ -201,7 +201,7 @@ function prep_preview(){
 	} else if (pages[pg].title == "Rubik's Cube Calculator"){
 		calculatorPrep();
 
-	} else if (pages[pg].title == "Cursed Quadratic Equations"){
+	} else if (pages[pg].title == "Cursed Equations"){
 		cursedPrep();
 
 	}

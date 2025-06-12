@@ -16,6 +16,7 @@ function touchStarted(){
 		in_a_box = in_a_box || settingBox.clicked();
 		in_a_box = in_a_box || shapeBox[activeShape].clicked();
 		in_a_box = in_a_box || iconBox.clicked();
+		in_a_box = in_a_box || labelBox.clicked();
 	}
 	
 	updateTouchInfo();

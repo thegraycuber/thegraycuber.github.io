@@ -13,12 +13,29 @@ function draw() {
 			shapes[s].radius_theta += rotation_angle[s]*2;
 			shapes[s].radius = 2**(sin(shapes[s].radius_theta)*2);
 			process = true;
+		} else if (anim == 'Translate'){
+			shapes[s].trans_ang += 2.23*rotation_angle[s];
+			shapes[s].trans_rad_ang += 3.07*rotation_angle[s];
+			process = true;
 		}
 	}
 	
 	
 	if (process){
-		quadratic();
+		output = [[],[]];
+		output_vertices = [];
+		funk_prep();
+		new_max_mag = 0;
+		
+		if (active_funk == 0){
+			quadratic();
+		} else if (active_funk == 1){
+			pythag();
+		} else if (active_funk == 2){
+			pythag_3d();
+		}
+		
+		update_max_mag(); 
 		process = false;
 	}
 	
@@ -61,9 +78,9 @@ function draw() {
 		labelBox.show();
 		fill(palette.back);
 		strokeWeight(shape_size*0.12);
-		for (var sh = 0; sh < 3; sh++){
+		for (var sh = 0; sh < funk_shapes[active_funk]; sh++){
 			stroke(palette.accent[sh]);
-			shapes[sh].display(shape_locs[sh],shape_size);
+			shapes[sh].display(shape_locs[active_funk][sh],shape_size);
 		}
 		textFont(atkinsonBold);
 	}

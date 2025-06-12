@@ -15,75 +15,7 @@ function gcd(a,b){
 	return b;
 }
 
-function quadratic(){
-	
-	var new_max_mag = 0;
-	
-	output = [[],[]];
-	output_vertices = [];
-	var inc_b2 = shapes[1].step*2*TWO_PI/resolution;
-	var inc_b = shapes[1].step*TWO_PI/resolution;
-	var inc_ac = (shapes[0].step+shapes[2].step)*TWO_PI/resolution;
-	var inc_a = shapes[0].step*TWO_PI/resolution;
-	var last_arg = 0;
-	var rad02 = shapes[0].radius*shapes[2].radius;
-	var rad11 = shapes[1].radius**2;
-	var q = [shapes[0].start-1,shapes[1].start-1,shapes[2].start-1];
-	
-	for (var p = 0; p < resolution; p++){
-		
-		var vertex_index = -1;
-		for (var qindex = 0; qindex < 3; qindex++){
-			q[qindex] += 1;
-			if (q[qindex] == resolution){
-				q[qindex] = 0;
-			}
-			if (shapes[qindex].isvertex[q[qindex]] && vertex_index == -1){
-				vertex_index = qindex;
-			}
-		}
-		output_vertices.push(vertex_index);
-		
-		var b2 = [rad11*(shapes[1].mags[q[1]]**2)*cos(p*inc_b2),rad11*(shapes[1].mags[q[1]]**2)*sin(p*inc_b2)];
-		var ac = [rad02*shapes[0].mags[q[0]]*shapes[2].mags[q[2]]*cos(p*inc_ac),rad02*shapes[0].mags[q[0]]*shapes[2].mags[q[2]]*sin(p*inc_ac)];
-		var disc = [b2[0]-4*ac[0],b2[1]-4*ac[1]];
-		//console.log(b2);
-		
-		var mag = (disc[0]**2+disc[1]**2)**0.25;
-		var arg = atan2(disc[1],disc[0])/2;
-		
-		var a_inv2 = [cos(p*inc_a)/(2*shapes[0].mags[q[0]]*shapes[0].radius),-sin(p*inc_a)/(2*shapes[0].mags[q[0]]*shapes[0].radius)];
-		for (var out = 0; out < 2; out++){
-			var numer = [mag*cos(arg+out*PI)-shapes[1].mags[q[1]]*shapes[1].radius*cos(p*inc_b),mag*sin(arg+out*PI)-shapes[1].mags[q[1]]*shapes[1].radius*sin(p*inc_b)];
-			var result = [numer[0]*a_inv2[0]-numer[1]*a_inv2[1],numer[0]*a_inv2[1]+numer[1]*a_inv2[0]];
-			output[out].push(result);
-	
-			if (auto_zoom){
-				var this_mag = pow(result[0],2)+pow(result[1],2);
-				if (this_mag > new_max_mag){
-					new_max_mag = this_mag;
-				}
-			}
-			
-		}
-		
-	}
-	
-	if (auto_zoom){
-		new_max_mag = (new_max_mag**0.5);
-		if (max_mag != undefined){
-			scalar = scalar*max_mag/new_max_mag;
-		} else {
-			scalar = scalar/new_max_mag;
-		}
-		max_mag = new_max_mag;
-	} 
-	
-}
-
 function action(id,index,value,s){
-	
-	
 	var vst;
 	
 	if (id == 'shape'){
@@ -161,6 +93,20 @@ function action(id,index,value,s){
 	} else if (id == 'label'){	
 		show_label = index == 0;
 		
+	} else if (id == 'function'){	
+		active_funk = index;
+		activeShape = activeShape % funk_shapes[active_funk];
+		
+		let shp_i = shapeBox[0].getIndex('shape');
+		for (let sb of shapeBox){
+			sb.Items[shp_i].Index = activeShape;
+			while (sb.Items[shp_i].List.length < funk_shapes[active_funk]){
+				sb.Items[shp_i].List.push(sb.Items[shp_i].List[0]);
+			}
+			sb.Items[shp_i].List.splice(funk_shapes[active_funk],sb.Items[shp_i].List.length-funk_shapes[active_funk]);
+			
+		}
+		
 	}
 }
 
@@ -199,4 +145,23 @@ function shape_info(box){
 	return([index_to_verts[vert_item.Index],int(step_item.List[step_item.Index]),type_item.List[type_item.Index]]);
 }
 
+function c_add(c_a,c_b){
+	return [c_a[0]+c_b[0],c_a[1]+c_b[1]];
+}
 
+function c_sub(c_a,c_b){
+	return [c_a[0]-c_b[0],c_a[1]-c_b[1]];
+}
+
+function c_mult(c_a,c_b){
+	return [c_a[0]*c_b[0]-c_a[1]*c_b[1],c_a[0]*c_b[1]+c_a[1]*c_b[0]];
+}
+
+function c_div(c_a,c_b){
+	let div_mag = 1 / (c_b[0]**2 + c_b[1]**2);
+	return [(c_a[0]*c_b[0]+c_a[1]*c_b[1])*div_mag,(-c_a[0]*c_b[1]+c_a[1]*c_b[0])*div_mag];
+}
+
+function c_sq(c_a){
+	return [c_a[0]*c_a[0]-c_a[1]*c_a[1],2*c_a[0]*c_a[1]];
+}

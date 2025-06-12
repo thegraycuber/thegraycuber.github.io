@@ -28,7 +28,7 @@ function setup() {
 	frameRate(30);
 	imageMode(CENTER);
 	rectMode(CENTER);
-	textFont(atkinsonRegular);
+	textFont(atkinsonBold);
 	
 	
 	logo_os = new Offset(createVector(-px,-px));
@@ -51,7 +51,7 @@ function setup() {
 	
 
 	pages = [];
-	pages.push(new Page("Cursed Quadratic Equations",'Electric','https://thegraycuber.github.io/cursedquadratics.html'));
+	pages.push(new Page("Cursed Equations",'Electric','https://thegraycuber.github.io/cursedequations.html'));
 	pages.push(new Page('Complex Primes','Sunset','https://thegraycuber.github.io/quadratic.html'));
 	pages.push(new Page("Rubik's Cube Calculator",'Forest','https://thegraycuber.github.io/cubecalculator.html'));
 	pages.push(new Page('Complex Grapher','Electric','https://thegraycuber.github.io/grapher.html'));

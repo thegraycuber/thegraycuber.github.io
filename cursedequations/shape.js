@@ -10,6 +10,8 @@ class Shape {
 		this.isvertex = [];
 		this.rotation = rotation;
 		this.start = round(this.rotation*resolution/TWO_PI);
+		this.trans_rad_ang = 0;
+		this.trans_ang = 0;
 		
 		var p, increment;
 		var phi = 0;
@@ -40,6 +42,8 @@ class Shape {
 				this.mags.push(phi);
 				phi += increment;
 			}
+			this.isvertex[0] = true;
+			this.isvertex[this.isvertex.length - 1] = true;
 			
 		} else {
 		
@@ -99,8 +103,11 @@ class Shape {
 	
 	display(center,size){
 		
+		push();
+		translate(this.trans[0]*size,this.trans[1]*size);
+		
 		var increment = TWO_PI*this.step/resolution;
-		var theta = -increment*this.start;
+		var theta = increment*this.start;
 		size *= pow(this.radius,0.25);
 		
 		beginShape();
@@ -113,6 +120,8 @@ class Shape {
 		}
 		endShape();
 		
+		pop();
+		
 	}
 	
 }
@@ -124,5 +133,7 @@ function reset_shapes(){
 		s.radius_theta = 0;
 		s.radius = 1;
 		s.rotation = 0;
+		s.trans_ang = 0;
+		s.trans_rad_ang = 0;
 	}
 }
