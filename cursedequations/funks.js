@@ -82,8 +82,8 @@ function pythag_3d(){
 
 function update_max_mag(){
 	if (auto_zoom){
-		new_max_mag = (new_max_mag**0.5);
 		if (max_mag != undefined){
+			new_max_mag = min(50,new_max_mag**0.5)*0.1+max_mag*0.9;
 			scalar = scalar*max_mag/new_max_mag;
 		} else {
 			scalar = scalar/new_max_mag;
