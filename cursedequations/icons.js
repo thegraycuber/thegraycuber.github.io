@@ -128,10 +128,8 @@ function randomize(){
 }
 
 function input_settings(input_str){
-	if (auto_zoom){
-		scalar = scalar*max_mag;
-		max_mag = undefined;
-	}
+	
+	mag_lerp = 0;
 	process = true;
 	input_str = input_str.trim();
 	if (input_str.length < 39){
