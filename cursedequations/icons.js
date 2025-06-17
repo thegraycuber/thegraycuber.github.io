@@ -129,6 +129,8 @@ function randomize(){
 
 function input_settings(input_str){
 	
+	scalar = scalar*max_mag;
+	max_mag = undefined;
 	process = true;
 	input_str = input_str.trim();
 	if (input_str.length < 39){
