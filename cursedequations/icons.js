@@ -219,11 +219,12 @@ function get_paste(){
 }
 
 var favorites = [
-	['fPy3,Off,Poi,Hex,-1,Off,Reg,12g,5,Rot,Smo,Cir,3,Off,Reg',''],
+['fPy3,Off,Poi,Hex,-1,Off,Reg,12g,5,Rot,Smo,Cir,3,Off,Reg',''],
 ['fPy3,Off,Poi,Pen,1,Rot,Reg,13g,2,Rot,Wig,Cir,-1,Off,Reg','@ymperal4663'],
 ['Oct,-3,Rot,Wig,Pen,2,Off,Reg,Cir,2,Off,Reg,Gri,Off','@Detteraleon'],
 ['fPyt,Gri,Poi,Hex,1,Tra,Wig,Hex,1,Rot,Wig',''],
 ['fPy3,Gri,Poi,Oct,-1,Off,Wig,Oct,-3,Rot,Reg,Oct,1,Off,Wig','@cosmnik472'],
+['fQua,Gri,Poi,Hep,2,Tra,Wig,13g,-2,Rot,Wig,11g,5,Off,Smo','@superdreamstelly5689'],
 ['fPyt,Gri,Poi,Pen,-1,Tra,Smo,Hex,1,Rot,Smo',''],
 ['12g,5,Rot,Reg,Hex,-1,Rad,Smo,12g,-5,Rad,Reg,Gri,Poi','@oxSoul99'],
 ['fPyt,Gri,Off,Spi,3,Rot,Reg,Spi,-3,Tra,Reg','@Chagama9'],
