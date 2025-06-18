@@ -122,6 +122,7 @@ class Icon {
 
 
 function randomize(){
+	mag_lerp = 0;
 	for (var mi of main_items){
 		mi.randomize();
 	}
