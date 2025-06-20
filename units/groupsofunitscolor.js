@@ -11,8 +11,8 @@ class Palette {
 			this.backlight = color(44,82,63);
 			this.accent = [color(214,221,204),
 				color(63,189,117),
-				color(216,184,1),
-				color(185,95,95)];
+				color(205,173,50),
+				color(238,128,96)];
 		} else if (color_type == 'Electric'){
 			this.front = color(186,219,243);
 			this.frontalpha = color(186,219,243);
