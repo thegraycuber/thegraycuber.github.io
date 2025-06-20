@@ -27,8 +27,8 @@ function make_solid(solid_color){
 	return solid;
 }
 
-var icon_ang = 0;
-var icon_rad;
+
+var icon_ang, icon_rad;
 function rotate_icons(){
 	
 	let i_ang = icon_ang;
