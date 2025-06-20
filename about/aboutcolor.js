@@ -31,7 +31,7 @@ class Palette {
 			this.back = [color(7,64,47),color(7,61,45),color(6,58,42),color(5,55,39),color(5,52,37)];
 			this.backlight = color(22,85,63);
 			this.accent1 = color(63,189,117);
-			this.accent2 = color(238,150,93);
+			this.accent2 = color(238,112,96);
 			this.accent3 = color(205,173,50);
 			this.gray = color(173,178,173);
 			
