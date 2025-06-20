@@ -23,6 +23,7 @@ function setup() {
 	scalar = px*5;
 	origin = createVector(0,0);
 	corner_ang = atan2(height,width);
+	icon_ang = random()*TWO_PI;
 	//plaque = min(width,px*9);
 	
 	frameRate(30);
