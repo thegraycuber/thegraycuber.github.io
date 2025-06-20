@@ -28,7 +28,7 @@ class Palette {
 			this.back = color(6,58,42);
 			this.backlight = color(22,85,63);
 			this.accent = [color(63,189,117),
-										 color(190,84,75),
+										 color(238,128,96),
 										 color(205,173,50)];
 			this.link = color(63,189,117);
 			
