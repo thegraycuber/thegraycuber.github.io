@@ -172,9 +172,6 @@ function setup() {
 
 		shapeBox[s].Items.push(new textItem(1,'Shape',bigText));
 		shapeBox[s].Items.push(new arrowItem(1,['Circle','Triangle','Square','Pentagon','Hexagon','Heptagon','Octagon','9gon','10gon','11gon','12gon','13gon','Rock','Spiral'],smallText,'vertices',s));
-		if (shapes[s].vertices > 0){
-			shapeBox[s].Items[shapeBox[s].Items.length - 1].Index = shapes[s].vertices - 2;
-		}
 		main_items.push(shapeBox[s].Items[shapeBox[s].Items.length - 1]);
 		shapeBox[s].Items.push(new textItem(0.6,'',0));
 		
@@ -194,7 +191,7 @@ function setup() {
 		shapeBox[s].Items.push(new textItem(0.6,'',0));
 		
 		shapeBox[s].Items.push(new textItem(1,'Shape Type',bigText));
-		shapeBox[s].Items.push(new arrowItem(1,['Regular','Flower','Wiggle','Smooth'],smallText,'type',s));
+		shapeBox[s].Items.push(new arrowItem(1,['Regular'],smallText,'type',s));
 		main_items.push(shapeBox[s].Items[shapeBox[s].Items.length - 1]);
 		shapeBox[s].Items.push(new textItem(0.6,'',0));
 		
