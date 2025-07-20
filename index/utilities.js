@@ -27,7 +27,6 @@ function make_solid(solid_color){
 	return solid;
 }
 
-
 var icon_ang, icon_rad;
 function rotate_icons(){
 	
@@ -192,3 +191,13 @@ function prime_factorization(num_to_factor){
 	return(factorization);
 }
 
+function text_limited(text_value,x,y,text_size,max_size){
+	
+	textSize(text_size);
+	let tw = textWidth(text_value);
+	if (tw > max_size){
+		textSize(text_size*max_size/tw);
+	}
+	
+	text(text_value,x,y);
+}

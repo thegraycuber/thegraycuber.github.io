@@ -13,7 +13,7 @@ var size_mult = 1;
 var win;
 
 function preload() {
-	atkinsonRegular = loadFont("media/Atkinson-Hyperlegible-Regular-102.ttf");
+	atkinsonRegular = loadFont("media/Atkinson-Hyperlegible-Bold-102.ttf");
 	openSans = loadFont("media/OpenSans-Regular.ttf");
 	for (var img = 1; img < color_list.length; img++){
 		masks.push(loadImage('media/icon_' + color_list[img].toLowerCase() + '.png'));	

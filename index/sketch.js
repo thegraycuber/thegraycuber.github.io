@@ -74,10 +74,10 @@ function draw() {
 		push();
 		translate(home_os.pos.x, home_os.pos.y, 0);
 		textAlign(LEFT, CENTER);
+		
 		for(let l_word of logo_words){
 			l_word.display();
 		}
-		
 		
 		if (page_mode != 'intro'){
 			for (let i of icons){
@@ -131,6 +131,8 @@ function draw() {
 			calculatorDraw();
 		} else if (pages[pg].title == "Cursed Equations") {
 			cursedDraw();
+		} else if (pages[pg].title == "Group Explorer") {
+			explorerDraw();
 		}
 		pop();
 	}
@@ -203,6 +205,9 @@ function prep_preview(){
 
 	} else if (pages[pg].title == "Cursed Equations"){
 		cursedPrep();
+
+	} else if (pages[pg].title == "Group Explorer"){
+		explorerPrep();
 
 	}
 }

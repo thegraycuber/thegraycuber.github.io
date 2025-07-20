@@ -2,6 +2,7 @@ var palette, icons, pages, logo_shapes, logo_words, asteroids, icon_a;
 var logo_os, home_os, preview_os;
 var px, px2, corner_ang;
 var pg = -1;
+var media_prefix = 'media/';
 
 var color_list = ['Current','Sunset','Electric','Forest'];
 //var main_list = [];
@@ -9,8 +10,9 @@ var ticker = 0;
 var prod = false;
 
 function preload() {
-	atkinsonBold = loadFont("media/Atkinson-Hyperlegible-Bold-102.ttf");
-	atkinsonRegular = loadFont("media/Atkinson-Hyperlegible-Regular-102.ttf");
+	atkinsonBold = loadFont(media_prefix+"Atkinson-Hyperlegible-Bold-102.ttf");
+	atkinsonRegular = loadFont(media_prefix+"Atkinson-Hyperlegible-Regular-102.ttf");
+	safeFont = loadFont(media_prefix+"OpenSans-Bold.ttf");
 }
 
 
@@ -52,8 +54,9 @@ function setup() {
 	
 
 	pages = [];
-	pages.push(new Page("Cursed Equations",'Electric','https://thegraycuber.github.io/cursedequations.html'));
+	pages.push(new Page("Cursed Equations",'Electric','https://thegraycuber.github.io/cursedquadratics.html'));
 	pages.push(new Page('Complex Primes','Sunset','https://thegraycuber.github.io/quadratic.html'));
+	pages.push(new Page('Group Explorer','Forest','https://thegraycuber.github.io/group_explorer.html'));
 	pages.push(new Page("Rubik's Cube Calculator",'Forest','https://thegraycuber.github.io/cubecalculator.html'));
 	pages.push(new Page('Complex Grapher','Electric','https://thegraycuber.github.io/grapher.html'));
 	pages.push(new Page('Groups of Units','Forest','https://thegraycuber.github.io/groupsofunits.html'));
@@ -62,14 +65,14 @@ function setup() {
 	icon_rad = px*6.5;
 	icons = [];
 	icon_maker = [];
-	let icon_paths = ['cursed','gaussian','cube','grapher','units'];
+	let icon_paths = ['cursed','gaussian','group','cube','grapher','units'];
 	for (let ic = 0; ic < pages.length; ic++){
-		icon_maker.push([[0,0],px*1.2,loadImage("media/icon_"+icon_paths[ic]+".png"),pages[ic].title]);
+		icon_maker.push([[0,0],px*1.2,loadImage(media_prefix+"icon_"+icon_paths[ic]+".png"),pages[ic].title]);
 	}
 	
-	icon_maker.push([[1.5*px,px],px*0.9,loadImage('media/icon_kofi.png'),'https://ko-fi.com/thegraycuber','_blank']);
-	icon_maker.push([[0.1*px,px],px*0.9,loadImage('media/icon_openprocessing.png'),'https://openprocessing.org/user/448907','_blank']);
-	icon_maker.push([[-1.3*px,px],px*0.9,loadImage('media/icon_youtube.png'),'https://www.youtube.com/@TheGrayCuber','_blank']);
+	icon_maker.push([[1.5*px,px],px*0.9,loadImage(media_prefix+'icon_kofi.png'),'https://ko-fi.com/thegraycuber','_blank']);
+	icon_maker.push([[0.1*px,px],px*0.9,loadImage(media_prefix+'icon_openprocessing.png'),'https://openprocessing.org/user/448907','_blank']);
+	icon_maker.push([[-1.3*px,px],px*0.9,loadImage(media_prefix+'icon_youtube.png'),'https://www.youtube.com/@TheGrayCuber','_blank']);
 	//icon_maker.push([[0.6*px,px],px*0.8,loadImage('icon_github1.png'),'https://github.com/thegraycuber','_blank']);
 	
 	for (let im of icon_maker){
