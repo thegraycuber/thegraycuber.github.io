@@ -159,8 +159,8 @@ function setup() {
 		arrowBoxes[a].Items.push(new arrowItem(1,['left operate','right operate','conjugate'],infoText,'arrow_type',a));
 		arrowBoxes[a].Items.push(new textItem(0.6,'',0));
 		
-		arrowBoxes[a].Items.push(new sliderItem(1.2,headText,[0,1],'arrow_strength',arrow_strengths[a]**0.5,a));
 		arrowBoxes[a].Items.push(new textItem(1,'strength',headText,'strength_head'));
+		arrowBoxes[a].Items.push(new sliderItem(1.2,headText,[0,1],'arrow_strength',arrow_strengths[a]**0.5,a));
 		arrowBoxes[a].Items.push(new textItem(0.8,'',0));
 		
 		arrowBoxes[a].giveSizes();
