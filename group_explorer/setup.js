@@ -1,15 +1,10 @@
 
 var el_data, gen_data;
 function preload(){
-	mainFont = loadFont('media/Atkinson-Hyperlegible-Bold-102.ttf');
-	safeFont = loadFont("media/OpenSans-Bold.ttf");
+	mainFont = loadFont('media/AshkinsonBold_001.ttf');
 	
 	gen_data = loadTable('group_explorer/group_generators_006.csv', 'csv', 'header');
 	el_data = loadTable('group_explorer/group_labels_009.csv', 'csv', 'header');
-	/*
-	atkinsonBold = loadFont("Atkinson-Hyperlegible-Bold-102.ttf");
-	atkinsonRegular = loadFont("Atkinson-Hyperlegible-Regular-102.ttf");
-	*/
 }
 
 var palette, arrowBoxes, settingBox, iconBox, arrowBox, displayBox, unit;
