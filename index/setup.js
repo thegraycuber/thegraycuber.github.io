@@ -10,9 +10,7 @@ var ticker = 0;
 var prod = false;
 
 function preload() {
-	atkinsonBold = loadFont(media_prefix+"Atkinson-Hyperlegible-Bold-102.ttf");
-	atkinsonRegular = loadFont(media_prefix+"Atkinson-Hyperlegible-Regular-102.ttf");
-	safeFont = loadFont(media_prefix+"OpenSans-Bold.ttf");
+	mainFont = loadFont(media_prefix+"AshkinsonBold_003.ttf");
 }
 
 
@@ -31,7 +29,7 @@ function setup() {
 	frameRate(30);
 	imageMode(CENTER);
 	rectMode(CENTER);
-	textFont(atkinsonBold);
+	textFont(mainFont);
 	
 	
 	logo_os = new Offset(createVector(-px,-px));
