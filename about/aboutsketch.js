@@ -13,7 +13,7 @@ var size_mult = 1;
 var win;
 
 function preload() {
-	mainFont = loadFont("media/AshkinsonBold_001.ttf");
+	mainFont = loadFont("media/AshkinsonBold_003.ttf");
 	for (var img = 1; img < color_list.length; img++){
 		masks.push(loadImage('media/icon_' + color_list[img].toLowerCase() + '.png'));	
 	}
