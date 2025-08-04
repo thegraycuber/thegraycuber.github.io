@@ -74,7 +74,7 @@ function draw() {
 	}
 
 	if (show_label){
-		textFont(atkinsonRegular);
+		textFont(thinFont);
 		labelBox.show();
 		fill(palette.back);
 		strokeWeight(shape_size*0.12);
@@ -82,7 +82,7 @@ function draw() {
 			stroke(palette.accent[sh]);
 			shapes[sh].display(shape_locs[active_funk][sh],shape_size);
 		}
-		textFont(atkinsonBold);
+		textFont(mainFont);
 	}
 	
 	
