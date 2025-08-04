@@ -68,7 +68,7 @@ class element{
 		circle(this.pos.x,this.pos.y,2);
 		fill(this.text_color);
 		noStroke();
-		text_limited(this.display_name,this.pos.x,this.pos.y-0.1,0.9,1.75);
+		text_limited(this.display_name,this.pos.x,this.pos.y,1.1,1.75);
 	}
 	
 	arrows(a){
