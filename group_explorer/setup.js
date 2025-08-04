@@ -1,7 +1,7 @@
 
 var el_data, gen_data;
 function preload(){
-	mainFont = loadFont('media/AshkinsonBold_001.ttf');
+	mainFont = loadFont('media/AshkinsonBold_003.ttf');
 	
 	gen_data = loadTable('group_explorer/group_generators_006.csv', 'csv', 'header');
 	el_data = loadTable('group_explorer/group_labels_009.csv', 'csv', 'header');
