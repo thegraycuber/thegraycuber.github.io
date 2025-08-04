@@ -8,7 +8,7 @@ function show_table(){
 	noStroke();
 	fill(palette.front);
 
-	let ts = box_size*0.4;
+	let ts = box_size*0.5;
 	let tmax = box_size*0.8;
 	/*
 	textSize(ts);
