@@ -11,10 +11,8 @@ var at_text = '';
 var at_ticker = 0;
 
 function preload() {
-	
-	openSans = loadFont("media/OpenSans-Bold.ttf");
-	atkinsonBold = loadFont("media/Atkinson-Hyperlegible-Bold-102.ttf");
-	atkinsonRegular = loadFont("media/Atkinson-Hyperlegible-Regular-102.ttf");
+	mainFont = loadFont("media/AshkinsonBold_003.ttf");
+	thinFont = loadFont("media/AshkinsonRegular_000.ttf");
 	
 }
 
@@ -26,7 +24,7 @@ function setup() {
 	createCanvas(window.innerWidth, window.innerHeight);
 	smooth();
 	rectMode(CENTER);
-	textFont(atkinsonBold);
+	textFont(mainFont);
 	textAlign(CENTER, CENTER);
 	noStroke();
 	rotation_angle = [TWO_PI/960,TWO_PI/840,TWO_PI/720];
