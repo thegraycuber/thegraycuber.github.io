@@ -81,17 +81,14 @@ class GroupElement{
 	}
 	
 	display(){
-	
-		textFont(safeFont);
+
 		fill(this.fill_color);
 		stroke(this.stroke_color);
 		circle(this.pos.x,this.pos.y,el_size*2);
 		
 		fill(this.text_color);
 		noStroke();
-		text_limited(this.display_name,this.pos.x,this.pos.y-0.1*el_size,0.9*el_size,1.75*el_size);
-		
-		textFont(atkinsonBold);
+		text_limited(this.display_name,this.pos.x,this.pos.y,1.1*el_size,1.75*el_size);
 	}
 	
 	draw_arrows(){
