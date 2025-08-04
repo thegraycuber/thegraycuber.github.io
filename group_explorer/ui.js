@@ -228,11 +228,7 @@ class arrowItem {
 	}
 	show(){
 		if (this.Active){give_fill(this.Color);} else {fill(palette.backlight);}
-		//textSize(this.TextSize);
-		if (this.Id == 'arrow_element'){textFont(safeFont);}
-		//text(this.List[this.Index],this.Coords[0],this.Coords[1]);//,this.Radius[0]-this.Size*2);
 		text_limited(this.List[this.Index],this.Coords[0],this.Coords[1],this.TextSize,this.Radius[0]*2-this.Size*6);
-		textFont(mainFont);
 		
 		if (this.List.length > 1){
 			triangle(this.Sides[0]-this.Size,this.Coords[1],this.Sides[0],this.Coords[1]-this.Size*0.5,this.Sides[0],this.Coords[1]+this.Size*0.5);
