@@ -7,8 +7,7 @@ function show_table(){
 	strokeWeight(box_size*0.05);
 	noStroke();
 	fill(palette.front);
-	
-	textFont(safeFont);
+
 	let ts = box_size*0.4;
 	let tmax = box_size*0.8;
 	/*
@@ -47,8 +46,6 @@ function show_table(){
 			text_limited(G[G[y].arrow_tables[0][x]].display_name ,box_x,box_y-box_size*0.05, ts, tmax);
 		}	
 	}
-	
-	textFont(mainFont);
 	
 }
 
