@@ -62,15 +62,13 @@ class element{
 	
 	display(){
 		this.giveColor();
-		
-		textFont(safeFont);
+	
 		fill(this.fill_color);
 		stroke(this.stroke_color);
 		circle(this.pos.x,this.pos.y,2);
 		fill(this.text_color);
 		noStroke();
 		text_limited(this.display_name,this.pos.x,this.pos.y-0.1,0.9,1.75);
-		textFont(mainFont);
 	}
 	
 	arrows(a){
