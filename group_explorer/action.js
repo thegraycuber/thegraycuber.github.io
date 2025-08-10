@@ -96,8 +96,11 @@ function action(id, value, object = [], arrow = active_arrow) {
 	} else if (id == 'display_mode') {
 		//object.darkened = physics_o;
 		
-		scalar = min(width, height) / (6 * G_order ** 0.7);
-		origin = default_origin.copy();
+		if (display_state != 1 || value != 0){
+			scalar = min(width, height) / (6 * G_order ** 0.7);
+			origin = default_origin.copy();
+		}
+		
 		display_state = value;
 		refresh_arrow_types();
 		refresh_strength_elements();
