@@ -20,7 +20,7 @@ function setup() {
 	rectMode(CENTER);
 	textAlign(CENTER,CENTER);
 	//colorMode(HSL, 360, 100, 100);
-	palette_index = palette_names.indexOf('Forest');
+	palette_index = palette_names.indexOf('Sunset');
 	palette = new Palette(palette_names[palette_index]);
 	colors = colorScheme();
 	colorsF = colorFactor();
