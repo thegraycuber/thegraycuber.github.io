@@ -86,7 +86,7 @@ function action(id,index,value,s){
 		show_vertices = index == 0;
 		
 	} else if (id == 'color'){	
-		palette.getColors(value);
+		palette = new Palette(value);
 		button_color(paste_input,palette.back,palette.front,true);
 		button_color(paste_go,palette.front,palette.back,false);
 
@@ -164,4 +164,20 @@ function c_div(c_a,c_b){
 
 function c_sq(c_a){
 	return [c_a[0]*c_a[0]-c_a[1]*c_a[1],2*c_a[0]*c_a[1]];
+}
+
+
+
+function give_fill(fill_index){
+	if (fill_index == -1){
+		fill(palette.front);
+	} else {
+		fill(palette.accent[fill_index]);
+	}
+}
+
+function core_color_custom(plt){
+		plt.backalpha = color(red(plt.back),green(plt.back),blue(plt.back),150);
+		plt.link = color(red(plt.mono),green(plt.mono),blue(plt.mono));
+
 }

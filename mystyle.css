@@ -18,7 +18,7 @@ footer {
 }
 
 .calc_input{
-	font-family: "AshkinsonRegular_000";
+	font-family: "media/AshkinsonRegular_000";
 	text-align: center;
 }
 
@@ -27,14 +27,14 @@ footer {
 }
 
 .calc_button{
-	font-family: "AshkinsonRegular_000";
+	font-family: "media/AshkinsonRegular_000";
 	text-align: center;
 	border: none;
 }
 
 
 .cursed_input{
-	font-family: "AshkinsonRegular_000";
+	font-family: "media/AshkinsonRegular_000";
 	text-align: center;
 }
 
@@ -43,7 +43,7 @@ footer {
 }
 
 .cursed_button{
-	font-family: "AshkinsonRegular_000";
+	font-family: "media/AshkinsonRegular_000";
 	text-align: center;
 	border: none;
 }

@@ -118,7 +118,7 @@ function trapezoid(xcenter,ycenter,wid){
 
 function showGrid(){
 	if(setting.ShowGrid == 1){
-		fill(0,0,black+10);
+		fill(palette.backlight);
 		for (var gl of setting.Gridlines) {
 			if (setting.WVals[setting.W] == -3 && gl[2] < setting.sq){
 				trapezoid(gl[0],gl[1],gl[2]/2);

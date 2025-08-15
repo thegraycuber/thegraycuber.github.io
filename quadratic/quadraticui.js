@@ -1,5 +1,5 @@
 class Icon {
-	constructor(displayChar,displaySize,radius,coeffs,yoffset,color = [white,white]) {
+	constructor(displayChar,displaySize,radius,coeffs,yoffset,color = [3,3]) {
 		this.DisplayChar = [displayChar,'X'];
 		this.Size = displaySize;
 		this.Radius = radius;
@@ -14,8 +14,8 @@ class Icon {
 	showIcon(){
 		if (this.Active > -1){
 			
-			fill(this.Color[this.Active]);
-			stroke(black);
+			fill(palette.accent[this.Color[this.Active]]);
+			stroke(palette.back);
 			
 			if (this.DisplayChar[this.Active] == '='){
 				strokeWeight(setting.sq*0.2);
@@ -68,9 +68,9 @@ class Box {
 	}
 	show(){
 		if (this.Active == 1){
-			fill(black+5);
+			fill(palette.backlight);
 			rect(this.Coords[0],this.Coords[1],this.Radius[0]*2+this.Pad,this.Radius[1]*2+this.Pad);
-			fill(black);
+			fill(palette.back);
 			rect(this.Coords[0],this.Coords[1],this.Radius[0]*2,this.Radius[1]*2);
 			for (var item of this.Items){
 				item.show();
@@ -114,7 +114,7 @@ class arrowItem {
 		this.Active = true;
 	}
 	show(){
-		if (this.Active){fill(white);} else {fill(white*0.4);}
+		if (this.Active){fill(palette.front);} else {fill(palette.mono);}
 		textSize(this.Size);
 		text(this.List[this.Index],this.Coords[0],this.Coords[1]);
 		triangle(this.Sides[0]-this.Size,this.Coords[1],this.Sides[0],this.Coords[1]-this.Size*0.5,this.Sides[0],this.Coords[1]+this.Size*0.5);
@@ -141,7 +141,7 @@ class arrowItem {
 }
 
 class textItem {
-	constructor(volume,displayText,displaySize,id = '', color = white,font = atkinsonBold,link = '') {
+	constructor(volume,displayText,displaySize,id = '', color = 3,font = atkinsonBold,link = '') {
 		this.Volume = volume;
 		this.Coords = [0,0]; 
 		this.DisplayText = displayText;
@@ -154,9 +154,9 @@ class textItem {
 	}
 	show(){
 		textFont(this.Font);
-		fill(this.Color);
+		fill(palette.accent[this.Color]);
 		if(this.Link != ''){
-			fill(210,90,70);
+			fill(palette.mono);
 		}
 		textSize(this.Size);
 		text(this.DisplayText,this.Coords[0],this.Coords[1]);
@@ -187,12 +187,12 @@ class binaryItem {
 	}
 	show(){
 		
-		if (this.Active){fill(white-20);} else {fill(white*0.4);}
+		if (this.Active){fill(palette.front);} else {fill(palette.mono);}
 		rect(this.Sides[this.Index],this.Coords[1],this.Radius[0]*0.9,this.Radius[1]*1.8,this.Size*0.5);
 		textSize(this.Size);
-		fill(black);
+		fill(palette.back);
 		text(this.List[this.Index],this.Sides[this.Index],this.Coords[1]);
-		if (this.Active){fill(white);} else {fill(white*0.4);}
+		if (this.Active){fill(palette.front);} else {fill(palette.mono);}
 		text(this.List[(this.Index+1)%2],this.Sides[(this.Index+1)%2],this.Coords[1]);
 	}
 	update(coords,radius){

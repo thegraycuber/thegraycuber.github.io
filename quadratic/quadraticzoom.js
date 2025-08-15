@@ -19,7 +19,7 @@ class Zoom {
 		for (a = 0 ; a < setting.WAssocs[setting.W]; a++){
 			
 			if (this.IsLow[a]){
-				fill(colors[0][0],colors[0][1],colors[0][2]);
+				fill(colors[0]);
 
 				if(setting.WY[setting.W] == 1){
 					rect(this.Coords[a][0], this.Coords[a][1], setting.sq/4, setting.sq/4);

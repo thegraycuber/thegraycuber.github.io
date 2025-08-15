@@ -45,8 +45,8 @@ function setup() {
 	
 	textFont(atkinsonBold);
 	
-	palette = new Palette();
-	palette.getColors('Forest');
+	palette_index = palette_names.indexOf('Forest');
+	palette = new Palette(palette_names[palette_index]);
 
 	//icons.push(new Icon('=',[px*0.4,px*0.36],px*0.3,[win[0]/2-px*7.2,win[1]/2-px*4],[0,0]));
 	//icons.push(new Icon('y',[px*0.4,px*0.28],px*0.4,[win[0]/2-px*6.5,win[1]/2-px*3.97],[0,0],'https://www.youtube.com/watch?v=8zD6sxhpvLc&t=10s'));
@@ -61,7 +61,8 @@ function setup() {
 	menuBox.Items.push(new textItem(0.6,'',0));
 	
 	menuBox.Items.push(new textItem(1,'Color Scheme',bigText));
-	menuBox.Items.push(new arrowItem(1,['Forest','Electric','Sunset','Light','Dark'],smallText,'Color'));
+	menuBox.Items.push(new arrowItem(1,palette_names,smallText,'Color'));
+	menuBox.Items[menuBox.Items.length - 1].Index = palette_index;
 	menuBox.Items.push(new textItem(0.8,'',0));
 	
 	menuBox.Items.push(new textItem(1,'Auto Zoom',bigText));
@@ -128,7 +129,7 @@ function arrowClick(id,listIndex,listValue){
 		menuBox.Active = listIndex;
 
 	} else if (id == 'Color'){
-		palette.getColors(listValue);
+		palette = new Palette(listValue);
 
 	} else if (id == 'Speed'){
 		ticker = max(ticker,listIndex-max_speed);

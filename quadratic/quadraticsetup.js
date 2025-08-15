@@ -9,6 +9,8 @@ function preload() {
 	}
 }
 
+var palette;
+
 function setup() {
 	var px = max(window.innerWidth/16,window.innerHeight/9);
 	win = [window.innerWidth,window.innerHeight];
@@ -17,9 +19,11 @@ function setup() {
 	textFont(atkinsonBold);
 	rectMode(CENTER);
 	textAlign(CENTER,CENTER);
-	colorMode(HSL, 360, 100, 100);
-	colors = colorScheme('Sunset');
-	colorsF = colorFactor('Sunset');
+	//colorMode(HSL, 360, 100, 100);
+	palette_index = palette_names.indexOf('Forest');
+	palette = new Palette(palette_names[palette_index]);
+	colors = colorScheme();
+	colorsF = colorFactor();
 	
 	setting = new Settings(px*16 / 101);
 	setting.IconBoxCoord = coeffToCoord([-43,25.5]);
@@ -43,7 +47,8 @@ function setup() {
 	menuBox.Items.push(new binaryItem(1,['Prime','Composite'],smallText*0.9,'displaying',0));
 	menuBox.Items.push(new textItem(0.8,'',0));
 	menuBox.Items.push(new textItem(1,'Color Scheme',bigText));
-	menuBox.Items.push(new arrowItem(1,['Sunset','Fire','Ice','Forest','Pastel','Dark Mode','Rainbow','Cotton Candy'],smallText,'colorScheme'));
+	menuBox.Items.push(new arrowItem(1,palette_names,smallText,'colorScheme'));
+	menuBox.Items[menuBox.Items.length - 1].Index = palette_index;
 	menuBox.Items.push(new textItem(0.8,'',0));
 	menuBox.Items.push(new textItem(1,'Animation Type',bigText));
 	menuBox.Items.push(new arrowItem(1,['Argument','Norm','Spiral','Solid','Stripes','X','Noise','Factor'],smallText,'colorType'));
@@ -87,10 +92,11 @@ function setup() {
 	hoverBox.Items.push(new textItem(0.2,'',0));
 	hoverBox.Items.push(new textItem(1,'',bigText,'factortitle'));
 	hoverBox.Items.push(new textItem(0.2,'',0));
-	hoverBox.Items.push(new textItem(0.6,'',smallText,'primefactorization',white*0.8));
+	hoverBox.Items.push(new textItem(0.6,'',smallText,'primefactorization',1));
 	hoverBox.Items.push(new textItem(1.2,'',bigText,'factors',white,openSans));
 	hoverBox.Items.push(new textItem(0.4,'',0));
 	hoverBox.giveSizes();
 	hoverBox.Active = 1;
 	
 }
+var white = 3;

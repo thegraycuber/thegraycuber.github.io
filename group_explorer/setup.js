@@ -23,7 +23,8 @@ var active_arrow = 0;
 
 function setup() {
 	createCanvas(window.innerWidth, window.innerHeight);
-	palette = new Palette('Forest');
+	palette_index = palette_names.indexOf('Forest');
+	palette = new Palette(palette_names[palette_index]);
 	noStroke();
 	smooth();
 	

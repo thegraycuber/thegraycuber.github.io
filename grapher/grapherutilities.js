@@ -200,3 +200,17 @@ function touchStarted() {
 	return false;
 }
 */
+
+function core_color_custom(plt){
+
+	if (plt.scheme == 'Electric'){
+		plt.output = plt.red;
+		plt.focus = plt.bright;
+
+	} else {
+		plt.output = plt.bright;
+		plt.focus = plt.red;
+	}
+	
+	plt.input = plt.mono;
+}

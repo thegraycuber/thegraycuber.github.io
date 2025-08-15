@@ -70,9 +70,10 @@ class Gauss {
 				if (this.IsLow[a]){
 
 					if (setting.ColorType == 7){
-						fill(colorsF[this.ColorFactor[0]][this.ColorFactor[1]][0],colorsF[this.ColorFactor[0]][this.ColorFactor[1]][1],lightAdd + colorsF[this.ColorFactor[0]][this.ColorFactor[1]][2]*lightMult);
+						fill(colorsF[this.ColorFactor[0]][this.ColorFactor[1]]);
 					} else{
-						fill(colors[this.Color[setting.ColorType][a]][0],colors[this.Color[setting.ColorType][a]][1],lightAdd + colors[this.Color[setting.ColorType][a]][2]*lightMult);
+						//fill(colors[this.Color[setting.ColorType][a]][0],colors[this.Color[setting.ColorType][a]][1],lightAdd + colors[this.Color[setting.ColorType][a]][2]*lightMult);
+						fill(colors[this.Color[setting.ColorType][a]]);
 					}
 					if(setting.WY[setting.W] == 1){
 						rect(this.Coords[a][0], this.Coords[a][1], setting.sq, setting.sq);
@@ -89,9 +90,9 @@ class Gauss {
 		noFill();
 		strokeWeight(setting.sq*0.25);
 		if (setting.ColorType == 7){
-			stroke(colorsF[this.ColorFactor[0]][this.ColorFactor[1]][0],colorsF[this.ColorFactor[0]][this.ColorFactor[1]][1],colorsF[this.ColorFactor[0]][this.ColorFactor[1]][2]*0.6+40);
+			stroke(colorsF[this.ColorFactor[0]][this.ColorFactor[1]]);
 		} else{
-			stroke(colors[this.Color[setting.ColorType][a]][0],colors[this.Color[setting.ColorType][a]][1],colors[this.Color[setting.ColorType][a]][2]*0.6+40);
+			stroke(colors[this.Color[setting.ColorType][a]]);
 		}
 		if(setting.WY[setting.W] == 1){
 			rect(this.Coords[a][0], this.Coords[a][1], setting.sq*1.2, setting.sq*1.25);
@@ -110,17 +111,19 @@ class Gauss {
 			if (this.IsLow[a] && setting.LabelShow[setting.WAssocs[setting.W]-2][a]){
 				if(setting.Prime == 1){
 					if (setting.ColorType == 7){
-						fill(colorsF[this.ColorFactor[0]][this.ColorFactor[1]][0],colorsF[this.ColorFactor[0]][this.ColorFactor[1]][1],colorsF[this.ColorFactor[0]][this.ColorFactor[1]][2]*0.6+40);
+						//fill(colorsF[this.ColorFactor[0]][this.ColorFactor[1]][0],colorsF[this.ColorFactor[0]][this.ColorFactor[1]][1],colorsF[this.ColorFactor[0]][this.ColorFactor[1]][2]*0.6+40);
+						fill(colorsF[this.ColorFactor[0]][this.ColorFactor[1]]);
 					} else{
-						fill(colors[this.Color[setting.ColorType][a]][0],colors[this.Color[setting.ColorType][a]][1],60 + colors[this.Color[setting.ColorType][a]][2]*0.4);
+						//fill(colors[this.Color[setting.ColorType][a]][0],colors[this.Color[setting.ColorType][a]][1],60 + colors[this.Color[setting.ColorType][a]][2]*0.4);
+						fill(colors[this.Color[setting.ColorType][a]]);
 					}
-					stroke(black);
+					stroke(palette.back);
 				}else{
-					fill(black);
+					fill(palette.back);
 					if (setting.ColorType == 7){
-						stroke(colorsF[this.ColorFactor[0]][this.ColorFactor[1]][0],colorsF[this.ColorFactor[0]][this.ColorFactor[1]][1],colorsF[this.ColorFactor[0]][this.ColorFactor[1]][2]*0.6+40);
+						stroke(colorsF[this.ColorFactor[0]][this.ColorFactor[1]]);
 					} else { 
-						stroke(colors[this.Color[setting.ColorType][a]][0],colors[this.Color[setting.ColorType][a]][1],60 + colors[this.Color[setting.ColorType][a]][2]*0.4);
+						stroke(colors[this.Color[setting.ColorType][a]]);
 					}
 				}
 				textFont(openSans);

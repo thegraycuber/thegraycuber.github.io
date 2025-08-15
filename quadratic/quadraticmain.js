@@ -9,8 +9,6 @@ icons = [];
 menuBox = [];
 infoBox = [];
 hoverBox = [];
-black = 10;
-white = 85;
 data = [];
 
 function draw() {
@@ -23,7 +21,7 @@ function draw() {
 	}
 	
 	if (setting.ZoomOut == 1 && prod){
-		background(black);
+		background(palette.back);
 		for (var zRow of zoomz) {
 			zRow.showAll();
 		}
@@ -102,7 +100,7 @@ function draw() {
 
 		if(setting.ColorSpeed > 0 || setting.Refresh){
 
-			background(black);
+			background(palette.back);
 
 			for (iRow of ints) {
 				iRow.showAll();

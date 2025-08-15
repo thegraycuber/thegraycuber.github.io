@@ -19,7 +19,9 @@ function preload() {
 
 function setup() {
 	frameRate(30);
-	palette = new Palette('Electric');
+
+	palette_index = palette_names.indexOf('Electric');
+	palette = new Palette(palette_names[palette_index]);
 
 	createCanvas(window.innerWidth, window.innerHeight);
 	smooth();
@@ -40,6 +42,7 @@ function setup() {
 	icons = [];
 	mobile = width*1.4 < height;
 	var bigText, smallText, s, lab_h, pad;
+	
 	
 	if (mobile) {	
 		unit = width*0.4;
@@ -134,7 +137,7 @@ function setup() {
 	
 	settingBox.Items.push(new textItem(0.6,'',0));
 	settingBox.Items.push(new textItem(1,'Color',bigText));
-	settingBox.Items.push(new arrowItem(1,['Electric','Sunset','Autumn','Dark','Light','Forest'],smallText,'color',0));
+	settingBox.Items.push(new arrowItem(1,palette_names,smallText,'color',0,palette_index));
 	settingBox.Items.push(new textItem(0.8,'',0));
 	
 	settingBox.Items.push(new textItem(1,'Resolution',bigText));

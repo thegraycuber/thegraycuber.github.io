@@ -211,10 +211,30 @@ function textWithMax(textString,textX,textY,textSizeTry,textMax){
 	text(textString,textX,textY);
 }
 
-/*
-function touchStarted() {
-	mouseClicked();
-	console.log('wtf');
-	return false;
+
+function core_color_custom(plt){
+	
+	if (plt.rev == -1){
+
+		plt.accent = [ 
+			plt.accent[1],
+			plt.front,
+			plt.accent[0],
+			plt.accent[2],
+			lerpColor(plt.front,plt.front,0)
+		];
+
+	} else {
+
+		plt.accent = [ 
+			plt.front,
+			plt.accent[1],
+			plt.accent[0],
+			plt.accent[2],
+			lerpColor(plt.front,plt.front,0)
+		];
+	}
+	//plt.accent.unshift(plt.front,0);
+	//plt.accent.push(lerpColor(plt.accent[1],plt.back,0.5));
+	plt.frontalpha = lerpColor(plt.front,plt.front,0);
 }
-*/

@@ -117,7 +117,7 @@ class Settings {
 			points = make_points();
 			
 		} else if (id == 'Color'){
-			palette.getColors(listValue);
+			palette = new Palette(listValue);
 			
 		} else if (id == 'Resolution'){
 			this.point_count = int(listValue);

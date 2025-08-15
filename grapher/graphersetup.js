@@ -5,6 +5,7 @@ function preload() {
 }
 
 
+var palette;
 function setup() {
 	createCanvas(window.innerWidth,window.innerHeight);
 	win = [window.innerWidth,window.innerHeight];
@@ -18,8 +19,8 @@ function setup() {
 	textFont(atkinsonBold);
 	textAlign(CENTER,CENTER);
 	
-	palette = new Palette();
-	palette.getColors('Electric');
+	palette_index = palette_names.indexOf('Electric');
+	palette = new Palette(palette_names[palette_index]);
 	settings.makeGrid();
 
 	
@@ -37,7 +38,8 @@ function setup() {
 	menuBox.Items.push(new textItem(0.6,'',0));
 	
 	menuBox.Items.push(new textItem(1,'Color Scheme',bigText));
-	menuBox.Items.push(new arrowItem(1,['Electric','Winter','Spring','Summer','Autumn','Forest','Love','Sunset'],smallText,'Color'));
+	menuBox.Items.push(new arrowItem(1,palette_names,smallText,'Color'));
+	menuBox.Items[menuBox.Items.length - 1].Index = palette_index;
 	menuBox.Items.push(new textItem(0.8,'',0));
 	
 	menuBox.Items.push(new textItem(1,'Animate',bigText));

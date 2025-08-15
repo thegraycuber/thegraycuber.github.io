@@ -1,7 +1,6 @@
 var points, output, input = [];
 var polylist, polydesc = [[0],[0],[0],[0],[0]];
 var icons = [];
-var palette = 0;
 var settings = 0;
 var poly_warn = 'Enter a polynomial in the form:\n  2x^5 - x^4 + 3x + 10    or    10,3,0,0,-1,2';
 var h_factor, h, note_size;

@@ -56,8 +56,9 @@ class Settings {
 		
 		setting.Refresh = true;
 		if (id == 'colorScheme'){
-			colors = colorScheme(listValue);
-			colorsF = colorFactor(listValue);
+			palette = new Palette(listValue);
+			colors = colorScheme();
+			colorsF = colorFactor();
 
 		} else if (id == 'colorType'){
 			this.ColorType = listIndex;
