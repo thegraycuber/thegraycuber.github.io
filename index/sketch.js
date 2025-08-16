@@ -131,7 +131,7 @@ function draw() {
 			calculatorDraw();
 		} else if (pages[pg].title == "Cursed Equations") {
 			cursedDraw();
-		} else if (pages[pg].title == "Group Explorer") {
+		} else if (pages[pg].title == "Group Visualizer") {
 			explorerDraw();
 		}
 		pop();
@@ -206,7 +206,7 @@ function prep_preview(){
 	} else if (pages[pg].title == "Cursed Equations"){
 		cursedPrep();
 
-	} else if (pages[pg].title == "Group Explorer"){
+	} else if (pages[pg].title == "Group Visualizer"){
 		explorerPrep();
 
 	}
