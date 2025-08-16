@@ -1,10 +1,10 @@
 
 var el_data, gen_data;
 function preload(){
-	mainFont = loadFont('media/AshkinsonBold_003.ttf');
+	mainFont = loadFont('media/AshkinsonBold_prod.ttf');
 	
-	gen_data = loadTable('group_visualizer/group_generators_006.csv', 'csv', 'header');
-	el_data = loadTable('group_visualizer/group_labels_009.csv', 'csv', 'header');
+	gen_data = loadTable('group_visualizer/group_generators_013.csv', 'csv', 'header');
+	el_data = loadTable('group_visualizer/group_labels_012.csv', 'csv', 'header');
 }
 
 var palette, arrowBoxes, settingBox, iconBox, arrowBox, displayBox, unit;

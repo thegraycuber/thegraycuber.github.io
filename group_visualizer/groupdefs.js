@@ -38,11 +38,13 @@ function generate_group_classes(){
 		}
 		
 		
-		let row_group = [];
-		for (let el_col = 0; el_col < new_cardinality; el_col++){
-			row_group.push(el_data.getString(el_row,el_col+3));
+		if (el_data.getString(el_row,2) != 'gen'){
+			let row_group = [];
+			for (let el_col = 0; el_col < new_cardinality; el_col++){
+				row_group.push(el_data.getString(el_row,el_col+3));
+			}
+			new_groups.push(new Group(row_group,el_data.getString(el_row,2)));
 		}
-		new_groups.push(new Group(row_group,el_data.getString(el_row,2)));
 	}
 	
 	
@@ -51,12 +53,14 @@ function generate_group_classes(){
 	
 	new_order_groups.push(new_groups);
 	groups.push(new_order_groups);
+	
 }
 
 function generate_group(){
 	gen_rules = [];
 	for (let gen_row = 1; gen_row < gen_data.getRowCount(); gen_row++){
 		if (gen_data.getString(gen_row,0) == group_classes[G_order][G_class]){
+			//gen_rules.push([gen_data.getString(gen_row,1).replaceAll('a','r').replaceAll('b','f'),gen_data.getString(gen_row,2).replaceAll('a','r').replaceAll('b','f')]);
 			gen_rules.push([gen_data.getString(gen_row,1),gen_data.getString(gen_row,2)]);
 		}
 	}

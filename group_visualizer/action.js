@@ -61,6 +61,7 @@ function action(id, value, object = [], arrow = active_arrow) {
 		for (let g of groups[G_order][G_class]){
 			groupItem.List.push(g.group_name);
 		}
+		groupItem.List.push('generators');
 		groupItem.Index = min(groupItem.List.length - 1, groupItem.Index);
 		
 		action('group',groupItem.Index,groupItem);
@@ -71,17 +72,17 @@ function action(id, value, object = [], arrow = active_arrow) {
 		
 		G_group = value;
 		
-		// if (G_group == 0) {
-		// 	for (let g of G) {
-		// 		g.display_name = g.nickname;
-		// 	}
+		if (G_group == groups[G_order][G_class].length) {
+			for (let g of G) {
+				g.display_name = g.nickname;
+			}
 			
-		// } else {
-		let vers = groups[G_order][G_class][G_group];
-		for (let g of G) {
-			g.display_name = vers.names[g.index];
+		} else {
+			let vers = groups[G_order][G_class][G_group];
+			for (let g of G) {
+				g.display_name = vers.names[g.index];
+			}
 		}
-		// }
 		
 		refresh_arrow_elements();
 		
@@ -141,7 +142,7 @@ function refresh_arrow_types(){
 		
 		if (display_state == 2){
 			type_item.List = ['left operate', 'right operate', 'results'];
-		} else if (group_classes[G_order][G_class].substring(0,1) != 'C'){
+		} else if (group_classes[G_order][G_class].substring(0,1) != 'C' || group_classes[G_order][G_class].search('⋊') != -1){
 			type_item.List = ['left operate', 'right operate', 'conjugate'];
 		} else {
 			type_item.List = ['operate'];
