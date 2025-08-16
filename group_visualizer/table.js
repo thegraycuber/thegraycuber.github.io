@@ -7,17 +7,9 @@ function show_table(){
 	strokeWeight(box_size*0.05);
 	noStroke();
 	fill(palette.front);
-
+	
 	let ts = box_size*0.5;
 	let tmax = box_size*0.8;
-	/*
-	textSize(ts);
-	for (let e of G){
-		let tw = textWidth(e.display_name);
-		if (tw > tmax){
-			textSize(ts*tmax/tw);
-		}
-	}*/
 	
 	
 	let box_base = (-0.25-G_order/2)*box_size;
@@ -79,19 +71,23 @@ function get_box_colors(){
 			
 				} else {
 	
-					let lerper_in = 0.1 + 0.9*sqel.inner/inner_ring.length;
-					let lerper_out = 0.1 + 0.9*sqel.outer/outer_ring.length;
+					let lerper_in = 0.3 + 0.7*sqel.inner/(inner_ring.length-1);
+					let lerper_out = 0.3 + 0.7*sqel.outer/(outer_ring.length-1);
 				
-					if (sqel.outer == 1 || outer_ring.length > 4){
+					if (sqel.outer == 4 || outer_ring.length > 4){
 						square_color = lerpColor(palette.back, palette.front, lerper_in);
 					} else {
-						square_color = lerpColor(palette.back, palette.accent[sqel.outer-2], lerper_in);
+						square_color = lerpColor(palette.back, palette.accent[sqel.outer-1], lerper_in);
 					}
 
 					
 				}
 				
-				if (brightness(square_color)*palette.rev > 50*palette.rev){
+				let bright_back = -1;
+				if (brightness(square_color) > 65 - palette.rev*5){
+					bright_back = 1;
+				}
+				if (bright_back == palette.rev){
 					new_row.push([square_color,palette.back]);
 				} else {
 					new_row.push([square_color,palette.front]);
@@ -122,7 +118,8 @@ function get_box_colors(){
 			}	
 		} else if (arrow_types[a] == 2){
 			for (let x = 0; x < G_order; x++){
-				for (let y = 0; y < G_order; y++){
+				//for (let y = 0; y < G_order; y++){
+				for (let y = x; y < x+1; y++){
 					if (G[y].arrow_tables[0][x] == arrow_elements[a]){
 						box_colors[x][y] = [palette.accent[a],palette.back];
 					}
