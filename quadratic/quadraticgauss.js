@@ -57,13 +57,12 @@ class Gauss {
 		var a;
 		
 		if (this.Walkable != 1 || setting.ColorType == 7){
-			var lightMult = 1;
-			var lightAdd = 0;
+			// var lightMult = 1;
+			// var lightAdd = 0;
 			
-			if (this.Walkable == -2){
-				lightAdd = 85
-				lightMult = 0.12
-			} 
+			// 	lightAdd = 85
+			// 	lightMult = 0.12
+			// } 
 			
 			for (a = 0 ; a < setting.WAssocs[setting.W]; a++){
 
@@ -71,7 +70,9 @@ class Gauss {
 
 					if (setting.ColorType == 7){
 						fill(colorsF[this.ColorFactor[0]][this.ColorFactor[1]]);
-					} else{
+					} else if (this.Walkable == -2){
+						fill(colorsLite[this.Color[setting.ColorType][a]]);
+					} else {
 						//fill(colors[this.Color[setting.ColorType][a]][0],colors[this.Color[setting.ColorType][a]][1],lightAdd + colors[this.Color[setting.ColorType][a]][2]*lightMult);
 						fill(colors[this.Color[setting.ColorType][a]]);
 					}
@@ -92,7 +93,7 @@ class Gauss {
 		if (setting.ColorType == 7){
 			stroke(colorsF[this.ColorFactor[0]][this.ColorFactor[1]]);
 		} else{
-			stroke(colors[this.Color[setting.ColorType][a]]);
+			stroke(colorsLite[this.Color[setting.ColorType][a]]);
 		}
 		if(setting.WY[setting.W] == 1){
 			rect(this.Coords[a][0], this.Coords[a][1], setting.sq*1.2, setting.sq*1.25);
@@ -115,7 +116,7 @@ class Gauss {
 						fill(colorsF[this.ColorFactor[0]][this.ColorFactor[1]]);
 					} else{
 						//fill(colors[this.Color[setting.ColorType][a]][0],colors[this.Color[setting.ColorType][a]][1],60 + colors[this.Color[setting.ColorType][a]][2]*0.4);
-						fill(colors[this.Color[setting.ColorType][a]]);
+						fill(colorsLite[this.Color[setting.ColorType][a]]);
 					}
 					stroke(palette.back);
 				}else{
@@ -123,7 +124,7 @@ class Gauss {
 					if (setting.ColorType == 7){
 						stroke(colorsF[this.ColorFactor[0]][this.ColorFactor[1]]);
 					} else { 
-						stroke(colors[this.Color[setting.ColorType][a]]);
+						stroke(colorsLite[this.Color[setting.ColorType][a]]);
 					}
 				}
 				textFont(openSans);

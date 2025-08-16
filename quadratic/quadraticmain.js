@@ -5,6 +5,7 @@ ints = [[]];
 zoomz = [[]];
 colors = [];
 colorsF = [];
+colorsLite = [];
 icons = [];
 menuBox = [];
 infoBox = [];

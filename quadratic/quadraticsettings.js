@@ -58,6 +58,7 @@ class Settings {
 		if (id == 'colorScheme'){
 			palette = new Palette(listValue);
 			colors = colorScheme();
+			colorsLite = colorScheme(0.9);
 			colorsF = colorFactor();
 
 		} else if (id == 'colorType'){

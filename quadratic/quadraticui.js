@@ -114,7 +114,7 @@ class arrowItem {
 		this.Active = true;
 	}
 	show(){
-		if (this.Active){fill(palette.front);} else {fill(palette.mono);}
+		if (this.Active){fill(palette.front);} else {fill(palette.backlight);}
 		textSize(this.Size);
 		text(this.List[this.Index],this.Coords[0],this.Coords[1]);
 		triangle(this.Sides[0]-this.Size,this.Coords[1],this.Sides[0],this.Coords[1]-this.Size*0.5,this.Sides[0],this.Coords[1]+this.Size*0.5);
@@ -187,12 +187,12 @@ class binaryItem {
 	}
 	show(){
 		
-		if (this.Active){fill(palette.front);} else {fill(palette.mono);}
+		if (this.Active){fill(palette.front);} else {fill(palette.backlight);}
 		rect(this.Sides[this.Index],this.Coords[1],this.Radius[0]*0.9,this.Radius[1]*1.8,this.Size*0.5);
 		textSize(this.Size);
 		fill(palette.back);
 		text(this.List[this.Index],this.Sides[this.Index],this.Coords[1]);
-		if (this.Active){fill(palette.front);} else {fill(palette.mono);}
+		if (this.Active){fill(palette.front);} else {fill(palette.backlight);}
 		text(this.List[(this.Index+1)%2],this.Sides[(this.Index+1)%2],this.Coords[1]);
 	}
 	update(coords,radius){

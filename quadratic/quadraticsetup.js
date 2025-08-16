@@ -1,8 +1,8 @@
 
 function preload() {
-	atkinsonBold = loadFont("media/Atkinson-Hyperlegible-Bold-102.ttf");
-	atkinsonRegular = loadFont("media/Atkinson-Hyperlegible-Regular-102.ttf");
-	openSans = loadFont("media/OpenSans-Bold.ttf");
+	atkinsonBold = loadFont("media/AshkinsonBold_003.ttf");
+	atkinsonRegular = loadFont("media/AshkinsonRegular_000.ttf");
+	openSans = loadFont("media/AshkinsonBold_003.ttf");
 	data = loadTable('quadratic/files/2dInts-1.4.csv', 'csv', 'header');
 	if (prod){
 		zoomdata = loadTable('quadratic/files/2dZoomData.csv', 'csv', 'header');
@@ -24,6 +24,7 @@ function setup() {
 	palette = new Palette(palette_names[palette_index]);
 	colors = colorScheme();
 	colorsF = colorFactor();
+	colorsLite = colorScheme(0.9);
 	
 	setting = new Settings(px*16 / 101);
 	setting.IconBoxCoord = coeffToCoord([-43,25.5]);
