@@ -54,7 +54,7 @@ function setup() {
 	pages = [];
 	pages.push(new Page("Cursed Equations",'Electric','https://thegraycuber.github.io/cursedequations.html'));
 	pages.push(new Page('Complex Primes','Sunset','https://thegraycuber.github.io/quadratic.html'));
-	pages.push(new Page('Group Explorer','Forest','https://thegraycuber.github.io/group_explorer.html'));
+	pages.push(new Page('Group Visualizer','Forest','https://thegraycuber.github.io/group_visualizer.html'));
 	pages.push(new Page("Rubik's Cube Calculator",'Forest','https://thegraycuber.github.io/cubecalculator.html'));
 	pages.push(new Page('Complex Grapher','Electric','https://thegraycuber.github.io/grapher.html'));
 	pages.push(new Page('Groups of Units','Forest','https://thegraycuber.github.io/groupsofunits.html'));
