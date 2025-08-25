@@ -118,8 +118,8 @@ function get_box_colors(){
 			}	
 		} else if (arrow_types[a] == 2){
 			for (let x = 0; x < G_order; x++){
-				//for (let y = 0; y < G_order; y++){
-				for (let y = x; y < x+1; y++){
+				for (let y = 0; y < G_order; y++){
+				//for (let y = x; y < x+1; y++){
 					if (G[y].arrow_tables[0][x] == arrow_elements[a]){
 						box_colors[x][y] = [palette.accent[a],palette.back];
 					}
