@@ -101,6 +101,12 @@ class Shape {
 		}
 		
 		this.rotate(rotation_angle);
+		
+		if (game_mode || this.vertices == 0){
+			iconBox.getItem('spin').Active = false;
+		} else {
+			iconBox.getItem('spin').Active = true;
+		}
 	}
 		
 	rotate(angle){

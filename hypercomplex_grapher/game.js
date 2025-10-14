@@ -15,7 +15,8 @@ function display_messages(){
 	
 	if (!game_mode){
 		if (!i_touched && millis() - start_time > 3000){
-			text_in_box('drag me',ideal[0]*scalar+origin.x,-ideal[1]*scalar+origin.y-vert_width*2, bounce*vert_width, palette.i, palette.back);
+			let i_loc = ideal_location(mobile);
+			text_in_box('drag me',i_loc[0],i_loc[1]-vert_width*2, bounce*vert_width, palette.i, palette.back);
 		}
 		return;
 	}

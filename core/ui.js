@@ -225,6 +225,7 @@ class Box {
 		
 	}
 	show(){
+		noStroke();
 		if (this.Active == 1){
 			
 			if (!this.Hide){

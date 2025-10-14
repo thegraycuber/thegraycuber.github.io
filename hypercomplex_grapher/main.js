@@ -6,8 +6,16 @@ function draw() {
 	
 	if (i_dragging){
 		let round_add = 2;
-		if (keyIsDown(32)){round_add = 1;}
-		ideal = [round((mouseX-origin.x)/scalar,scale_log+round_add), round(-(mouseY-origin.y)/scalar,scale_log+round_add)];
+		if (keyIsDown(32) || touches.length == 2){round_add = 1;}
+		if (mobile){
+			let idl_adj = scalar/unit*0.4;
+			let mX_cons = constrain(mouseX,mobileBox.Coords[0]-mobileBox.Size[0]*0.4,mobileBox.Coords[0]+mobileBox.Size[0]*0.4);
+			let mY_cons = constrain(mouseY,mobileBox.Coords[1]-mobileBox.Size[1]*0.4,mobileBox.Coords[1]+mobileBox.Size[1]*0.4);
+			ideal = [(mX_cons-mobileBox.Coords[0])/(idl_adj*mobileBox.Size[0]),-(mY_cons-mobileBox.Coords[1])/(idl_adj*mobileBox.Size[1])];
+		} else {
+			ideal = [(mouseX-origin.x)/scalar, -(mouseY-origin.y)/scalar,scale_log];
+		}
+		ideal = [round(ideal[0],scale_log+round_add),round(ideal[1],scale_log+round_add)]
 		
 		if (game_mode){
 			ideal = [constrain(ideal[0],-1,1),constrain(ideal[1],-1,1)];
@@ -15,7 +23,7 @@ function draw() {
 	}
 	idealBox.Items[0].DisplayText = 'i² =' + text_2d(ideal,'i');
 	
-	if (spin_shape){
+	if (spin_shape && shape.vertices != 0){
 		let res_angle = PI/360;
 		
 		
@@ -41,9 +49,11 @@ function draw() {
 		stroke(palette.medium);
 		strokeWeight(0.6*circle_width/scalar);
 		noFill();
+		let prin_0 = 2*(abs(origin.x/scalar)**0.5);
+		let rab_range = [max(-origin.y/scalar,-prin_0),min((height-origin.y)/scalar,prin_0)];
+		let rab_step = (rab_range[1] - rab_range[0])/100;
 		beginShape();
-		for (let y = 0; y < height+25; y+= 20){
-			let b = (y-origin.y)/scalar;
+		for (let b = rab_range[0]; b < rab_range[1]+2*rab_step; b += rab_step){
 			let a = -(b**2)/4;
 			vertex(a,b);
 		}
@@ -55,7 +65,7 @@ function draw() {
 	if (game_mode && win_tracker == 0){
 			
 		if (target_shape.vertices == shape.vertices && target_shape.step == shape.step && target_shape.type == shape.type){
-			if (polynomial == target_polynomial && round(ideal[0],1) == round(target_ideal[0],1) && round(ideal[1],1) == round(target_ideal[1],1)){
+			if (polynomial == target_polynomial && abs(ideal[0]-target_ideal[0])<0.05 && abs(ideal[1]-target_ideal[1])< 0.05  ){
 				win_tracker = 0.001;
 				i_dragging = false;
 			}
@@ -90,16 +100,28 @@ function draw() {
 		shape.display_output(palette.front, palette.vertices, ideal, function_list[polynomial][3]);
 	}
 	
-	strokeWeight(vert_width*0.15/scalar);
+	
+	pop();
+	
+	if (mobile){
+		mobileBox.show();
+	}
+	
+	let i_loc = ideal_location(mobile);
+	strokeWeight(vert_width*0.15);
 	stroke(palette.back);
 	fill(palette.i);
-	circle(ideal[0], -ideal[1], vert_width*1.75/scalar);
+	circle(i_loc[0], i_loc[1], vert_width*1.75);
 	
-	textSize(1.4*vert_width/scalar);
+	if (mobile){
+		let real_i_loc = ideal_location(false);
+		circle(real_i_loc[0], real_i_loc[1], vert_width*1);
+	}
+	
+	textSize(1.4*vert_width);
 	noStroke();
 	fill(palette.back);
-	text('i²', ideal[0], -ideal[1]);	
-	pop();
+	text('i²', i_loc[0], i_loc[1]);	
 	
 	
 	

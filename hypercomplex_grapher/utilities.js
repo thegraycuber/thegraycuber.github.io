@@ -1,10 +1,19 @@
 
+function ideal_location(mobile_location){
+	if (mobile_location){
+		let idl_adj = scalar/unit*0.4;
+		return [ideal[0]*idl_adj*mobileBox.Size[0]+mobileBox.Coords[0], -ideal[1]*idl_adj*mobileBox.Size[1]+mobileBox.Coords[1]];
+	} else {
+		return [ideal[0]*scalar+origin.x, -ideal[1]*scalar+origin.y];
+	}
+}
+
 function core_color_custom(plt){
 	plt.medium = lerpColor(plt.accent[1],plt.back,0.6);
 	plt.backalpha = color(red(plt.back),green(plt.back),blue(plt.back),150);
 	plt.link = plt.mono;
 	
-	if (plt.scheme == 'Electric'){
+	if (['Electric','Pastel','Paper'].includes(plt.scheme)){
 		plt.i = plt.red;
 		plt.vertices = plt.bright;
 	} else {
@@ -116,10 +125,13 @@ function action(id,index,value){
 			for (let mi of main_items){
 				mi.Active = false;
 			}
+			
 			iconBox.getItem('random').Active = false;
 			iconBox.getItem('spin').Active = false;
-			iconBox.getItem('reset').Active = false;
+			iconBox.getItem('reset').Active = false;	
+			
 		} else {
+			
 			win_tracker = 0;
 			randomize();
 			for (let mi of main_items){
@@ -128,6 +140,7 @@ function action(id,index,value){
 			iconBox.getItem('random').Active = true;
 			iconBox.getItem('spin').Active = true;
 			iconBox.getItem('reset').Active = true;
+		
 		}
 		
 	} else if (id == 'type'){
@@ -154,6 +167,7 @@ function action(id,index,value){
 		origin = default_origin.copy();
 		scalar = unit;
 		ideal = [-1,0];
+		iconBox.getItem('reset').Active = false;
 		
 	} else if (id == 'palette'){	
 		

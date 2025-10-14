@@ -1,17 +1,14 @@
-var palette, shapeBox, iconBox, labelBox, idealBox, grid;
+var palette, shapeBox, iconBox, labelBox, idealBox, mobileBox, grid;
 var shape, target_shape, shape_size; 
-var unit, circle_width, vert_width, main_items;
-//max_mag, new_max_mag, at_location, invalid_tick, mouse_data
+var unit, circle_width, vert_width, main_items, mobile;
 var resolution = 720;
 var resolutions = [240,720,1440,2880,5040];
 
-// var auto_zoom = false;
-// var invalid_text = '';
 
 function preload() {
 	
-	mainFont = loadFont("media/AshkinsonBold_003.ttf");
-	mainBold = loadFont("media/AshkinsonBold_003.ttf");
+	mainFont = loadFont("media/AshkinsonBold_prod.ttf");
+	mainBold = loadFont("media/AshkinsonBold_prod.ttf");
 	thinFont = loadFont("media/AshkinsonRegular_000.ttf");
 	
 }
@@ -20,6 +17,9 @@ var mainBold;
 function setup() {
 
 	frameRate(30);
+	start_time = millis();
+	palette_index = palette_names.indexOf('Electric');
+	palette = new Palette(palette_names[palette_index]);
 
 	createCanvas(window.innerWidth, window.innerHeight);
 	smooth();
@@ -28,21 +28,15 @@ function setup() {
 	textAlign(CENTER, CENTER);
 	noStroke();
 	y_flip = createVector(1,-1);
-	
-	start_time = millis();
-	palette_index = palette_names.indexOf('Electric');
-	palette = new Palette(palette_names[palette_index]);
 
-	
-	shape = new Shape(0,1);
 	// icons = [];
-	let mobile = width*1.4 < height;
+	mobile = width*1.4 < height;
 	let bigText, smallText, pad, gap;
 	
 	if (mobile) {	
 		unit = width*0.3;
-		bigText = width * 0.04;
-		smallText = width * 0.03;
+		bigText = width * 0.035;
+		smallText = width * 0.025;
 		pad = width*0.015;
 		gap = 0.5;
 		circle_width = width*0.012;
@@ -50,31 +44,32 @@ function setup() {
 		default_origin = createVector(width*0.5,height*0.5-width*0.32);
 		grid = new Grid(0,height-width*0.67,width,0);
 		
-		let box_mid = height-width*0.28
-		shapeBox = new Box([width*0.27,box_mid],[width*0.42,width*0.48],pad);
+		shapeBox = new Box([width*0.27,height-width*0.48],[width*0.42,width*0.36],pad);
 	
-		iconBox = new Box([width*0.73,box_mid],[width*0.42,width*0.48],pad);
-		let icon_size = [width*0.09,width*0.09];
-		iconBox.Items.push(new Icon('palette',[width*0.64,box_mid-width*0.15],icon_size));
-		iconBox.Items.push(new Icon('play',[width*0.82,box_mid-width*0.15],icon_size,'play','bright'));
-		iconBox.Items.push(new Icon('spin',[width*0.64,box_mid],icon_size));
-		iconBox.Items.push(new Icon('random',[width*0.82,box_mid],icon_size));
-		iconBox.Items.push(new Icon('youtube',[width*0.64,box_mid+width*0.15],icon_size,'youtube','front','https://www.youtube.com/@TheGrayCuber'));
-		iconBox.Items.push(new Icon('reset',[width*0.82,box_mid+width*0.15],icon_size));
+		iconBox = new Box([width*0.27,height-width*0.15],[width*0.42,width*0.24],pad);
+		let icon_size = [width*0.07,width*0.07];
+		iconBox.Items.push(new Icon('palette',[width*0.15,height-width*0.21],icon_size));
+		iconBox.Items.push(new Icon('spin',[width*0.27,height-width*0.21],icon_size));
+		iconBox.Items.push(new Icon('play',[width*0.39,height-width*0.21],icon_size,'play','bright'));
+		iconBox.Items.push(new Icon('youtube',[width*0.15,height-width*0.09],icon_size,'youtube','front','https://www.youtube.com/@TheGrayCuber'));
+		iconBox.Items.push(new Icon('random',[width*0.27,height-width*0.09],icon_size));
+		iconBox.Items.push(new Icon('reset',[width*0.39,height-width*0.09],icon_size));
 		
-		shape_size = width*0.04;
-		labelBox = new Box([width*0.27,height-width*0.61],[width*0.42,width*0.12],pad);
-		labelBox.Items.push(new textItem(1,'      ²',width*0.06));
+		shape_size = width*0.035;
+		labelBox = new Box([width*0.73,height-width*0.61],[width*0.42,width*0.1],pad);
+		labelBox.Items.push(new textItem(1,'      ²',width*0.05));
 		labelBox.Items.push(new textItem(0.1,'',0));
 
-		idealBox = new Box([width*0.73,height-width*0.61],[width*0.42,width*0.12],pad);
-		idealBox.Items.push(new textItem(1,'i² = -1',width*0.06,'','','i'));		
+		idealBox = new Box([width*0.73,height-width*0.485],[width*0.42,width*0.09],pad);
+		idealBox.Items.push(new textItem(1,'i² = -1',width*0.05,'','','i'));		
 		
 		game_icons = [
 			new Icon('restart',[ default_origin.x-height*0.17, default_origin.y + height*0.15],[height*0.1,height*0.05],'text_inv'),
 			new Icon('free play',[ default_origin.x+height*0.018, default_origin.y + height*0.15],[height*0.14,height*0.05],'text_inv'),
 			new Icon('exit',[ default_origin.x+height*0.18, default_origin.y + height*0.15],[height*0.08,height*0.05],'text_inv'),
 		];
+		
+			mobileBox = new Box([width*0.73,height-width*0.22],[width*0.42,width*0.38],pad);
 		
 	} else {
 		unit = min(height, width - height*0.34)* 0.33;
@@ -116,6 +111,7 @@ function setup() {
 	
 	scalar = unit;
 	origin = default_origin.copy();
+	shape = new Shape(0,1);
 	
 	main_items = [];
 	
@@ -156,6 +152,7 @@ function setup() {
 	shapeBox.giveSizes();
 	labelBox.giveSizes();
 	idealBox.giveSizes();
+	iconBox.getItem('reset').Active = false;
 	
 	randomize();
 }

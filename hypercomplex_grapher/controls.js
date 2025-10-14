@@ -11,8 +11,9 @@ function pixel_to_principal(pixels){
 var in_a_box = false;
 function touchStarted(){
 	
-	let i_sq_var = pixel_to_principal(createVector(mouseX, mouseY)).sub(createVector(ideal[0], ideal[1]));
-	if (i_sq_var.mag() < vert_width*3/scalar){
+	let i_loc = ideal_location(mobile);
+	let i_sq_var = createVector(mouseX, mouseY).sub(createVector(i_loc[0], i_loc[1]));
+	if (i_sq_var.mag() < vert_width*3){
 		i_dragging = true;
 		i_touched = true;
 	}
@@ -83,6 +84,7 @@ function updateMovement(){
 	if (touches.length <= 2){
 		origin = focus_point().sub(principal_pos.mult(scalar).mult(y_flip));
 		principal_pos = pixel_to_principal(focus_point());
+		iconBox.getItem('reset').Active = true;
 	}
 }
 
@@ -97,6 +99,7 @@ function mouseWheel(event){
 		var scalar_log = log(scalar);
 		scalar_log -= event.delta/1024; // make this positive to invert scroll
 		scalar = exp(scalar_log);
+		iconBox.getItem('reset').Active = true;
 
 		updateMovement();
 	}
