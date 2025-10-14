@@ -207,7 +207,7 @@ function allowed_laps(vertices){
 }
 
 
-var scale_log; 
+var scale_log = 0; 
 class Grid{
 	constructor(x_min,y_min,x_max,y_max){
 		this.grid_min = createVector(x_min,y_min);
