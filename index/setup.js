@@ -1,6 +1,6 @@
 var palette, icons, pages, logo_shapes, logo_words, asteroids, icon_a;
 var logo_os, home_os, preview_os;
-var px, px2, corner_ang;
+var px, px2, corner_ang, mobile;
 var pg = -1;
 var media_prefix = 'media/';
 
@@ -24,6 +24,7 @@ function setup() {
 	origin = createVector(0,0);
 	corner_ang = atan2(height,width);
 	icon_ang = random()*TWO_PI;
+	mobile = width*1.4 < height;
 	//plaque = min(width,px*9);
 	
 	frameRate(30);
@@ -49,21 +50,22 @@ function setup() {
 	logo_words.push(new LogoItem('Cuber',[px*0.5,px*-0.3],px*0.6,1,1.6));
 	
 	
-	
 
+	
 	pages = [];
 	pages.push(new Page("Cursed Equations",'Electric','https://thegraycuber.github.io/cursedequations.html'));
 	pages.push(new Page('Complex Primes','Sunset','https://thegraycuber.github.io/quadratic.html'));
 	pages.push(new Page('Group Visualizer','Forest','https://thegraycuber.github.io/group_visualizer.html'));
 	pages.push(new Page("Rubik's Cube Calculator",'Forest','https://thegraycuber.github.io/cubecalculator.html'));
-	pages.push(new Page('Complex Grapher','Electric','https://thegraycuber.github.io/grapher.html'));
+	// pages.push(new Page('Complex Grapher','Electric','https://thegraycuber.github.io/grapher.html'));
+	pages.push(new Page('Hypercomplex Grapher','Electric','https://thegraycuber.github.io/hypercomplex_grapher.html'));
 	pages.push(new Page('Groups of Units','Forest','https://thegraycuber.github.io/groupsofunits.html'));
 	
 	
 	icon_rad = px*6.5;
 	icons = [];
 	icon_maker = [];
-	let icon_paths = ['cursed','gaussian','group','cube','grapher','units'];
+	let icon_paths = ['cursed','gaussian','group','cube','hyper','units'];
 	for (let ic = 0; ic < pages.length; ic++){
 		icon_maker.push([[0,0],px*1.2,loadImage(media_prefix+"icon_"+icon_paths[ic]+".png"),pages[ic].title]);
 	}
@@ -80,13 +82,14 @@ function setup() {
 	
 	
 	palette = [];		
+	let rand_color = int(1+random()*3);
+	color_trans = [rand_color,rand_color,1];
+	color_list[0] = color_list[rand_color];
 	for (var scheme of color_list){
 		palette.push(new Palette(scheme));
 	}
-	let rand_color = int(1+random()*3);
-	color_trans = [rand_color,rand_color,1];
 	
-	palette[0].refresh();
+	color_refresh();
 	asteroids = [];
 	
 }

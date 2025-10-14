@@ -1,5 +1,61 @@
 
 
+var color_trans;
+var color_types = ['front','back','backlight','accent1','accent2','accent3','mono','bright','red','gray'];
+
+function color_refresh(){
+
+	if (color_trans[2] == -1){return;}
+
+	color_trans[2] += 0.02;
+	let pal_a = palette[color_trans[0]];
+	let pal_b = palette[color_trans[1]];
+
+	for (let c_type of color_types){
+		palette[0][c_type] = lerpColor(pal_a[c_type], pal_b[c_type] ,color_trans[2]);
+	}
+
+	palette[0].accent = [palette[0].accent1,
+		palette[0].accent2,
+		palette[0].accent3];
+
+	//this.backalpha = lerpColor(pal_a.back,pal_b.back,color_trans[2]);
+	//this.backalpha.setAlpha(5);
+
+	palette[0].medium = lerpColor(palette[0].back,palette[0].accent1,0.5);
+
+	if (color_trans[2] >= 1){
+		color_trans[2] = -1;
+		color_trans[0] = color_trans[1];
+		update_icons(0,icons.length);
+	}
+
+}
+
+
+function core_color_custom(plt){
+		// plt.backalpha = color(red(plt.back),green(plt.back),blue(plt.back),200);
+		// plt.dark = color(int(red(plt.back)*0.75),int(green(plt.back)*0.75),int(blue(plt.back)*0.75));
+		// plt.medium = lerpColor(plt.back,plt.front,0.3);
+		plt.accent1 = plt.mono;
+		plt.accent2 = plt.bright;
+		plt.accent3 = plt.red;
+	
+		if (plt.scheme == 'Sunset'){
+
+			for(var suns = 0; suns < sunlen/3; suns++){
+				sunset.push(lerpColor(plt.red,plt.mono,3*suns/sunlen));
+			}
+			for(suns = 0; suns < sunlen/3; suns++){
+				sunset.push(lerpColor(plt.mono,plt.bright,3*suns/sunlen));
+			}
+			for(suns = 0; suns < sunlen/3; suns++){
+				sunset.push(lerpColor(plt.bright,plt.red,3*suns/sunlen));
+			}
+		}
+}
+
+
 function update_icons(u_start,u_end){
 	
 	var flat_link = make_solid(palette[0].accent2);

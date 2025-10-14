@@ -7,7 +7,7 @@ var comp_range = [0, 0];
 
 function draw() {
 	ticker += 0.035;
-	palette[0].refresh();
+	color_refresh();
 	
 	background(palette[0].back);
 			
@@ -133,6 +133,8 @@ function draw() {
 			cursedDraw();
 		} else if (pages[pg].title == "Group Visualizer") {
 			explorerDraw();
+		} else if (pages[pg].title == "Hypercomplex Grapher") {
+			hyperDraw();
 		}
 		pop();
 	}
@@ -208,6 +210,9 @@ function prep_preview(){
 
 	} else if (pages[pg].title == "Group Visualizer"){
 		explorerPrep();
+
+	} else if (pages[pg].title == "Hypercomplex Grapher"){
+		hyperPrep();
 
 	}
 }

@@ -61,7 +61,7 @@ class LogoItem{
 	display(){
 		if (ticker < this.start && page_mode == 'intro'){return;}
 		let logo_size = this.size;
-		strokeWeight(this.size*0.08);
+		strokeWeight(this.size*0.1);
 		if (ticker < this.stop && page_mode == 'intro'){
 			logo_size *= 0.6 * (sin(map(ticker,this.start,this.stop,-PI/2,2.411))+1);
 		}

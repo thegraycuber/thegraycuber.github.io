@@ -81,14 +81,14 @@ class GroupElement{
 	}
 	
 	display(){
-
+	
 		fill(this.fill_color);
 		stroke(this.stroke_color);
 		circle(this.pos.x,this.pos.y,el_size*2);
 		
 		fill(this.text_color);
 		noStroke();
-		text_limited(this.display_name,this.pos.x,this.pos.y,1.1*el_size,1.75*el_size);
+		text_limited(this.display_name,this.pos.x,this.pos.y,el_size*1.1,1.75*el_size);
 	}
 	
 	draw_arrows(){
