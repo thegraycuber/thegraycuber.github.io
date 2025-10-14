@@ -11,9 +11,9 @@ var textValues = [
 ];
 
 var infoText = [
-	["You can often find me with Hayley,",
-"my fiancée, watching thrillers, playing",
-"Overcooked and Star Realms, shopping",
+	["You can often find me with my wife",
+"Hayley, watching thrillers, playing",
+"Silksong or Star Realms, shopping",
 "at vintage stores and eating vegan food."],
 ["Two of my roommates are cats!",
 "Tog can be shy, but will meow back",
@@ -25,8 +25,8 @@ var infoText = [
 "My favorite is the megaminx!"],
 ["Ik hou niet alleen van wiskunde!",
 "I love learning other languages.",
-"I'm pretty good with Dutch, and",
-"currently working on Russian."],
+"I'm pretty good with Dutch and",
+"Russian, and working on Mandarin."],
 ["My logo is a representation of",
 "the 15th cyclotomic polynomial.",
 "Why 15? It's the first interesting case,",
