@@ -24,6 +24,7 @@ function touchStarted(){
 	in_a_box = in_a_box || shapeBox.clicked();
 	in_a_box = in_a_box || iconBox.clicked();
 	in_a_box = in_a_box || labelBox.clicked();
+	in_a_box = in_a_box || mobileBox.clicked();
 	if (level == 12){
 		for (let gi of game_icons){
 			gi.clicked();

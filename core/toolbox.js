@@ -33,6 +33,10 @@ function c_sq(c_a){
 	return [c_a[0]**2-c_a[1]**2, 2*c_a[0]*c_a[1]];
 }
 
+function dot(v_a,v_b){
+  return [v_a[0]*v_b[0],v_a[1]*v_b[1]];
+}
+
 function gcd(a,b){
 	
 	if (a < b){

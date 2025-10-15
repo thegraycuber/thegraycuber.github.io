@@ -1,8 +1,12 @@
 
 function ideal_location(mobile_location){
 	if (mobile_location){
-		let idl_adj = scalar/unit*0.4;
-		return [ideal[0]*idl_adj*mobileBox.Size[0]+mobileBox.Coords[0], -ideal[1]*idl_adj*mobileBox.Size[1]+mobileBox.Coords[1]];
+		let x_perc = (ideal[0]*scalar+origin.x-default_origin.x)/unit;
+		let y_perc = (-ideal[1]*scalar+origin.y-default_origin.y)/unit;
+		if (abs(x_perc) > 1.05 || abs(y_perc) > 1.05){
+      return [];
+    }
+    return c_add(dot(c_scale(0.4,[x_perc,y_perc]),mobileBox.Size),mobileBox.Coords);
 	} else {
 		return [ideal[0]*scalar+origin.x, -ideal[1]*scalar+origin.y];
 	}

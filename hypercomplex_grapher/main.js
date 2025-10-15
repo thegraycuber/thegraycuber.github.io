@@ -8,10 +8,11 @@ function draw() {
 		let round_add = 2;
 		if (keyIsDown(32) || touches.length == 2){round_add = 1;}
 		if (mobile){
-			let idl_adj = scalar/unit*0.4;
 			let mX_cons = constrain(mouseX,mobileBox.Coords[0]-mobileBox.Size[0]*0.4,mobileBox.Coords[0]+mobileBox.Size[0]*0.4);
+			let x_ideal = (mX_cons-mobileBox.Coords[0])*unit/(mobileBox.Size[0]*0.4)+default_origin.x-origin.x;
 			let mY_cons = constrain(mouseY,mobileBox.Coords[1]-mobileBox.Size[1]*0.4,mobileBox.Coords[1]+mobileBox.Size[1]*0.4);
-			ideal = [(mX_cons-mobileBox.Coords[0])/(idl_adj*mobileBox.Size[0]),-(mY_cons-mobileBox.Coords[1])/(idl_adj*mobileBox.Size[1])];
+			let y_ideal = (mY_cons-mobileBox.Coords[1])*unit/(mobileBox.Size[1]*0.4)+default_origin.y-origin.y;
+			ideal = [x_ideal/scalar,-y_ideal/scalar];
 		} else {
 			ideal = [(mouseX-origin.x)/scalar, -(mouseY-origin.y)/scalar,scale_log];
 		}
@@ -99,30 +100,32 @@ function draw() {
 		
 		shape.display_output(palette.front, palette.vertices, ideal, function_list[polynomial][3]);
 	}
-	
-	
 	pop();
 	
 	if (mobile){
+		strokeWeight(vert_width*0.15);
+		stroke(palette.back);
+		fill(palette.i);
+		let real_i_loc = ideal_location(false);
+		circle(real_i_loc[0], real_i_loc[1], vert_width*1);
+		onlyFill(palette.back);
+		rect(default_origin.x,height-width*0.33,width,width*0.66);
 		mobileBox.show();
 	}
-	
+
 	let i_loc = ideal_location(mobile);
 	strokeWeight(vert_width*0.15);
 	stroke(palette.back);
 	fill(palette.i);
-	circle(i_loc[0], i_loc[1], vert_width*1.75);
-	
-	if (mobile){
-		let real_i_loc = ideal_location(false);
-		circle(real_i_loc[0], real_i_loc[1], vert_width*1);
+	if (i_loc.length > 0){
+		circle(i_loc[0], i_loc[1], vert_width*1.75);
 	}
-	
-	textSize(1.4*vert_width);
-	noStroke();
-	fill(palette.back);
-	text('i²', i_loc[0], i_loc[1]);	
-	
+	if (i_loc.length > 0){
+	  textSize(1.4*vert_width);
+	  noStroke();
+	  fill(palette.back);
+	  text('i²', i_loc[0], i_loc[1]);	
+	}
 	
 	
 	shapeBox.show();
