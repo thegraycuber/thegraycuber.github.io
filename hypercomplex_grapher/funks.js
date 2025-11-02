@@ -177,28 +177,3 @@ function inv_sig(p_inv){
 		return [1,sign(p_inv[1])];
 	}
 }
-
-
-// var mag_lerp;
-// function update_max_mag(){
-// 	if (auto_zoom){
-// 		if (max_mag != undefined){
-// 			new_max_mag = lerp(min(25,new_max_mag**0.5),max_mag,mag_lerp);
-// 			scalar = scalar*max_mag/new_max_mag;
-// 		} else {
-// 			scalar = scalar/new_max_mag;
-// 		}
-// 		max_mag = new_max_mag;
-// 	} 
-// 	mag_lerp = 0.95;
-// }
-
-// function check_result_mag(result){
-// 	if (auto_zoom){
-// 		var this_mag = result[0]**2+result[1]**2;
-// 		if (this_mag > new_max_mag){
-// 			new_max_mag = this_mag;
-// 		}
-// 	}
-// }
-

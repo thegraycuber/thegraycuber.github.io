@@ -13,6 +13,7 @@ function onlyFill(fill_color){
 	fill(fill_color);
 }
 
+
 function c_scale(c_c,c_a){
 	return [c_c*c_a[0],c_c*c_a[1]];
 }
@@ -68,6 +69,18 @@ function sign(sign_input){
 	}
 }
 
+function sup_from_val(sup_val){
+	if (sup_val < 2){return '';}
+	
+	let sup = '';
+	while (sup_val > 0){
+		sup = superscripts[sup_val%10] + sup;
+		sup_val = int(sup_val/10);
+	}
+	return sup;
+}
+
+
 function text_limited(text_value,x,y,text_size,max_size){
 	
 	textSize(text_size);
@@ -89,6 +102,7 @@ function text_in_box(t_string, t_x, t_y, t_s, t_color, b_color){
 		text(t_string,t_x, t_y);
 }
 
+
 function drawTri(x,y,d){
 	triangle(x+d,y,x-d,y+d*1.2,x-d,y-d*1.2);
 }
@@ -97,8 +111,14 @@ function drawVertTri(x,y,d){
 	triangle(x+d*1.2,y-d,x*1.2-d,y-d,x,y+d);
 }
 
+
 function now_string(){
 	return pre_0(year()) + pre_0(month()) + pre_0(day()) + '_' + pre_0(hour()) + pre_0(minute()) + pre_0(second());
+}
+
+function pre_0(time_value){
+	let raw_string = "0" + str(time_value);
+	return raw_string.substring(raw_string.length-2,raw_string.length);
 }
 
 

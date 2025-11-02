@@ -1,7 +1,7 @@
 var showgrid = false;
 var process = true;
 var spin_shape = true;
-
+//test
 function draw() {
 	
 	if (i_dragging){

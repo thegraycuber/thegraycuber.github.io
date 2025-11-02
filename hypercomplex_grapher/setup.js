@@ -29,10 +29,10 @@ function setup() {
 	noStroke();
 	y_flip = createVector(1,-1);
 
-	// icons = [];
+	
 	mobile = width*1.4 < height;
 	let bigText, smallText, pad, gap;
-	
+
 	if (mobile) {	
 		unit = width*0.3;
 		bigText = width * 0.035;
@@ -51,7 +51,7 @@ function setup() {
 		iconBox.Items.push(new Icon('palette',[width*0.15,height-width*0.21],icon_size));
 		iconBox.Items.push(new Icon('spin',[width*0.27,height-width*0.21],icon_size));
 		iconBox.Items.push(new Icon('play',[width*0.39,height-width*0.21],icon_size,'play','bright'));
-		iconBox.Items.push(new Icon('youtube',[width*0.15,height-width*0.09],icon_size,'youtube','front','https://youtu.be/P9ApmHdPZeI?si=ixWy589su9RTJ1R_'));
+		iconBox.Items.push(new Icon('youtube',[width*0.15,height-width*0.09],icon_size,'youtube','front','https://www.youtube.com/@TheGrayCuber'));
 		iconBox.Items.push(new Icon('random',[width*0.27,height-width*0.09],icon_size));
 		iconBox.Items.push(new Icon('reset',[width*0.39,height-width*0.09],icon_size));
 		
@@ -90,7 +90,7 @@ function setup() {
 		iconBox.Items.push(new Icon('play',[height*0.19,height*0.69],icon_size,'play','bright'));
 		iconBox.Items.push(new Icon('spin',[height*0.09,height*0.8],icon_size));
 		iconBox.Items.push(new Icon('random',[height*0.19,height*0.8],icon_size));
-		iconBox.Items.push(new Icon('youtube',[height*0.09,height*0.91],icon_size,'youtube','front','https://youtu.be/P9ApmHdPZeI?si=ixWy589su9RTJ1R_'));
+		iconBox.Items.push(new Icon('youtube',[height*0.09,height*0.91],icon_size,'youtube','front','https://www.youtube.com/@TheGrayCuber'));
 		iconBox.Items.push(new Icon('reset',[height*0.19,height*0.91],icon_size));
 		
 		shape_size = height*0.03;
