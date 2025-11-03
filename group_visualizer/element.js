@@ -20,7 +20,7 @@ class element{
 		for (let l = 0; l < this.name.length; l++){
 			accum += 1;
 			if (l + 1 == this.name.length || this.name.substring(l,l+1) != this.name.substring(l+1,l+2)){
-				this.display_name += this.name.substring(l,l+1) + exp_from_val(accum);
+				this.display_name += this.name.substring(l,l+1) + sup_from_val(accum);
 				accum = 0;
 			}
 		}
@@ -62,7 +62,7 @@ class element{
 	
 	display(){
 		this.giveColor();
-	
+		
 		fill(this.fill_color);
 		stroke(this.stroke_color);
 		circle(this.pos.x,this.pos.y,2);

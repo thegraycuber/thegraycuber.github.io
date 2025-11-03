@@ -40,8 +40,8 @@ class Icon {
 			if (check_play() == 'play'){
 				drawTri(0,0,this.Size[0]*0.38);
 			} else if (check_play() == 'pause'){
-				rect(-this.Size[0]*0.25,0,this.Size[0]*0.2,this.Size[1]*0.9);
-				rect(this.Size[0]*0.25,0,this.Size[0]*0.2,this.Size[1]*0.9);
+				rect(-this.Size[0]*0.22,0,this.Size[0]*0.22,this.Size[1]*0.85);
+				rect(this.Size[0]*0.22,0,this.Size[0]*0.22,this.Size[1]*0.85);
 			} else if (check_play() == 'stop'){
 				rotate(PI/4);
 				rect(0,0,this.Size[0],this.Size[0]*0.12);
@@ -60,21 +60,12 @@ class Icon {
 			line(-rad*0.12, -rad*0.12, rad*0.12, rad*0.12);
 			
 		} else if (this.Type == 'download'){
-			let rad = this.Size[0]*0.2;
+			onlyStroke(icon_color,this.Size[0]*0.1);
+			let rad = this.Size[0]*0.25;
 			line(-rad, rad*1.6, rad, rad*1.6);
 			line(0, -rad*1.6, 0, rad*0.5);
 			line(-rad, -rad*0.5, 0, rad*0.5);
 			line(rad, -rad*0.5, 0, rad*0.5);
-			
-		} else if (this.Type == 'movement'){
-			
-			onlyFill(icon_color);
-			if (movement){
-				rect(-this.Size[0]*0.2, 0, this.Size[0]*0.2, this.Size[1]*0.8);
-				rect(this.Size[0]*0.2, 0, this.Size[0]*0.2, this.Size[1]*0.8);
-			} else {
-				triangle(this.Size[0]*0.35, 0, -this.Size[0]*0.35, -this.Size[1]*0.4, -this.Size[0]*0.35, this.Size[1]*0.4);
-			}
 			
 		} else if (this.Type == 'random') {
 			onlyStroke(icon_color,this.Size[0]*0.06);
@@ -97,56 +88,6 @@ class Icon {
 			ellipse(this.Size[0]*0.23, this.Size[1]*0.12,this.Size[0]*0.03, this.Size[1]*0.05);
 			ellipse(this.Size[0]*0.14, this.Size[1]*0.26,this.Size[0]*0.03, this.Size[1]*0.05);
 			
-		} else if (this.Type == 'display_mode') {
-			if (display_state == this.Value){
-				fill(icon_color);
-				stroke(icon_color);
-			} else {
-				fill(palette.medium);
-				stroke(palette.medium);
-			}
-			strokeWeight(0);
-			
-			if (this.Value == 0) {
-				let circ_rad = this.Size[0]*0.35;
-				circle(circ_rad*1.3,circ_rad*0.9,circ_rad);
-				circle(-1.3*circ_rad,0.2*circ_rad,circ_rad);
-				circle(-0.2*circ_rad,-1.1*circ_rad,circ_rad);
-				strokeWeight(circ_rad*0.3);
-				line(0.3*circ_rad,-0.2*circ_rad,0.6*circ_rad,0.1*circ_rad);
-				line(-0.3*circ_rad,0.4*circ_rad,0.3*circ_rad,0.6*circ_rad);
-				line(-0.75*circ_rad,-0.4*circ_rad,-0.78*circ_rad,-0.43*circ_rad);
-
-			} else if (this.Value == 1) {
-				let circ_rad = this.Size[0]*0.4;
-				for (let p = PI/2; p < PI*5/2; p+= TWO_PI/5){
-					circle(cos(p)*circ_rad*1.2,-sin(p)*1.2*circ_rad,circ_rad);	
-				}
-
-			} else if (this.Value == 2) {
-				for (let x = -0.3; x < 0.5; x += 0.6){
-					for (let y = -0.3; y < 0.5; y += 0.6){
-						rect(x*this.Size[0],y*this.Size[1],this.Size[0]*0.5,this.Size[1]*0.5,this.Size[0]*0.08);
-					}
-				}
-			}
-		
-		} else if (this.Type == 'arrow_active'){
-			let pick_color = palette.accent[this.Value];
-			if (arrow_elements[this.Value] == -1){
-				pick_color = lerpColor(pick_color, palette.back, 0.5);
-			}
-			noStroke();
-			fill(pick_color);
-			circle(0,0,this.Size[0]);
-			
-			if (this.Value == active_arrow){
-				stroke(icon_color);
-				strokeWeight(4);
-				noFill();
-				circle(0,0,this.Size[0]+12);
-			}
-			 
 		} else if (this.Type == 'youtube'){
 			onlyFill(palette.front);
 			rect(0,0,this.Size[0],this.Size[0]*0.8,this.Size[0]*0.25);
@@ -173,7 +114,7 @@ class Icon {
 	
 	clicked() {
 		if(this.Active && abs(mouseX - this.Coords[0])*2 <= this.Size[0] && abs(mouseY - this.Coords[1])*2 <= this.Size[1]){
-			action(this.Id,this.Value);
+			action(this.Id,this.Type);
 		}
 		
 	}
@@ -238,8 +179,7 @@ class Box {
 		}
 	}
 	clicked(){
-		if (this.mouseInside() == 1){
-		
+		if (this.mouseInside()){
 			for (let item of this.Items){
 				if( abs(mouseY - item.Coords[1])*2 < item.Size[1]){
 					item.clicked();
@@ -251,9 +191,9 @@ class Box {
 	}
 	
 	mouseInside(){
-		if(this.Active == 1 && (mouseX - this.Coords[0])*2 < this.Size[0] && (mouseY - this.Coords[1])*2 < this.Size[1]){
-			return 1;
-		} else {return 0;}
+		if(this.Active == 1 && abs(mouseX - this.Coords[0])*2 < this.Size[0] && abs(mouseY - this.Coords[1])*2 < this.Size[1]){
+			return true;
+		} else {return false;}
 	}
 	
 	getItem(searchId){

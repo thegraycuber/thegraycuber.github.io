@@ -36,7 +36,7 @@ function update_physics(){
 			if (diff_vec.mag() > 6){
 				continue;
 			}
-			diff_vec.mult(min(0.0004/diff_vec.mag(),20));
+			diff_vec.mult(min(0.0004/diff_vec.mag(),100));
 			g.acc.add(diff_vec);
 			h.acc.sub(diff_vec);
 		}
@@ -60,7 +60,7 @@ function inner_outer(position_mode){
 	
 	if (movement){
 		in_theta += 0.0031;
-		out_theta += 0.0061;
+		out_theta += 0.0021;
 	}
 	
 	inner_ring = [0];
@@ -95,7 +95,7 @@ function inner_outer(position_mode){
 			}
 			
 			for (let inr = 0; inr < inner_ring.length; inr++){
-				let pos_el = G[outer_ring[outr]].arrow_tables[0][inner_ring[inr]];
+				let pos_el = G[inner_ring[inr]].arrow_tables[arrow_types[0]%2][outer_ring[outr]];
 				let pos_ang =  in_theta + inr*inner_ang + outr*(TWO_PI/G_order+out_theta) - PI/2;
 				G[pos_el].inner = inr;
 				G[pos_el].outer = outr+1;

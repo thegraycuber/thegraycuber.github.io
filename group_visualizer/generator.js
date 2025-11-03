@@ -83,14 +83,15 @@ function name_reduce(full_name){
 		if (full_name.substring(r,r+1) == curr_letter){
 			curr_count += 1;
 		} else {
-			reduced += exp_from_val(curr_count);
+			reduced += sup_from_val(curr_count);
 			curr_letter = full_name.substring(r,r+1);
 			reduced += curr_letter;
 			
 		}
 	}
-	reduced += exp_from_val(curr_count);
+	reduced += sup_from_val(curr_count);
 	return reduced;
 }
 
 
+v

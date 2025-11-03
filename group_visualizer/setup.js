@@ -7,12 +7,12 @@ function preload(){
 	el_data = loadTable('group_visualizer/group_labels_012.csv', 'csv', 'header');
 }
 
-var palette, arrowBoxes, settingBox, iconBox, arrowBox, displayBox, unit;
+var arrowBoxes, settingBox, iconBox, arrowBox, displayBox, unit;
 
 var G;
-var G_order = 8;
+var G_order = 4;
 var G_class = 0;
-var G_group = 1;
+var G_group = 0;
 var gen = [];
 var gen_rules = [];
 
@@ -23,8 +23,7 @@ var active_arrow = 0;
 
 function setup() {
 	createCanvas(window.innerWidth, window.innerHeight);
-	palette_index = palette_names.indexOf('Forest');
-	palette = new Palette(palette_names[palette_index]);
+	palette = new Palette('Forest');
 	noStroke();
 	smooth();
 	
@@ -55,28 +54,29 @@ function setup() {
 		infoText = unit * 0.12;
 		pad = unit*0.03;
 		default_origin = createVector(width*0.5,height*0.5-unit*0.85);
-		settingBox = new Box([width*0.615,height-unit*0.77],[width*0.18,unit*0.7],pad);
+		settingBox = new Box([width*0.615,height-unit*0.77],[width*0.36,unit*1.4],pad);
 		for (let a = 0; a < 3; a++){
-			arrowBoxes.push(new Box([width*0.22,height-unit*0.77],[width*0.18,unit*0.7],pad));
+			arrowBoxes.push(new Box([width*0.22,height-unit*0.77],[width*0.36,unit*1.4],pad));
 		}
 		
 		row_height = width*0.9;
-		iconBox = new Box([row_height,height-unit*0.77],[width*0.07,unit*0.7],pad);
-		iconBox.Items.push(new Icon('movement',[width*0.07,width*0.07],width*0.006,[row_height,height-unit*1.25]));
-		iconBox.Items.push(new Icon('palette',[width*0.06,width*0.06],width*0.0065,[row_height,height-unit*0.92]));
-		iconBox.Items.push(new Icon('rand',[width*0.08,width*0.08],width*0.006,[row_height,height-unit*0.6]));
-		iconBox.Items.push(new Icon('save_image',[width*0.08,width*0.08],width*0.007,[row_height,height-unit*0.28]));
+		iconBox = new Box([row_height,height-unit*0.77],[width*0.14,unit*1.4],pad);
+		iconBox.Items.push(new Icon('movement',[row_height,height-unit*1.25],[width*0.07,width*0.07],'play'));
+		iconBox.Items.push(new Icon('palette',[row_height,height-unit*0.92],[width*0.07,width*0.07]));
+		iconBox.Items.push(new Icon('random',[row_height,height-unit*0.6],[width*0.07,width*0.07]));
+		iconBox.Items.push(new Icon('download',[row_height,height-unit*0.28],[width*0.07,width*0.07]));
 
+		let icon_size = [height*0.06,height*0.06];
 		row_height = height-unit*1.32;
-		displayBox = new Box([width*0.615,row_height],[width*0.18,unit*0.1],pad,true);
-		displayBox.Items.push(new Icon('display_mode',[height*0.03,height*0.03],height*0.003,[width*0.51,row_height],0));
-		displayBox.Items.push(new Icon('display_mode',[height*0.03,height*0.03],height*0.003,[width*0.615,row_height],1));
-		displayBox.Items.push(new Icon('display_mode',[height*0.03,height*0.03],height*0.003,[width*0.72,row_height],2));
+		displayBox = new Box([width*0.615,row_height],[width*0.36,unit*0.2],pad,true);
+		displayBox.Items.push(new Icon('display_mode',[width*0.51,row_height],icon_size,0));
+		displayBox.Items.push(new Icon('display_mode',[width*0.615,row_height],icon_size,1));
+		displayBox.Items.push(new Icon('display_mode',[width*0.72,row_height],icon_size,2));
 		
-		arrowBox = new Box([width*0.22,row_height],[width*0.18,unit*0.1],pad,true);
-		arrowBox.Items.push(new Icon('arrow_active',[height*0.03,height*0.03],height*0.003,[width*0.12,row_height],0));
-		arrowBox.Items.push(new Icon('arrow_active',[height*0.03,height*0.03],height*0.003,[width*0.225,row_height],1));
-		arrowBox.Items.push(new Icon('arrow_active',[height*0.03,height*0.03],height*0.003,[width*0.33,row_height],2));
+		arrowBox = new Box([width*0.22,row_height],[width*0.36,unit*0.2],pad,true);
+		arrowBox.Items.push(new Icon('arrow_active',[width*0.12,row_height],icon_size,0,'accent0'));
+		arrowBox.Items.push(new Icon('arrow_active',[width*0.225,row_height],icon_size,1,'accent1'));
+		arrowBox.Items.push(new Icon('arrow_active',[width*0.33,row_height],icon_size,2,'accent2'));
 		
 	} else {
 		unit = height * 0.35;
@@ -85,28 +85,29 @@ function setup() {
 		pad = unit * 0.02;
 		default_origin = createVector(width*0.5+unit*0.27,height*0.5);
 
-		settingBox = new Box([unit*0.35,height*0.765],[unit*0.3,height*0.21],pad);
+		settingBox = new Box([unit*0.35,height*0.765],[unit*0.6,height*0.42],pad);
 		for (let a = 0; a < 3; a++){
-			arrowBoxes.push(new Box([unit*0.35,height*0.32],[unit*0.3,height*0.22],pad));
+			arrowBoxes.push(new Box([unit*0.35,height*0.32],[unit*0.6,height*0.44],pad));
 		}
-		iconBox = new Box([unit*0.35,height*0.05],[unit*0.3,height*0.035],pad);
+		iconBox = new Box([unit*0.35,height*0.05],[unit*0.6,height*0.07],pad);
 		let row_height = height*0.05;
-		iconBox.Items.push(new Icon('movement',[height*0.03,height*0.03],height*0.003,[unit*0.14,row_height]));
-		iconBox.Items.push(new Icon('palette',[height*0.028,height*0.028],height*0.0025,[unit*0.28,row_height]));
-		iconBox.Items.push(new Icon('rand',[height*0.032,height*0.032],height*0.0022,[unit*0.43,row_height]));
-		iconBox.Items.push(new Icon('save_image',[height*0.035,height*0.035],height*0.003,[unit*0.57,row_height]));
-		
+		iconBox.Items.push(new Icon('movement',[unit*0.14,row_height],[height*0.03,height*0.03],'play'));
+		iconBox.Items.push(new Icon('palette',[unit*0.28,row_height],[height*0.03,height*0.03]));
+		iconBox.Items.push(new Icon('random',[unit*0.43,row_height],[height*0.03,height*0.03]));
+		iconBox.Items.push(new Icon('download',[unit*0.57,row_height],[height*0.03,height*0.03]));
+
+		let icon_size = [height*0.06,height*0.06];
 		row_height = height*0.6;
-		displayBox = new Box([unit*0.35,row_height],[unit*0.3,height*0.04],pad,true);
-		displayBox.Items.push(new Icon('display_mode',[height*0.03,height*0.03],height*0.003,[unit*0.17,row_height],0));
-		displayBox.Items.push(new Icon('display_mode',[height*0.03,height*0.03],height*0.003,[unit*0.36,row_height],1));
-		displayBox.Items.push(new Icon('display_mode',[height*0.03,height*0.03],height*0.003,[unit*0.54,row_height],2));
+		displayBox = new Box([unit*0.35,row_height],[unit*0.6,height*0.08],pad,true);
+		displayBox.Items.push(new Icon('display_mode',[unit*0.17,row_height],icon_size,0));
+		displayBox.Items.push(new Icon('display_mode',[unit*0.36,row_height],icon_size,1));
+		displayBox.Items.push(new Icon('display_mode',[unit*0.54,row_height],icon_size,2));
 		
 		row_height = height*0.15;
-		arrowBox = new Box([unit*0.35,row_height],[unit*0.3,height*0.04],pad,true);
-		arrowBox.Items.push(new Icon('arrow_active',[height*0.03,height*0.03],height*0.003,[unit*0.17,row_height],0));
-		arrowBox.Items.push(new Icon('arrow_active',[height*0.03,height*0.03],height*0.003,[unit*0.36,row_height],1));
-		arrowBox.Items.push(new Icon('arrow_active',[height*0.03,height*0.03],height*0.003,[unit*0.54,row_height],2));
+		arrowBox = new Box([unit*0.35,row_height],[unit*0.6,height*0.08],pad,true);
+		arrowBox.Items.push(new Icon('arrow_active',[unit*0.17,row_height],icon_size,0,'accent0'));
+		arrowBox.Items.push(new Icon('arrow_active',[unit*0.36,row_height],icon_size,1,'accent1'));
+		arrowBox.Items.push(new Icon('arrow_active',[unit*0.54,row_height],icon_size,2,'accent2'));
 	}
 	circle_width = unit/64;
 	vert_width = unit/20;
@@ -128,10 +129,6 @@ function setup() {
 	settingBox.Items.push(new arrowItem(1,['a'],infoText,'group',-1,0));
 	settingBox.Items.push(new textItem(0.8,'',0));
 	
-	// settingBox.Items.push(new textItem(1,'display mode',headText));
-	// settingBox.Items.push(new arrowItem(1,['physics','diagram','table'],infoText,'display_mode',-1,0));
-	// settingBox.Items.push(new textItem(0.8,'',0));
-	
 	// settingBox.Items.push(new textItem(0.8,'about this page',infoText,'','https://youtu.be/ocDnfeFAsCg'));
 	// settingBox.Items.push(new textItem(0.4,'',0));
 	
@@ -139,16 +136,8 @@ function setup() {
 	for (a = 0; a < 3; a++){
 		
 		arrowBoxes[a].Items.push(new textItem(2.4,'',0));
-		/*
-		arrowBoxes[a].Items.push(new textItem(0.6,'',0));
-		arrowBoxes[a].Items.push(new arrowItem(1,[arrow_labels[a],arrow_labels[a],arrow_labels[a]],infoText*0.8,'arrow',a,0,a));
-		arrowBoxes[a].Items.push(new textItem(0.6,'',0));
-
-		arrowBoxes[a].Items.push(new binaryItem(1,['on','off'],headText*1.4,'arrow_active',0,a));
-		arrowBoxes[a].Items.push(new textItem(0.8,'',0));
-	*/
-		//arrowBoxes[a].Items.push(new textItem(0.8,'',0));
-		arrowBoxes[a].Items.push(new arrowItem(1,['0','1','2'],infoText,'arrow_element',a,arrow_elements[a],a));
+		
+		arrowBoxes[a].Items.push(new arrowItem(1,['0','1','2'],infoText,'arrow_element',a,arrow_elements[a],'accent'+str(a)));
 		arrowBoxes[a].Items.push(new textItem(0.8,'',0));
 		
 		arrowBoxes[a].Items.push(new textItem(1,'type',headText,'type_head'));

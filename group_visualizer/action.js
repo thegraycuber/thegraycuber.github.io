@@ -106,11 +106,13 @@ function action(id, value, object = [], arrow = active_arrow) {
 		refresh_arrow_types();
 		refresh_strength_elements();
 		
-	} else if (id == 'save_image') {
+	} else if (id == 'download') {
 		save("Group_Explorer_" + now_string() + ".jpg");
 		
 		
-	} else if (id == 'rand') {
+	} else if (id == 'random') {
+		origin = default_origin.copy();
+		
 		settingBox.randomize();
 		display_state = int(random(3));
 		refresh_arrow_types();
@@ -125,6 +127,7 @@ function action(id, value, object = [], arrow = active_arrow) {
 			arrow_elements[a] = arrowBoxes[a].getItem('arrow_element').Index;
 			arrowBoxes[a].randomize();
 		}
+		
 		
 		refresh_strength_elements();
 		

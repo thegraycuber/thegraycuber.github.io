@@ -24,9 +24,9 @@ function touchStarted(){
 	in_a_box = false;
 	in_a_box = in_a_box || iconBox.clicked();
 	in_a_box = in_a_box || arrowBox.clicked();
+	in_a_box = in_a_box || arrowBoxes[active_arrow].clicked();
 	in_a_box = in_a_box || displayBox.clicked();
 	in_a_box = in_a_box || settingBox.clicked();
-	in_a_box = in_a_box || arrowBoxes[active_arrow].clicked();
 
 	skip_move = true;
 	//if (display_state == 2){return;}
