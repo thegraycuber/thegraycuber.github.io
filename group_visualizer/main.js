@@ -13,9 +13,7 @@ function draw() {
 			inner_outer('auto');
 		}
 
-		noFill();
-		strokeWeight(0.2);
-		stroke(palette.front);
+		onlyStroke(palette.front,0.2);
 		for (var a = arrow_elements.length -1; a > -1 ; a--){
 			if (arrow_elements[a] != -1){
 				stroke(palette.accent[a]);
@@ -110,9 +108,7 @@ function core_icon_custom(icon_object, icon_color){
 		circle(0,0,icon_object.Size[0]/2);
 		
 		if (icon_object.Type == active_arrow){
-			stroke(palette.front);
-			strokeWeight(4);
-			noFill();
+			onlyStroke(palette.front,4);
 			circle(0,0,icon_object.Size[0]/2+12);
 		}
 		

@@ -139,9 +139,7 @@ class Shape {
 		output = [[]];
 		p_of_shape(display_ideal, this, display_function);
 
-		noFill();
-		stroke(display_color);
-		strokeWeight(adjust*circle_width/scalar);
+		onlyStroke(display_color,adjust*circle_width/scalar);
 		beginShape();
 
 		for (let out of output){
@@ -163,8 +161,7 @@ class Shape {
 			endShape();
 		}
 
-		noStroke();
-		fill(vertex_color);
+		onlyFill(vertex_color);
 		for (let out = 0; out < output.length; out++){
 			for (let o of this.true_indices){
 				if (display_function[0] == 'sqrt'){

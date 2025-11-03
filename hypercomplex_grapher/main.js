@@ -47,9 +47,7 @@ function draw() {
 	
 	if (!game_mode){
 		// dual ideal parabola
-		stroke(palette.medium);
-		strokeWeight(0.6*circle_width/scalar);
-		noFill();
+		onlyStroke(palette.medium,0.6*circle_width/scalar);
 		let prin_0 = 2*(abs(origin.x/scalar)**0.5);
 		let rab_range = [max(-origin.y/scalar,-prin_0),min((height-origin.y)/scalar,prin_0)];
 		let rab_step = (rab_range[1] - rab_range[0])/100;
@@ -61,8 +59,6 @@ function draw() {
 		endShape();
 	}
 	
-	// noStroke();
-	// fill(palette.front);
 	if (game_mode && win_tracker == 0){
 			
 		if (target_shape.vertices == shape.vertices && target_shape.step == shape.step && target_shape.type == shape.type){
@@ -122,8 +118,7 @@ function draw() {
 	}
 	if (i_loc.length > 0){
 	  textSize(1.4*vert_width);
-	  noStroke();
-	  fill(palette.back);
+	  onlyFill(palette.back);
 	  text('i²', i_loc[0], i_loc[1]);	
 	}
 	
@@ -133,8 +128,7 @@ function draw() {
 	idealBox.show();
 	labelBox.show();
 
-	noStroke();
-	fill(palette.mono);
+	onlyFill(palette.mono);
 	shape.display([labelBox.Coords[0]+function_list[polynomial][2]*shape_size,labelBox.Coords[1]], shape_size);
 	
 	display_messages();

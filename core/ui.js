@@ -31,7 +31,6 @@ class Icon {
 		} else if (this.Type == 'reset'){
 			onlyStroke(icon_color,this.Size[0]*0.1);
 			arc(0,0, this.Size[0]*0.75, this.Size[1]*0.75, -PI/2, PI);
-			noStroke();
 			onlyFill(icon_color);
 			drawTri(-this.Size[1]*0.15, -this.Size[1]*0.38, -this.Size[1]*0.15);
 			

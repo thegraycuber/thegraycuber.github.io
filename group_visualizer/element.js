@@ -53,7 +53,6 @@ class element{
 	update(){
 		this.vel.add(this.acc);
 		this.pos.add(this.vel);
-		//this.pos.mult(adjust);
 		
 		this.acc = createVector(0,0);
 		this.vel.mult(0.98);
@@ -66,8 +65,7 @@ class element{
 		fill(this.fill_color);
 		stroke(this.stroke_color);
 		circle(this.pos.x,this.pos.y,2);
-		fill(this.text_color);
-		noStroke();
+		onlyFill(this.text_color);
 		text_limited(this.display_name,this.pos.x,this.pos.y,1.1,1.75);
 	}
 	

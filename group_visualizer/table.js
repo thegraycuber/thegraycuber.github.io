@@ -4,9 +4,7 @@ function show_table(){
 	let box_colors = get_box_colors();
 	let box_size = 2; //
 	
-	strokeWeight(box_size*0.05);
-	noStroke();
-	fill(palette.front);
+	onlyFill(palette.front);
 	
 	let ts = box_size*0.5;
 	let tmax = box_size*0.8;
@@ -17,24 +15,20 @@ function show_table(){
 	for (let x = 0; x < G_order; x++){
 		
 		let box_x = (x-(G_order-1.5)/2)*box_size;
-		noStroke();
-		fill(box_colors[x][G_order][0]);
+		onlyFill(box_colors[x][G_order][0]);
 		text_limited(G[x].display_name ,box_x,box_base-box_size*0.1, ts, tmax);
-		fill(box_colors[G_order][x][0]);
+		onlyFill(box_colors[G_order][x][0]);
 		text_limited(G[x].display_name ,box_base,box_x-box_size*0.1, ts, tmax);
 		
 		
 		for (let y = 0; y < G_order; y++){
 		
 			let box_y = (y-(G_order-1.5)/2)*box_size;
-			
-			//stroke(palette.medium);
-			noStroke();
-			fill(box_colors[x][y][0]);
+
+			onlyFill(box_colors[x][y][0]);
 			rect(box_x,box_y,box_size*0.9,box_size*0.9,box_size*0.05);
 			
-			noStroke();
-			fill(box_colors[x][y][1]);
+			onlyFill(box_colors[x][y][1]);
 			text_limited(G[G[y].arrow_tables[0][x]].display_name ,box_x,box_y-box_size*0.05, ts, tmax);
 		}	
 	}
