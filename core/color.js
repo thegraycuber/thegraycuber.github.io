@@ -22,7 +22,7 @@ class Palette {
 			this.red = color('#e5686e');
 			this.bright = color('#f2c76f');
 			this.mono = color('#bc7ff5');
-			this.gray = color('#8c849e');
+			this.gray = color('#a8a1b7');
 		
 		} else if (scheme == 'Forest'){
 			this.front = color('#d6ddcb');
