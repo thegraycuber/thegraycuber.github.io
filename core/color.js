@@ -1,5 +1,5 @@
 var palette;
-var palette_names = ['Forest','Sunset','Dark','Paper','Autumn','Pastel','Electric'];
+var palette_names = ['Forest','Sunset','Dark','Pastel','Paper','Autumn','Electric'];
 var palette_index = 0;
 class Palette {
 	constructor(scheme) {
