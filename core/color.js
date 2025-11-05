@@ -1,4 +1,4 @@
-
+var palette;
 var palette_names = ['Forest','Sunset','Dark','Paper','Autumn','Pastel','Electric'];
 var palette_index = 0;
 class Palette {
@@ -9,7 +9,7 @@ class Palette {
 		if (scheme == 'Electric'){
 			this.front = color('#bbdbf3');
 			this.back = color('#110a5d');
-			this.backlight = color('#324b96');
+			this.backlight = color('#273f8a');
 			this.bright = color('#d7f75b');
 			this.red = color('#e185dc');
 			this.mono = color('#23d2e8');
@@ -21,7 +21,7 @@ class Palette {
 			this.backlight = color('#53407e');
 			this.red = color('#e5686e');
 			this.bright = color('#f2c76f');
-			this.mono = color('#a084dc');
+			this.mono = color('#bc7ff5');
 			this.gray = color('#8c849e');
 		
 		} else if (scheme == 'Forest'){
