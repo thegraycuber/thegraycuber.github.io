@@ -38,8 +38,8 @@ function core_color_custom(plt){
 		// plt.dark = color(int(red(plt.back)*0.75),int(green(plt.back)*0.75),int(blue(plt.back)*0.75));
 		// plt.medium = lerpColor(plt.back,plt.front,0.3);
 		plt.accent1 = plt.mono;
-		plt.accent2 = plt.bright;
-		plt.accent3 = plt.red;
+		plt.accent2 = plt.red;
+		plt.accent3 = plt.bright;
 	
 		if (plt.scheme == 'Sunset'){
 
