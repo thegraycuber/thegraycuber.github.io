@@ -1,5 +1,5 @@
 var palette;
-var palette_names = ['Forest','Sunset','Dark','Pastel','Paper','Autumn','Electric'];
+var palette_names = ['Forest','Sunset','Dark','Autumn','Paper','Pastel','Electric'];
 var palette_index = 0;
 class Palette {
 	constructor(scheme) {
@@ -22,7 +22,7 @@ class Palette {
 			this.red = color('#e5686e');
 			this.bright = color('#f2c76f');
 			this.mono = color('#bc7ff5');
-			this.gray = color('#a8a1b7');
+			this.gray = color('#8c849e');
 		
 		} else if (scheme == 'Forest'){
 			this.front = color('#d6ddcb');
@@ -39,7 +39,7 @@ class Palette {
 			this.backlight = color('#6e4122');
 			this.mono = color('#fe8241');
 			this.bright = color('#faca30');
-			this.red = color('#d24828');
+			this.red = color('#ee5947');
 			this.gray = color('#999170');
 			
 		} else if (scheme == 'Dark'){
@@ -47,7 +47,7 @@ class Palette {
 			this.back = color('#20213f');
 			this.backlight = color('#373861');
 			this.mono = color('#8498ef');
-			this.red = color('#d86f9a');
+			this.red = color('#f168a0');
 			this.bright = color('#2cda9d');
 			this.gray = color('#afb4c9');
 			
@@ -65,7 +65,7 @@ class Palette {
 			this.front = color('#814e3c');
 			this.back = color('#e9d8c6');
 			this.backlight = color('#ddc3a8');
-			this.mono = color('#b18b6b');
+			this.mono = color('#ce8e58');
 			this.red = color('#c38db0');
 			this.bright = color('#8ba372');
 			this.gray = color('#9b928a');
