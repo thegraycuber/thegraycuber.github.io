@@ -25,11 +25,12 @@ function preload() {
 function setup() {
 	
 	alg_list = loadTable('cubecalculator/n_alg.csv', 'csv');//, 'header');
-	palette.push(new Palette('#063a2a','#d6ddcc',['#d6ddcc','#d8b801','#3fbd75','#449d9d','#af5757','#b88153'],'#3fbd75','#095a44'));
-	palette.push(new Palette('#292929','#bbb',['#bbb','#999','#777','#222','#575757','#373737'],'#797979','#4f4f4f'));
-	palette.push(new Palette('#2f3052','#d8d9ff',['#d8d9ff','#e1e485','#2cda9d','#8498f0','#d86f9a','#e4b37f'],'#8498f0','#434c72'));
-	//palette.push(new Palette('#2a2b2e','#6b7b86',['#6b7b86','#7c765b','#465541','#435168','#72454e','#6f5949'],'#6f5949'));
-	palette.push(new Palette('#e4e4e4','#94a0b4',['#bac4cc','#ecdd90','#99df92','#accdff','#eeb5cf','#dac2f3'],'#eeb5cf','#d6d4df','#e4e4e4'));
+	// white yellow green blue red orange
+	palette.push(new Palette('#063a2a','#d6ddcc',['#d6ddcc','#d8b801','#3fbd75','#36b4cb','#af5757','#ee8060'],'#3fbd75','#16553f'));
+	palette.push(new Palette('#20213f','#c8caf4',['#c8caf4','#e1e485','#2cda9d','#8498ef','#f168a0','#ebad6b'],'#8498ef','#373861'));
+	palette.push(new Palette('#110a5d','#bbdbf3',['#bbdbf3','#d7f75b','#5de281','#23d2e8','#e185dc','#ffa475'],'#23d2e8','#273f8a'));
+	palette.push(new Palette('#cbc1e9','#6f538d',['#6f538d','#d3bc5f','#6db99d','#6c99df','#cf6eb1','#a77ad8'],'#a77ad8','#b6a5db','#cbc1e9'));
+	palette.push(new Palette('#e9d8c6','#814e3c',['#814e3c','#beb36a','#8ba372','#8aaabb','#c38db0','#ce8e58'],'#ce8e58','#ddc3a8','#e9d8c6'));
 	
 	px = windowHeight / (9 * pxfact);
 	w = px*8/n;

@@ -77,7 +77,7 @@ class Icon {
 		} else if (this.Type == 'th') {
 			noFill();
 			strokeWeight(this.Radius);
-			stroke(palette[0].colors[2]);
+			stroke(palette[0].head);
 			circle(this.Coords[0], this.Coords[1] - this.Size[0] * 0.18, this.Size[0] * 0.64);
 			circle(this.Coords[0] + this.Size[0] * 0.17, this.Coords[1] + this.Size[0] * 0.09, this.Size[0] * 0.64);
 			circle(this.Coords[0] - this.Size[0] * 0.17, this.Coords[1] + this.Size[0] * 0.09, this.Size[0] * 0.64);
