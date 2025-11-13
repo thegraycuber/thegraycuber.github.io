@@ -7,6 +7,7 @@ var rotx = 0.43;
 var roty = -0.65;
 var cube_moves = ['u','U','d','D','l','L','r','R','f','F','b','B'];
 
+
 function calculatorPrep(){
 	var edge = 0;
 	cube = [];
@@ -17,9 +18,9 @@ function calculatorPrep(){
 			cube.push(new sticker([i,-w*3/2,j],color('#d6ddcc'),w*0.9,[1,0],edge));
 			cube.push(new sticker([i,w*3/2,j],'#d8b801',w*0.9,[1,0],edge));
 			cube.push(new sticker([i,j,w*3/2],'#3fbd75',w*0.9,[0,0],edge));
-			cube.push(new sticker([i,j,-w*3/2],'#449d9d',w*0.9,[0,0],edge));
-			cube.push(new sticker([w*3/2,i,j],'#904e4e',w*0.9,[0,1],edge));
-			cube.push(new sticker([-w*3/2,i,j],'#b88153',w*0.9,[0,1],edge));
+			cube.push(new sticker([i,j,-w*3/2],'#36b4cb',w*0.9,[0,0],edge));
+			cube.push(new sticker([w*3/2,i,j],'#af5757',w*0.9,[0,1],edge));
+			cube.push(new sticker([-w*3/2,i,j],'#ee8060',w*0.9,[0,1],edge));
 	
 			for (var k =  -w; k <=  w*1.99; k += w){
 				boxes.push(new cubie([i*0.99,j*0.99,k*0.99],'#063a2a',w*0.99));
