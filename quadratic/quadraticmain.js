@@ -129,8 +129,30 @@ function draw() {
 	menuBox.show();
 	infoBox.show();
 	hoverBox.show();
+
+	if (fullscreen_count > 0){
+		fullscreen_count++;
+		if (fullscreen_count > 30){
+			fullscreen_count = 0;
+			resizeCanvas(window.innerWidth,window.innerHeight);
+		}
+	}
+	let currentUrl = window.location.href;
+	if (currentUrl.includes('key_test')){
+		text_in_box(last_key,width/2,height/2,height*0.08,palette.back,palette.front);
+	}
 }
 
+var fullscreen_count = 0;
+var last_key = '';
+function keyPressed(){
+	last_key = keyCode;
+	
+	if (key == 'f'){
+		fullscreen(true);
+		fullscreen_count = 1;
+	}
+}
 
 function touchStarted(){
 	
