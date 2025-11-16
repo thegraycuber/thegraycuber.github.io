@@ -90,7 +90,7 @@ function setup() {
 		iconBox.Items.push(new Icon('play',[height*0.19,height*0.69],icon_size,'play','bright'));
 		iconBox.Items.push(new Icon('spin',[height*0.09,height*0.8],icon_size));
 		iconBox.Items.push(new Icon('random',[height*0.19,height*0.8],icon_size));
-		iconBox.Items.push(new Icon('youtube',[height*0.09,height*0.91],icon_size,'youtube','front','https://www.youtube.com/@TheGrayCuber'));
+		iconBox.Items.push(new Icon('youtube',[height*0.09,height*0.91],icon_size,'youtube','front','https://youtu.be/P9ApmHdPZeI?si=F7IeZ9CRZsmcGP1D'));
 		iconBox.Items.push(new Icon('reset',[height*0.19,height*0.91],icon_size));
 		
 		shape_size = height*0.03;
