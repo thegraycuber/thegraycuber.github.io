@@ -35,7 +35,7 @@ function setup() {
 	icons.push(new Icon('?',[px*0.36,px*0.36],px*0.4,[-43,25.4],[0,0]));
 	*/
 	icons.push(new Icon('=',[px*0.4,px*0.36],px*0.3,[origin.x+3,origin.y-2],[0,0]));
-	icons.push(new Icon('?',[px*0.36,px*0.36],px*0.4,[origin.x+7,origin.y-2],[0,0]));
+	//icons.push(new Icon('?',[px*0.36,px*0.36],px*0.4,[origin.x+7,origin.y-2],[0,0]));
 	var bigText = px*0.18;
 	var smallText = px*0.14;
 	//menuBox = new Box([-43,5],[setting.sq*6,setting.sq*18],setting.sq);
