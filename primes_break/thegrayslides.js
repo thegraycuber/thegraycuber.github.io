@@ -56,10 +56,11 @@ function tgs_next_slide(){
 		prep_presentation();
 		
 	}
+	last_display = Date.now();
 }
 
+var last_display;
 function tgs_display(){
-	
 	load_slide_data();
 	
 	resetMatrix();
@@ -67,8 +68,8 @@ function tgs_display(){
 	scale(tgs_scalar,tgs_scalar,1);
 	
 	if (present_ticker <= 1){
-		present_ticker = min(1,round(present_ticker+tgs_present_speed,3));
-		lerp_bounce = sin(present_ticker*PI*0.63)/0.918;
+		present_ticker = min(1,round(present_ticker+(Date.now()-last_display)*0.03*tgs_present_speed,3));
+		last_display = Date.now();
 		lerp_smooth = (sin((present_ticker-0.5)*PI)+1)/2;
 		lerp_abrupt = floor(present_ticker);
 		for (let p_module of present_modules){
