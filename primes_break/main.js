@@ -14,7 +14,7 @@ var image_list = [
 var origin, scalar;
 function setup() {
 	palette = new Palette('Sunset');
-	
+	framteRate(30);
 	createCanvas(windowWidth, windowHeight);
 	
 	tgs_setup(1);
