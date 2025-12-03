@@ -15,6 +15,7 @@ var origin, scalar;
 function setup() {
 	palette = new Palette('Sunset');
 	framteRate(30);
+	
 	createCanvas(windowWidth, windowHeight);
 	
 	tgs_setup(1);
@@ -111,21 +112,30 @@ function core_color_custom(plt){
 }
 
 
+var last_transition = 0;
 function keyPressed(){
-	tgs_next_slide();
-
+	if (Date.now() < last_transition + 500){
+		return;
+	}
+	
 	if ([32, DOWN_ARROW, RIGHT_ARROW, 34].includes(keyCode)){
 		if (keyIsDown(SHIFT)){
 			slide = min(modules.length-1,slide+9);
+		} else if (keyIsDown(69)){
+			slide = modules.length-1;
 		}
 		tgs_next_slide();
+		last_transition = Date.now();
 	} else if ([BACKSPACE, UP_ARROW, LEFT_ARROW, 33].includes(keyCode)){
 		slide = max(0,slide-2);
 		if (keyIsDown(SHIFT)){
 			slide = max(0,slide-9);
+		} else if (keyIsDown(69)){
+			slide = 0;
 		}
 		tgs_next_slide();
 		present_ticker = 0.99;
+		last_transition = Date.now();
 	}
 	
 }
