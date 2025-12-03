@@ -1,5 +1,5 @@
 
-var tgs_present_speed = 0.03;
+var tgs_present_speed = 0.04;
 var image_list = [
 	'primes_break/fermat_000.png',
 	'primes_break/lame_000.png',
@@ -14,7 +14,7 @@ var image_list = [
 var origin, scalar;
 function setup() {
 	palette = new Palette('Sunset');
-	framteRate(30);
+	frameRate(30);
 	
 	createCanvas(windowWidth, windowHeight);
 	
@@ -125,6 +125,7 @@ function keyPressed(){
 			slide = modules.length-1;
 		}
 		tgs_next_slide();
+		present_ticker = 0;
 		last_transition = Date.now();
 	} else if ([BACKSPACE, UP_ARROW, LEFT_ARROW, 33].includes(keyCode)){
 		slide = max(0,slide-2);
