@@ -107,7 +107,7 @@ function action(id, value, object = [], arrow = active_arrow) {
 		refresh_strength_elements();
 		
 	} else if (id == 'download') {
-		to_download = true;
+		save("Group_Visualizer_" + now_string() + ".png");
 		
 	} else if (id == 'random') {
 		origin = default_origin.copy();
@@ -136,7 +136,6 @@ function action(id, value, object = [], arrow = active_arrow) {
 	}
 
 }
-var to_download = false;
 
 function refresh_arrow_types(){
 	
