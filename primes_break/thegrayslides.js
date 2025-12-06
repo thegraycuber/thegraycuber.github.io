@@ -1,18 +1,3 @@
-/*
-instructions:
-THIS IS THE SOURCE OF TRUTH
-
-make slide_file
-make speed of present, usualy 0.04
-make image_list
-place setup function
-place display function
-place next_slide function
-place color function
-
-*/
-
-
 
 var slide, slide_data;
 var tgs_default_origin, tgs_origin, tgs_default_scalar, tgs_scalar;
@@ -47,6 +32,7 @@ function tgs_next_slide(){
 		D = 0;
 	}
 
+	
 	if (slide + 1 < modules.length){
 		slide++;
 		prep_presentation();
@@ -66,7 +52,7 @@ function tgs_display(){
 	if (present_ticker <= 1){
 		present_ticker = min(1,round(present_ticker+(Date.now()-last_display)*0.03*tgs_present_speed,3));
 		last_display = Date.now();
-
+		
 		lerp_bounce = sin(present_ticker*PI*0.63)/0.918;
 		lerp_smooth = (sin((present_ticker-0.5)*PI)+1)/2;
 		lerp_abrupt = floor(present_ticker);
@@ -81,6 +67,7 @@ function tgs_display(){
 	for (let p_module of present_modules){
 		p_module.display();
 	}
+	
 	
 }
 

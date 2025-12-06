@@ -10,6 +10,11 @@ var image_list = [
 ];
 
 var origin, scalar;
+var mainBold;
+function preload() {
+	mainBold = loadFont("media/AshkinsonBold_prod.ttf");
+}
+
 function setup() {
 	palette = new Palette('Sunset');
 	frameRate(30);
@@ -49,7 +54,7 @@ function draw() {
 	background(palette.back);
 
 	if (display_index != -1 && present_ticker < display_limit[display_index]){
-		
+
 		process_limit = 40;
 		
 		translate(origin.x, origin.y);
@@ -143,9 +148,8 @@ function core_color_custom(plt){
 	}
 }
 
-
-var last_transition = 0;
 var fullscreen_count = 0;
+var last_transition = 0;
 function keyPressed(){
 	if (Date.now() < last_transition + 500){
 		return;
@@ -170,6 +174,7 @@ function keyPressed(){
 		tgs_next_slide();
 		present_ticker = 0.99;
 		last_transition = Date.now();
+		
 	} else if (keyCode == 70){
 		fullscreen(true);
 		fullscreen_count = 1;
@@ -177,10 +182,6 @@ function keyPressed(){
 	
 }
 
-var mainBold;
-function preload() {
-	mainBold = loadFont("media/AshkinsonBold_prod.ttf");
-}
 
 function pixel_to_principal(pixels){
 	// principal = (pixel - origin)/scalar

@@ -35,6 +35,7 @@ var display_type = 'p';
 var color_mode = 0;
 
 function process_int(re, im){
+
 	
 	if (abs(re) >= q_ints.length){
 		if (process_limit == 0){
@@ -107,19 +108,33 @@ class Q_int {
 	}
 
 	display(re,im){
-		
+
+		let this_fill_color;
 		if(this.type == display_type){
 			// let int_noise = floor(noise(re/16,im/16,z_noise)*360);
 			// if (color_mode == 1){
 			// console.log(this.color[color_mode]);
 			// }
-			fill(palette.gradient[this.color[color_mode]]);
+			this_fill_color = palette.gradient[this.color[color_mode]];
 			
 		} else if(this.type == 'x'){
-			fill(palette.undefined);
-		} else {
+			this_fill_color = palette.undefined;
+		} else if (slide != 5 && slide != 6){
 			return;
+		} else {
+			this_fill_color = palette.back;
 		}
+		
+		if (slide == 5){
+			this_fill_color = palette.mono;
+			stroke(palette.back);
+			strokeWeight(0.1);
+		} else if (slide == 6){
+			this_fill_color = lerpColor(palette.mono, this_fill_color,present_ticker);
+			stroke(palette.back);
+			strokeWeight(0.1);
+		}
+		fill(this_fill_color);
 
 		if (is_hex){
 			hexagon(re/2,-im*0.866,1);
@@ -143,6 +158,7 @@ function hexagon(xcenter,ycenter,hexrad){
 
 function reset_D(){
 
+	last_frame = Date.now();
 	is_hex = modulo(D,4) == 1 ? 1 : 0;
 
 	prime_norms = [modulo(D,8)==5 ? 4 : 2];
