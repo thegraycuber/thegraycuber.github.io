@@ -4,8 +4,6 @@ var image_list = [
 	'primes_break/fermat_000.png',
 	'primes_break/lame_000.png',
 	'primes_break/liouville_000.png',
-	'primes_break/speech_right_001.png',
-	'primes_break/speech_left_001.png',
 	'primes_break/Wiles_000.png',
 	'primes_break/UFD_000.png',
 	'primes_break/quadratic_qr_000.png',
@@ -31,28 +29,39 @@ function setup() {
 	}
 	generate_squares(100);
 	reset_D();
-	slide_data = loadJSON('primes_break/primes_break_017.json');
+	slide_data = loadJSON('primes_break/primes_break_022.json');
+	color_millis = 0;
 }
 
 
 
 var D = -1;
 var scale_min = 3;
+var display_slides = [0,1,2,4,5,6,7,8,9,10,11,78,81,88,89,90];
+var display_D = [-1,-1,-1,-1,-1,2,-3,5,-7,-7,-7,-1,-3,17,7,-67];
+var display_limit = [2,2,1,2,2,2,2,2,1,1,1,2,2,2,2,2];
+var display_index = 0;
+var last_frame, color_millis;
+
 
 function draw() {
 
 	background(palette.back);
 
-	if ([78,81,89,90].includes(slide)){
+	if (display_index != -1 && present_ticker < display_limit[display_index]){
 		
 		process_limit = 40;
 		
 		translate(origin.x, origin.y);
 		scale(scalar,scalar);
 	
-		for (let i = 0; i < 2; i++){
+		color_millis -= last_frame;
+		last_frame = Date.now();
+		color_millis += last_frame;
+		while (color_millis > 0){
 			palette.gradient.push(palette.gradient[0]);
 			palette.gradient.splice(0,1);
+			color_millis -= 10;
 		}
 	
 		let direc_maxes;
@@ -93,6 +102,29 @@ function draw() {
 	}
 	
 	tgs_display();
+
+	if (fullscreen_count > 0){
+		fullscreen_count++;
+		if (fullscreen_count > 30){
+			
+			fullscreen_count = 0;
+			resizeCanvas(window.innerWidth,window.innerHeight);
+			
+			origin = createVector(width/2, height/2);
+			scalar = round(height/50);
+			draw_origin = createVector(width/2,height/2);
+	
+			tgs_scalar = width/1920;
+			tgs_default_scalar = tgs_scalar;
+			tgs_origin = createVector(width/2,height/2);
+			tgs_default_origin = tgs_origin.copy();
+			
+			
+			for (let view = 0; view < present_view.length; view++){
+				present_view[view] = new PresentView(present_view[view].size, present_view[view].pos.x, present_view[view].pos.y);
+			}
+		}
+	}
 }
 
 function core_color_custom(plt){
@@ -113,6 +145,7 @@ function core_color_custom(plt){
 
 
 var last_transition = 0;
+var fullscreen_count = 0;
 function keyPressed(){
 	if (Date.now() < last_transition + 500){
 		return;
@@ -137,6 +170,9 @@ function keyPressed(){
 		tgs_next_slide();
 		present_ticker = 0.99;
 		last_transition = Date.now();
+	} else if (keyCode == 70){
+		fullscreen(true);
+		fullscreen_count = 1;
 	}
 	
 }

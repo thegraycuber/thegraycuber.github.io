@@ -37,20 +37,16 @@ function tgs_setup(scale_adjust){
 
 function tgs_next_slide(){
 
-	if (slide == 77){
-		D = -1;
-		reset_D();
-	} else if (slide == 80){
-		D = -3;
-		reset_D();
-	} else if (slide == 88){
-		D = 2;
-		reset_D();
-	} else if (slide == 89){
-		D = -67;
-		reset_D();
+	display_index = display_slides.indexOf(slide);
+	if (display_index != -1){
+		if (display_D[display_index] != D || display_D[display_index] == -7){
+			D = display_D[display_index];
+			reset_D();
+		}
+	} else {
+		D = 0;
 	}
-		
+
 	if (slide + 1 < modules.length){
 		slide++;
 		prep_presentation();
@@ -397,9 +393,9 @@ class TextModule{
 			this.start_offset = lerp(this.start_s_offset,this.end_s_offset,lerp_val);
 			this.end_offset = lerp(this.start_e_offset,this.end_e_offset,lerp_val);
 			
-		} else {
+		}/* else {
 			this.giveSizes();
-		}
+		}*/
 	}
 	
 	duplicate(){
