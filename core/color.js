@@ -39,7 +39,7 @@ class Palette {
 			this.backlight = color('#6e4122');
 			this.mono = color('#fe8241');
 			this.bright = color('#faca30');
-			this.red = color('#ee5947');
+			this.red = color('#d94242');
 			this.gray = color('#999170');
 			
 		} else if (scheme == 'Dark'){
@@ -52,22 +52,22 @@ class Palette {
 			this.gray = color('#afb4c9');
 			
 		} else if (scheme == 'Pastel'){
-			this.front = color('#6f538d');
+			this.front = color('#5b2a7d');
 			this.back = color('#cbc1e9');
 			this.backlight = color('#b6a5db');
-			this.mono = color('#a77ad8');
-			this.red = color('#cf6eb1');
-			this.bright = color('#6c99df');
+			this.mono = color('#9a63d9');
+			this.red = color('#c353a0');
+			this.bright = color('#5184d2');
 			this.gray = color('#8c8eb4');
 			this.rev = -1;
 			
 		} else if (scheme == 'Paper'){
-			this.front = color('#814e3c');
+			this.front = color('#663F00');
 			this.back = color('#e9d8c6');
 			this.backlight = color('#ddc3a8');
-			this.mono = color('#ce8e58');
-			this.red = color('#c38db0');
-			this.bright = color('#8ba372');
+			this.mono = color('#bf7853');
+			this.red = color('#ad588b');
+			this.bright = color('#829651');
 			this.gray = color('#9b928a');
 			this.rev = -1;
 			
@@ -84,4 +84,3 @@ class Palette {
 
 	}
 }
-

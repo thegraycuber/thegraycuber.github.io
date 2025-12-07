@@ -29,8 +29,8 @@ function setup() {
 	palette.push(new Palette('#063a2a','#d6ddcc',['#d6ddcc','#d8b801','#3fbd75','#36b4cb','#af5757','#ee8060'],'#3fbd75','#16553f'));
 	palette.push(new Palette('#20213f','#c8caf4',['#c8caf4','#e1e485','#2cda9d','#8498ef','#f168a0','#ebad6b'],'#8498ef','#373861'));
 	palette.push(new Palette('#110a5d','#bbdbf3',['#bbdbf3','#d7f75b','#5de281','#23d2e8','#e185dc','#ffa475'],'#23d2e8','#273f8a'));
-	palette.push(new Palette('#cbc1e9','#6f538d',['#6f538d','#d3bc5f','#6db99d','#6c99df','#cf6eb1','#a77ad8'],'#a77ad8','#b6a5db','#cbc1e9'));
-	palette.push(new Palette('#e9d8c6','#814e3c',['#814e3c','#beb36a','#8ba372','#8aaabb','#c38db0','#ce8e58'],'#ce8e58','#ddc3a8','#e9d8c6'));
+	palette.push(new Palette('#cbc1e9','#5b2a7d',['#5b2a7d','#d3bc5f','#6db99d','#5184d2','#c353a0','#9a63d9'],'#9a63d9','#b6a5db','#cbc1e9'));
+	palette.push(new Palette('#e9d8c6','#663F00',['#663F00','#beb36a','#829651','#82989c','#ad588b','#bf7853'],'#bf7853','#ddc3a8','#e9d8c6'));
 	
 	px = windowHeight / (9 * pxfact);
 	w = px*8/n;
