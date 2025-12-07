@@ -35,11 +35,6 @@ function draw() {
 		show_table();
 	}
 
-	if (to_download){
-		to_download = false;
-		save("Group_Visualizer_" + now_string() + ".png");
-	}
-
 	resetMatrix();
 	settingBox.show();
 	arrowBoxes[active_arrow].show();
