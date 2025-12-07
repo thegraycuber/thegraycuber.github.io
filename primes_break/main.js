@@ -34,7 +34,7 @@ function setup() {
 	}
 	generate_squares(100);
 	reset_D();
-	slide_data = loadJSON('primes_break/primes_break_022.json');
+	slide_data = loadJSON('primes_break/primes_break_023.json');
 	color_millis = 0;
 }
 
@@ -42,9 +42,9 @@ function setup() {
 
 var D = -1;
 var scale_min = 3;
-var display_slides = [0,1,2,4,5,6,7,8,9,10,11,78,81,88,89,90];
-var display_D = [-1,-1,-1,-1,-1,2,-3,5,-7,-7,-7,-1,-3,17,7,-67];
-var display_limit = [2,2,1,2,2,2,2,2,1,1,1,2,2,2,2,2];
+var display_slides = [0,1,2,4,5,6,7,8,9,76,79,86,87,88];
+var display_D = [-1,-1,-1,-1,-1,2,19,19,19,-1,-3,17,7,-67];
+var display_limit = [2,2,1,2,2,2,1,1,1,2,2,2,2,2];
 var display_index = 0;
 var last_frame, color_millis;
 
