@@ -49,6 +49,21 @@ class Icon {
 				rotate(-3*PI/4);
 			}
 			
+		} else if (this.Type == 'info'){
+			onlyFill(icon_color);
+			if (check_info() == 'info'){
+				textSize(this.Size[1]*0.65);
+				text('i',0,0);
+				onlyStroke(palette.front,this.Size[1]*0.08);
+				circle(0,0,this.Size[1]);
+			} else if (check_info() == 'hide'){
+				rotate(PI/4);
+				rect(0,0,this.Size[0],this.Size[0]*0.1);
+				rotate(PI/2);
+				rect(0,0,this.Size[0],this.Size[0]*0.1);
+				rotate(-3*PI/4);
+			}
+			
 		} else if (this.Type == 'physics'){
 			let rad = this.Size[0]*0.2;
 			onlyFill(icon_color);
@@ -86,6 +101,13 @@ class Icon {
 			ellipse(this.Size[0]*0.31, -this.Size[0]*0.015,this.Size[0]*0.03, this.Size[1]*0.05);
 			ellipse(this.Size[0]*0.23, this.Size[1]*0.12,this.Size[0]*0.03, this.Size[1]*0.05);
 			ellipse(this.Size[0]*0.14, this.Size[1]*0.26,this.Size[0]*0.03, this.Size[1]*0.05);
+			
+		} else if (this.Type == 'grid'){
+			onlyStroke(palette.front,this.Size[0]*0.08);
+			for (let g_pos = -0.3; g_pos < 0.4; g_pos += 0.3){
+				rect(this.Size[0]*g_pos,0,0,this.Size[1]);
+				rect(0,this.Size[1]*g_pos, this.Size[0],0);
+			}
 			
 		} else if (this.Type == 'youtube'){
 			onlyFill(palette.front);
@@ -208,6 +230,19 @@ class Box {
 			// if (item.Id == 'arrow_active' && item.Index == 1){
 			// 	return;
 			// }
+		}
+	} 
+	
+	setActive(active_value){
+		this.Active = active_value;
+		for (let list_item of this.Items){
+			if (list_item.Type == 'text' && list_item.Link != ''){
+				if (active_value){
+					list_item.button.removeAttribute("hidden");
+				} else {
+					list_item.button.attribute("hidden","hidden");
+				}
+			} 
 		}
 	}
 }

@@ -69,6 +69,14 @@ function sign(sign_input){
 	}
 }
 
+function vector_to_array(vec_to_convert){
+	return [vec_to_convert.x, vec_to_convert.y];
+}
+
+function array_to_vector(){
+	
+}
+
 function sup_from_val(sup_val){
 	if (sup_val < 2){return '';}
 	
@@ -123,31 +131,34 @@ function pre_0(time_value){
 
 
 function text_2d(values,unit){
-	let text_output = '';
-	
-	if (values[0] != 0 || values[1] == 0){
-		text_output += ' ' + str(values[0]);
+
+	if (values[0] == 0){
+		if (values[1] == 0){
+			return '0';
+		} else if (values[1] == 1){
+			return unit;
+		} else if (values[1] == -1){
+			return '-' + unit;
+		} else {
+			return str(values[1]) + unit;
+		}
 	}
+	
+	let text_output = str(values[0]);
 
 	if (values[1] == 1){
-		text_output += ' ' + unit;
+		return text_output + ' + ' + unit;
 	} else if (values[1] == -1){
-		if (text_output.length == 0){
-			text_output += ' -' + unit;
-		} else {
-			text_output += ' - ' + unit;	
-		}
+		return text_output + ' - ' + unit;	
 	} else if (values[1] != 0){
-		if (text_output.length == 0){
-			text_output += ' ' + str(values[1]) + unit;
-		} else if (values[1] >= 1){
-			text_output += ' + ' + str(values[1]) + unit;
+		if (values[1] >= 1){
+			return text_output + ' + ' + str(values[1]) + unit;
 		} else {
-			text_output += ' - ' + str(abs(values[1])) + unit;
+			return text_output + ' - ' + str(abs(values[1])) + unit;
 		}
+	} else {
+		return text_output;
 	}
-	
-	return text_output;
 }
 
 
@@ -158,5 +169,31 @@ function quadratic(a,b,c){
 	} else {
 		let disc_root = discrim**0.5;
 		return [(-b+disc_root)/(2*a)*sign(a), (-b-disc_root)/(2*a)*sign(a)];
+	}
+}
+
+
+var primes = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47];
+var prime_limit = 10000;
+
+function add_prime(){
+	let test_prime = primes[primes.length-1];
+	
+	while (test_prime < prime_limit){
+		test_prime += 2;
+		let test_is_prime = true;
+		let max_factor = test_prime**0.5+0.01;
+		for (let test_factor of primes){
+			if (test_factor > max_factor){break;}
+			if (test_prime % test_factor == 0){
+				test_is_prime = false;
+				break;
+			}
+		}
+
+		if (test_is_prime){
+			primes.push(test_prime);
+			return;
+		}
 	}
 }
