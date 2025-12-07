@@ -24,7 +24,7 @@ function tgs_next_slide(){
 
 	display_index = display_slides.indexOf(slide);
 	if (display_index != -1){
-		if (display_D[display_index] != D || display_D[display_index] == -7){
+		if (display_D[display_index] != D || display_D[display_index] == 19){
 			D = display_D[display_index];
 			reset_D();
 		}
