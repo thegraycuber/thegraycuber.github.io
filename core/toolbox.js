@@ -13,6 +13,10 @@ function onlyFill(fill_color){
 	fill(fill_color);
 }
 
+function copyColor(color_to_copy){
+	return color(red(color_to_copy),green(color_to_copy),blue(color_to_copy));
+}
+
 
 function c_scale(c_c,c_a){
 	return [c_c*c_a[0],c_c*c_a[1]];
@@ -73,8 +77,8 @@ function vector_to_array(vec_to_convert){
 	return [vec_to_convert.x, vec_to_convert.y];
 }
 
-function array_to_vector(){
-	
+function array_to_vector(array_to_convert){
+	return createVector(...array_to_convert);
 }
 
 function sup_from_val(sup_val){
@@ -196,4 +200,13 @@ function add_prime(){
 			return;
 		}
 	}
+}
+
+function copyToClipboard(text) {
+    var dummy = document.createElement("textarea");
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
 }

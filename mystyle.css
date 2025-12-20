@@ -48,6 +48,22 @@ footer {
 	border: none;
 }
 
+.hexponent_input{
+	font-family: "AshkinsonRegular_000";
+	text-align: center;
+}
+
+.hexponent_input::placeholder{
+	color: #ffffff77;
+}
+
+
+.hexponent_button{
+	font-family: "AshkinsonRegular_000";
+	text-align: center;
+	border: none;
+}
+
 
 .index_button{
 	text-align: center;

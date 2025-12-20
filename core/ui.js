@@ -49,6 +49,24 @@ class Icon {
 				rotate(-3*PI/4);
 			}
 			
+		} else if (this.Type == 'hearts') {
+			onlyFill(palette.front);
+			beginShape();
+			for (var h = 0; h < TWO_PI; h+=0.1){
+				vertex(this.Size[0]*(-0.25+0.2*pow(sin(h),3)), -this.Size[1]*(0.3+0.012*(13*cos(h)-5*cos(2*h)-2*cos(3*h)-cos(4*h))));
+			}
+			endShape(CLOSE);	
+			beginShape();
+			for (h = 0; h < TWO_PI; h+=0.1){
+				vertex(this.Size[0]*0.2*pow(sin(h),3), -this.Size[1]*(-0.15+0.012*(13*cos(h)-5*cos(2*h)-2*cos(3*h)-cos(4*h))));
+			}
+			endShape(CLOSE);
+			beginShape();
+			for (h = 0; h < TWO_PI; h+=0.1){
+				vertex(this.Size[0]*(0.3+0.2*pow(sin(h),3)), -this.Size[1]*(0.2+0.012*(13*cos(h)-5*cos(2*h)-2*cos(3*h)-cos(4*h))));
+			}
+			endShape(CLOSE);
+			
 		} else if (this.Type == 'info'){
 			onlyFill(icon_color);
 			if (check_info() == 'info'){
@@ -80,6 +98,23 @@ class Icon {
 			line(0, -rad*1.6, 0, rad*0.5);
 			line(-rad, -rad*0.5, 0, rad*0.5);
 			line(rad, -rad*0.5, 0, rad*0.5);
+			
+		} else if (this.Type == 'copy'){
+			onlyStroke(palette.front,this.Size[0]*0.1);
+			rect(-this.Size[0]*0.1, -this.Size[1]*0.15,this.Size[0]*0.5,this.Size[1]*0.72,this.Size[0]*0.12);
+			stroke(palette.back);
+			fill(palette.back);
+			rect(this.Size[0]*0.2, this.Size[1]*0.15,this.Size[0]*0.8,this.Size[1],this.Size[0]*0.12);
+			stroke(palette.front);
+			rect(this.Size[0]*0.2, this.Size[1]*0.15,this.Size[0]*0.5,this.Size[1]*0.72,this.Size[0]*0.12);
+			
+		} else if (this.Type == 'paste') {
+			onlyStroke(palette.front,this.Size[0]*0.1);
+			rect(0,0,this.Size[0]*0.7,this.Size[1],this.Size[0]*0.15);
+			onlyFill(palette.back);
+			rect(0,-this.Size[1]*0.5,this.Size[0]*0.45,this.Size[1]*0.4);
+			fill(palette.front);
+			rect(0, -this.Size[1]*0.5,this.Size[0]*0.3,this.Size[1]*0.18,this.Size[0]*0.05);
 			
 		} else if (this.Type == 'random') {
 			onlyStroke(icon_color,this.Size[0]*0.06);
@@ -281,15 +316,19 @@ class arrowItem {
 			this.giveValue((1 + this.Index) % this.List.length);
 		}
 	}
-	giveValue(indexVal){
-		if (this.Index != indexVal){
+	giveValue(indexVal,override = false){
+		if (this.Index != indexVal || override){
 			this.Index = indexVal;
 			action(this.Id,this.Index,this.List[this.Index],this.Arrow);
 		}
 	}
-	randomize(){
+	randomize(force_new = false){
 		if (this.Id == 'arrow'){return;}
-		this.giveValue(int(random(this.List.length)));
+		let new_value = int(random(this.List.length));
+		while (force_new && new_value == this.Index && this.List.length > 1){
+			new_value = int(random(this.List.length));
+		}
+		this.giveValue(new_value);
 	}
 }
 
@@ -379,7 +418,7 @@ class binaryItem {
 			this.giveValue(1);
 		}
 	}
-	giveValue(indexVal){
+	giveValue(indexVal,override = false){
 		if (this.Index != indexVal){
 			this.Index = indexVal;
 			action(this.Id,this.Index,this.List[this.Index],this.Arrow);
@@ -430,8 +469,8 @@ class sliderItem {
 			this.giveValue(min(max(((mouseX - this.Coords[0])*2/this.Size[0] + 0.8)*(this.Range[1] - this.Range[0])/1.6 + this.Range[0],this.Range[0]),this.Range[1]));
 		}
 	}
-	giveValue(indexVal){
-		if (this.Value != indexVal){
+	giveValue(indexVal,override = false){
+		if (this.Value != indexVal || override){
 			this.Value = indexVal;
 			action(this.Id,this.Value,this,this.Arrow);
 		}
