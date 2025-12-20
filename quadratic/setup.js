@@ -5,7 +5,11 @@ function setup() {
 
 	palette_index = palette_names.indexOf('Sunset');
 	palette = new Palette(palette_names[palette_index]);
-
+	
+	let currentUrl = window.location.href; // PROD
+	if (currentUrl.includes('D=')){
+		D = int(currentUrl.substring(currentUrl.indexOf('D=')+2));
+	}
 	createCanvas(window.innerWidth, window.innerHeight);
 	smooth();
 	frameRate(30);
