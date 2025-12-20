@@ -313,6 +313,14 @@ var at_text;
 var at_ticker = 0;
 var fav = 0;
 var favorites = [
-	['I woke up at 7:02 and ate 3 pecans',''],
-	['I woke up at 7:16 and ate 4 pears',''],
+	['I woke up at 7:06 and ate 4 raisins',''],
+	['I woke up at 7:04 and ate 48 peaches',''],
+	['I woke up at 7:07 and ate 2 raisins',''],
+	['I woke up at 7:06 and ate 88 cherries',''],
+	['I woke up at 7:04 and ate 5 raisins',''],
+	['I woke up at 7:03 and ate 3 craisins',''],
+	['I woke up at 7:09 and ate 2 raspberries',''],
+	['I woke up at 7:06 and ate 8 grapes',''],
+	['I woke up at 7:05 and ate 9 peaches',''],
+	['I woke up at 7:19 and ate 2 raisins',''],
 	];
