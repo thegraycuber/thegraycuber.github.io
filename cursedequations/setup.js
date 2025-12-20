@@ -123,7 +123,7 @@ function setup() {
 		shape_size = unit*0.07;
 	
 		button_style(paste_input,palette.back,palette.front,true,unit*0.06,unit*0.06,0.8,0.12,0.08,0.01,0.05);
-		button_style(paste_go,palette.front,palette.back,false,unit*0.92,unit*0.08,0.4,0.12,0.08,0,0.05);
+		button_style(paste_go,palette.front,palette.back,false,unit*0.92,unit*0.06,0.4,0.12,0.08,0,0.05);
 		
 		
 	}
