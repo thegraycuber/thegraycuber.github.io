@@ -89,6 +89,12 @@ function setup() {
 	}
 	textBox.Items.push(new arrowItem(1,ring_list,bigText,'ring'));
 	textBox.Items.push(new textItem(0.8,'i² = -1',bigText*0.8,'ring_rule'));
+	for (let r = 0; r < D_list.length; r++){
+		if (D_list[r] == D){
+			textBox.Items[textBox.Items.length-2].Index = r;
+			break;
+		}
+	}
 	
 	textBox.Items.push(new textItem(1,'',0));
 	textBox.Items.push(new textItem(0.6,'color mode',bigText*0.6));
