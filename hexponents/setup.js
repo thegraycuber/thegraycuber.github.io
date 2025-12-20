@@ -127,6 +127,7 @@ function setup() {
 	helpBox.giveSizes();
 	helpBox.setActive(false);
 	
+	code_to_settings('I woke up at 7:06 and ate 4 raisins');
 }
 
 var mainFont, regularFont;
