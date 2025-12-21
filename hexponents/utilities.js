@@ -77,7 +77,9 @@ function process_orbits(){
 	}
 
 	let orbit_number = 0;
-	for (let c of Object.keys(equivalence_classes)){
+	let class_keys = Object.keys(equivalence_classes);
+	class_keys.sort();
+	for (let c of class_keys){
 		if (c == '0;0'){continue;}
 		if (equivalence_classes[c].orbit == -1){
 			let orbiter = [...equivalence_classes[c].rep];
@@ -152,7 +154,7 @@ function add_prime_norm(prime_index){
 
 	if (D_power == 1){
 		add_hex_with_norm(test_prime);
-	} else if (test_prime < 50){
+	} else if (test_prime < 50){ // CAREFUL THIS WILL BREAK CODES
 		prime_norms.push([test_prime,0,test_prime**2]);
 	}
 }

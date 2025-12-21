@@ -181,15 +181,13 @@ var favorites = [
 	['I woke up at 7:03 and ate 3 craisins',''],
 	['I woke up at 7:09 and ate 2 raspberries',''],
 	['I woke up at 7:06 and ate 8 grapes',''],
-	['I woke up at 7:05 and ate 9 peaches',''],
 	['I woke up at 7:19 and ate 2 raisins',''],
 	['I woke up at 7:12 and ate 140 raisins',''],
-	['I woke up at 7:13 and ate 7 raisins',''],
-	['I woke up at 7:14 and ate 184 raisins',''],
 	['I woke up at 7:31 and ate 2 raisins',''],
-	// ['I woke up at 7:35 and ate 2 raisins',''],
-	// ['I woke up at 7:39 and ate 55 raisins',''],
-	// ['',''],
+	['I woke up at 7:13 and ate 7 raisins',''],
+	['I woke up at 7:35 and ate 2 raisins',''],
+	['I woke up at 7:39 and ate 55 raisins',''],
+	// ['I woke up at 7:42 and ate 194 grapefruits',''],
 	// ['',''],
 	// ['',''],
 	// ['',''],
@@ -199,5 +197,3 @@ var favorites = [
 	// ['',''],
 	// ['','']
 	];
-
-
