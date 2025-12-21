@@ -1,6 +1,6 @@
 
-var modulus = [5,0]; 
-var orbits = 2; 
+var modulus = [11,0]; 
+var orbits = 3; 
 var crow_constant = -1; 
 
 

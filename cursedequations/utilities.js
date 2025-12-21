@@ -89,6 +89,10 @@ function action(id,index,value,s){
 		palette = new Palette(value);
 		button_color(paste_input,palette.back,palette.front,true);
 		button_color(paste_go,palette.front,palette.back,false);
+		if (mobile){
+			button_color(copy_text,palette.back,palette.front,true);
+		button_color(copt_label,palette.front,palette.back,false);
+		}
 
 	} else if (id == 'label'){	
 		show_label = index == 0;

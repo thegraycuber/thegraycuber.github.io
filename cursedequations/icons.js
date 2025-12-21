@@ -8,6 +8,7 @@ class Icon {
 		this.Stroke = stroke;
 		this.Coords = coords;
 		this.Direction = direction;
+		this.Id = type;
 	}
 	show() {
 		if (this.Type == 'copy') {
@@ -21,6 +22,15 @@ class Icon {
 			stroke(palette.front);
 			rect(this.Coords[0]+this.Size[0]*0.2, this.Coords[1]+this.Size[1]*0.15,this.Size[0]*0.5,this.Size[1]*0.72,this.Size[0]*0.12);
 			noStroke();
+		} else if (this.Type == 'play') {
+			push();
+			translate(this.Coords[0],this.Coords[1]);
+			rotate(PI/4);
+			rect(0,0,this.Size[0],this.Size[0]*0.12);
+			rotate(PI/2);
+			rect(0,0,this.Size[0],this.Size[0]*0.12);
+			rotate(-3*PI/4);
+			pop();
 		} else if (this.Type == 'paste') {
 			noFill();
 			strokeWeight(this.Stroke);
@@ -101,18 +111,32 @@ class Icon {
 					code += mi.List[mi.Index].substring(0,3) + ",";	
 				}
 			}
-			copyToClipboard(code.substring(0,code.length-1));
+			if (mobile){
+				copy_text.style("visibility", "visible");
+				copy_text.attribute("value",code.substring(0,code.length-1));
+				copy_label.style("visibility", "visible");
+				iconBox.Items[iconBox.getIndex('copy')].Type = 'play';
+				return;
+			} else {
+				copyToClipboard(code.substring(0,code.length-1));
+			}
 			
 		} else if (this.Type == 'paste'){
 			pasting = true;
 			input_setup();
-			
+	
 		} else if (this.Type == 'heart'){
 			fav = (fav + 1)%favorites.length;
 			input_settings(favorites[fav][0]);
 			at_text = favorites[fav][1];
 			at_ticker = 400;
 			reset_shapes();
+		}
+		
+		if (mobile){
+			copy_text.style("visibility", "hidden");
+			copy_label.style("visibility", "hidden");
+			iconBox.Items[iconBox.getIndex('copy')].Type = 'copy';
 		}
 	}
 }
@@ -165,6 +189,7 @@ function input_settings(input_str){
 }
 var pasting = false;
 
+var copy_text, copy_label;
 function copyToClipboard(text) {
     var dummy = document.createElement("textarea");
     document.body.appendChild(dummy);
@@ -287,7 +312,6 @@ var favorites = [
 ['Oct,1,Rot,Reg,Spi,1,Rad,Reg,12g,-1,Rot,Wig,Gri,Off','@bruh6942'],
 ['fPyt,Off,Poi,9go,-4,Off,Wig,12g,-1,Rot,Wig',''],
 ['13g,2,Off,Flo,Tri,1,Rad,Smo,9go,1,Rot,Wig,Off,Poi','@wcodelyoko'],
-['13g,1,Rot,Smo,13g,-3,Off,Reg,Cir,1,Rot,Reg,Off,Off','@lunaamora1794']
+['13g,1,Rot,Smo,13g,-3,Off,Reg,Cir,1,Rot,Reg,Off,Off','@lunaamora1794'],
 ]
 var fav = -1;
-

@@ -7,7 +7,7 @@ var produce_list = ['raisins','apples','pears','oranges','craisins','grapes','pe
 
 
 var equivalence_classes;
-var textBox, iconBox, helpBox, bigText, at_location;
+var textBox, iconBox, helpBox, bigText, at_location, mobile;
 function setup() {
 	
 	createCanvas(windowWidth, windowHeight);
@@ -36,7 +36,7 @@ function setup() {
 	paste_go.mousePressed(get_paste);
 
 	
-	let mobile = width*1.4 < height;
+	mobile = width*1.4 < height;
 	let pad;
 	
 	if (mobile) {	
@@ -57,8 +57,15 @@ function setup() {
 
 		helpBox = new Box([width*0.74,height-width*0.77],[width*0.44,width*0.7],pad);
 		
-		button_style(paste_input,palette.back,palette.front,true,width*0.5-bigText*6,bigText,bigText*8,bigText*1.6);
-		button_style(paste_go,palette.front,palette.back,false,width*0.5+bigText*2.5,bigText,bigText*4,bigText*1.6);
+		button_style(paste_input,palette.back,palette.front,true,width*0.5-bigText*8,bigText,bigText*16,bigText*1.4,bigText*0.8);
+		button_style(paste_go,palette.front,palette.back,true,width*0.5-bigText*4,bigText*2.6,bigText*8,bigText*1.2,bigText*0.8);
+			
+		copy_text = createInput('');
+		copy_text.attribute("value","enter code");
+		copy_label = createButton('copy the code above');
+
+		button_style(copy_text,palette.back,palette.front,true,width*0.5-bigText*8,bigText,bigText*16,bigText*1.4,bigText*0.8);
+		button_style(copy_label,palette.front,palette.back,true,width*0.5-bigText*4,bigText*2.6,bigText*8,bigText*1.2,bigText*0.8);
 			
 		at_location = [width*0.5,height-width*0.4-bigText];
 		
@@ -82,8 +89,8 @@ function setup() {
 		
 		helpBox = new Box([height*0.26,height*0.78],[height*0.26,height*0.4],pad);
 		
-		button_style(paste_input,palette.back,palette.front,true,height*0.13,height*0.61-bigText*0.8,bigText*8,bigText*1.6);
-		button_style(paste_go,palette.front,palette.back,false,height*0.15+bigText*8,height*0.61-bigText*0.8,bigText*4,bigText*1.6);
+		button_style(paste_input,palette.back,palette.front,true,height*0.13,height*0.61-bigText*0.8,bigText*8,bigText*1.6,bigText);
+		button_style(paste_go,palette.front,palette.back,false,height*0.15+bigText*8,height*0.61-bigText*0.8,bigText*4,bigText*1.6,bigText);
 
 		at_location = [width*0.5,height-bigText*2];
 	} 
@@ -126,8 +133,7 @@ function setup() {
 	textBox.giveSizes();
 	helpBox.giveSizes();
 	helpBox.setActive(false);
-	
-	
+
 	fav = floor(random()*favorites.length);
 	action('hearts');
 }

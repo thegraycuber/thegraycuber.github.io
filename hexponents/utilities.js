@@ -205,3 +205,7 @@ function check_info(){
 		return 'info';
 	}
 }
+
+function check_play(){
+	return 'stop';
+}

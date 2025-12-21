@@ -9,10 +9,11 @@ var show_label = true;
 var invalid_text = '';
 var at_text = '';
 var at_ticker = 0;
+var media_prefix = 'media/';
 
 function preload() {
-	mainFont = loadFont("media/AshkinsonBold_003.ttf");
-	thinFont = loadFont("media/AshkinsonRegular_000.ttf");
+	mainFont = loadFont(media_prefix+"AshkinsonBold_003.ttf");
+	thinFont = loadFont(media_prefix+"AshkinsonRegular_000.ttf");
 	
 }
 
@@ -82,8 +83,15 @@ function setup() {
 		
 		grid = new Grid(0,lab_h-unit*0.16,width,0);
 		
-		button_style(paste_input,palette.back,palette.front,true,default_origin.x-unit*0.9,unit*0.1,1.8,0.2,0.14,0.02);
-		button_style(paste_go,palette.front,palette.back,false,default_origin.x-unit*0.3,unit*0.4,0.6,0.2,0.14,0.02);
+		button_style(paste_input,palette.back,palette.front,true,default_origin.x-unit*1.05,unit*0.1,2.1,0.16,0.08,0.01,0.06);
+		button_style(paste_go,palette.front,palette.back,false,default_origin.x-unit*0.45,unit*0.3,0.9,0.14,0.08,0.01,0.06);
+		
+		copy_text = createInput('');
+		copy_text.attribute("value","enter code");
+		copy_label = createButton('copy the code above');
+		
+		button_style(copy_text,palette.back,palette.front,true,default_origin.x-unit*1.05,unit*0.1,2.1,0.16,0.08,0.01,0.06);
+		button_style(copy_label,palette.front,palette.back,false,default_origin.x-unit*0.45,unit*0.3,0.9,0.14,0.08,0.01,0.06);
 		
 		
 	} else {
