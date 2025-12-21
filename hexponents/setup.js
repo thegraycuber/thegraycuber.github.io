@@ -65,7 +65,7 @@ function setup() {
 		copy_label = createButton('copy the code above');
 
 		button_style(copy_text,palette.back,palette.front,true,width*0.5-bigText*8,bigText,bigText*16,bigText*1.4,bigText*0.8);
-		button_style(copy_label,palette.front,palette.back,true,width*0.5-bigText*4,bigText*2.6,bigText*8,bigText*1.2,bigText*0.8);
+		button_style(copy_label,palette.front,palette.back,true,width*0.5-bigText*5,bigText*3,bigText*10,bigText*1.2,bigText*0.8);
 			
 		at_location = [width*0.5,height-width*0.4-bigText];
 		

@@ -91,7 +91,7 @@ function setup() {
 		copy_label = createButton('copy the code above');
 		
 		button_style(copy_text,palette.back,palette.front,true,default_origin.x-unit*1.05,unit*0.1,2.1,0.16,0.08,0.01,0.06);
-		button_style(copy_label,palette.front,palette.back,false,default_origin.x-unit*0.45,unit*0.3,0.9,0.14,0.08,0.01,0.06);
+		button_style(copy_label,palette.front,palette.back,false,default_origin.x-unit*0.45,unit*0.35,0.9,0.14,0.08,0.01,0.06);
 		
 		
 	} else {
