@@ -152,7 +152,7 @@ function add_prime_norm(prime_index){
 
 	if (D_power == 1){
 		add_hex_with_norm(test_prime);
-	} else if (test_prime < 30){
+	} else if (test_prime < 50){
 		prime_norms.push([test_prime,0,test_prime**2]);
 	}
 }

@@ -207,7 +207,7 @@ function action(id,index,value){
 		textBox.getItem('ring').randomize(true);
 		textBox.getItem('mod').randomize(true);
 
-		let new_orbits = floor((random()*(hex_norm(modulus)**0.25))**4);
+		let new_orbits = floor((random()*(abs(hex_norm(modulus))**0.5))**2);
 		let orbit_index = orbit_options.length-1;
 		while (orbit_options[orbit_index] > new_orbits && orbit_index > 0){
 			orbit_index--;

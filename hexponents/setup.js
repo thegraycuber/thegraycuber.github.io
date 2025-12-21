@@ -22,7 +22,7 @@ function setup() {
 	palette_index = 1;
 	orbit_color_setup();
 
-	while (primes.length < 30){
+	while (primes.length < 100){
 		add_prime();
 	}
 
