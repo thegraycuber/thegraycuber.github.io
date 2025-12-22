@@ -2,6 +2,7 @@
 var origin, scalar;
 
 function touchStarted(){
+	at_ticker = min(at_ticker,at_text.length);
 	if (pasting){return;}
 	textBox.clicked();
 	iconBox.clicked();
@@ -187,7 +188,8 @@ var favorites = [
 	['I woke up at 7:04 and ate 48 peaches',''],//lines and diam's
 	['I woke up at 7:07 and ate 2 raisins',''],//smallest legs
 	['I woke up at 7:06 and ate 88 cherries',''],//holy lattice
-	['I woke up at 7:04 and ate 5 raisins','C'],//zul man
+	['I woke up at 7:33 and ate 194 apples',''],//kerchoo
+	['I woke up at 7:04 and ate 5 raisins',''],//zul man
 	['I woke up at 7:09 and ate 2 raspberries',''],//squatties
 	['I woke up at 7:09 and ate 3 kiwis','@MatteoDolcin-ye8xm'],//huge mosaic
 	['I woke up at 7:14 and ate 276 strawberries','@unapersonarandom2763'],//energy diamonds
@@ -195,14 +197,13 @@ var favorites = [
 	['I woke up at 7:06 and ate 8 grapes',''],//laser
 	['I woke up at 7:19 and ate 2 raisins',''],//za
 	['I woke up at 7:12 and ate 140 raisins',''],//layers
+	['I woke up at 7:42 and ate 194 grapefruits',''], //blades
 	['I woke up at 7:03 and ate 3 craisins',''],//hedges
 	['I woke up at 7:31 and ate 2 raisins',''],//very wiggly dartboards
 	// ['I woke up at 7:13 and ate 7 raisins','I'],//hexes of hexes
 	['I woke up at 7:35 and ate 2 raisins',''],//wiggly dartboards with moons
 	['I woke up at 7:39 and ate 55 raisins',''],//wiggler
-	['I woke up at 7:42 and ate 194 grapefruits',''], //blades
 	['I woke up at 7:14 and ate 552 cashews',''], //holy argyle
-	['I woke up at 7:33 and ate 194 apples',''],//kerchoo
 	// ['',''],
 	// ['',''],
 	// ['',''],
