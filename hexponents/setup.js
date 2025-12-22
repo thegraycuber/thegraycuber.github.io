@@ -58,7 +58,7 @@ function setup() {
 		helpBox = new Box([width*0.74,height-width*0.77],[width*0.44,width*0.7],pad);
 		
 		button_style(paste_input,palette.back,palette.front,true,width*0.5-bigText*8,bigText,bigText*16,bigText*1.4,bigText*0.8);
-		button_style(paste_go,palette.front,palette.back,true,width*0.5-bigText*4,bigText*2.6,bigText*8,bigText*1.2,bigText*0.8);
+		button_style(paste_go,palette.front,palette.back,true,width*0.5-bigText*4,bigText*3,bigText*8,bigText*1.2,bigText*0.8);
 			
 		copy_text = createInput('');
 		copy_text.attribute("value","enter code");
@@ -89,8 +89,8 @@ function setup() {
 		
 		helpBox = new Box([height*0.26,height*0.78],[height*0.26,height*0.4],pad);
 		
-		button_style(paste_input,palette.back,palette.front,true,height*0.13,height*0.61-bigText*0.8,bigText*8,bigText*1.6,bigText);
-		button_style(paste_go,palette.front,palette.back,false,height*0.15+bigText*8,height*0.61-bigText*0.8,bigText*4,bigText*1.6,bigText);
+		button_style(paste_input,palette.back,palette.front,true,height*0.13,height*0.61-bigText*0.8,bigText*12,bigText,bigText*0.6);
+		button_style(paste_go,palette.front,palette.back,false,height*0.13+bigText*4,height*0.61+bigText*0.8,bigText*4,bigText,bigText*0.6);
 
 		at_location = [width*0.5,height-bigText*2];
 	} 

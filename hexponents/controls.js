@@ -95,23 +95,33 @@ function settings_to_code(){
 
 function code_to_settings(input_code){
 	let code_words = input_code.split(' ');
-	if (code_words.length < 9){
-		return 'invalid code';
+	let unfound = true;
+	while(unfound){
+		if (code_words.length < 8){
+			return 'invalid code';
+		}
+		if (code_words[0] == 'woke'){
+			unfound = false;
+		} else {
+			code_words.splice(0,1);
+		}
+		
 	}
-	let crow_index = produce_list.indexOf(code_words[8]);
+	
+	let crow_index = produce_list.indexOf(code_words[7]);
 	if (crow_index == -1){
 		return 'invalid code';
 	}
 	textBox.getItem('ring').giveValue(crow_index);
 
-	let mod_index = int(code_words[4].substring(2));
+	let mod_index = int(code_words[3].substring(2));
 	if (isNaN(mod_index) || mod_index < 0 || mod_index >= textBox.getItem('mod').List.length){
 		return 'invalid code';
 	}
 	
 	textBox.getItem('mod').giveValue(mod_index);
 	
-	let orbit_value = int(code_words[7]);
+	let orbit_value = int(code_words[6]);
 	for (let o = 0; o < orbit_options.length; o++){
 		if (orbit_value == orbit_options[o]){
 			textBox.getItem('orbits').giveValue(o);
@@ -173,25 +183,25 @@ var at_text;
 var at_ticker = 0;
 var fav = 0;
 var favorites = [
-	['I woke up at 7:06 and ate 4 raisins',''],
-	['I woke up at 7:04 and ate 48 peaches',''],
-	['I woke up at 7:07 and ate 2 raisins',''],
-	['I woke up at 7:06 and ate 88 cherries',''],
-	['I woke up at 7:04 and ate 5 raisins',''],
-	['I woke up at 7:03 and ate 3 craisins',''],
-	['I woke up at 7:09 and ate 2 raspberries',''],
-	['I woke up at 7:06 and ate 8 grapes',''],
-	['I woke up at 7:19 and ate 2 raisins',''],
-	['I woke up at 7:12 and ate 140 raisins',''],
-	['I woke up at 7:31 and ate 2 raisins',''],
-	['I woke up at 7:13 and ate 7 raisins',''],
-	['I woke up at 7:35 and ate 2 raisins',''],
-	['I woke up at 7:39 and ate 55 raisins',''],
-	// ['I woke up at 7:42 and ate 194 grapefruits',''],
-	// ['',''],
-	// ['',''],
-	// ['',''],
-	// ['',''],
+	['I woke up at 7:06 and ate 4 raisins',''],//solid 4
+	['I woke up at 7:04 and ate 48 peaches',''],//lines and diam's
+	['I woke up at 7:07 and ate 2 raisins',''],//smallest legs
+	['I woke up at 7:06 and ate 88 cherries',''],//holy lattice
+	['I woke up at 7:04 and ate 5 raisins','C'],//zul man
+	['I woke up at 7:09 and ate 2 raspberries',''],//squatties
+	['I woke up at 7:09 and ate 3 kiwis','@MatteoDolcin-ye8xm'],//huge mosaic
+	['I woke up at 7:14 and ate 276 strawberries','@unapersonarandom2763'],//energy diamonds
+	['I woke up at 7:06 and ate 8 grapes',''],//laser
+	['I woke up at 7:19 and ate 2 raisins',''],//za
+	['I woke up at 7:12 and ate 140 raisins',''],//layers
+	['I woke up at 7:03 and ate 3 craisins',''],//hedges
+	['I woke up at 7:31 and ate 2 raisins',''],//very wiggly dartboards
+	// ['I woke up at 7:13 and ate 7 raisins','I'],//hexes of hexes
+	['I woke up at 7:35 and ate 2 raisins',''],//wiggly dartboards with moons
+	['I woke up at 7:39 and ate 55 raisins',''],//wiggler
+	['I woke up at 7:42 and ate 194 grapefruits',''], //blades
+	['I woke up at 7:14 and ate 552 cashews',''], //holy argyle
+	['I woke up at 7:33 and ate 194 apples',''],//kerchoo
 	// ['',''],
 	// ['',''],
 	// ['',''],
