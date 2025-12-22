@@ -83,16 +83,15 @@ function setup() {
 		
 		grid = new Grid(0,lab_h-unit*0.16,width,0);
 		
-		button_style(paste_input,palette.back,palette.front,true,default_origin.x-unit*1.05,unit*0.1,2.1,0.16,0.08,0.01,0.06);
-		button_style(paste_go,palette.front,palette.back,false,default_origin.x-unit*0.45,unit*0.3,0.9,0.14,0.08,0.01,0.06);
+		button_style(paste_input,palette.back,palette.front,true,default_origin.x-unit*1.05,unit*0.1,2.1,0.16,0.14,0.01,0.1);
+		button_style(paste_go,palette.front,palette.back,false,default_origin.x-unit*0.45,unit*0.4,0.9,0.16,0.14,0.01,0.1);
 		
 		copy_text = createInput('');
 		copy_text.attribute("value","enter code");
 		copy_label = createButton('copy the code above');
 		
-		button_style(copy_text,palette.back,palette.front,true,default_origin.x-unit*1.05,unit*0.1,2.1,0.16,0.08,0.01,0.06);
-		button_style(copy_label,palette.front,palette.back,false,default_origin.x-unit*0.45,unit*0.35,0.9,0.14,0.08,0.01,0.06);
-		
+		button_style(copy_text,palette.back,palette.front,true,default_origin.x-unit*1.15,unit*0.16,2.3,0.2,0.13,0.01,0.06);
+		button_style(copy_label,palette.front,palette.back,false,default_origin.x-unit*0.8,unit*0.4,1.6,0.2,0.13,0.01,0.06);
 		
 	} else {
 		unit = height * 0.35;
