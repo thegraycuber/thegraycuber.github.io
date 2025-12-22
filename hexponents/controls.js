@@ -191,6 +191,7 @@ var favorites = [
 	['I woke up at 7:09 and ate 2 raspberries',''],//squatties
 	['I woke up at 7:09 and ate 3 kiwis','@MatteoDolcin-ye8xm'],//huge mosaic
 	['I woke up at 7:14 and ate 276 strawberries','@unapersonarandom2763'],//energy diamonds
+	['I woke up at 7:00 and ate 4 limes','@ismaelmartinez8639'],//triple lattice
 	['I woke up at 7:06 and ate 8 grapes',''],//laser
 	['I woke up at 7:19 and ate 2 raisins',''],//za
 	['I woke up at 7:12 and ate 140 raisins',''],//layers
