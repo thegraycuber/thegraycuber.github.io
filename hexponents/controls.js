@@ -187,6 +187,7 @@ var fav = 0;
 var favorites = [
 	['I woke up at 7:06 and ate 4 raisins',''],//solid 4
 	['I woke up at 7:04 and ate 48 peaches',''],//lines and diam's
+	['I woke up at 7:19 and ate 165 peaches','@arcie.lastname'], //slow rift
 	['I woke up at 7:04 and ate 2 walnuts','@WPawnToE4'], // tire tracks
 	['I woke up at 7:07 and ate 2 raisins',''],//smallest legs
 	['I woke up at 7:38 and ate 138 grapes','@Kaitte'],//bertzai canyon 
@@ -203,17 +204,15 @@ var favorites = [
 	['I woke up at 7:19 and ate 2 raisins',''],//za
 	['I woke up at 7:35 and ate 191 pears','@tylerdoesdumbstuff'], //gradients with lines
 	['I woke up at 7:12 and ate 140 raisins',''],//layers
-	['I woke up at 7:42 and ate 194 grapefruits',''], //blades
+	['I woke up at 7:42 and ate 388 grapefruits','@quocphong6588'], //blades
 	['I woke up at 7:09 and ate 3 kiwis','@MatteoDolcin-ye8xm'],//huge mosaic
 	['I woke up at 7:31 and ate 2 raisins',''],//very wiggly dartboards
 	['I woke up at 7:05 and ate 90 peanuts','@memeing_donkey'], //overlapping directions 
-	['I woke up at 7:03 and ate 3 craisins',''],//hedges
-	['I woke up at 7:34 and ate 112 cashews','@noahniederklein8038'],//ants
+	['I woke up at 7:03 and ate 3 grapefruits','@manalu-asya'],//hedges
 	['I woke up at 7:35 and ate 2 raisins',''],//wiggly dartboards with moons
+	['I woke up at 7:07 and ate 6 raisins','@beta_electron'], //pyramids
+	['I woke up at 7:34 and ate 112 cashews','@noahniederklein8038'],//ants
 	['I woke up at 7:39 and ate 55 raisins',''],//wiggler
 	['I woke up at 7:23 and ate 90 pears','@Kaitte'],//sliced scales
 	['I woke up at 7:14 and ate 552 cashews',''], //holy argyle
-	// ['',''], //
-	// ['',''], //
 	];
-
