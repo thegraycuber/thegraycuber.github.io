@@ -29,7 +29,6 @@ function draw(){
 		highlight = (highlight + 1) % orbits;
 	}
 	
-	noFill();
 	onlyStroke(palette.back,cos(ticker)*0.05+0.05);
 	for (let c of Object.keys(equivalence_classes)){
 		if (equivalence_classes[c].orbit != highlight){continue;}
