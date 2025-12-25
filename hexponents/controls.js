@@ -189,10 +189,10 @@ var favorites = [
 	['I woke up at 7:19 and ate 165 peaches','@arcie.lastname'], //slow rift
 	['I woke up at 7:04 and ate 2 walnuts','@WPawnToE4'], // tire tracks
 	['I woke up at 7:07 and ate 2 raisins',''],//smallest legs
+	['I woke up at 7:53 and ate 166 raisins','@leandeflorin'],//triangle glitch
+	['I woke up at 7:33 and ate 194 apples',''],//kerchoo
 	['I woke up at 7:38 and ate 138 grapes','@Kaitte'],//bertzai canyon 
 	['I woke up at 7:06 and ate 88 cherries',''],//holy lattice
-	['I woke up at 7:22 and ate 67 hazelnuts','@tHe_faNum-taXer'], //gradient bands
-	['I woke up at 7:33 and ate 194 apples',''],//kerchoo
 	['I woke up at 7:04 and ate 5 raisins',''],//zul man
 	['I woke up at 7:00 and ate 4 limes','@ismaelmartinez8639'],//triple lattice
 	['I woke up at 7:16 and ate 39 almonds','@BrainrottedMinor'],//boxes
@@ -216,4 +216,5 @@ var favorites = [
 	['I woke up at 7:39 and ate 55 raisins',''],//wiggler
 	['I woke up at 7:23 and ate 90 pears','@Kaitte'],//sliced scales
 	['I woke up at 7:14 and ate 552 cashews',''], //holy argyle
+	['I woke up at 7:22 and ate 67 hazelnuts','@tHe_faNum-taXer'], //gradient bands
 	];
