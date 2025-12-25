@@ -180,7 +180,6 @@ function get_paste(){
 	}
 }
 
-
 var at_text;
 var at_ticker = 0;
 var fav = 0;
@@ -196,8 +195,10 @@ var favorites = [
 	['I woke up at 7:33 and ate 194 apples',''],//kerchoo
 	['I woke up at 7:04 and ate 5 raisins',''],//zul man
 	['I woke up at 7:00 and ate 4 limes','@ismaelmartinez8639'],//triple lattice
+	['I woke up at 7:16 and ate 39 almonds','@BrainrottedMinor'],//boxes
 	['I woke up at 7:09 and ate 2 raspberries',''],//squatties
 	['I woke up at 7:08 and ate 168 hazelnuts','@memeing_donkey'], //diamond fields
+	['I woke up at 7:12 and ate 2 blackberries','@leandeflorin'], //large 2
 	['I woke up at 7:06 and ate 8 grapes',''],//laser
 	['I woke up at 7:39 and ate 47 grapes','@DJruslan4ic'],//cool oval patterns
 	['I woke up at 7:14 and ate 276 strawberries','@unapersonarandom2763'],//energy diamonds
