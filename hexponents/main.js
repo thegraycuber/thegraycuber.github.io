@@ -1,3 +1,4 @@
+// dev version of https://thegraycuber.github.io/hexponents
 
 var modulus = [11,0]; 
 var orbits = 3; 
@@ -7,6 +8,7 @@ var crow_constant = -1;
 var ticker = -3.14;
 var highlight = 0;
 var last_display = 0;
+var show_borders = true;
 function draw(){
 	background(palette.back);
 	translate(origin.x,origin.y);
@@ -22,19 +24,21 @@ function draw(){
 	}
 	
 	//draw the borders
-	ticker = ticker+(Date.now()-last_display)*0.003;
-	last_display = Date.now();
-	if (ticker > PI){
-		ticker = -PI;
-		highlight = (highlight + 1) % orbits;
-	}
-	
-	onlyStroke(palette.back,cos(ticker)*0.05+0.05);
-	for (let c of Object.keys(equivalence_classes)){
-		if (equivalence_classes[c].orbit != highlight){continue;}
-		for (let hex of equivalence_classes[c].hexes){
-			hexagon(hex[0],hex[1],0.51);
+	if (show_borders){
+		ticker = ticker+(Date.now()-last_display)*0.003;
+		last_display = Date.now();
+		if (ticker > PI){
+			ticker = -PI;
+			highlight = (highlight + 1) % orbits;
 		}
+		
+		onlyStroke(palette.back,cos(ticker)*0.05+0.05);
+		for (let c of Object.keys(equivalence_classes)){
+			if (equivalence_classes[c].orbit != highlight){continue;}
+			for (let hex of equivalence_classes[c].hexes){
+				hexagon(hex[0],hex[1],0.51);
+			}
+		}	
 	}
 	
 	resetMatrix();

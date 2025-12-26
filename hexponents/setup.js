@@ -44,18 +44,20 @@ function setup() {
 		bigText = width * 0.05;
 		pad = width*0.015;
 
-		textBox = new Box([width*0.24,height-width*0.2],[width*0.4,width*0.36],pad);
+		textBox = new Box([width*0.22,height-width*0.18],[width*0.38,width*0.32],pad);
 	
-		iconBox = new Box([width*0.72,height-width*0.2],[width*0.48,width*0.36],pad);
-		let icon_size = [width*0.08,width*0.08];
-		iconBox.Items.push(new Icon('copy',[width*0.57,height-width*0.28],icon_size));
-		iconBox.Items.push(new Icon('paste',[width*0.72,height-width*0.28],icon_size));
-		iconBox.Items.push(new Icon('info',[width*0.87,height-width*0.28],icon_size));
-		iconBox.Items.push(new Icon('palette',[width*0.57,height-width*0.12],icon_size));
-		iconBox.Items.push(new Icon('random',[width*0.72,height-width*0.12],icon_size));
-		iconBox.Items.push(new Icon('hearts',[width*0.87,height-width*0.12],icon_size));
+		iconBox = new Box([width*0.705,height-width*0.18],[width*0.53,width*0.32],pad);
+		let icon_size = [width*0.07,width*0.07];
+		iconBox.Items.push(new Icon('copy',[width*0.51,height-width*0.26],icon_size));
+		iconBox.Items.push(new Icon('paste',[width*0.64,height-width*0.26],icon_size));
+		iconBox.Items.push(new Icon('download',[width*0.77,height-width*0.26],icon_size));
+		iconBox.Items.push(new Icon('info',[width*0.90,height-width*0.26],icon_size));
+		iconBox.Items.push(new Icon('palette',[width*0.51,height-width*0.1],icon_size));
+		iconBox.Items.push(new Icon('hexagon',[width*0.64,height-width*0.1],icon_size));
+		iconBox.Items.push(new Icon('random',[width*0.77,height-width*0.1],icon_size));
+		iconBox.Items.push(new Icon('hearts',[width*0.9,height-width*0.1],icon_size));
 
-		helpBox = new Box([width*0.74,height-width*0.77],[width*0.44,width*0.7],pad);
+		helpBox = new Box([width*0.74,height-width*0.72],[width*0.44,width*0.7],pad);
 		
 		button_style(paste_input,palette.back,palette.front,true,width*0.5-bigText*8,bigText,bigText*16,bigText*1.4,bigText*0.8);
 		button_style(paste_go,palette.front,palette.back,true,width*0.5-bigText*4,bigText*3,bigText*8,bigText*1.2,bigText*0.8);
@@ -67,7 +69,7 @@ function setup() {
 		button_style(copy_text,palette.back,palette.front,true,width*0.5-bigText*8,bigText,bigText*16,bigText*1.4,bigText*0.8);
 		button_style(copy_label,palette.front,palette.back,true,width*0.5-bigText*5,bigText*3,bigText*10,bigText*1.2,bigText*0.8);
 			
-		at_location = [width*0.5,height-width*0.4-bigText];
+		at_location = [width*0.5,height-width*0.35-bigText];
 		
 	} else {
 		
@@ -76,21 +78,22 @@ function setup() {
 
 		textBox = new Box([height*0.15,height*0.12],[height*0.26,height*0.2],pad);
 
-		let icon_wid = height*0.065;
-		iconBox = new Box([icon_wid,height*0.61],[height*0.09,height*0.74],pad);
-		let icon_size = [height*0.05,height*0.05];
-		iconBox.Items.push(new Icon('random',[icon_wid,height*0.295],icon_size));
-		iconBox.Items.push(new Icon('hearts',[icon_wid,height*0.40],icon_size));
-		iconBox.Items.push(new Icon('copy',[icon_wid,height*0.505],icon_size));
-		iconBox.Items.push(new Icon('paste',[icon_wid,height*0.61],icon_size));
-		iconBox.Items.push(new Icon('download',[icon_wid,height*0.715],icon_size));
-		iconBox.Items.push(new Icon('palette',[icon_wid,height*0.82],icon_size));
-		iconBox.Items.push(new Icon('info',[icon_wid,height*0.925],icon_size));
+		let icon_wid = height*0.06;
+		iconBox = new Box([icon_wid,height*0.61],[height*0.08,height*0.74],pad);
+		let icon_size = [height*0.045,height*0.045];
+		iconBox.Items.push(new Icon('palette',[icon_wid,height*0.29],icon_size));
+		iconBox.Items.push(new Icon('hexagon',[icon_wid,height*0.38],icon_size));
+		iconBox.Items.push(new Icon('random',[icon_wid,height*0.47],icon_size));
+		iconBox.Items.push(new Icon('hearts',[icon_wid,height*0.56],icon_size));
+		iconBox.Items.push(new Icon('copy',[icon_wid,height*0.65],icon_size));
+		iconBox.Items.push(new Icon('paste',[icon_wid,height*0.76],icon_size));
+		iconBox.Items.push(new Icon('download',[icon_wid,height*0.85],icon_size));
+		iconBox.Items.push(new Icon('info',[icon_wid,height*0.94],icon_size));
 		
 		helpBox = new Box([height*0.26,height*0.78],[height*0.26,height*0.4],pad);
 		
-		button_style(paste_input,palette.back,palette.front,true,height*0.13,height*0.61-bigText*0.8,bigText*12,bigText,bigText*0.6);
-		button_style(paste_go,palette.front,palette.back,false,height*0.13+bigText*4,height*0.61+bigText*0.8,bigText*4,bigText,bigText*0.6);
+		button_style(paste_input,palette.back,palette.front,true,height*0.12,height*0.76-bigText*0.8,bigText*12,bigText,bigText*0.6);
+		button_style(paste_go,palette.front,palette.back,false,height*0.12+bigText*4,height*0.76+bigText*0.8,bigText*4,bigText,bigText*0.6);
 
 		at_location = [width*0.5,height-bigText*2];
 	} 

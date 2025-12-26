@@ -20,8 +20,10 @@ function action(id,index,value){
 		orbit_color_setup();
 		button_color(paste_input,palette.back,palette.front,true);
 		button_color(paste_go,palette.front,palette.back,false);
-		button_color(copy_text,palette.back,palette.front,true);
-		button_color(copy_label,palette.front,palette.back,false);
+		if (mobile){
+			button_color(copy_text,palette.back,palette.front,true);
+			button_color(copy_label,palette.front,palette.back,false);
+		}
 		
 	} else if (id == 'info'){
 		helpBox.setActive(!helpBox.Active);
@@ -76,6 +78,10 @@ function action(id,index,value){
 		pasting = true;
 		input_setup();
 		
+	} else if (id == 'hexagon'){
+		show_borders = !show_borders;
+		ticker = -PI;
+		
 	} else if (id == 'hearts'){
 		fav = (fav + 1)%favorites.length;
 		code_to_settings(favorites[fav][0]);
@@ -88,6 +94,17 @@ function action(id,index,value){
 		copy_label.style("visibility", "hidden");
 		iconBox.getItem('copy').Type = 'copy';
 	}
+}
+
+function core_icon_custom(icon_object, icon_color){
+	if (icon_object.Type == 'hexagon'){
+		if (show_borders){
+			onlyStroke(icon_color,icon_object.Size[0]*0.1);
+		} else {
+			onlyStroke(palette.medium,icon_object.Size[0]*0.1);
+		}
+		hexagon(0,0,icon_object.Size[0]*0.45);
+	} 
 }
 
 function settings_to_code(){
@@ -135,12 +152,11 @@ function code_to_settings(input_code){
 
 var copy_text, copy_label;
 function button_style(button_in,back,front,input,x,y,w,h,text_height){
-
-  button_in.style("font-size", int(text_height) + "px");
-  button_in.style("border-radius", int(text_height*0.4) + "px");
-  button_in.size(w,h);
+	button_in.style("font-size", int(text_height) + "px");
+	button_in.style("border-radius", int(text_height*0.4) + "px");
+	button_in.size(w,h);
 	button_in.position(x, y);
-  button_in.style("visibility", "hidden");
+	button_in.style("visibility", "hidden");
 	if (input){
   	button_in.style("border", int(text_height*0.1) + "px solid");
 		button_in.addClass('hexponent_input');
@@ -151,11 +167,11 @@ function button_style(button_in,back,front,input,x,y,w,h,text_height){
 }
 
 function button_color(button_in,back,front,input){
-  button_in.style("background-color", back);
-  button_in.style("color", front);
-  button_in.style("text_color", front);
+	button_in.style("background-color", back);
+	button_in.style("color", front);
+	button_in.style("text_color", front);
 	if (input){
-  	button_in.style("border-color", front);
+		button_in.style("border-color", front);
 	}
 }
 
@@ -185,6 +201,7 @@ var at_ticker = 0;
 var fav = 0;
 var favorites = [
 	['I woke up at 7:06 and ate 4 raisins',''],//solid 4
+	['I woke up at 7:04 and ate 2 blueberries','@snadsnad-g7o'],//cool 2
 	['I woke up at 7:04 and ate 48 peaches',''],//lines and diam's
 	['I woke up at 7:19 and ate 165 peaches','@arcie.lastname'], //slow rift
 	['I woke up at 7:04 and ate 2 walnuts','@WPawnToE4'], // tire tracks
@@ -210,11 +227,14 @@ var favorites = [
 	['I woke up at 7:31 and ate 2 raisins',''],//very wiggly dartboards
 	['I woke up at 7:05 and ate 90 peanuts','@memeing_donkey'], //overlapping directions 
 	['I woke up at 7:03 and ate 3 grapefruits','@manalu-asya'],//hedges
+	['I woke up at 7:44 and ate 249 oranges','@snadsnad-g7o'], // wide bolts over stripes
 	['I woke up at 7:35 and ate 2 raisins',''],//wiggly dartboards with moons
 	['I woke up at 7:07 and ate 6 raisins','@beta_electron'], //pyramids
 	['I woke up at 7:34 and ate 112 cashews','@noahniederklein8038'],//ants
+	['I woke up at 7:37 and ate 221 apples',''],//cubes
 	['I woke up at 7:39 and ate 55 raisins',''],//wiggler
 	['I woke up at 7:23 and ate 90 pears','@Kaitte'],//sliced scales
 	['I woke up at 7:14 and ate 552 cashews',''], //holy argyle
 	['I woke up at 7:22 and ate 67 hazelnuts','@tHe_faNum-taXer'], //gradient bands
 	];
+	
