@@ -182,6 +182,18 @@ function keyPressed(){
 	
 }
 
+function touchStarted(){
+	if (mouseX < width/2){
+		slide = max(0,slide-2);
+		tgs_next_slide();
+		present_ticker = 0.99;
+		last_transition = Date.now();
+	} else {
+		tgs_next_slide();
+		present_ticker = 0;
+		last_transition = Date.now();
+	}
+}
 
 function pixel_to_principal(pixels){
 	// principal = (pixel - origin)/scalar
