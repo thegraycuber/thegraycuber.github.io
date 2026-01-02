@@ -21,12 +21,13 @@ function setup() {
 	
 	name_size = min(height*0.035,width*0.05);
 	name_width = name_size*9;
-	name_x = name_size*5;
+	name_x = name_size*4.8;
 	name_gap = name_size*4.5;
 
-	input_center = createVector(width*0.5-name_size*5,height*0.45-name_size);
-	input_radius = createVector(name_size*4.5,name_size*1.2);
-	button_style(input_box,palette.back,palette.bright,true,input_center.x-input_radius.x,input_center.y,input_radius.x,input_radius.y,name_size*0.8);
+	let adjuster = width*1.4 < height ? 0.8 : 1;
+	input_center = createVector(width*0.5-name_size*4.5,height*0.45-name_size);
+	input_radius = createVector(name_size*4,name_size*1.2);
+	button_style(input_box,palette.back,palette.bright,true,input_center.x-input_radius.x*adjuster,input_center.y,input_radius.x*adjuster*2,input_radius.y*adjuster*2,name_size*1.6);
 
 	
 	iconBox = new Box([width*0.5,height],[name_size*8,name_size*5],name_size*0.4);
