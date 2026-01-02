@@ -64,6 +64,21 @@ footer {
 	border: none;
 }
 
+.efficient_input{
+	font-family: "AshkinsonBold_prod";
+	text-align: center;
+}
+
+.efficient_input::placeholder{
+	color: #ffffff77;
+}
+
+
+.efficient_button{
+	font-family: "AshkinsonBold_prod";
+	text-align: center;
+	border: none;
+}
 
 .index_button{
 	text-align: center;
