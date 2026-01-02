@@ -25,9 +25,9 @@ function setup() {
 	name_gap = name_size*4.5;
 
 	let adjuster = width*1.4 < height ? 0.8 : 1;
-	input_center = createVector(width*0.5-name_size*4.5,height*0.45-name_size);
+	input_center = createVector(width*0.5-name_size*4.8,height*0.45-name_size);
 	input_radius = createVector(name_size*4,name_size*1.2);
-	button_style(input_box,palette.back,palette.bright,true,input_center.x-input_radius.x*adjuster,input_center.y,input_radius.x*adjuster*2,input_radius.y*adjuster*2,name_size*1.6);
+	button_style(input_box,palette.back,palette.bright,true,input_center.x-input_radius.x,input_center.y,input_radius.x*adjuster*2,input_radius.y*adjuster*2,name_size*1.5);
 
 	
 	iconBox = new Box([width*0.5,height],[name_size*8,name_size*5],name_size*0.4);
