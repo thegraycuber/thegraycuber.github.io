@@ -39,6 +39,7 @@ function touchEnded(){
 
 var panning = false;
 function touchMoved(event){
+	event.preventDefault(); 
 
 	if (!panning){
 		return;
