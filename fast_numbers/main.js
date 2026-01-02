@@ -56,7 +56,7 @@ function draw() {
 	
 			if (number_values[n] != ""){
 				fill(palette.brights[n_index]);
-				text_limited(number_values[n],-name_x,n_y,name_size*1.6*n_mult,name_width*n_mult);
+				text_limited(number_values[n],-name_x,n_y,name_size*1.5*n_mult,name_width*n_mult);
 				fill(palette.fronts[n_index]);
 				text_limited(number_names[n],name_x,n_y+name_size*n_offsets[0],name_size*n_mult,name_width*n_mult);
 				fill(palette.monos[n_index]);
