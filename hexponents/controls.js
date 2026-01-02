@@ -10,6 +10,10 @@ function touchStarted(){
 }
 
 
+function touchMoved(event){
+	event.preventDefault(); 
+}
+
 function action(id,index,value){
 
 	invalid_text = '';
