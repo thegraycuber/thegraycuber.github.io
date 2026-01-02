@@ -26,7 +26,7 @@ function setup() {
 
 	input_center = createVector(width*0.5-name_size*5,height*0.45-name_size);
 	input_radius = createVector(name_size*4.5,name_size*1.2);
-	button_style(input_box,palette.back,palette.bright,true,input_center.x-input_radius.x,input_center.y,input_radius.x*2,input_radius.y*2,name_size*1.6);
+	button_style(input_box,palette.back,palette.bright,true,input_center.x-input_radius.x,input_center.y,input_radius.x,input_radius.y,name_size*0.8);
 
 	
 	iconBox = new Box([width*0.5,height],[name_size*8,name_size*5],name_size*0.4);
