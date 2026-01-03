@@ -150,6 +150,19 @@ class Icon {
 			fill(palette.back);
 			drawTri(this.Size[0]*0.05,0,this.Size[0]*0.18);
 			
+		} else if (this.Type == 'thegraycuber'){
+			onlyStroke(palette.front,this.Size[0]*0.06);
+			let tgc_shapes = [[-PI*0.5,5],[-PI*0.3,3],[-PI*0.7,3]];
+			for (let tgc of tgc_shapes){
+				beginShape();
+				let tgc_ang = tgc[0];
+				for (let _ = 0; _ < tgc[1]; _++){
+					vertex(this.Size[0]*0.5*cos(tgc_ang),this.Size[1]*0.5*sin(tgc_ang));
+					tgc_ang += TWO_PI/tgc[1];
+				}
+				endShape(CLOSE);
+			}
+			
 		} else if (this.Type == 'text'){
 			text_in_box(this.Id, 0, 0, this.Size[1]*0.8, icon_color, palette.back);
 			

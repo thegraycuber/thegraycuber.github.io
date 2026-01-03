@@ -9,15 +9,12 @@ function setup() {
 	palette_index = palette_names.indexOf('Dark');
 	textFont(mainBold);
 
-	// origin = createVector(width/2, height/2);
-	// scalar = height;
 	textAlign(CENTER,CENTER);
 	rectMode(CENTER);
 	ellipseMode(CENTER);
 	fill(palette.front);
 
 	input_box = createInput('loading...');
-	// input_box.attribute("placeholder","");
 	
 	name_size = min(height*0.035,width*0.05);
 	name_width = name_size*9;
@@ -25,18 +22,19 @@ function setup() {
 	name_gap = name_size*4.5;
 
 	let adjuster = width*1.4 < height ? 0.8 : 1;
-	input_center = createVector(width*0.5-name_size*4.8,height*0.45-name_size);
+	input_center = createVector(width*0.5-name_x,height*0.45-name_size);
 	input_radius = createVector(name_size*4,name_size*1.2);
 	button_style(input_box,palette.back,palette.bright,true,input_center.x-input_radius.x,input_center.y,input_radius.x*adjuster*2,input_radius.y*adjuster*2,name_size*1.5);
 
 	
-	iconBox = new Box([width*0.5,height],[name_size*8,name_size*5],name_size*0.4);
+	iconBox = new Box([width*0.5,height],[name_size*11.5,name_size*5],name_size*0.35);
 	let icon_size = [name_size*1.3,name_size*1.3];
-	iconBox.Items.push(new Icon('random',[width*0.5-name_size*2.4,height-name_size*1.2],icon_size));
-	iconBox.Items.push(new Icon('info',[width*0.5,height-name_size*1.2],icon_size));
-	iconBox.Items.push(new Icon('palette',[width*0.5+name_size*2.4,height-name_size*1.2],icon_size));
+	iconBox.Items.push(new Icon('random',[width*0.5-name_size*4.2,height-name_size*1.2],icon_size));
+	iconBox.Items.push(new Icon('info',[width*0.5-name_size*1.4,height-name_size*1.2],icon_size));
+	iconBox.Items.push(new Icon('palette',[width*0.5+name_size*1.4,height-name_size*1.2],icon_size));
+	iconBox.Items.push(new Icon('thegraycuber',[width*0.5+name_size*4.2,height-name_size*1.2],icon_size,'thegraycuber','front','https://thegraycuber.github.io/'));
 	
-	helpBox = new Box([width*0.5,height-name_size*6.1],[name_size*14,name_size*6],name_size*0.4);
+	helpBox = new Box([width*0.5,height-name_size*6.1],[name_size*14,name_size*6],name_size*0.35);
 	helpBox.Items.push(new textItem(0.6,'',0));
 	helpBox.Items.push(new textItem(1,"what's the fastest way to say each number?",name_size*0.6));
 	helpBox.Items.push(new textItem(0.6,"",0));

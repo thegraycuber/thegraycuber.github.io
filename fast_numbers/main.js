@@ -17,9 +17,20 @@ function draw() {
 		input_box.value('');
 	}
 
+	if (number_values[3] == "0" && offset > 0.4){
+		offset = 0.4;
+		scrolling = false;
+		panning = false;
+		block_scroll = Date.now();
+	} else if (number_values[3] == "1000000" && offset < -0.4){
+		offset = -0.4;
+		scrolling = false;
+		panning = false;
+		block_scroll = Date.now();
+	}
 	
 	if (abs(offset) > 0.5){
-		give_value(existing_number - round(offset));
+		give_value(constrain(existing_number - round(offset),0,1000000));
 		offset -= round(offset);
 	} else {
 		let test_number = parseInt(input_box.value());
@@ -68,7 +79,7 @@ function draw() {
 		fill(palette.bright);
 		text_limited('enter a whole number\nbetween 0 and 1 000 000',-name_x,-name_gap*0.5,name_size*0.6,name_width);
 		fill(palette.front);
-		text_limited('or press the die\nfor a random number',-name_size*2.4,height*0.55-name_size*4,name_size*0.6,name_width);
+		text_limited('or press the die\nfor a random number',-name_size*4.2,height*0.55-name_size*4,name_size*0.6,name_width);
 	}
 	
 	resetMatrix();

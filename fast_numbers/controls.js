@@ -2,10 +2,11 @@
 
 var scrolling = false;
 var last_scroll, focus;
+var block_scroll = 0;
 
 function mouseWheel(event){
 	
-	if (number_values[3] == "" || panning){
+	if (number_values[3] == "" || panning || (Date.now() - block_scroll < 1000)){
 		return;
 	}
 	scrolling = true;
