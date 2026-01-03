@@ -17,7 +17,7 @@ function preload() {
 function setup() {
 	createCanvas(window.innerWidth, window.innerHeight);//, WEBGL);
 	
-	px = min(width/10,height/16);
+	px = min(width/11,height/16);
 	px2 = px**2;
 	unit = px*5;
 	scalar = px*5;
@@ -40,8 +40,8 @@ function setup() {
 	
 	
 	logo_shapes = [];
+	logo_shapes.push(new LogoItem('pentb',[0,0],px,0.5,1.1));
 	logo_shapes.push(new LogoItem('pent',[0,0],px,0.5,1.1));
-	// logo_shapes.push(new LogoItem('pentb',[0,0],px*1.2,0,0.6));
 	logo_shapes.push(new LogoItem('tri1',[0,0],px,0,0.6));
 	logo_shapes.push(new LogoItem('tri2',[0,0],px,1.1,1.6));
 	

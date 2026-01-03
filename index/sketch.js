@@ -14,21 +14,7 @@ function draw() {
 	
 	translate(origin.x,origin.y);
 	background(palette[0].back);
-			
-	push();
-	noFill();
-	translate(logo_os.pos.x,logo_os.pos.y,5);
-	logo_shapes[0].check();
-	for(let l_shape of logo_shapes){
-		l_shape.display();
-	}
-	pop();
-	
-	if (page_mode == 'intro' && ticker > 1.8){
-		page_mode = 'home';
-		ticker = 0;
-		update_icons(0,icons.length);
-	}
+
 	
 	
 	if (page_mode == 'to_preview' || page_mode == 'from_preview'){
@@ -56,46 +42,6 @@ function draw() {
 		
 	}
 	
-	
-	if (page_mode != 'preview'){
-		
-		
-		if (page_mode != 'intro' && ticker*6 > icon_a && icon_a < icon_maker.length){
-			//let im = icon_maker[icons.length];
-			//icons.push(new Icon(im[0], im[1], im[2], im[3], im[4]));
-			icon_a++;
-			icons[icons.length-icon_a].inactive = false;
-			icons[icons.length-icon_a].make_button();
-			update_icons(icons.length-icon_a,icons.length-icon_a+1);
-		} else if (icon_a == icon_maker.length && asteroids.length < 50){
-			let ast_ang = TWO_PI*(random(0.2,0.8) + int(random(pages.length)))/pages.length;
-			asteroids.push(new Asteroid(icon_rad,ast_ang,px*random(0.15,0.4),int(random(4))));
-		}
-		
-		icon_ang += 0.003*time_correct;
-		rotate_icons();
-		
-		push();
-		translate(home_os.pos.x, home_os.pos.y, 0);
-		textAlign(LEFT, CENTER);
-		
-		for(let l_word of logo_words){
-			l_word.display();
-		}
-		
-		if (page_mode != 'intro'){
-			for (let i of icons){
-				i.check();
-				i.display();
-			}
-		}
-		
-		noStroke();
-		for (let a of asteroids){
-			a.display();
-		}
-		pop();
-	}
 	if (page_mode != 'intro' && page_mode != 'home'){
 		push();
 		translate(preview_os.pos.x, preview_os.pos.y, 0);
@@ -146,6 +92,62 @@ function draw() {
 		}
 		pop();
 	}
+	
+	
+	if (page_mode == 'intro' && ticker > 1.8){
+		page_mode = 'home';
+		ticker = 0;
+		update_icons(0,icons.length);
+	}
+	
+	
+	if (page_mode != 'preview'){
+		
+		
+		if (page_mode != 'intro' && ticker*6 > icon_a && icon_a < icon_maker.length){
+			//let im = icon_maker[icons.length];
+			//icons.push(new Icon(im[0], im[1], im[2], im[3], im[4]));
+			icon_a++;
+			icons[icons.length-icon_a].inactive = false;
+			icons[icons.length-icon_a].make_button();
+			update_icons(icons.length-icon_a,icons.length-icon_a+1);
+		} else if (icon_a == icon_maker.length && asteroids.length < 50){
+			let ast_ang = TWO_PI*(random(0.2,0.8) + int(random(pages.length)))/pages.length;
+			asteroids.push(new Asteroid(icon_rad,ast_ang,px*random(0.15,0.4),int(random(4))));
+		}
+		
+		icon_ang += 0.003*time_correct;
+		rotate_icons();
+		
+		push();
+		translate(home_os.pos.x, home_os.pos.y, 0);
+		textAlign(LEFT, CENTER);
+		
+		for(let l_word of logo_words){
+			l_word.display();
+		}
+		
+		if (page_mode != 'intro'){
+			for (let i of icons){
+				i.check();
+				i.display();
+			}
+		}
+		
+		noStroke();
+		for (let a of asteroids){
+			a.display();
+		}
+		pop();
+	}
+		
+	push();
+	translate(logo_os.pos.x,logo_os.pos.y,5);
+	logo_shapes[0].check();
+	for(let l_shape of logo_shapes){
+		l_shape.display();
+	}
+	pop();
 
 }
 

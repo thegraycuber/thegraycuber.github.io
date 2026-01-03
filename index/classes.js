@@ -62,6 +62,7 @@ class LogoItem{
 		if (ticker < this.start && page_mode == 'intro'){return;}
 		let logo_size = this.size;
 		strokeWeight(this.size*0.1);
+		noFill();
 		if (ticker < this.stop && page_mode == 'intro'){
 			logo_size *= 0.6 * (sin(map(ticker,this.start,this.stop,-PI/2,2.411))+1);
 		}
@@ -79,13 +80,11 @@ class LogoItem{
 			stroke(palette[0].gray);
 			n_gon(this.pos,logo_size,0.25,5);
 		} else if (this.name == 'pentb'){
-			translate(0,0,-1);
 			logo_size *= logo_hover;
 			fill(palette[0].back);
 			stroke(palette[0].back);
-			n_gon(this.pos,logo_size,0.25,5);
+			n_gon(this.pos,logo_size*1.3,0.25,5);
 			noFill();
-			translate(0,0,1);
 		} else {
 			
 			textSize(logo_size);
@@ -98,7 +97,7 @@ class LogoItem{
 	
 	check(clicked = false){
 		let mouseLogo = createVector(mouseX-width/2-logo_os.pos.x,mouseY-height/2-logo_os.pos.y)
-		if(mouseLogo.dist(this.pos) < this.size*1.4 && page_mode != 'intro'){
+		if(mouseLogo.dist(this.pos) < this.size*(page_mode == 'preview' ? 2.4 : 1.2) && page_mode != 'intro'){
 			if(clicked){
 				return true;
 			} 
