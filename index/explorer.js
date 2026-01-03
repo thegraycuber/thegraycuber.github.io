@@ -81,9 +81,10 @@ class GroupElement{
 	}
 	
 	display(){
-	
+
 		fill(this.fill_color);
 		stroke(this.stroke_color);
+		strokeWeight(el_size*0.2);
 		circle(this.pos.x,this.pos.y,el_size*2);
 		
 		fill(this.text_color);
@@ -94,7 +95,7 @@ class GroupElement{
 	draw_arrows(){
 		for (var m = 0; m < 2; m++){
 			
-			stroke(palette[0].accent[m]);
+			stroke(palette[0].accent[m*2]);
 			noFill();
 			
 			var source_el = this.pos.copy();

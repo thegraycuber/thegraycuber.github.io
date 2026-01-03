@@ -77,6 +77,8 @@ class CursedShape {
 
 var out_cursed, vert_cursed, rotation_angle, max_mag, curse_tick, cursed_rot;
 function cursedDraw(){
+
+	translate(-origin.x, -origin.y);
 	
 	if (ticker < 2 && curse_tick < cursed_resolution){
 			curse_tick = min(int(curse_tick + cursed_resolution/32),cursed_resolution);

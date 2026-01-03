@@ -29,30 +29,36 @@ function color_refresh(){
 		color_trans[0] = color_trans[1];
 		update_icons(0,icons.length);
 	}
+	
+	palette[0].orbits = [palette[0].front,palette[0].mono,palette[0].bright];
+	for (let c = 0; c < 5; c++){
+		palette[0].orbits.push(lerpColor(palette[0].medium,palette[0].back,c/5));
+	}
 
 }
 
 
 function core_color_custom(plt){
-		// plt.backalpha = color(red(plt.back),green(plt.back),blue(plt.back),200);
-		// plt.dark = color(int(red(plt.back)*0.75),int(green(plt.back)*0.75),int(blue(plt.back)*0.75));
-		// plt.medium = lerpColor(plt.back,plt.front,0.3);
-		plt.accent1 = plt.mono;
-		plt.accent2 = plt.red;
-		plt.accent3 = plt.bright;
-	
-		if (plt.scheme == 'Sunset'){
+	// plt.backalpha = color(red(plt.back),green(plt.back),blue(plt.back),200);
+	// plt.dark = color(int(red(plt.back)*0.75),int(green(plt.back)*0.75),int(blue(plt.back)*0.75));
+	plt.medium = lerpColor(plt.back,plt.mono,0.8);
+	plt.accent1 = plt.mono;
+	plt.accent2 = plt.red;
+	plt.accent3 = plt.bright;
 
-			for(var suns = 0; suns < sunlen/3; suns++){
-				sunset.push(lerpColor(plt.red,plt.mono,3*suns/sunlen));
-			}
-			for(suns = 0; suns < sunlen/3; suns++){
-				sunset.push(lerpColor(plt.mono,plt.bright,3*suns/sunlen));
-			}
-			for(suns = 0; suns < sunlen/3; suns++){
-				sunset.push(lerpColor(plt.bright,plt.red,3*suns/sunlen));
-			}
+	if (plt.scheme == 'Sunset'){
+
+		for(var suns = 0; suns < sunlen/3; suns++){
+			sunset.push(lerpColor(plt.red,plt.mono,3*suns/sunlen));
 		}
+		for(suns = 0; suns < sunlen/3; suns++){
+			sunset.push(lerpColor(plt.mono,plt.bright,3*suns/sunlen));
+		}
+		for(suns = 0; suns < sunlen/3; suns++){
+			sunset.push(lerpColor(plt.bright,plt.red,3*suns/sunlen));
+		}
+	}
+	
 }
 
 

@@ -58,7 +58,7 @@ class HyperShape {
 		
 		noFill();
 		stroke(palette[0].front);
-		strokeWeight(px*0.15);
+		strokeWeight(0.08);//px*0.15
 		beginShape();
 
 		for (let p of this.points){

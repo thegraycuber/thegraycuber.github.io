@@ -3,12 +3,16 @@ var page_mode = 'intro';
 var rot = 0;
 var page_rand = 5;
 var comp_range = [0, 0];
+var last_frame;
 //var page_count = 0;
 
 function draw() {
-	ticker += 0.035;
+	let time_correct = (Date.now()-last_frame)/33;
+	last_frame = Date.now();
+	ticker += 0.035*time_correct;
 	color_refresh();
 	
+	translate(origin.x,origin.y);
 	background(palette[0].back);
 			
 	push();
@@ -29,7 +33,7 @@ function draw() {
 	
 	if (page_mode == 'to_preview' || page_mode == 'from_preview'){
 		
-		offset_angle += 0.05;
+		offset_angle += 0.05*time_correct;
 		let lerpy = (sin(offset_angle)+1)/2
 		logo_os.update(lerpy);
 		home_os.update(lerpy);
@@ -68,7 +72,7 @@ function draw() {
 			asteroids.push(new Asteroid(icon_rad,ast_ang,px*random(0.15,0.4),int(random(4))));
 		}
 		
-		icon_ang += 0.003;
+		icon_ang += 0.003*time_correct;
 		rotate_icons();
 		
 		push();
@@ -96,7 +100,7 @@ function draw() {
 		push();
 		translate(preview_os.pos.x, preview_os.pos.y, 0);
 			
-		translate(0,0,4);
+		// translate(0,0,4);// 3D
 		
 		noStroke();
 		fill(palette[0].front);
@@ -113,28 +117,32 @@ function draw() {
 		fill(palette[0].medium);
 		text('click to visit this page', 0, title_mult*(height*0.5 - px*1.8));
 		
-		translate(0,0,-2);
-		fill(palette[0].back);
-		rect(0, title_mult*height*0.5,rect_wid,px*4.2,px*0.2);
+		// translate(0,0,-2);// 3D
+		// fill(palette[0].back); //3D
+		// rect(0, title_mult*height*0.5,rect_wid,px*4.2,px*0.2); // 3D
 		
-		translate(0,0,-2);
+		// translate(0,0,-2);// 3D
 		
 		if (pages[pg].title == 'Complex Primes') {
 			gaussDraw();
-		} else if (pages[pg].title == 'Quadratic Primes') {
-			quadraticDraw();
-		} else if (pages[pg].title == 'Complex Grapher') {
-			grapherDraw();
-		} else if (pages[pg].title == 'Groups of Units') {
-			unitsDraw();
-		} else if (pages[pg].title == "Rubik's Cube Calculator") {
-			calculatorDraw();
+		// } else if (pages[pg].title == 'Quadratic Primes') {
+		// 	quadraticDraw();
+		// } else if (pages[pg].title == 'Complex Grapher') {
+		// 	grapherDraw();
+		// } else if (pages[pg].title == 'Groups of Units') {
+		// 	unitsDraw();
+		// } else if (pages[pg].title == "Rubik's Cube Calculator") {
+		// 	calculatorDraw();
 		} else if (pages[pg].title == "Cursed Equations") {
 			cursedDraw();
 		} else if (pages[pg].title == "Group Visualizer") {
 			explorerDraw();
 		} else if (pages[pg].title == "Hypercomplex Grapher") {
 			hyperDraw();
+		} else if (pages[pg].title == "Hexponents!") {
+			hexponentDraw();
+		} else if (pages[pg].title == "Fastest Numbers") {
+			fastestDraw();
 		}
 		pop();
 	}
@@ -192,27 +200,24 @@ function prep_preview(){
 	if (pages[pg].title == 'Complex Primes') {
 		makeGauss();
 		page_rand = int(random(1, main_list[0].colorvalue.length));
-
-	} else if (pages[pg].title == 'Complex Grapher') {
-		comp_range = [0, 0];
-		page_rand = int(random() * 5) + 3;
-		makePentagon(page_rand);
-
-	} else if (pages[pg].title == 'Groups of Units') {
-		main_list = [];
-		unit_mod = 0;
-
-	} else if (pages[pg].title == "Rubik's Cube Calculator"){
-		calculatorPrep();
-
+	// } else if (pages[pg].title == 'Complex Grapher') {
+	// 	comp_range = [0, 0];
+	// 	page_rand = int(random() * 5) + 3;
+	// 	makePentagon(page_rand);
+	// } else if (pages[pg].title == 'Groups of Units') {
+	// 	main_list = [];
+	// 	unit_mod = 0;
+	// } else if (pages[pg].title == "Rubik's Cube Calculator"){
+	// 	calculatorPrep();
 	} else if (pages[pg].title == "Cursed Equations"){
 		cursedPrep();
-
 	} else if (pages[pg].title == "Group Visualizer"){
 		explorerPrep();
-
 	} else if (pages[pg].title == "Hypercomplex Grapher"){
 		hyperPrep();
-
+	} else if (pages[pg].title == "Hexponents!"){
+		hexponentPrep();
+	} else if (pages[pg].title == "Fastest Numbers"){
+		fastestPrep();
 	}
 }

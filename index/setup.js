@@ -4,7 +4,7 @@ var px, px2, corner_ang, mobile;
 var pg = -1;
 var media_prefix = 'media/';
 
-var color_list = ['Current','Sunset','Electric','Forest'];
+var color_list = ['Current','Sunset','Electric','Forest','Dark'];
 //var main_list = [];
 var ticker = 0;
 var prod = false;
@@ -15,13 +15,14 @@ function preload() {
 
 
 function setup() {
-	createCanvas(window.innerWidth, window.innerHeight, WEBGL);
+	createCanvas(window.innerWidth, window.innerHeight);//, WEBGL);
 	
 	px = min(width/10,height/16);
 	px2 = px**2;
 	unit = px*5;
 	scalar = px*5;
-	origin = createVector(0,0);
+	origin = createVector(width/2,height/2);
+	// origin = createVector(0,0);
 	corner_ang = atan2(height,width);
 	icon_ang = random()*TWO_PI;
 	mobile = width*1.4 < height;
@@ -40,7 +41,7 @@ function setup() {
 	
 	logo_shapes = [];
 	logo_shapes.push(new LogoItem('pent',[0,0],px,0.5,1.1));
-	logo_shapes.push(new LogoItem('pentb',[0,0],px*1.2,0,0.6));
+	// logo_shapes.push(new LogoItem('pentb',[0,0],px*1.2,0,0.6));
 	logo_shapes.push(new LogoItem('tri1',[0,0],px,0,0.6));
 	logo_shapes.push(new LogoItem('tri2',[0,0],px,1.1,1.6));
 	
@@ -56,16 +57,17 @@ function setup() {
 	pages.push(new Page("Cursed Equations",'Electric','https://thegraycuber.github.io/cursedequations.html'));
 	pages.push(new Page('Complex Primes','Sunset','https://thegraycuber.github.io/quadratic.html'));
 	pages.push(new Page('Group Visualizer','Forest','https://thegraycuber.github.io/group_visualizer.html'));
-	pages.push(new Page("Rubik's Cube Calculator",'Forest','https://thegraycuber.github.io/cubecalculator.html'));
+	// pages.push(new Page("Rubik's Cube Calculator",'Forest','https://thegraycuber.github.io/cubecalculator.html'));
 	// pages.push(new Page('Complex Grapher','Electric','https://thegraycuber.github.io/grapher.html'));
 	pages.push(new Page('Hypercomplex Grapher','Electric','https://thegraycuber.github.io/hypercomplex_grapher.html'));
-	pages.push(new Page('Groups of Units','Forest','https://thegraycuber.github.io/groupsofunits.html'));
+	pages.push(new Page('Fastest Numbers','Dark','https://thegraycuber.github.io/fast_numbers.html'));
+	pages.push(new Page('Hexponents!','Sunset','https://thegraycuber.github.io/hexponents.html'));
 	
 	
 	icon_rad = px*6.5;
 	icons = [];
 	icon_maker = [];
-	let icon_paths = ['cursed','gaussian','group','cube','hyper','units'];
+	let icon_paths = ['cursed','gaussian','group','hyper','fastest','hexponent'];
 	for (let ic = 0; ic < pages.length; ic++){
 		icon_maker.push([[0,0],px*1.2,loadImage(media_prefix+"icon_"+icon_paths[ic]+".png"),pages[ic].title]);
 	}
@@ -91,5 +93,6 @@ function setup() {
 	
 	color_refresh();
 	asteroids = [];
+	last_frame = Date.now();
 	
 }

@@ -98,7 +98,7 @@ class LogoItem{
 	
 	check(clicked = false){
 		let mouseLogo = createVector(mouseX-width/2-logo_os.pos.x,mouseY-height/2-logo_os.pos.y)
-		if(mouseLogo.dist(this.pos) < this.size && page_mode != 'intro'){
+		if(mouseLogo.dist(this.pos) < this.size*1.4 && page_mode != 'intro'){
 			if(clicked){
 				return true;
 			} 
