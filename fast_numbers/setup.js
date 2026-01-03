@@ -5,6 +5,8 @@ var name_x, name_width, name_gap, name_size;
 function setup() {
 	
 	createCanvas(windowWidth, windowHeight);
+	
+	palette_names = ['Dark','Electric','Forest','Sunset','Autumn','Paper','Pastel'];
 	palette = new Palette('Dark');
 	palette_index = palette_names.indexOf('Dark');
 	textFont(mainBold);
@@ -29,7 +31,7 @@ function setup() {
 	
 	iconBox = new Box([width*0.5,height],[name_size*11.5,name_size*5],name_size*0.35);
 	let icon_size = [name_size*1.3,name_size*1.3];
-	iconBox.Items.push(new Icon('random',[width*0.5-name_size*4.2,height-name_size*1.2],icon_size));
+	iconBox.Items.push(new Icon('random',[width*0.5-name_size*4.2,height-name_size*1.2],icon_size,'random','red'));
 	iconBox.Items.push(new Icon('info',[width*0.5-name_size*1.4,height-name_size*1.2],icon_size));
 	iconBox.Items.push(new Icon('palette',[width*0.5+name_size*1.4,height-name_size*1.2],icon_size));
 	iconBox.Items.push(new Icon('thegraycuber',[width*0.5+name_size*4.2,height-name_size*1.2],icon_size,'thegraycuber','front','https://thegraycuber.github.io/'));
