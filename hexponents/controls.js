@@ -227,6 +227,7 @@ var favorites = [
 	['I woke up at 7:35 and ate 191 pears','@tylerdoesdumbstuff'], //gradients with lines
 	['I woke up at 7:12 and ate 140 raisins',''],//layers
 	['I woke up at 7:42 and ate 388 grapefruits','@quocphong6588'], //blades
+	['I woke up at 7:13 and ate 552 blackberries','@T0mPlayes'], //bands over noise
 	['I woke up at 7:09 and ate 3 kiwis','@MatteoDolcin-ye8xm'],//huge mosaic
 	['I woke up at 7:31 and ate 2 raisins',''],//very wiggly dartboards
 	['I woke up at 7:05 and ate 90 peanuts','@memeing_donkey'], //overlapping directions 
