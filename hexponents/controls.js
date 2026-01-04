@@ -205,10 +205,12 @@ var at_ticker = 0;
 var fav = 0;
 var favorites = [
 	['I woke up at 7:06 and ate 4 raisins',''],//solid 4
+	['I woke up at 7:12 and ate 1680 pecans','@tima_soft'],//bands
 	['I woke up at 7:04 and ate 2 blueberries','@snadsnad-g7o'],//cool 2
 	['I woke up at 7:04 and ate 48 peaches',''],//lines and diam's
 	['I woke up at 7:19 and ate 165 peaches','@arcie.lastname'], //slow rift
 	['I woke up at 7:04 and ate 2 walnuts','@WPawnToE4'], // tire tracks
+	['I woke up at 7:41 and ate 58 raisins','@adamvagenknecht'], // hex arms
 	['I woke up at 7:07 and ate 2 raisins',''],//smallest legs
 	['I woke up at 7:53 and ate 166 raisins','@leandeflorin'],//triangle glitch
 	['I woke up at 7:33 and ate 194 apples',''],//kerchoo
@@ -242,4 +244,3 @@ var favorites = [
 	['I woke up at 7:14 and ate 552 cashews',''], //holy argyle
 	['I woke up at 7:22 and ate 67 hazelnuts','@tHe_faNum-taXer'], //gradient bands
 	];
-	
