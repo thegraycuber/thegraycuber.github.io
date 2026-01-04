@@ -250,6 +250,7 @@ var favorites = [
 ['fQua,Gri,Off,13g,-6,Off,Flo,13g,3,Rot,Smo,13g,-2,Off,Wig','@zdohmarbleblaster2048'],
 ['12g,5,Rot,Reg,Hex,-1,Rad,Smo,12g,-5,Rad,Reg,Gri,Poi','@oxSoul99'],
 ['Squ,1,Rot,Reg,Cir,-1,Off,Reg,Oct,-3,Rad,Flo,Off,Poi',''],
+['fPy3,Off,Off,Spi,-3,Rot,Reg,Spi,3,Rot,Reg,Hex,1,Rot,Flo','@axolotlmaru'],
 ['fPy3,Gri,Poi,Pen,1,Tra,Wig,10g,-1,Rot,Flo,Hep,-1,Rad,Smo','@SoulFule101'],
 ['fPy3,Off,Poi,Spi,4,Rot,Reg,Spi,-4,Tra,Reg,Spi,-4,Tra,Reg','@NoenD_io'],
 ['fPy3,Off,Off,12g,5,Rot,Flo,Cir,-1,Tra,Reg,Spi,-1,Off,Reg',''],
