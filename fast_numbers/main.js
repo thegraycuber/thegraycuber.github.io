@@ -77,9 +77,9 @@ function draw() {
 		
 	} else {
 		fill(palette.bright);
-		text_limited('enter a whole number\nbetween 0 and 1 000 000',-name_x,-name_gap*0.5,name_size*0.6,name_width);
+		text_limited(messages.enter[dict],-name_x,-name_gap*0.5,name_size*0.6,name_width);
 		fill(palette.red);
-		text_limited('press the die\nto randomize',-name_size*4.2,height*0.55-name_size*4,name_size*0.6,name_width);
+		text_limited(messages.random[dict],-name_size*4.2,height*0.55-name_size*4,name_size*0.6,name_width);
 	}
 	
 	resetMatrix();

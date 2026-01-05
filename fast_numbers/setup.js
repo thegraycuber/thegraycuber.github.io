@@ -3,8 +3,12 @@
 var input_box, input_center, input_radius, iconBox, helpBox;
 var name_x, name_width, name_gap, name_size;
 function setup() {
-	
+
 	createCanvas(windowWidth, windowHeight);
+
+	if (window.location.href.includes("lang=nl")){
+		dict = 'nl';
+	}
 	
 	palette_names = ['Dark','Electric','Forest','Sunset','Autumn','Paper','Pastel'];
 	palette = new Palette('Dark');
@@ -16,7 +20,7 @@ function setup() {
 	ellipseMode(CENTER);
 	fill(palette.front);
 
-	input_box = createInput('loading...');
+	input_box = createInput(messages.load[dict]);
 	
 	name_size = min(height*0.035,width*0.05);
 	name_width = name_size*9;
@@ -38,16 +42,17 @@ function setup() {
 	
 	helpBox = new Box([width*0.5,height-name_size*6.1],[name_size*14,name_size*6],name_size*0.35);
 	helpBox.Items.push(new textItem(0.6,'',0));
-	helpBox.Items.push(new textItem(1,"what's the fastest way to say each number?",name_size*0.6));
+	helpBox.Items.push(new textItem(1,messages.info1[dict],name_size*0.6));
 	helpBox.Items.push(new textItem(0.6,"",0));
-	helpBox.Items.push(new textItem(3,"this page shows the least syllables\nthat can be used to describe a given value,\nusing a certain set of rules.",name_size*0.6));
+	helpBox.Items.push(new textItem(3,messages.info2[dict],name_size*0.6));
 	helpBox.Items.push(new textItem(0.6,"",0));
-	helpBox.Items.push(new textItem(1,"watch our video to learn more!",name_size*0.6,'help_link','https://youtu.be/Ff8qIBUu4wM','bright'));
+	helpBox.Items.push(new textItem(1,messages.info3[dict],name_size*0.6,'help_link',messages.link[dict],'bright'));
 	helpBox.Items.push(new textItem(0.6,'',0));
 	helpBox.giveSizes();
 	helpBox.setActive(false);
+
 	
-	name_data = loadTable('fast_numbers/fast_numbers_data.csv');
+	name_data = loadTable('fast_numbers/fast_numbers_' + dict + '.csv');
 	
 }
 
