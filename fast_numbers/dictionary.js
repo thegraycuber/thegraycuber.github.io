@@ -28,7 +28,7 @@ messages = {
 	},
 	link: {
 		en:"https://youtu.be/Ff8qIBUu4wM",
-		nl:"https://youtu.be/Ff8qIBUu4wM"
+		nl:"https://youtu.be/nnE3b4snoCI"
 	},
 };
 
