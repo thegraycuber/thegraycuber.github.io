@@ -8,7 +8,12 @@ function setup() {
 
 	if (window.location.href.includes("lang=nl")){
 		dict = 'nl';
+	} else if (window.location.href.includes("mode=ance")){
+		mode = 'ance';
+	} else if (window.location.href.includes("mode=serious")){
+		mode = 'serious';
 	}
+	
 	
 	palette_names = ['Dark','Electric','Forest','Sunset','Autumn','Paper','Pastel'];
 	palette = new Palette('Dark');
@@ -52,7 +57,7 @@ function setup() {
 	helpBox.setActive(false);
 
 	
-	name_data = loadTable('fast_numbers/fast_numbers_' + dict + '.csv');
+	name_data = loadTable('fast_numbers/fast_numbers_' + dict + mode + '.csv');
 	
 }
 
