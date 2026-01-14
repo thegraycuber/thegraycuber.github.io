@@ -34,6 +34,22 @@ function c_mult(c_a,c_b){
 	return [c_a[0]*c_b[0]-c_a[1]*c_b[1],c_a[0]*c_b[1]+c_a[1]*c_b[0]];
 }
 
+function c_div(c_a,c_b){
+	return c_mult(c_a,c_inv(c_b));
+}
+
+function c_inv(c_a){
+	let a_norm = c_norm(c_a);
+	if (a_norm == 0){
+		return(100000000,100000000);
+	}
+	return [c_a[0]/a_norm,-c_a[1]/a_norm];
+}
+
+function c_norm(c_a){
+	return c_a[0]**2 + c_a[1]**2;
+}
+
 function c_sq(c_a){
 	return [c_a[0]**2-c_a[1]**2, 2*c_a[0]*c_a[1]];
 }
