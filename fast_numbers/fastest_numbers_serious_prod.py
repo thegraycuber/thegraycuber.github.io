@@ -263,6 +263,35 @@ def number_names_generator(leave_point,max_number):
                     break
 
 
+        for op in unary:
+            #print(op)
+            if s <= op["syllables"]:
+                continue
+
+            min_value, max_value = get_first_extremes(op, min_missing, max_number)
+            for input_value in syllable_key[s - op["syllables"]][op["pemdas_left"]]:
+                if input_value < min_value:
+                    continue
+                if input_value > max_value:
+                    break
+
+                op_output, valid_output = get_output(op, max_number, input_value)
+                if not valid_output:
+                    continue
+
+                new_name = get_name(op, input_value)
+                new_equation = get_equation(op, input_value)
+
+                for u in range(op["pemdas_result"],pemdas_count):
+                    if number_names[op_output]["syllables"][u] >= s:
+                        number_names[op_output]["names"][u] = new_name
+                        number_names[op_output]["equations"][u] = new_equation
+                        number_names[op_output]["level_out"][u] = op["level_out"]
+
+                        if number_names[op_output]["syllables"][u] > s:
+                            number_names[op_output]["syllables"][u] = s
+                            syllable_key[s][u].append(op_output)
+                
         for op in binary:
             print(op)
 
@@ -304,35 +333,6 @@ def number_names_generator(leave_point,max_number):
                                     number_names[op_output]["syllables"][u] = s
                                     syllable_key[s][u].append(op_output)
 
-        for op in unary:
-            #print(op)
-            if s <= op["syllables"]:
-                continue
-
-            min_value, max_value = get_first_extremes(op, min_missing, max_number)
-            for input_value in syllable_key[s - op["syllables"]][op["pemdas_left"]]:
-                if input_value < min_value:
-                    continue
-                if input_value > max_value:
-                    break
-
-                op_output, valid_output = get_output(op, max_number, input_value)
-                if not valid_output:
-                    continue
-
-                new_name = get_name(op, input_value)
-                new_equation = get_equation(op, input_value)
-
-                for u in range(op["pemdas_result"],pemdas_count):
-                    if number_names[op_output]["syllables"][u] >= s:
-                        number_names[op_output]["names"][u] = new_name
-                        number_names[op_output]["equations"][u] = new_equation
-                        number_names[op_output]["level_out"][u] = op["level_out"]
-
-                        if number_names[op_output]["syllables"][u] > s:
-                            number_names[op_output]["syllables"][u] = s
-                            syllable_key[s][u].append(op_output)
-                
         
         for op in huge_ops:
             for a in adjust_types:
@@ -618,6 +618,8 @@ def get_output(op,max_number,left_value,right_value=0):
     elif op["id"] == "*":# or op["id"] == "multiples":
         return left_value * right_value, True
     elif op["id"] == "ns":
+        if op["value"] % 10 != 0 and op["value"] > 20 and left_value % 100 == 0:
+            return 0, False
         return left_value * op["value"], True
     elif op["id"] == "-":
         return left_value - right_value, True
@@ -626,6 +628,8 @@ def get_output(op,max_number,left_value,right_value=0):
             return left_value // right_value, True
         return 0, False
     elif op["id"] == "nths":
+        if op["value"] % 10 != 0 and op["value"] > 20 and left_value % 100 == 0:
+            return 0, False
         if left_value % op["value"] == 0:
             return left_value // op["value"], True
         return 0, False
@@ -710,6 +714,8 @@ def get_equation(op,left_value,right_value=-1):
             return input_name + " * " + str(op["value"])
         elif op["id"] in ["ns","nths"]:
             return input_name + op["equation"]
+        elif op["id"] in ["²","³"] and input_name[-1] in ["²","³"]:
+            return "(" + input_name + ")" + " " + op["id"]
         
         return input_name + " " + op["id"]
 
@@ -854,19 +860,19 @@ replacements = [
         "ord_name": "sixty-five thousand five hundred thirty-seventh", "ord_syllables": 12, "ord_equation": "65537"},
 
     # { "value": 24, "name": "FOUR", "syllables": 1, "equation": "4!", 
-    #     "ord_name": "FOURth", "ord_syllables": 1, "ord_equation": "4!"},
+    #     "ord_name": "FOURTH", "ord_syllables": 1, "ord_equation": "4!"},
     # { "value": 120, "name": "FIVE", "syllables": 1, "equation": "5!", 
-    #     "ord_name": "FIVEth", "ord_syllables": 1, "ord_equation": "5!"},
+    #     "ord_name": "FIFTH", "ord_syllables": 1, "ord_equation": "5!"},
     # { "value": 720, "name": "SIX", "syllables": 1, "equation": "6!", 
-    #     "ord_name": "SIXth", "ord_syllables": 1, "ord_equation": "6!"},
+    #     "ord_name": "SIXTH", "ord_syllables": 1, "ord_equation": "6!"},
     # { "value": 5040, "name": "SVEN", "syllables": 1, "equation": "7!", 
-    #     "ord_name": "SVENth", "ord_syllables": 1, "ord_equation": "7!"},
+    #     "ord_name": "SVENTH", "ord_syllables": 1, "ord_equation": "7!"},
     # { "value": 40320, "name": "EIGHT", "syllables": 1, "equation": "8!", 
-    #     "ord_name": "EIGHTh", "ord_syllables": 1, "ord_equation": "8!"},
+    #     "ord_name": "EIGHTH", "ord_syllables": 1, "ord_equation": "8!"},
     # { "value": 362880, "name": "NINE", "syllables": 1, "equation": "9!", 
-    #     "ord_name": "NINEth", "ord_syllables": 1, "ord_equation": "9!"},
+    #     "ord_name": "NINTH", "ord_syllables": 1, "ord_equation": "9!"},
     # { "value": 3628800, "name": "TEN", "syllables": 1, "equation": "10!", 
-    #     "ord_name": "TENth", "ord_syllables": 1, "ord_equation": "10!"},
+    #     "ord_name": "TENTH", "ord_syllables": 1, "ord_equation": "10!"},
 ]
 
 upper_limit = 10000000
