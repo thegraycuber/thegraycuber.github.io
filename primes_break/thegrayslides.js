@@ -712,7 +712,7 @@ class ArrowModule{
 		this.end_size = this.size;
 		this.end_stroke_color = palette.backtrans;
 		this.end_fill_color = palette.backtrans;
-		this.end_stroke = 0;
+		this.end_stroke = this.stroke;
 		this.end_angle = this.angle;
 	}
 	
