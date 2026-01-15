@@ -821,6 +821,7 @@ class ImageModule{
 		this.start_angle = startModule.angle;
 		this.start_stroke_color = startModule.stroke_color;
 		this.start_stroke = startModule.stroke;
+		this.start_tint = (startModule.age == 1 ? startModule.tint : 0);
 	}
 	
 	startEmpty(){
@@ -829,6 +830,7 @@ class ImageModule{
 		this.start_angle = this.angle;
 		this.start_stroke_color = palette.backtrans;
 		this.start_stroke = 0;
+		this.start_tint = 0;
 	}
 	
 	endAt(endModule){
@@ -837,6 +839,7 @@ class ImageModule{
 		this.end_angle = endModule.angle;
 		this.end_stroke_color = endModule.stroke_color;
 		this.end_stroke = endModule.stroke;
+		this.end_tint = (endModule.age == 1 ? endModule.tint : 0);
 	}
 	
 	endEmpty(){
