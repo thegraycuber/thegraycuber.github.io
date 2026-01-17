@@ -372,14 +372,6 @@ def number_names_generator(leave_point,max_number):
 
     return number_names[0:leave_point+1]
 
-
-def numbers_out(number_names, file_name):
-    with open(file_name,"w",encoding="utf-8") as f:
-        for l in number_names:
-            # f.write(name_clean(l["names"][-1]) + "," + equation_clean(l["equations"][-1]) + "\n")
-            f.write(l["names"][-1] + "," + l["equations"][-1] + "\n")
-
-
 def numbers_out(number_names, file_name):
     with open(file_name,"w",encoding="utf-8") as f:
         for l in number_names:
