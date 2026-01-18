@@ -372,11 +372,12 @@ def number_names_generator(leave_point,max_number):
 
     return number_names[0:leave_point+1]
 
+
 def numbers_out(number_names, file_name):
     with open(file_name,"w",encoding="utf-8") as f:
         for l in number_names:
             f.write(name_clean(l["names"][-1]) + "," + equation_clean(l["equations"][-1]) + "\n")
-        #    f.write(l["names"][-1] + "," + l["equations"][-1] + "\n")
+            # f.write(l["names"][-1] + "," + l["equations"][-1] + "\n")
 
 
 name_cleans = [
@@ -444,7 +445,7 @@ equation_cleans = [
     [" / ","/"],
     [" * ","*"],
     [" ^ ","^"],
-    [" % ","^"],
+    [" % ","%"],
     [" b ","J"],
     [" C ","C"],
     [" ²","L"],
@@ -759,7 +760,7 @@ def adjust_equation(adjust_type, val_to_adjust):
 unary = [
     # {"id": "fibonacci", "syllables": 1, "text": " fib",  "pemdas_left": 0, "pemdas_result": 2, "level_in": 0, "level_out": 4},
     {"id": "prime", "syllables": 1, "text": " prime",  "pemdas_left": 0, "pemdas_result": 2, "level_in": 0, "level_out": 4},
-    {"id": "fibonacci", "syllables": 6, "text": " fibonacci number",  "pemdas_left": 0,"pemdas_result": 2, "level_in": 0, "level_out": 4},
+    {"id": "fibonacci", "syllables": 4, "text": " fibonacci",  "pemdas_left": 0,"pemdas_result": 2, "level_in": 0, "level_out": 4},
     { "id": "adj_tan", "syllables": 1, "adjust_type": "round", "pemdas_left": 2,"pemdas_result": 3, "level_in": 0, "level_out": 4},
     { "id": "adj_tan", "syllables": 1, "adjust_type": "floor", "pemdas_left": 2,"pemdas_result": 3, "level_in": 0, "level_out": 4},
     { "id": "adj_tan", "syllables": 2, "adjust_type": "ceiling", "pemdas_left": 2,"pemdas_result": 3, "level_in": 0, "level_out": 4},
