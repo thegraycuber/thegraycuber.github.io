@@ -51,7 +51,7 @@ function setup() {
 	helpBox.Items.push(new textItem(0.6,"",0));
 	helpBox.Items.push(new textItem(3,messages.info2[dict],name_size*0.6));
 	helpBox.Items.push(new textItem(0.6,"",0));
-	helpBox.Items.push(new textItem(1,messages.info3[dict],name_size*0.6,'help_link',messages.link[dict],'bright'));
+	helpBox.Items.push(new textItem(1,messages.info3[dict+mode],name_size*0.6,'help_link',messages.link[dict+mode],'bright'));
 	helpBox.Items.push(new textItem(0.6,'',0));
 	helpBox.giveSizes();
 	helpBox.setActive(false);

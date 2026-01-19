@@ -16,8 +16,10 @@ messages = {
 		nl:"dit pagina toont het minimum\nlettergrepen nodig voor elk getal,\nmet een bepaalde reeks regels."
 	},
 	info3: {
-		en:"watch our video to learn more!",
-		nl:"kijk naar mijn filmpje om meer te leren!"
+		enmain:"watch our video to learn more!",
+		nlmain:"kijk naar mijn filmpje om meer te leren!",
+		enance:"watch our video to learn more!",
+		enserious:"watch my update video to learn more!"
 	},
 	enter: {
 		en:"enter a whole number\nbetween 0 and 1 000 000",
@@ -28,11 +30,12 @@ messages = {
 		nl:"druk de dobbelsteen\nte randomiseren"
 	},
 	link: {
-		en:"https://youtu.be/Ff8qIBUu4wM",
-		nl:"https://youtu.be/Ff8qIBUu4wM"
+		enmain:"https://youtu.be/Ff8qIBUu4wM",
+		nlmain:"https://youtu.be/Ff8qIBUu4wM",
+		enance:"https://youtu.be/iHrXpLDcICo",
+		enserious:"https://ko-fi.com/post/January-2026-Update-B0B11SMAXZ",
 	},
 };
-
 
 
 name_compress = {
