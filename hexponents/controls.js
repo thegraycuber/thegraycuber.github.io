@@ -204,7 +204,7 @@ var at_text;
 var at_ticker = 0;
 var fav = 0;
 var favorites = [
-	['I woke up at 7:06 and ate 4 raisins',''],//solid 4
+['I woke up at 7:06 and ate 4 raisins',''],//solid 4
 	['I woke up at 7:12 and ate 1680 pecans','@tima_soft'],//bands
 	['I woke up at 7:04 and ate 2 blueberries','@snadsnad-g7o'],//cool 2
 	['I woke up at 7:04 and ate 48 peaches',''],//lines and diam's
@@ -218,6 +218,7 @@ var favorites = [
 	['I woke up at 7:06 and ate 88 cherries',''],//holy lattice
 	['I woke up at 7:04 and ate 5 raisins',''],//zul man
 	['I woke up at 7:00 and ate 4 limes','@ismaelmartinez8639'],//triple lattice
+	['I woke up at 7:14 and ate 736 raisins','@radical4033'],//triangle dishes
 	['I woke up at 7:16 and ate 39 almonds','@BrainrottedMinor'],//boxes
 	['I woke up at 7:09 and ate 2 raspberries',''],//squatties
 	['I woke up at 7:08 and ate 168 hazelnuts','@memeing_donkey'], //diamond fields
