@@ -211,5 +211,7 @@ function setup() {
 	labelBox.Items[0].Size*=0.6;
 	
 	//input_settings('Squ,1,Rot,Reg,Cir,-1,Off,Reg,Oct,-3,Rad,Flo,Off,Poi');
-	randomize();
+	
+	fav = floor(random()*favorites.length);
+	heart();
 }
