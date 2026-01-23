@@ -126,11 +126,7 @@ class Icon {
 			input_setup();
 	
 		} else if (this.Type == 'heart'){
-			fav = (fav + 1)%favorites.length;
-			input_settings(favorites[fav][0]);
-			at_text = favorites[fav][1];
-			at_ticker = 400;
-			reset_shapes();
+			heart();
 		}
 		
 		if (mobile){
@@ -148,6 +144,16 @@ function randomize(){
 		mi.randomize();
 	}
 }
+
+
+function heart(){
+	fav = (fav + 1)%favorites.length;
+	input_settings(favorites[fav][0]);
+	at_text = favorites[fav][1];
+	at_ticker = 400;
+	reset_shapes();
+}
+
 
 
 function input_settings(input_str){
@@ -242,7 +248,7 @@ function get_paste(){
 }
 
 var favorites = [
-	['fPy3,Off,Poi,Hex,-1,Off,Reg,12g,5,Rot,Smo,Cir,3,Off,Reg',''],
+['fPy3,Off,Poi,Hex,-1,Off,Reg,12g,5,Rot,Smo,Cir,3,Off,Reg',''],
 ['fPy3,Off,Poi,Pen,1,Rot,Reg,13g,2,Rot,Wig,Cir,-1,Off,Reg','@ymperal4663'],
 ['Oct,-3,Rot,Wig,Pen,2,Off,Reg,Cir,2,Off,Reg,Gri,Off','@Detteraleon'],
 ['fQua,Gri,Poi,Hep,2,Rot,Reg,Hep,-1,Rot,Wig,Hep,3,Rot,Reg','@gergelyarpa7071'],
@@ -257,6 +263,7 @@ var favorites = [
 ['fPy3,Off,Off,12g,5,Rot,Flo,Cir,-1,Tra,Reg,Spi,-1,Off,Reg',''],
 ['fQua,Off,Poi,Cir,-1,Rot,Reg,10g,1,Off,Flo,Oct,-1,Rot,Smo','@tornadix99'],
 ['13g,1,Rot,Wig,Cir,-1,Off,Reg,Oct,-3,Rad,Flo,Off,Poi','@memeing_donkey'],
+['fPyt,Off,Off,Spi,4,Rad,Reg,Spi,-4,Rot,Reg','@JordanZhoug'],
 ['fPyt,Off,Off,9go,-1,Rot,Wig,11g,-2,Off,Wig',''],
 ['fQua,Off,Off,13g,1,Rot,Flo,13g,-3,Rot,Flo,13g,6,Rot,Flo','@CelloGiraffe'],
 ['fPy3,Off,Off,Cir,4,Rot,Reg,9go,1,Rad,Reg,10g,-3,Rad,Reg','@orrinpants'],
@@ -270,6 +277,7 @@ var favorites = [
 ['Hex,-1,Rad,Wig,Hex,-1,Rot,Wig,Tri,-1,Off,Wig,Gri,Poi',''],
 ['11g,5,Rad,Reg,Squ,-1,Off,Reg,11g,-1,Rot,Wig,Off,Off','@steamedeggeggegg'],
 ['Oct,1,Rot,Flo,Pen,-2,Rad,Reg,Spi,2,Rot,Reg,Off,Poi','@Novacozmo'],
+['fQua,Gri,Off,12g,-1,Rad,Wig,Cir,3,Tra,Reg,Spi,2,Rot,Reg','@versusparker'],
 ['fPyt,Off,Poi,Hep,2,Rot,Wig,Cir,-4,Off,Reg',''],
 ['fQua,Gri,Poi,Roc,-1,Rad,Reg,Spi,4,Tra,Reg,13g,-4,Rot,Wig','@memeing_donkey'],
 ['Spi,1,Rot,Reg,Spi,4,Rad,Reg,Cir,-4,Rad,Reg,Gri,Poi','@refiredspace6930'],
@@ -283,6 +291,7 @@ var favorites = [
 ['Tri,-1,Rad,Wig,9go,1,Rad,Wig,Spi,3,Rot,Reg,Off,Off','@SmokeTranspicuators'],
 ['Oct,-3,Rot,Wig,12g,5,Rad,Reg,Cir,2,Off,Reg,Gri,Off','@16alpakas'],
 ['Hep,3,Off,Smo,12g,5,Rot,Flo,12g,-5,Rad,Flo,Gri,Poi',''],
+['fPy3,Gri,Poi,Hex,1,Rad,Smo,Cir,-4,Off,Reg,13g,4,Rot,Smo','@slaydrik'],
 ['Tri,1,Off,Wig,Pen,2,Rad,Flo,Oct,-3,Rot,Smo,Off,Poi','@JunglinGuitarJourney'],
 ['Cir,-4,Rot,Reg,Spi,1,Rot,Reg,Spi,-3,Rot,Reg,Off,Off','@EnricoRodolico'],
 ['fPyt,Gri,Poi,9go,2,Rad,Reg,9go,-2,Rot,Smo',''],
