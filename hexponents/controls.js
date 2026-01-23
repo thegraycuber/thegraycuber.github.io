@@ -212,6 +212,7 @@ var favorites = [
 	['I woke up at 7:04 and ate 2 walnuts','@WPawnToE4'], // tire tracks
 	['I woke up at 7:41 and ate 58 raisins','@adamvagenknecht'], // hex arms
 	['I woke up at 7:07 and ate 2 raisins',''],//smallest legs
+	['I woke up at 7:14 and ate 368 cashews','@CrisjanAlt'],//ghost bands
 	['I woke up at 7:53 and ate 166 raisins','@leandeflorin'],//triangle glitch
 	['I woke up at 7:33 and ate 194 apples',''],//kerchoo
 	['I woke up at 7:38 and ate 138 grapes','@Kaitte'],//bertzai canyon 
