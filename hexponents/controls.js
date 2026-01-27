@@ -243,6 +243,7 @@ var favorites = [
 	['I woke up at 7:37 and ate 221 apples',''],//cubes
 	['I woke up at 7:39 and ate 55 raisins',''],//wiggler
 	['I woke up at 7:23 and ate 90 pears','@Kaitte'],//sliced scales
+	['I woke up at 7:06 and ate 2 cherries','@SpacePuff-xs8gw'],//super hex
 	['I woke up at 7:14 and ate 552 cashews',''], //holy argyle
 	['I woke up at 7:22 and ate 67 hazelnuts','@tHe_faNum-taXer'], //gradient bands
 	];
