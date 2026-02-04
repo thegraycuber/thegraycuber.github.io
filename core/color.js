@@ -77,6 +77,8 @@ class Palette {
 										this.mono,
 									 	this.red
 									];
+
+		document.body.style.backgroundColor = this.back;
 		
 		if (typeof core_color_custom === 'function'){
 			core_color_custom(this);
