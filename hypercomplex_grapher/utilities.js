@@ -52,8 +52,8 @@ function core_icon_custom(icon_object, icon_color){
 }
 
 function i_mult(c_a,c_b,p_ideal){
-	//return [c_a[0]*c_b[0]+c_a[1]*c_b[1]*p_ideal[0],c_a[0]*c_b[1]+c_a[1]*c_b[0]+c_a[1]*c_b[1]*p_ideal[1]];
-  return [c_a[1]*c_b[1]+(c_a[0]*c_b[1]-c_a[1]*c_b[0])*p_ideal[0],c_a[0]*c_b[0]+(c_a[0]*c_b[1]-c_a[1]*c_b[0])*p_ideal[1]];
+	return [c_a[0]*c_b[0]+c_a[1]*c_b[1]*p_ideal[0],c_a[0]*c_b[1]+c_a[1]*c_b[0]+c_a[1]*c_b[1]*p_ideal[1]];
+  // return [c_a[1]*c_b[1]+(c_a[0]*c_b[1]-c_a[1]*c_b[0])*p_ideal[0],c_a[0]*c_b[0]+(c_a[0]*c_b[1]-c_a[1]*c_b[0])*p_ideal[1]];
 }
 
 function randomize(avoidance){
