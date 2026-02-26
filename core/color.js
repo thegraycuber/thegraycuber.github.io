@@ -53,7 +53,7 @@ class Palette {
 			
 		} else if (scheme == 'Pastel'){
 			this.front = color('#5b2a7d');
-			this.back = color('#cbc1e9');
+			this.back = color('#dfc8f1');
 			this.backlight = color('#b6a5db');
 			this.mono = color('#9a63d9');
 			this.red = color('#c353a0');
