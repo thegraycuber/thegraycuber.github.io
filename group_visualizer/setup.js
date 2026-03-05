@@ -153,10 +153,13 @@ function setup() {
 	
 	settingBox.giveSizes();
 	
-	settingBox.getItem('order').giveValue(7);
-	settingBox.getItem('class').giveValue(1);
+	settingBox.getItem('order').giveValue(19);
+	settingBox.getItem('class').giveValue(4);
 	settingBox.getItem('group').giveValue(0);
 	
 	//arrowBoxes[2].getItem('arrow_active').giveValue(1);
+	arrow_elements[0] = 1;
+	arrow_elements[1] = 5;
 	arrow_elements[2] = -1;
+	display_state = 1;
 }
