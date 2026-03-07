@@ -4,7 +4,7 @@ function preload(){
 	mainFont = loadFont('media/AshkinsonBold_prod.ttf');
 	
 	gen_data = loadTable('group_visualizer/group_generators_015.csv', 'csv', 'header');
-	el_data = loadTable('group_visualizer/group_labels_015.csv', 'csv', 'header');
+	el_data = loadTable('group_visualizer/group_labels_016.csv', 'csv', 'header');
 }
 
 var arrowBoxes, settingBox, iconBox, arrowBox, displayBox, unit;
