@@ -17,6 +17,10 @@ function copyColor(color_to_copy){
 	return color(red(color_to_copy),green(color_to_copy),blue(color_to_copy));
 }
 
+function colorToHex(color_input){
+	return '#' + hex(red(color_input)).substring(6) + hex(green(color_input)).substring(6) + hex(blue(color_input)).substring(6);
+}
+
 
 function c_scale(c_c,c_a){
 	return [c_c*c_a[0],c_c*c_a[1]];
