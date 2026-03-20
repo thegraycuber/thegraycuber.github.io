@@ -58,7 +58,7 @@ class Palette {
 			this.mono = color('#9a63d9');
 			this.red = color('#c353a0');
 			this.bright = color('#5184d2');
-			this.gray = color('#8c8eb4');
+			this.gray = color('#7b7aa2');
 			this.rev = -1;
 			
 		} else if (scheme == 'Paper'){
@@ -68,7 +68,7 @@ class Palette {
 			this.mono = color('#bf7853');
 			this.red = color('#ad588b');
 			this.bright = color('#829651');
-			this.gray = color('#9b928a');
+			this.gray = color('#85796d');
 			this.rev = -1;
 			
 		}
