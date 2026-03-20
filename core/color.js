@@ -40,7 +40,7 @@ class Palette {
 			this.mono = color('#fe8241');
 			this.bright = color('#faca30');
 			this.red = color('#d94242');
-			this.gray = color('#999170');
+			this.gray = color('#b4af99');
 			
 		} else if (scheme == 'Dark'){
 			this.front = color('#c8caf4');
