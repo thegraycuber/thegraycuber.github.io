@@ -45,7 +45,7 @@ function c_div(c_a,c_b){
 function c_inv(c_a){
 	let a_norm = c_norm(c_a);
 	if (a_norm == 0){
-		return(100000000,100000000);
+		return [100000000,100000000] ;
 	}
 	return [c_a[0]/a_norm,-c_a[1]/a_norm];
 }
