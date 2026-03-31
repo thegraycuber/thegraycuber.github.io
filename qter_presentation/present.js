@@ -18,6 +18,7 @@ function next_slide(){
 	}
 	last_transition = Date.now();
 	slide++;
+	document.getElementById('slide-counter').innerHTML = 'slide ' + str(slide+1) + '/' + str(modules.length);
 	prep_presentation();
 }
 

@@ -1,18 +1,39 @@
 
+
 var cube = [];
 var w = 0;
+var n;
 
 var baseCubeColors = ['#c8caf4','#e1e485','#2cda9d','#8498ef','#f168a0','#ebad6b','#20213f']; // dark
 var cubeColors;
 
 function aux_setup() {
 	resetCube();
+	lastFrame = Date.now();
 }
 
 function resetCube(){
 	//create a 3x3 grid on all 6 faces, and a 3x3x3 grid of boxes inside
 	w = 1/3;
 	cube = [];
+
+	// n = 3;
+	// let startSize = -w*(n-1)/2;
+	// let endSize = w*(n-0.999)/2;
+	// let fullSize = w*n/2;
+	
+	// for (var i = startSize; i <= endSize; i += w){
+	// 	for (var j = startSize; j <= endSize; j += w){
+	// 		cube.push(new sticker([i,-fullSize,j],0,w*0.9,[1,0])); // white on U
+	// 		cube.push(new sticker([i,fullSize,j],1,w*0.9,[1,0])); // yellow on D
+	// 		cube.push(new sticker([i,j,fullSize],2,w*0.9,[0,0])); // green on F
+	// 		cube.push(new sticker([i,j,-fullSize],3,w*0.9,[0,0])); // blue on B
+	// 		cube.push(new sticker([fullSize,i,j],4,w*0.9,[0,1])); // red on R
+	// 		cube.push(new sticker([-fullSize,i,j],5,w*0.9,[0,1])); // orange on L
+	// 	}
+	// }
+
+
 	for (var i = -w; i <= w; i += w){
 		for (var j = -w; j <= w; j += w){
 			cube.push(new sticker([i,-w*1.5,j],0,w*0.9,[1,0])); // white on U
@@ -21,6 +42,7 @@ function resetCube(){
 			cube.push(new sticker([i,j,-w*1.5],3,w*0.9,[0,0])); // blue on B
 			cube.push(new sticker([w*1.5,i,j],4,w*0.9,[0,1])); // red on R
 			cube.push(new sticker([-w*1.5,i,j],5,w*0.9,[0,1])); // orange on L
+			
 
 			for (var k = -w; k <= w; k += w){
 				cube.push(new sticker([i*0.99,j*0.99,k*0.99],6,w*0.99,[0,0],false)); // inner boxes
@@ -29,15 +51,16 @@ function resetCube(){
 	}
 }
 
-
+var lastFrame;
 function aux_draw() {
 	if (typeof settings.alg == 'undefined'){return;}
 	
 	if (settings.setCube.length > 0){
 		resetCube();
+		moveaxis = -1;
 		while(settings.setCube.length > 0){
 			keytoMove(settings.setCube.substring(0,1),true);
-			settings.setCube = settings.setCube.substring(1,settings.setCube.length);
+			settings.setCube = settings.setCube.substring(1);
 		}
 	}
 	
@@ -47,7 +70,7 @@ function aux_draw() {
 	for (let c of baseCubeColors){
 		cubeColors.push(lerpColor(color(baseCubeColors[6]),color(c),settings.cube));
 	}
-	let auxScalar = height*0.3*settings.scalar;
+	let auxScalar = wid**1.9*0.0004*settings.scalar;
 
 
 	noStroke();
@@ -60,11 +83,14 @@ function aux_draw() {
 	translate(-settings.strafeZ*sin(settings.yAngle),0,settings.strafeZ*cos(settings.yAngle));
 	translate(0,settings.strafeY,0);
 
+	
+	// fill(palette.back);
+	// box(w*n*0.9999,w*n*0.9999,w*n*0.9999);
+
 	if (settings.alg.length > 0 && moveaxis == -1){
 		keytoMove(settings.alg.substring(0,1));
 		settings.alg = settings.alg.substring(1,settings.alg.length);
 	} else if (moveaxis == -1 && settings.autoplay && mouse_state == 'presenting' && present_ticker == 1){
-
 		next_slide();
 	}
 
@@ -74,7 +100,7 @@ function aux_draw() {
 
 	// if mid move, continue to process the move
 	if(moveaxis != -1){
-		moveang += 1;
+		moveang = min(moveframes,moveang + (Date.now() - lastFrame)*0.03);
 		moveportion = PI*movedir*movefact*(-cos(PI*moveang/moveframes)+1)/4;
 		if(moveaxis == 0){
 			rotateX(moveportion);
@@ -91,11 +117,13 @@ function aux_draw() {
 	}
 
 	// if the move is now done, handle by permanently moving the stickers
-	if (moveang == moveframes){
+	if (moveang >= moveframes){
 		processMove();
 	}
 	
 	pop();
+
+	lastFrame = Date.now();
 }
 
 

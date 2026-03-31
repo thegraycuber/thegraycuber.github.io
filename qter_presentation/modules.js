@@ -51,11 +51,14 @@ class TextModule{
 		translate(this.pos.x,this.pos.y);
 		rotate(this.angle);
 		
-		strokeWeight((is3d?scalar*0.08:1/this.size.x)*this.stroke);
+		strokeWeight((is3d?scalar*wid*0.0003:1/this.size.x)*this.stroke);
 		stroke(shadow?this.shadow:this.stroke_color);
 	
 		if (this.inverted){
+			fill(shadow?this.shadow:this.fill_color);
+			translate(0,0,-0.0001);
 			rect(0,0,this.size.x,this.size.y);
+			translate(0,0,0.0001);
 		} 
 		
 		noStroke();
@@ -257,7 +260,7 @@ class PolyModule{
 
 		let y_mult = this.size.y/this.size.x;
 		
-		strokeWeight((is3d?scalar*0.08:1/this.size.x)*this.stroke*2);
+		strokeWeight((is3d?scalar*wid*0.0003:1/this.size.x)*this.stroke*2);
 		stroke(shadow?this.shadow:this.stroke_color);
 		fill(shadow&&this.inverted?this.shadow:this.fill_color);
 		// fill(palette.backtrans);
@@ -517,6 +520,24 @@ var image_list = [
 	'qter_presentation/proj/scratch_5.png',
 	'qter_presentation/proj/scratch_6.png',
 	'qter_presentation/proj/scratch_7.png',
+	'qter_presentation/proj/yr_edge.png',
+	'qter_presentation/proj/yr_outline.png',
+	'qter_presentation/proj/wg_edge.png',
+	'qter_presentation/proj/wg_outline.png',
+	'qter_presentation/proj/4by4.png',
+	'qter_presentation/proj/5by5.png',
+	'qter_presentation/proj/8by8.png',
+	'qter_presentation/proj/cube_solved.png',
+	'qter_presentation/proj/cube_u.png',
+	'qter_presentation/proj/cube_l.png',
+	'qter_presentation/proj/cube_r.png',
+	'qter_presentation/proj/cube_f.png',
+	'qter_presentation/proj/cube_rf.png',
+	'qter_presentation/proj/cube_ru.png',
+	'qter_presentation/proj/cube_rd.png',
+	'qter_presentation/proj/cube_position.png',
+	'qter_presentation/proj/cube_random.png',
+	'qter_presentation/proj/cube_5.png',
 ];
 
 function image_load(){
@@ -593,6 +614,7 @@ class ImageModule{
 		// 	// fill(this.shadow);
 		// 	// rect(0,0,this.size.x,this.size.y);
 		// }
+		if (this.noshad && shadow){return;}
 		
 		push();
 		translate(this.pos.x,this.pos.y);
@@ -859,4 +881,9 @@ function points_to_pts(points_array,points_size,s_slide){//NEWPOLY
 		pts.push([round(pt.x, logger),round(pt.y, logger)]);
 	}
 	return pts;	
+}
+
+
+function pp_to_prin(poly_module,p){
+	return poly_module.points[p].copy().mult(poly_module.size).div(2).rotate(poly_module.angle).add(poly_module.pos);
 }

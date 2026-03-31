@@ -15,8 +15,8 @@ function draw() {
 	
 
 	if (is3d){
-		translate(0,0,700);
-		scale(0.128,0.128);
+		translate(0,0,wid*0.5);
+		scale(wid*0.000625);
 		translate(-width/2,-height/2);
 	}
 
@@ -75,21 +75,6 @@ function draw() {
 		if (is3d){translate(0,0,0.0001);}
 	}
 
-	
-	if (fullscreen_count > 0){
-		fullscreen_count++;
-		if (fullscreen_count > 30){
-			
-			fullscreen_count = 0;
-			resizeCanvas(window.innerWidth,window.innerHeight);
-			
-			setValues();
-			
-			for (let view = 0; view < present_view.length; view++){
-				present_view[view] = new PresentView(present_view[view].size, present_view[view].pos.x, present_view[view].pos.y);
-			}
-		}
-	}
 
 }
 
@@ -101,12 +86,12 @@ var is3d = true;
 function preload(){
 	mainBold = loadFont('qter_presentation/proj/GoogleSansCode-SemiBold.ttf');
 	module_defaults = loadJSON('qter_presentation/proj/defaults_015.json');
-	slide_data = loadJSON('qter_presentation/proj/qter_hack_012.json');
+	slide_data = loadJSON('qter_presentation/proj/qter_hack_034.json');
 	image_load();
 }
 
 
-var slide_data, modules, module_defaults, audio_file;
+var slide_data, modules, module_defaults, audio_file, cam;
 var wid;
 var module_id_counter = 1;
 var onion_skin = false;
@@ -115,10 +100,12 @@ var select_focus = true;
 var slide = 1;
 
 function setup() {
-
+	
 	wid = min(window.innerWidth,window.innerHeight*16/9);
 	if (is3d){
 		createCanvas(wid,wid*9/16,WEBGL);
+		cam = createCamera();
+		cam.setPosition(0,0,wid);
 	} else {
 		createCanvas(wid,wid*9/16);
 	}
@@ -126,9 +113,12 @@ function setup() {
 	noStroke();
 	smooth();
 	frameRate(30);
+	
+	scalar = wid/1920;
+	default_scalar = scalar;
+	origin = createVector(width/2,height/2);
+	default_origin = origin.copy();
 
-
-	setValues();
 	last_frame = 0;
 	present_view = [new PresentView(1,0,0)];
 
@@ -147,14 +137,6 @@ function setup() {
 
 	aux_setup();
     getCurrentSettings();
-}
-
-
-function setValues(){
-	scalar = wid/1920;
-	default_scalar = scalar;
-	origin = createVector(width/2,height/2);
-	default_origin = origin.copy();
 }
 
 
@@ -186,12 +168,14 @@ function core_color_custom(plt){
 			plt.backlight,
 			plt.back,
 			plt.backtrans,
+			color('#e1e485'),
+			color('#ebad6b'),
 		];
 
 		let flat_shadow = make_solid(plt.backdark);
 		for (let im of image_list){
 			im.shadow = im.image.get();//image(shad,im.image.width,im.image.height);
-			im.shadow.copy(flat_shadow,0,0,1,1,0,0,im.image.width,im.image.width);
+			im.shadow.copy(flat_shadow,0,0,1,1,0,0,im.image.width,im.image.height);
 			im.shadow.mask(im.image);
 		}
 }
@@ -433,6 +417,7 @@ function load_slide_data(){
 			modules[d.s].push(new PolyModule(d));
 		}
 		slide = 0;
+		document.getElementById('slide-counter').innerHTML = 'slide 1/' + str(modules.length);
 	}
 	
 	while (present_view.length < modules.length){

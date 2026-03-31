@@ -4,25 +4,23 @@ var fullscreen_count = 0;
 var last_transition = 0;
 function keyPressed(){
 
-	// if (settings.autoplay){return;}
-	if (Date.now() < last_transition + 500){
-		return;
-	}
+	let isControl = keyIsDown(17) || keyIsDown(91);
+	
 	if ([32, DOWN_ARROW, RIGHT_ARROW, 34].includes(keyCode)){
-		if (keyIsDown(SHIFT)){
-			slide = min(modules.length-1,slide+9);
-		} else if (keyIsDown(69)){
+		if (keyIsDown(SHIFT) && isControl){
 			slide = modules.length-1;
+		} else if (isControl){
+			slide = min(modules.length-1,slide+9);
 		}
 		next_slide();
 		present_ticker = 0;
 		last_transition = Date.now();
 	} else if ([BACKSPACE, UP_ARROW, LEFT_ARROW, 33].includes(keyCode)){
 		slide = max(0,slide-2);
-		if (keyIsDown(SHIFT)){
-			slide = max(0,slide-9);
-		} else if (keyIsDown(69)){
+		if (keyIsDown(SHIFT) && isControl){
 			slide = 0;
+		} else if (isControl){
+			slide = max(0,slide-9);
 		}
 		next_slide();
 		present_ticker = 0.99;
@@ -30,9 +28,28 @@ function keyPressed(){
 		
 	} else if (keyCode == 122){
 		fullscreen(true);
-		fullscreen_count = 1;
+
+	} else if (key == '=' || key == '+'){
+		document.getElementById('help-box').style.display = 'block';
+	} else if (key == '-' || key == '_'){
+		document.getElementById('help-box').style.display = 'none';
 	}
 	
+}
+
+
+function windowResized() {
+
+	let wid = min(window.innerWidth,window.innerHeight*16/9);
+	resizeCanvas(wid,wid*9/16+100);
+	cam.setPosition(0,0,wid);
+	default_scalar = wid/1920;
+	default_origin = createVector(wid/2,wid*9/32+50);
+
+	for (let view = 0; view < present_view.length; view++){
+		present_view[view] = new PresentView(present_view[view].size, present_view[view].pos.x, present_view[view].pos.y);
+	}
+
 }
 
 
