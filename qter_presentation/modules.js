@@ -520,10 +520,6 @@ var image_list = [
 	'qter_presentation/proj/scratch_5.png',
 	'qter_presentation/proj/scratch_6.png',
 	'qter_presentation/proj/scratch_7.png',
-	'qter_presentation/proj/yr_edge.png',
-	'qter_presentation/proj/yr_outline.png',
-	'qter_presentation/proj/wg_edge.png',
-	'qter_presentation/proj/wg_outline.png',
 	'qter_presentation/proj/4by4.png',
 	'qter_presentation/proj/5by5.png',
 	'qter_presentation/proj/8by8.png',
@@ -538,6 +534,7 @@ var image_list = [
 	'qter_presentation/proj/cube_position.png',
 	'qter_presentation/proj/cube_random.png',
 	'qter_presentation/proj/cube_5.png',
+	'qter_presentation/proj/cube_shorten.png',
 ];
 
 function image_load(){

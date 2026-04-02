@@ -8,7 +8,7 @@ function keyPressed(){
 	
 	if ([32, DOWN_ARROW, RIGHT_ARROW, 34].includes(keyCode)){
 		if (keyIsDown(SHIFT) && isControl){
-			slide = modules.length-1;
+			slide = modules.length-2;
 		} else if (isControl){
 			slide = min(modules.length-1,slide+9);
 		}

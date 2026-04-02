@@ -86,7 +86,7 @@ var is3d = true;
 function preload(){
 	mainBold = loadFont('qter_presentation/proj/GoogleSansCode-SemiBold.ttf');
 	module_defaults = loadJSON('qter_presentation/proj/defaults_015.json');
-	slide_data = loadJSON('qter_presentation/proj/qter_hack_034.json');
+	slide_data = loadJSON('qter_presentation/proj/qter_hack_050.json');
 	image_load();
 }
 
