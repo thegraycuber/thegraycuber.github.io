@@ -3,6 +3,14 @@ var draw_age = 0;
 var show_stuff = true;
 var back_image = false;
 
+var filePath = 'qter_presentation/proj';
+
+function preload(){
+	mainBold = loadFont('qter_presentation/proj/GoogleSansCode-SemiBold.ttf');
+	module_defaults = loadJSON('qter_presentation/proj/defaults_015.json');
+	slide_data = loadJSON('qter_presentation/proj/qter_hack_051.json');
+}
+
 function draw() {
 
 	load_slide_data();
@@ -83,13 +91,6 @@ function draw() {
 var allow_audio = false;
 var is3d = true;
 
-function preload(){
-	mainBold = loadFont('qter_presentation/proj/GoogleSansCode-SemiBold.ttf');
-	module_defaults = loadJSON('qter_presentation/proj/defaults_015.json');
-	slide_data = loadJSON('qter_presentation/proj/qter_hack_050.json');
-	image_load();
-}
-
 
 var slide_data, modules, module_defaults, audio_file, cam;
 var wid;
@@ -101,6 +102,34 @@ var slide = 1;
 
 function setup() {
 	
+	image_list = [
+		filePath + '/qter_logo.png',
+		filePath + '/qter_label.png',
+		filePath + '/scratch_1.png',
+		filePath + '/scratch_2.png',
+		filePath + '/scratch_3.png',
+		filePath + '/scratch_4.png',
+		filePath + '/scratch_5.png',
+		filePath + '/scratch_6.png',
+		filePath + '/scratch_7.png',
+		filePath + '/4by4.png',
+		filePath + '/5by5.png',
+		filePath + '/8by8.png',
+		filePath + '/cube_solved.png',
+		filePath + '/cube_u.png',
+		filePath + '/cube_l.png',
+		filePath + '/cube_r.png',
+		filePath + '/cube_f.png',
+		filePath + '/cube_rf.png',
+		filePath + '/cube_ru.png',
+		filePath + '/cube_rd.png',
+		filePath + '/cube_position.png',
+		filePath + '/cube_random.png',
+		filePath + '/cube_5.png',
+		filePath + '/cube_shorten.png',
+	];
+	image_load();
+
 	wid = min(window.innerWidth,window.innerHeight*16/9);
 	if (is3d){
 		createCanvas(wid,wid*9/16,WEBGL);

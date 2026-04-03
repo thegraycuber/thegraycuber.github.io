@@ -510,32 +510,7 @@ function move_links(all_modules,poly_index){
 
 
 
-var image_list = [
-	'qter_presentation/proj/qter_logo.png',
-	'qter_presentation/proj/qter_label.png',
-	'qter_presentation/proj/scratch_1.png',
-	'qter_presentation/proj/scratch_2.png',
-	'qter_presentation/proj/scratch_3.png',
-	'qter_presentation/proj/scratch_4.png',
-	'qter_presentation/proj/scratch_5.png',
-	'qter_presentation/proj/scratch_6.png',
-	'qter_presentation/proj/scratch_7.png',
-	'qter_presentation/proj/4by4.png',
-	'qter_presentation/proj/5by5.png',
-	'qter_presentation/proj/8by8.png',
-	'qter_presentation/proj/cube_solved.png',
-	'qter_presentation/proj/cube_u.png',
-	'qter_presentation/proj/cube_l.png',
-	'qter_presentation/proj/cube_r.png',
-	'qter_presentation/proj/cube_f.png',
-	'qter_presentation/proj/cube_rf.png',
-	'qter_presentation/proj/cube_ru.png',
-	'qter_presentation/proj/cube_rd.png',
-	'qter_presentation/proj/cube_position.png',
-	'qter_presentation/proj/cube_random.png',
-	'qter_presentation/proj/cube_5.png',
-	'qter_presentation/proj/cube_shorten.png',
-];
+var image_list;
 
 function image_load(){
 	
