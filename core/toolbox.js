@@ -175,7 +175,7 @@ function text_2d(values,unit){
 	} else if (values[1] == -1){
 		return text_output + ' - ' + unit;	
 	} else if (values[1] != 0){
-		if (values[1] >= 1){
+		if (values[1] >= 0){
 			return text_output + ' + ' + str(values[1]) + unit;
 		} else {
 			return text_output + ' - ' + str(abs(values[1])) + unit;
