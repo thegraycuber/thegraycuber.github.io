@@ -11,7 +11,7 @@ var prod = false;
 
 function preload() {
 	mainFont = loadFont(media_prefix+"AshkinsonBold_003.ttf");
-}
+}//
 
 
 function setup() {
