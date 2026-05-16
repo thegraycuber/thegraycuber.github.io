@@ -1,47 +1,50 @@
 
-var number_values = ['','','','','','',''];
-var number_names = ['','','','','','',''];
-var number_equations = ['','','','','','',''];
-var existing_number = -1;
+var existingNumber = -1;
 
 var offset = 0;
 var nonloaded = true;
+var hideCanvas = false;
+var unprocessed = true;
 
-function draw() {
-	background(palette.back);	
+function draw(){
 	
-	if (name_data.getRowCount() == 0){
+	if (hideCanvas){
+		return;
+	}
+
+	if (nameData.getRowCount() == 0){
 		return;
 	} else if (nonloaded){
 		nonloaded = false;
-		input_box.value('');
+		inputBox.value = '';
+		document.getElementById('input-alert').style.display = 'inline';
 	}
-
-	if (number_values[3] == "0" && offset > 0.4){
+	
+	if (inputBox.value == "0" && offset > 0.4){
 		offset = 0.4;
 		scrolling = false;
 		panning = false;
-		block_scroll = Date.now();
-	} else if (number_values[3] == "1000000" && offset < -0.4){
+		blockScroll = Date.now();
+	} else if (inputBox.value == "1000000" && offset < -0.4){
 		offset = -0.4;
 		scrolling = false;
 		panning = false;
-		block_scroll = Date.now();
+		blockScroll = Date.now();
 	}
 	
 	if (abs(offset) > 0.5){
-		give_value(constrain(existing_number - round(offset),0,1000000));
+		giveValue(constrain(existingNumber - round(offset),0,1000000));
 		offset -= round(offset);
 	} else {
-		let test_number = parseInt(input_box.value());
-		give_value(test_number);
+		let testNumber = parseInt(inputBox.value);
+		giveValue(testNumber);
 	}
 
 	
-	if (scrolling && Date.now() - last_scroll > 50){
+	if (scrolling && Date.now() - lastScroll > 100){
 		scrolling = false;
 	}
-	if (panning && Date.now() - last_pan > 300){
+	if (panning && Date.now() - lastPan > 300){
 		panning = false;
 	}
 	
@@ -50,73 +53,72 @@ function draw() {
 			offset -= min(abs(offset),0.05)*sign(offset);
 		}
 		if (offset == 0){
-			input_box.style("visibility", "visible");	
+			inputBox.style.borderColor = 'var(--color-vivid)';		
 		}
 	}
 	
-	translate(width*0.5,height*0.45);
 
-	if (number_values[3] != ""){
+	if (inputBox.value != "" || unprocessed){
+
 		for (let n = 0; n < 7; n++){
-			n_val = (n-3+offset);
-			n_adjust = ((cos(PI*n_val/4)+1)/2)**2;
-			n_mult = 0.6+n_adjust*0.4;
-			n_y = name_gap*n_val*(0.8+n_adjust*0.4);
-			n_index = floor(100-n_adjust*100)
-			n_offsets = number_names[n].length > 20 ? [-n_mult*0.9,n_mult] : [-0.7*n_mult,0.6*n_mult];
-	
-			if (number_values[n] != ""){
-				fill(palette.brights[n_index]);
-				text_limited(number_values[n],-name_x,n_y,name_size*1.5*n_mult,name_width*n_mult);
-				fill(palette.fronts[n_index]);
-				text_limited(number_names[n],name_x,n_y+name_size*n_offsets[0],name_size*n_mult,name_width*n_mult);
-				fill(palette.monos[n_index]);
-				text_limited(number_equations[n],name_x,n_y+name_size*n_offsets[1],name_size*n_mult,name_width*n_mult);			
-			}
+			let nHolder = document.getElementById('number-holder-'+str(n));
+
+			nVal = (n-3+offset);
+			nAdjust = (cos(PI*nVal/4)+1)/2;
+			nHolder.style.opacity = nAdjust**2;
+
+			nY = 40+14*(0.8+nAdjust*0.4)*nVal;
+			nHolder.style.top = str(nY) + 'vh';
 		}
-		
+		unprocessed = false;
+	} 
+	
+}
+
+var inputBox = {
+	value: ''
+};
+function setup() {
+
+	morningRoutine('dark');
+
+
+	if (window.location.href.includes("fast_numbers/nl")){
+		dict = 'nl';
+		setVersion('original');
 	} else {
-		fill(palette.bright);
-		text_limited(messages.enter[dict],-name_x,-name_gap*0.5,name_size*0.6,name_width);
-		fill(palette.red);
-		text_limited(messages.random[dict],-name_size*4.2,height*0.55-name_size*4,name_size*0.6,name_width);
+		popupList = ['info-holder','info-hide'];
+		popdownList = ['info-show','main-holder'];
 	}
 	
-	resetMatrix();
-	iconBox.show();
-	helpBox.show();
+	if (window.location.href.includes("mode=ance")){
+		document.getElementById('version-select').value = 'ance';
+		setVersion('ance');
+	} else if (window.location.href.includes("mode=serious")){
+		document.getElementById('version-select').value = 'serious';
+		setVersion('serious');
+	} else {
+		setVersion('original');
+	}
 
+	textFont(mainBold);
+	textAlign(CENTER,CENTER);
+	regularFontTags = ['p', 'li', 'textarea','h3'];
+	setupFonts();
+	
+	inputBox = document.getElementById('number-input');
+	inputBox.style.setProperty('font-family', 'AshkinsonBold_prod, Helvetica, sans-serif');
+	document.getElementById('version-select').style.setProperty('font-family', 'AshkinsonBold_prod, Helvetica, sans-serif');
+	
+	scalar = 1;
+	yFlip = 1;
+	origin = createVector(0,0);
 }
 
 
-function give_value(test_number){
-	
-	if (!isNaN(test_number) && test_number > -1 && test_number <= 1000000){
-		
-		if (test_number != existing_number){
-			existing_number = test_number;
-			for (let n = 0; n < 7; n++){
-				let test_index = test_number + n - 3;
-				if (test_index > -1 && test_index <= 1000000){
-					number_names[n] = name_decompress(name_data.getString(test_index,0));
-					number_equations[n] = equation_decompress(name_data.getString(test_index,1));
-					number_values[n] = str(test_index);
-				} else {
-					number_names[n] = '';
-					number_equations[n] = '';
-					number_values[n] = '';
-				}
-			}
-		} 
-		input_box.value(test_number);
-		
-	} else {
-		existing_number = -1;
-		for (let n = 0; n < 7; n++){
-			number_names[n] = '';
-			number_equations[n] = '';
-			number_values[n] = '';
-		}
-	}
-
+var mainBold, regularFont, nameData;
+function preload(){
+	mainBold = loadFont('/media/AshkinsonBold_prod.ttf');
+	regularFont = loadFont('/media/AshkinsonRegular_000.ttf');
 }
+

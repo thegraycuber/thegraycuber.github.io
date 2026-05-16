@@ -1,194 +1,291 @@
 
 
-function action(id, value, object = [], arrow = active_arrow) {
+//##################################
+//              CONTROLS
+//##################################
+
+
+
+var draggedElement = -1;
+var dragging = 'none';
+var mouseVec;
+var acElPos, acElVel;
+var skipMove = false;
+
+
+// trigger updates when touches are started, stopped, or moved
+function touchStarted(){
+	if (dragging != 'none' || mouseInMenu || hideCanvas){
+		return;
+	}
+
+	skipMove = true;
+	updateTouchInfo();
+
+	for (let g of G){
+		if (g.clicked(mouseVec)){
+			return;
+		}
+	}
+}
+
+function touchEnded(){
+	mouseInMenu = false;
+	dragging = 'none';
+	draggedElement = -1;
+	updateTouchInfo();
+}
+
+
+function touchMoved(event){
+	if (mouseInMenu || hideCanvas){return;}
+	// event.preventDefault(); 
+	updateMovement(); //&& display_state < 2
+}
+
+
+function updateMovement(){
+	if (touches.length == 2){
+		var newDist = dist(touches[0].x,touches[0].y,touches[1].x,touches[1].y);
+		scalar *= newDist/principalDist;
+		principalDist = newDist;
+	}
 	
-	if (id == 'arrow'){
-		active_arrow = value;
-		for (var box of arrowBoxes){
-			box.getItem('arrow').Index = value;
+	if (touches.length <= 2){
+		
+		if (dragging == 'slider'){
+			// arrowBoxes[activeArrow].getItem('arrow_strength').clicked();
+			return;
 		}
 		
-	} else if (id == 'arrow_active'){
-
-		auto_position_skip = false;
-		if (arrow_elements[active_arrow] != -1 && active_arrow == value){
-			arrow_elements[active_arrow] = -1;
-			arrowBoxes[active_arrow].getItem('arrow_element').Active = false;
-			arrowBoxes[active_arrow].getItem('arrow_type').Active = false;
-			arrowBoxes[active_arrow].getItem('type_head').Active = false;
-		} else {
-			active_arrow = value;
-			arrow_elements[active_arrow] = arrowBoxes[active_arrow].getItem('arrow_element').Index;
-			arrowBoxes[active_arrow].getItem('arrow_element').Active = true;
-			arrowBoxes[active_arrow].getItem('arrow_type').Active = true;
-			arrowBoxes[active_arrow].getItem('type_head').Active = true;
+		if (skipMove){
+			skipMove = false;
+			return;
 		}
 		
-		refresh_strength_elements();
-		
-	}  else if (id == 'arrow_element'){
-		
-		auto_position_skip = false;
-		arrow_elements[arrow] = value;
-		
-	} else if (id == 'arrow_type'){
-
-		auto_position_skip = false;
-		arrow_types[arrow] = value;
-		
-	} else if (id == 'arrow_strength'){
-		arrow_strengths[arrow] = value**2;
-		
-	} else if (id == 'order') {
-		
-		G_order = value + 1;
-		scalar = min(width, height) / (9 * G_order ** 0.5);
-		
-		let classItem = settingBox.getItem('class');
-		classItem.List = group_classes[G_order];
-		classItem.Index = min(classItem.List.length - 1, classItem.Index);
-		
-		action('class',classItem.Index,classItem);
-		
-	} else if (id == 'class') {
-		
-		G_class = value;
-		generate_group();
-		refresh_arrow_types();
-				
-		let groupItem = settingBox.getItem('group');
-		groupItem.List = [];//['generators'];
-		for (let g of groups[G_order][G_class]){
-			groupItem.List.push(g.group_name);
-		}
-		groupItem.List.push('generators');
-		groupItem.Index = min(groupItem.List.length - 1, groupItem.Index);
-		
-		action('group',groupItem.Index,groupItem);
-		
-	} else if (id == 'group') {
-		
-		auto_position_skip = false;
-		
-		G_group = value;
-		
-		if (G_group == groups[G_order][G_class].length) {
-			for (let g of G) {
-				g.display_name = g.nickname;
-			}
+		if(draggedElement != -1){
+			return;
 			
-		} else {
-			let vers = groups[G_order][G_class][G_group];
+		} 
+		origin = focusPoint().sub(principalPos.mult(scalar));
+		principalPos = pixelToPrincipal(focusPoint(),1);
+	}
+}
+
+
+function mouseWheel(event){
+	//if(display_state == 2){return;}
+	if (hideCanvas){return;}
+	updateTouchInfo();
+	
+	var scalarLog = log(scalar);
+	scalarLog -= event.delta/1024; // make this positive to invert scroll
+	scalar = exp(scalarLog);
+	
+	updateMovement();
+}
+
+
+
+//##################################
+//              ACTION
+//##################################
+
+
+var displayState = 0;
+function setDisplayState(newDisplayValue){
+	hidePopups();
+
+	if (displayState != 1 || newDisplayValue != 0){
+		setupLayout();
+	}
+
+	toggleDisplayIcon(displayState);
+	toggleDisplayIcon(newDisplayValue);
+	
+	displayState = newDisplayValue;
+	refreshArrowTypes();
+	refreshStrengthElements();
+}
+
+function toggleDisplayIcon(displayIndex){
+	let displayElement = document.getElementById('display-' + str(displayIndex));
+	for (let e of displayElement.children){
+		e.classList.toggle('svg-half');
+		e.classList.toggle('svg-front');
+	}
+}
+
+
+var movement = true;
+function toggleMovement(){
+	hidePopups();
+	movement = !movement;
+	document.getElementById('play-icon').style.display = movement?'none':'flex';
+	document.getElementById('pause-icon').style.display = movement?'flex':'none';
+}
+		
+
+var activeElement = 0;
+var elementKeys = ['vivid','mono','alert'];
+function setElement(newElement, blockDisable = false){
+	hidePopups();
+	
+	autoPositionSkip = false;
+	if (arrowElements[activeElement] != -1){
+		selectedElements[activeElement] = arrowElements[activeElement];
+	}
+
+	if (activeElement == newElement && controllers['arrow-element'].disabled == false && !blockDisable){
+		arrowElements[activeElement] = -1;
+		document.getElementById('element-'+str(activeElement)).children[0].style.opacity = '0.5';
+		controllers['arrow-element'].disable();
+		controllers['arrow-type'].disable();
+		document.getElementById('slider-strength').disabled = true;
+		return;
+	} 
+
+	document.getElementById('element-'+str(activeElement)).children[1].style.display = 'none';
+	document.getElementById('element-'+str(newElement)).children[1].style.display = 'inline';
+	activeElement = newElement;
+
+	document.getElementById('element-'+str(newElement)).children[0].style.opacity = '1';
+	controllers['arrow-element'].setColor(elementKeys[activeElement]);
+	controllers['arrow-element'].enable();
+	controllers['arrow-type'].setColor(elementKeys[activeElement]);
+	controllers['arrow-type'].enable();
+
+	if (arrowElements[activeElement] == -1){
+		arrowElements[activeElement] = selectedElements[activeElement]<gOrder?selectedElements[activeElement]:1;
+	}
+	controllers['arrow-element'].giveIndex(arrowElements[activeElement],true);
+
+	refreshArrowTypes();
+	refreshStrengthElements();
+}
+
+function setStrength(strengthValue) {
+	arrowStrengths[activeElement] = (strengthValue*0.01)**2;
+}
+
+function arrowHandlerCustom(clickedControl){
+	hidePopups();
+	// processFrame = true;
+
+	if (clickedControl.id == 'arrow-order') {
+		
+		gOrder = clickedControl.index + 1;
+		controllers['arrow-class'].giveList(groupClasses[gOrder]);
+		setupLayout();
+
+		
+	} else if (clickedControl.id == 'arrow-class') {
+		
+		gClass = clickedControl.index;
+		generateGroup();
+		refreshArrowTypes();
+				
+		groupList = [];
+		for (let g of groups[gOrder][gClass]){
+			groupList.push(g.groupName);
+		}
+		groupList.push('generators');		
+		controllers['arrow-group'].giveList(groupList);
+		setupLayout();
+	
+	} else if (clickedControl.id == 'arrow-group') {
+		
+		autoPositionSkip = false;
+		gGroup = clickedControl.index;
+		
+		if (gGroup == groups[gOrder][gClass].length) {
 			for (let g of G) {
-				g.display_name = vers.names[g.index];
+				g.displayName = g.nickname;
+			}
+		} else {
+			let vers = groups[gOrder][gClass][gGroup];
+			for (let g of G) {
+				g.displayName = vers.names[g.index];
 			}
 		}
 		
-		refresh_arrow_elements();
-		
-		
-	} else if (id == 'palette') {
-		palette_index = (palette_index + 1) % palette_names.length;
-		palette = new Palette(palette_names[palette_index]);
-		// for (let g of G) {
-		// 	g.giveColor();
-		// }
-
-	} else if (id == 'display_mode') {
-		//object.darkened = physics_o;
-		
-		if (display_state != 1 || value != 0){
-			scalar = min(width, height) / (6 * G_order ** 0.7);
-			origin = default_origin.copy();
-		}
-		
-		display_state = value;
-		refresh_arrow_types();
-		refresh_strength_elements();
-		
-	} else if (id == 'download') {
-		save("Group_Visualizer_" + now_string() + ".png");
-		
-	} else if (id == 'random') {
-		origin = default_origin.copy();
-		
-		settingBox.randomize();
-		display_state = int(random(3));
-		refresh_arrow_types();
-		
-		arrow_elements = [-1,-1,-1];
-		let actives = int((random(15)+1)**0.5);
-		if (G_order == 1){
-			actives = 0;
-		}
-		active_arrow = max(actives-1,0);
-		for (let a = 0; a < actives; a++){
-			arrow_elements[a] = arrowBoxes[a].getItem('arrow_element').Index;
-			arrowBoxes[a].randomize();
-		}
-		
-		
-		refresh_strength_elements();
-		
-	} else if (id == 'movement') {
-		movement = !movement;
-		
-	}
-
-}
-
-function refresh_arrow_types(){
+		refreshArrowElements();
+		setupLayout();
 	
-	for (let a = 0; a < arrowBoxes.length; a++){
-		let type_item = arrowBoxes[a].getItem('arrow_type');
+	} else if (clickedControl.id == 'arrow-element'){
 		
-		if (display_state == 2){
-			type_item.List = ['left operate', 'right operate', 'results'];
-		} else if (group_classes[G_order][G_class].substring(0,1) != 'C' || group_classes[G_order][G_class].search('⋊') != -1){
-			type_item.List = ['left operate', 'right operate', 'conjugate'];
-		} else {
-			type_item.List = ['operate'];
-		}
+		autoPositionSkip = false;
+		arrowElements[activeElement] = clickedControl.index;
 		
-		type_item.Index = min(type_item.List.length - 1, type_item.Index);
-		arrow_types[a] = type_item.Index;
-	}
-}
-
-function refresh_arrow_elements(){
-	
-	for (let a = 0; a < arrowBoxes.length; a++){
-		let el_item = arrowBoxes[a].getItem('arrow_element');
+	} else if (clickedControl.id == 'arrow-type'){
 		
-		//console.log(G_order,G);
-		el_item.List = [];
-		for (let g = 0; g < G_order; g++) {
-			el_item.List.push(G[g].display_name);
-		}
-
-		if (el_item.Index >= G_order){
-			if (arrow_elements[a] == -1){
-				el_item.Index = G_order - 1;	
-			} else {
-				el_item.giveValue(G_order - 1);	
-			}
-		}
+		autoPositionSkip = false;
+		arrowTypes[activeElement] = clickedControl.index;
+		
 	}
 }
 
 
-function refresh_strength_elements(){
+function randomize(){
+
+	setupLayout();
+
+	setDisplayState(int(random(3)));
+	controllers['arrow-order'].randomize();
+	controllers['arrow-class'].randomize();
+	controllers['arrow-group'].randomize();
 	
-	for (let a = 0; a < arrowBoxes.length; a++){
-		
-		if (display_state == 0 && arrow_elements[active_arrow] != -1){
-			arrowBoxes[active_arrow].getItem('arrow_strength').Active = true;
-			arrowBoxes[active_arrow].getItem('strength_head').Active = true;
-		} else {
-			arrowBoxes[active_arrow].getItem('arrow_strength').Active = false;
-			arrowBoxes[active_arrow].getItem('strength_head').Active = false;
-		}
-		
+	arrowElements = [-1,-1,-1];
+	let actives = min(int((random(15)+1)**0.5), gOrder);
+	
+	for (let a = 0; a < actives; a++){
+		arrowElements[a] = int(random(gOrder));
+		document.getElementById('element-'+str(a)).children[0].style.opacity = '1';
 	}
+	for (let a = actives; a < 3; a++){
+		document.getElementById('element-'+str(a)).children[0].style.opacity = '0.5';
+	}
+	setElement(0,true);
+	
+}
+
+
+
+function refreshArrowTypes(){
+
+	let typeList;
+	if (displayState == 2){
+		typeList = ['left operate', 'right operate', 'results'];
+	} else if (groupClasses[gOrder][gClass].substring(0,1) != 'C' || groupClasses[gOrder][gClass].search('⋊') != -1){
+		typeList = ['left operate', 'right operate', 'conjugate'];
+	} else {
+		typeList = ['operate'];
+	}
+
+	for (let a = 0; a < arrowTypes.length; a++){
+		arrowTypes[a] = min(typeList.length-1,arrowTypes[a]);
+	}
+	controllers['arrow-type'].giveList(typeList,arrowTypes[activeElement]);
+
+}
+
+function refreshArrowElements(){
+
+	let elementList = [];
+	for (let g = 0; g < gOrder; g++) {
+		elementList.push(G[g].displayName);
+	}
+	
+	for (let a = 0; a < arrowElements.length; a++){
+		arrowElements[a] = min(elementList.length-1,arrowElements[a]);
+	}
+	controllers['arrow-element'].giveList(elementList,arrowElements[activeElement]);
+
+}
+
+
+function refreshStrengthElements(){
+	document.getElementById('slider-strength').value = arrowStrengths[activeElement]**0.5*100;
+	document.getElementById('slider-strength').disabled = displayState != 0;
 }
 

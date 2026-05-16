@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+	<title>Group Visualizer - TheGrayCuber</title>
+
+	<link rel='stylesheet' href='/crabman/palette-forest.css'>
+	<link rel='stylesheet' href='/crabman/core.css'>
+	<link rel='stylesheet' href='style.css'>
+	
+	<script src='https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.js'></script>
+	<script src='/crabman/palette.js'></script>
+	<script src='/crabman/toolbox.js'></script>
+	
+	<script src='main.js'></script>
+	<script src='action.js'></script>
+	<script src='groupTheory.js'></script>
+	<script src='visuals.js'></script>
+
+</head>
+
+<iframe></iframe>
+
+<body class='container'>
+	
+
+	<div id='menu-holder' class='container' onmousedown='mouseInMenu = true;'>
+
+
+		<general-menu class='container menu'>
+
+			<a href='/index.html' id='logo-holder' class='container zoom icon'>
+				<svg id='svg-logo' viewBox='0 0 180 100' stroke-width='4' class='center-vert' stroke-linejoin='round' font-weight='bold'>
+					<polygon class='svg-gray' points='50,12 88,41 73,87 27,87 12,41' fill-opacity='0.15' />
+					<polygon class='svg-mono' points='24,19 90,47 32,90' fill-opacity='0.15' />
+					<polygon class='svg-mono' points='76,19 10,47 68,90' fill-opacity='0.15' />
+					<text class='svg-mono' x='103' y='31' font-size='24' stroke-opacity='0'>The</text>
+					<text class='svg-gray' x='98' y='62' font-size='32' stroke-opacity='0'>Gray</text>
+					<text class='svg-mono' x='101' y='88' font-size='24' stroke-opacity='0'>Cuber</text>
+				</svg>
+			</a>
+
+			<div id='palette-icon' onclick='changePalette()' class='container zoom icon'>
+				<svg id='svg-palette' viewBox='0 0 100 100' alt='palette' class='icon-image center-vert'>
+					<circle class='svg-front' cx='50' cy='35' r='25' stroke-width='6' fill-opacity='0' />
+					<circle class='svg-front' cx='34' cy='62' r='25' stroke-width='6' fill-opacity='0' />
+					<circle class='svg-front' cx='66' cy='62' r='25' stroke-width='6' fill-opacity='0' />
+				</svg>
+				<icon-text>palette</icon-text>
+			</div>
+
+
+			<div id='info-show' onclick='showHolder("info","inline")' class='container zoom icon'>
+				<svg id='svg-info' viewBox='0 0 100 100' alt='info' class='icon-image center-vert'>
+					<circle class='svg-front' cx='50' cy='50' r='40' stroke-width='8' fill-opacity='0' />
+					<rect class='svg-front' width='10' height='30' x='45' y='45' stroke-opacity='0' />
+					<rect class='svg-front' width='14' height='8' x='39' y='45' stroke-opacity='0' />
+					<circle class='svg-front' cx='49' cy='31' r='4' stroke-width='4' />
+				</svg>
+				<icon-text>info</icon-text>
+			</div>
+			
+			<div id='info-hide' onclick='hideHolder("info")' class='container zoom icon' style='display:none;'>
+				<svg id='svg-hide' viewBox='0 0 100 100' alt='info' class='icon-image center-vert'>
+				  <path class='svg-alert' d='M 20 20 L 80 80' fill-opacity='0' stroke-width='10' stroke-linecap='round'/>
+				  <path class='svg-alert' d='M 80 20 L 20 80' fill-opacity='0' stroke-width='10' stroke-linecap='round'/>
+				</svg>
+				<icon-text>hide</icon-text>
+			</div>
+
+			<div id='random-icon' onclick='randomize()' class='container zoom icon'>
+				<svg id='svg-random' viewBox='0 0 100 100' stroke-linejoin='round' alt='randomize' class='icon-image center-vert'>
+					<path class='svg-vivid' d='M 50 40 L 18 21 L 50 6 L 82 21  Z' stroke-width='4' />
+					<path class='svg-vivid' d='M 43 52 L 13 34 L 14 70 L 43 90  Z' stroke-width='4' />
+					<path class='svg-vivid' d='M 57 52 L 87 34 L 86 70 L 57 90  Z' stroke-width='4' />
+					
+					<ellipse class='svg-back' cx='50' cy='23' rx='9' ry='7' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='23' cy='54' rx='5' ry='6.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='35' cy='71' rx='5' ry='6.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='79' cy='49' rx='4.5' ry='5.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='72' cy='62.5' rx='4.5' ry='5.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='65' cy='76' rx='4.5' ry='5.5' stroke-opacity='0' />
+				</svg>
+				<icon-text>randomize</icon-text>
+			</div>
+
+			<div id='play-icon' onclick='toggleMovement()' class='container zoom icon' style='display:none;'>
+				<svg id='svg-play' viewBox='0 0 100 100' alt='play' class='icon-image center-vert'>
+				  <path class='svg-front' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+				<icon-text>play</icon-text>
+			</div>
+			
+			<div id='pause-icon' onclick='toggleMovement()' class='container zoom icon'>
+				<svg id='svg-pause' viewBox='0 0 100 100' alt='pause' class='icon-image center-vert'>
+				  <rect class='svg-front' width='18' height='70' x='57' y='15' rx='5' ry='5'/>
+				  <rect class='svg-front' width='18' height='70' x='25' y='15' rx='5' ry='5'/>
+				</svg>
+				<icon-text>pause</icon-text>
+			</div>
+
+		</general-menu>
+		
+
+		
+		<arrow-menu class='container menu'>
+
+			<picker class='container' style='justify-content: space-evenly;'>
+				<div class='container icon'>
+					<svg onclick='setDisplayState(0)' id='display-0' viewBox='0 0 100 100' alt='display physics' class='center-vert zoom'>
+						<circle class='svg-front' cx='82' cy='20' r='13'/>
+						<circle class='svg-front' cx='18' cy='57' r='13'/>
+						<circle class='svg-front' cx='72' cy='80' r='13'/>
+						<path class='svg-front' d='M 40 39 L 57 30' stroke-width='8' stroke-linecap='round'/>
+						<path class='svg-front' d='M 43 66 L 49 69' stroke-width='8' stroke-linecap='round'/>
+						<path class='svg-front' d='M 78 47 L 77 53' stroke-width='8' stroke-linecap='round'/>
+					</svg>
+				</div>	
+				<div class='container icon'>
+					<svg onclick='setDisplayState(1)' id='display-1' viewBox='0 0 100 100' alt='display auto' class='center-vert zoom'>
+						<circle class='svg-half' cx='50' cy='15' r='15'/>
+						<circle class='svg-half' cx='83' cy='40' r='15'/>
+						<circle class='svg-half' cx='71' cy='78' r='15'/>
+						<circle class='svg-half' cx='29' cy='78' r='15'/>
+						<circle class='svg-half' cx='17' cy='40' r='15'/>
+					</svg>
+				</div>	
+				<div class='container icon'>
+					<svg onclick='setDisplayState(2)' id='display-2' viewBox='0 0 100 100' alt='display talbe' class='center-vert zoom'>
+						<rect class='svg-half' width='40' height='40' x='5' y='5' rx='8' ry='8' />
+						<rect class='svg-half' width='40' height='40' x='55' y='5' rx='8' ry='8' />
+						<rect class='svg-half' width='40' height='40' x='5' y='55' rx='8' ry='8' />
+						<rect class='svg-half' width='40' height='40' x='55' y='55' rx='8' ry='8' />
+					</svg>
+				</div>	
+				
+			</picker>
+			
+			
+			<arrow-label>order</arrow-label>
+			<arrow-holder id='arrow-order' class='container'>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-order",-1)' style='left:0;'>
+					<path class='svg-front' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+				<arrow-text class='center-vert'></arrow-text>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-order",1)' style='right:0;'>
+					<path class='svg-front' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+			</arrow-holder>
+					
+			<arrow-label>class</arrow-label>	
+			<arrow-holder id='arrow-class' class='container'>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-class",-1)' style='left:0;'>
+					<path class='svg-front' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+				<arrow-text class='center-vert'></arrow-text>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-class",1)' style='right:0;'>
+					<path class='svg-front' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+			</arrow-holder>
+			
+			<arrow-label>group</arrow-label>
+			<arrow-holder id='arrow-group' class='container'>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-group",-1)' style='left:0;'>
+					<path class='svg-front' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+				<arrow-text class='center-vert'></arrow-text>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-group",1)' style='right:0;'>
+					<path class='svg-front' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+			</arrow-holder>
+
+		</arrow-menu>
+
+		
+		<arrow-menu id='element-menu' class='container menu'>
+
+			<picker class='container' style='justify-content: space-evenly;'>
+				<div class='container icon'>
+					<svg onclick='setElement(0)' id='element-0' viewBox='0 0 100 100' alt='element 0' class='center-vert zoom'>
+						<circle class='svg-vivid' cx='50' cy='50' r='32' />
+						<circle class='svg-front' cx='50' cy='50' r='45' fill-opacity='0' stroke-width='8' display='inline'/>
+					</svg>
+				</div>	
+				<div class='container icon'>
+					<svg onclick='setElement(1)' id='element-1' viewBox='0 0 100 100' alt='element 1' class='center-vert zoom'>
+						<circle class='svg-mono' cx='50' cy='50' r='32' />
+						<circle class='svg-front' cx='50' cy='50' r='45' fill-opacity='0' stroke-width='8' display='none'/>
+					</svg>
+				</div>	
+				<div class='container icon'>
+					<svg onclick='setElement(2)' id='element-2' viewBox='0 0 100 100' alt='element 2' class='center-vert zoom'>
+						<circle class='svg-alert' cx='50' cy='50' r='32' />
+						<circle class='svg-front' cx='50' cy='50' r='45' fill-opacity='0' stroke-width='8' display='none'/>
+					</svg>
+				</div>	
+				
+			</picker>
+			
+			<arrow-label>element</arrow-label>
+			<arrow-holder id='arrow-element' class='container'>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-element",-1)' style='left:0;'>
+					<path class='svg-front' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+				<arrow-text class='center-vert'></arrow-text>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-element",1)' style='right:0;'>
+					<path class='svg-front' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+			</arrow-holder>
+			
+			<arrow-label>type</arrow-label>
+			<arrow-holder id='arrow-type' class='container'>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-type",-1)' style='left:0;'>
+					<path class='svg-front' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+				<arrow-text class='center-vert'></arrow-text>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-type",1)' style='right:0;'>
+					<path class='svg-front' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+			</arrow-holder>
+			
+			<arrow-label>strength</arrow-label>
+			<arrow-holder id='arrow-strength' class='container'>
+				<input id="slider-strength" type="range" min="0" max="100" value="50" class="slider center-vert" oninput="setStrength(this.value)">	
+			</arrow-holder>
+
+		</arrow-menu>
+
+
+		<div id='menu-hide' onclick='hideHolder("menu")' class='menu-control zoom container floater'>
+			<svg viewBox='0 0 100 100'>
+				<path class='svg-mono menu-svg' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+			</svg>
+		</div>
+
+	</div>
+
+
+<!-- 	<div id='info-holder' class='container center-zont'> -->
+	
+	
+	<div id='main-pane' class='container'>
+		<div id='info-holder' class='center-zont'>
+			<h1>group visualizer</h1>
+			<p><a href='https://en.wikipedia.org/wiki/Group_theory' target='_blank'>Group theory</a> is a wonderful branch of mathematics! 
+				It has many interesting results, and offers a variety of graphical representations.
+			</p>
+			<p>This page was developed alongside <a href='https://www.youtube.com/playlist?list=PLRcOL8MUr-pe-6PvyDfQ8vjHrK10Xwe3_' target='_blank'>our video series</a>
+				about groups.
+				It offers a place to explore small groups, through
+				three methods of visualization:
+			</p>
+	
+			<h2>particles</h2>
+			<p>In this visualization, each element is represented by a particle.
+				An 'operating element' can be chosen to link these particles with arrows.
+				For example: if the group is addition of integers and 3 is chosen as the 
+				operating element, then there will be an arrow from 0 to 3, from 1 to 4, from 2 to 5,
+				and from every n to (n+3).
+			</p>
+
+			<p>For a more detailed graph, you can select multiple operating elements, denoted in different colors.
+				Each operating element has a 'strength' which is set using the slider. 
+				A high strength causes linked particles to have strong attraction,
+				while a low strength causes weak attraction.
+				Vary these strengths to see the effect on the graph.
+			</p>
+
+			<h2>cayley diagrams</h2>
+			<p>The particle graphs are <em>technically</em> Cayley Diagrams, but they can be messy.
+				For a more structured view, the elements are fixed in a regular pattern. 
+				This dispalys a more typical Cayley Diagram - a visual of all elements
+				linked by arrows determined by the operating elements.
+				The cycles rotate to offer changing perspectives on the graph, 
+				but no attraction between elements is applied.
+			</p>
+
+			<h2>tables</h2>
+			<p>The most comprehensive visualizations are tables.
+				These show the result from operating any pair of elements.
+			</p>
+			
+			
+			<h2>navigation</h2>
+			<p>Use the icons to switch between visualizations:
+			</p>
+			<ul>
+				<li>particles: 3 dots linked by lines</li>
+				<li>cayley diagrams: 5 dots evenly spaced</li>
+				<li>tables: a 2x2 table</li>
+			</ul>
+			<p>Use the arrows below these icons to select the group.
+				There are 3 levels of granularity. First, set the order
+				to determine the number of elements in the group.
+				Second, set the class to determine the group, up to isomorphism.
+				Third, set the group to determine the representation of that particular group.
+			</p>
+			<p>Use the other control box to set operating elements. Click the colored 
+				circles to enable or disable them. The white ring denotes which 
+				operating element you are currently editing.
+			</p>
+			
+			<h2>about me</h2>
+			<p>I am TheGrayCuber, a creator of mathematical websites and videos!
+			</p>
+			
+			<p>My fascination with group theory began with the multiplicative groups mod n.
+				It is so cool that finite multiplication is just finite addition.
+				I created <a href='/archive/groups_of_units/' target='_blank'>a page</a>
+				that explored the relationships between these groups,
+				using a particle system similar to this page, though each particle represented
+				an entire group rather than just a single element.
+			</p>
+			
+			<p>I was further inspired by a section of Contemporary Abstract Algebra by Joseph A. Gallian,
+				which classified all groups with order 1-15. I love classification problems, and 
+				tried to continue with 16, but immediately learned that the book ended with 15 for good reason. 
+				Order 16 has <a href='https://people.maths.bris.ac.uk/~matyd/GroupNames/index.html#order16' target='_blank'>a lot of groups</a>, 
+				and they're much trickier than 1-15.
+			</p>
+			
+			<p>Working on this page and our video series helped me to fully understand those 
+				groups of order 16 and to continue the classification problem to higher orders!
+				It was also a much needed push to figure out 
+				<a href='https://math.stackexchange.com/questions/128230/understanding-the-semidirect-product' target='_blank'>semi-direct products</a>.
+			</p>
+			
+			<p>The first draft of this page was quite experimental.
+				I made the controls modular - everything could be resized, 
+				recolored, and dragged around to any position.
+				Eventually I decided that it wasn't worth the hassle. This 
+				would mainly just help me to format the page for a video. It wouldn't 
+				matter to the average user.
+				But it wasn't all in vain - that system for designing and positioning controls
+				became the starting point for TheGraySlides, the program that I now 
+				use to make all of my videos!
+			</p>
+
+			<br/>
+			<p class='info-end'>made with love, and without AI</p>
+			<p class='info-end'><a href='https://ko-fi.com/thegraycuber' target='_blank'>leave a tip</a> to support my future creations :)</p>
+			<p class='info-end'><a href='https://github.com/thegraycuber/thegraycuber.github.io/tree/main/group_visualizer' target='_blank'>view the code</a> behind this website</p>
+			<p style='white-space: pre'><br/><br/></p>
+		</div>
+	</div>
+
+
+	<div id='menu-show' onclick='showHolder("menu")' class='menu-control zoom container floater'>
+		<svg viewBox='0 0 100 100'>
+			<path class='svg-mono menu-svg' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+		</svg>
+	</div>
+	
+</body>
+
+</html>

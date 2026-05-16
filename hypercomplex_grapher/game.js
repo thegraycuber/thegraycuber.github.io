@@ -1,95 +1,119 @@
 
 var ideal = [-1,0];
-var target_ideal, target_polynomial;
-var level, start_time, level_start, win_time, win_tracker, game_icons;
-var game_mode = false;
-var has_won = 0;
+var targetIdeal, targetPolynomial;
+var level, startTime, levelStart, winTime, winTracker, gameIcons;
+var gameMode = false;
+var hasWon = 0;
+var winTracker = 0;
 
-var i_dragging = false;
-var i_touched = false;
-var bounce_angle = 0;
+var iDragging = false;
+var iTouched = false;
 
-function display_messages(){
-	bounce_angle += 0.1;
-	let bounce = sin(bounce_angle)*0.1+1;
-	
-	if (!game_mode){
-		if (!i_touched && millis() - start_time > 3000){
-			let i_loc = ideal_location(mobile);
-			text_in_box('drag me',i_loc[0],i_loc[1]-vert_width*2, bounce*vert_width, palette.i, palette.back);
-		}
-		return;
+
+function startGame(){
+	document.getElementsByTagName('game-menu')[0].style.display = 'flex';
+	document.getElementsByTagName('icon-menu')[0].style.display = 'none';
+	document.getElementById('end-game-options').style.display = 'none';
+
+	level = 0;
+	gameMode = true;
+	startTime = millis();
+	resetLayout();
+	if (!spinShape){
+		toggle('spin');
 	}
-	
-	if (level > 0 && level < 12){
-		text_in_box(str(level) + '/12', default_origin.x-height*0.06, height*0.04, height*0.03, palette.bright, palette.back);
-		let elapsed = (millis() - start_time)/1000;
-		let time_string = pre_zero(str(floor(elapsed/60))) + ':' + pre_zero(str(floor(elapsed)%60));
-		text_in_box(time_string, default_origin.x+height*0.06, height*0.04, height*0.03, palette.bright, palette.back);
-	} else if (level >= 100){
-		text_in_box(str(level-100), width - (2+str(level-100).length)*height*0.02, height*0.06, height*0.05, palette.bright, palette.back);
+	newTarget();
+
+	for (let c of Object.keys(controllers)){
+		controllers[c].disable();
 	}
-	
+}
+
+function endGame(){
+	gameMode = false;
+	document.getElementsByTagName('game-menu')[0].style.display = 'none';
+	document.getElementsByTagName('icon-menu')[0].style.display = 'flex';
+	document.getElementById('end-game-options').style.display = 'none';
+
+	winTracker = 0;
+	randomize();
+
+	for (let c of Object.keys(controllers)){
+		controllers[c].enable();
+	}
+}
+
+
+function setGameMessages(){
+
+	document.getElementById('level-ind').innerHTML = str(level) + '/12';
+
+	let gameMessage = document.getElementById('game-message');
 	if (level == 0){
-		text_in_box('move i² to match the target shape', default_origin.x, height*0.05, height*0.03*bounce, palette.back, palette.bright);
+		gameMessage.innerHTML = 'move i² to match the target shape';
 		
 	} else if (level == 5){
-		let y_offset = lerp(default_origin.y,height*0.08,constrain((millis() - level_start)/2000-3,has_won,1));
-		text_in_box('now you must also match the function', default_origin.x, y_offset, height*0.03*bounce, palette.back, palette.bright);
-		
+		gameMessage.innerHTML = 'now you must also match the function';
+
 	} else if (level == 9){
-		let y_offset = lerp(default_origin.y,height*0.08,constrain((millis() - level_start)/2000-3,has_won,1));
-		text_in_box('now you must also match the input shape', default_origin.x, y_offset, height*0.03*bounce, palette.back, palette.bright);
-		
+		gameMessage.innerHTML = 'now you must also match the input shape';
+
 	} else if (level == 12){
-		text_in_box('you win!', default_origin.x, default_origin.y - height*0.13, height*0.06*bounce, palette.back, palette.bright);
-		let elapsed = win_time/1000;
-		let time_string = pre_zero(str(floor(elapsed/60))) + ':' + pre_zero(str(floor(elapsed)%60)) + '.' + pre_zero(str(floor((win_time)/10)%100));
-		text_in_box(time_string,  default_origin.x, default_origin.y - height*0.01, height*0.06, palette.bright, palette.back);
-		
-		for (let gi of game_icons){
-			gi.show();
+		gameMessage.innerHTML = 'you win!';
+
+		winTime = millis() - startTime;
+		let elapsed = winTime/1000;
+		document.getElementById('time-ind').innerHTML =  timeString(elapsed);
+		winTracker = -1;
+		hasWon = 1;
+		document.getElementById('end-game-options').style.display = 'flex';
+
+		for (let c of Object.keys(controllers)){
+			controllers[c].disable();
 		}
+
+	} else {
+		gameMessage.style.visibility = 'hidden';
+		return;
 	}
-	
+
+	gameMessage.style.visibility = 'visible';
 }
 
-function pre_zero(input_string){
-	let with_zero = '0' + input_string;
-	return with_zero.substring(with_zero.length-2,with_zero.length);
+function timeString(elapsed){
+	return pre0(str(floor(elapsed/60))) + ':' + pre0(str(floor(elapsed)%60));
 }
 
-
-
-
-function new_target(){
-	level_start = millis();
-	win_tracker = 0;
+function newTarget(){
+	setGameMessages();
+	if (level==12){
+		return;
+	}
+	levelStart = millis();
+	winTracker = 0;
 	randomize();
-	target_ideal = [...ideal];
+	targetIdeal = [...ideal];
 	if (level >= 5 && level < 100){
-		target_polynomial = polynomial;	
-		shapeBox.getItem('function').Active = true;
+		targetPolynomial = polynomial;	
+		controllers['arrow-function'].enable();
 	}
 	if (level >= 9 && level < 100){
-		target_shape = new Shape(shape.vertices, shape.step, shape.type);
-		shapeBox.getItem('vertices').Active = true;
-		shapeBox.getItem('step').Active = true;
-		shapeBox.getItem('type').Active = true;
+		targetShape = new Shape(shape.vertices, shape.step, shape.type);
+		controllers['arrow-version'].enable();
+		controllers['arrow-type'].enable();
+		controllers['arrow-step'].enable();
 	}
 	
-	randomize(level < 100);
+	randomize(true);
+	// btw, i dislike cilantro.
 	if (level < 5 || level >= 100){
-		target_polynomial = polynomial;
+		targetPolynomial = polynomial;
 	}
 	if (level < 9 || level >= 100){
-		target_shape = new Shape(shape.vertices, shape.step, shape.type);
-		shapeBox.getItem('vertices').Active = false;
-		shapeBox.getItem('step').Active = false;
-		shapeBox.getItem('type').Active = false;
+		targetShape = new Shape(shape.vertices, shape.step, shape.type);
 	}
 	
-	while (abs(target_ideal[0]-ideal[0]) < 0.3 || abs(target_ideal[1]-ideal[1]) < 0.3){
-		ideal = [round(random()*2-1,scale_log+2),round(random()*2-1,scale_log+2)];
+	while (abs(targetIdeal[0]-ideal[0]) < 0.3 || abs(targetIdeal[1]-ideal[1]) < 0.3){
+		ideal = [round(random()*2-1,2),round(random()*2-1,2)];
 	}
 }

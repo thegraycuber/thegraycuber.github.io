@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang='nl'>
+
+<head>
+	<title>Snelle Getallen - DeGrijzeCuber</title>
+
+	<link rel='stylesheet' href='/crabman/palette-dark.css'>
+	<link rel='stylesheet' href='/crabman/core.css'>
+	<link rel='stylesheet' href='style.css'>
+	
+	<script src='https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.js'></script>
+	<script src='/crabman/palette.js'></script>
+	<script src='/crabman/toolbox.js'></script>
+	
+	<script src='action.js'></script>
+	<script src='dictionary.js'></script>
+	<script src='main.js'></script>
+
+</head>
+
+<body class='container'>
+	
+
+	<div id='menu-holder' class='container' onmousedown='mouseInMenu = true;'>
+
+
+		<general-menu class='container menu center-zont nl'>
+
+
+			<a id='logo-holder' class='container icon'>
+				<svg id='svg-logo' viewBox='0 0 180 100' stroke-width='4' class='center-vert' stroke-linejoin='round' font-weight='bold'>
+					<polygon class='svg-gray' points='50,12 80,26 87,58, 66,84 34,84 13,58 20,26' fill-opacity='0.15' />
+					<polygon class='svg-mono' points='66,16 71,81 12,53' fill-opacity='0.15' />
+					<polygon class='svg-mono' points='34,16 29,81 88,53' fill-opacity='0.15' />
+					<text class='svg-mono' x='103' y='31' font-size='24' stroke-opacity='0'>De</text>
+					<text class='svg-gray' x='98' y='62' font-size='32' stroke-opacity='0'>Grijze</text>
+					<text class='svg-mono' x='101' y='88' font-size='24' stroke-opacity='0'>Cuber</text>
+				</svg>
+			</a>
+
+			<div id='palette-icon' onclick='changePalette()' class='container zoom icon'>
+				<svg id='svg-palette' viewBox='0 0 100 100' alt='thema' class='icon-image center-vert'>
+					<circle class='svg-vivid' cx='50' cy='35' r='25' stroke-width='6' fill-opacity='0' />
+					<circle class='svg-vivid' cx='34' cy='62' r='25' stroke-width='6' fill-opacity='0' />
+					<circle class='svg-vivid' cx='66' cy='62' r='25' stroke-width='6' fill-opacity='0' />
+				</svg>
+				<icon-text>thema</icon-text>
+			</div>
+
+			<div id='random-icon' onclick='randomize()' class='container zoom icon'>
+				<svg id='svg-random' viewBox='0 0 100 100' stroke-linejoin='round' alt='randomiseren' class='icon-image center-zont'>
+					<path class='svg-front' d='M 50 40 L 18 21 L 50 6 L 82 21  Z' stroke-width='4' />
+					<path class='svg-front' d='M 43 52 L 13 34 L 14 70 L 43 90  Z' stroke-width='4' />
+					<path class='svg-front' d='M 57 52 L 87 34 L 86 70 L 57 90  Z' stroke-width='4' />
+					
+					<ellipse class='svg-back' cx='50' cy='23' rx='9' ry='7' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='23' cy='54' rx='5' ry='6.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='35' cy='71' rx='5' ry='6.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='79' cy='49' rx='4.5' ry='5.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='72' cy='62.5' rx='4.5' ry='5.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='65' cy='76' rx='4.5' ry='5.5' stroke-opacity='0' />
+				</svg>
+				<icon-text>randomiseren</icon-text>
+			</div>
+
+			<select name='version' id='version-select' onchange='setVersion(value)' style='display:none'>
+				<option value='original'>original</option>
+				<option value='ance'>ance</option>
+				<option value='serious'>serious</option>
+			</select>
+
+		</general-menu>
+
+	</div>
+
+
+	
+	
+	<div id='main-pane' class='container'>
+	
+
+		<div id='main-holder' class='center-zont'>
+
+			<number-holder id='number-holder-0'>
+				<h1></h1>
+				<desc-holder class='container'>
+				<h3></h3>
+				<h4></h4>
+				</desc-holder>
+			</number-holder>
+
+			<number-holder id='number-holder-1'>
+				<h1></h1>
+				<desc-holder class='container'>
+				<h3></h3>
+				<h4></h4>
+				</desc-holder>
+			</number-holder>
+
+			<number-holder id='number-holder-2'>
+				<h1></h1>
+				<desc-holder class='container'>
+				<h3></h3>
+				<h4></h4>
+				</desc-holder>
+			</number-holder>
+
+			<number-holder id='number-holder-4'>
+				<h1></h1>
+				<desc-holder class='container'>
+				<h3></h3>
+				<h4></h4>
+				</desc-holder>
+			</number-holder>
+
+			<number-holder id='number-holder-5'>
+				<h1></h1>
+				<desc-holder class='container'>
+				<h3></h3>
+				<h4></h4>
+				</desc-holder>
+			</number-holder>
+
+			<number-holder id='number-holder-6'>
+				<h1></h1>
+				<desc-holder class='container'>
+				<h3></h3>
+				<h4></h4>
+				</desc-holder>
+			</number-holder>
+
+			<number-holder id='number-holder-3'>
+				<input id='number-input' value='laden...'></input>
+				<desc-holder class='container'>
+				<h3></h3>
+				<h4></h4>
+				</desc-holder>
+			</number-holder>
+
+
+			<h5 id='input-alert' style='display:none'>voer in een geheel getal <br>tussen 0 en 1 000 000</h5>
+		</div>
+	</div>
+
+
+	
+</body>
+
+</html>

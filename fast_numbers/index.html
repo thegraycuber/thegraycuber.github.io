@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+	<title>Fast Numbers - TheGrayCuber</title>
+
+	<link rel='stylesheet' href='/crabman/palette-dark.css'>
+	<link rel='stylesheet' href='/crabman/core.css'>
+	<link rel='stylesheet' href='style.css'>
+	
+	<script src='https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.js'></script>
+	<script src='/crabman/palette.js'></script>
+	<script src='/crabman/toolbox.js'></script>
+	
+	<script src='action.js'></script>
+	<script src='dictionary.js'></script>
+	<script src='main.js'></script>
+
+</head>
+
+<body class='container'>
+	
+
+	<div id='menu-holder' class='container' onmousedown='mouseInMenu = true;'>
+
+
+		<general-menu class='container menu center-zont'>
+
+
+			<a href='/index.html' id='logo-holder' class='container zoom icon'>
+				<svg id='svg-logo' viewBox='0 0 180 100' stroke-width='4' class='center-vert' stroke-linejoin='round' font-weight='bold'>
+					<polygon class='svg-gray' points='50,12 88,41 73,87 27,87 12,41' fill-opacity='0.15' />
+					<polygon class='svg-mono' points='24,19 90,47 32,90' fill-opacity='0.15' />
+					<polygon class='svg-mono' points='76,19 10,47 68,90' fill-opacity='0.15' />
+					<text class='svg-mono' x='103' y='31' font-size='24' stroke-opacity='0'>The</text>
+					<text class='svg-gray' x='98' y='62' font-size='32' stroke-opacity='0'>Gray</text>
+					<text class='svg-mono' x='101' y='88' font-size='24' stroke-opacity='0'>Cuber</text>
+				</svg>
+			</a>
+
+			<div id='palette-icon' onclick='changePalette()' class='container zoom icon'>
+				<svg id='svg-palette' viewBox='0 0 100 100' alt='palette' class='icon-image center-vert'>
+					<circle class='svg-vivid' cx='50' cy='35' r='25' stroke-width='6' fill-opacity='0' />
+					<circle class='svg-vivid' cx='34' cy='62' r='25' stroke-width='6' fill-opacity='0' />
+					<circle class='svg-vivid' cx='66' cy='62' r='25' stroke-width='6' fill-opacity='0' />
+				</svg>
+				<icon-text>palette</icon-text>
+			</div>
+
+
+			<div id='info-show' onclick='showHolder("info","inline")' class='container zoom icon'>
+				<svg id='svg-info' viewBox='0 0 100 100' alt='info' class='icon-image center-vert'>
+					<circle class='svg-vivid' cx='50' cy='50' r='40' stroke-width='8' fill-opacity='0' />
+					<rect class='svg-vivid' width='10' height='30' x='45' y='45' stroke-opacity='0' />
+					<rect class='svg-vivid' width='14' height='8' x='39' y='45' stroke-opacity='0' />
+					<circle class='svg-vivid' cx='49' cy='31' r='4' stroke-width='4' />
+				</svg>
+				<icon-text>info</icon-text>
+			</div>
+			
+			<div id='info-hide' onclick='hideHolder("info")' class='container zoom icon' style='display:none;'>
+				<svg id='svg-hide' viewBox='0 0 100 100' alt='info' class='icon-image center-vert'>
+				  <path class='svg-alert' d='M 20 20 L 80 80' fill-opacity='0' stroke-width='10' stroke-linecap='round'/>
+				  <path class='svg-alert' d='M 80 20 L 20 80' fill-opacity='0' stroke-width='10' stroke-linecap='round'/>
+				</svg>
+				<icon-text>hide</icon-text>
+			</div>
+					
+			<div id='random-icon' onclick='randomize()' class='container zoom icon'>
+				<svg id='svg-random' viewBox='0 0 100 100' stroke-linejoin='round' alt='randomize' class='icon-image center-zont'>
+					<path class='svg-front' d='M 50 40 L 18 21 L 50 6 L 82 21  Z' stroke-width='4' />
+					<path class='svg-front' d='M 43 52 L 13 34 L 14 70 L 43 90  Z' stroke-width='4' />
+					<path class='svg-front' d='M 57 52 L 87 34 L 86 70 L 57 90  Z' stroke-width='4' />
+					
+					<ellipse class='svg-back' cx='50' cy='23' rx='9' ry='7' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='23' cy='54' rx='5' ry='6.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='35' cy='71' rx='5' ry='6.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='79' cy='49' rx='4.5' ry='5.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='72' cy='62.5' rx='4.5' ry='5.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='65' cy='76' rx='4.5' ry='5.5' stroke-opacity='0' />
+				</svg>
+				<icon-text>randomize</icon-text>
+			</div>
+
+			<select name='version' id='version-select' onchange='setVersion(value)'>
+				<option value='original'>original</option>
+				<option value='ance'>ance</option>
+				<option value='serious'>serious</option>
+			</select>
+
+		</general-menu>
+
+	</div>
+
+
+	
+	
+	<div id='main-pane' class='container'>
+		<div id='info-holder' class='center-zont'>
+			<div lang="en">
+			<h1>fast numbers</h1>
+
+			<p>What is the fastest way to say each number? 27 is usually called 'twenty-seven', but that takes four syllies (syllables).
+				Instead, we can use only 2 syllies by saying 'three cubed'.
+			</p>
+
+			<p>This page shows the optimal name for each number,
+				using arithmetic, nicknames, and other shortcuts.
+				Use the input to select between three different versions:
+			</p>
+	
+			<h2>original</h2>
+			<p>The original fast numbers are the most basic. 
+				This is the system discussed in <a href='https://youtu.be/Ff8qIBUu4wM' target='_blank'>our first video</a> 
+				about fast numbers. We allow arithmetic 
+				using the words 'plus', 'minus', 'times', and 'over'. 
+				For example: 'seventy-two' can be shortened to 'six times twelve'.
+			</p>
+			<p>We also allow for powers using the words 'squared', 'cubed',
+				'to the fourth', 'to the fifth', and so on.
+				For example: 'five hundred twelve' can be shortened to 'eight cubed'.
+			</p>
+			<p>Finally, we allow for fractions using the words 'halves', 'thirds', 'fourths' and so on.
+				For example: 'three hundred seventy-five' can be shortened to 'three thousand eighths'.
+			</p>
+	
+			<h2>ance</h2>
+			<p>The ance (advanced) version expands on the original with nicknames 
+				and more operations, as shown in <a href='https://youtu.be/iHrXpLDcICo' target='_blank'>our second video</a>.
+			</p>
+			<p>'Thousand', 'million', and 'billion' are shortened to
+				'thou', 'mil' and 'bil'.
+				We also shorten 'seven' to 'sven', 'eleven' to 'elf'.
+			</p>
+			<p>Numbers can be also named by sequences. 23 is 'ninth prime',
+				55 is 'tenth fib' (fibonacci), and 32 is 'five bits'.
+			</p>
+			<p>The following new terms are introduced: score for 20,
+				gross for 144, ream for 500, lakh for 100,000, crore for 100,00,000,
+				stack for 64, chest for 1728, and large chest for 3456.
+			</p>
+			<p>Some of the existing operations are improved. 'x minus y'
+				is replaced by 'x take y'. 'x over y' is replaced by 'x on y'.
+				'x times y' is replaced by 'x ys'.
+			</p>
+			<p>We also add a bunch of new operations: factorial, choose, base, and modulo.
+			</p>
+	
+			<h2>serious</h2>
+			<p>The serious version is an alternate expansion of the original system.
+				Instead of approaching the problem with nicknames, we use an wider
+				set of operations.
+			</p>
+			<p>Floor, ceiling, and round are introduced.
+				These allow for logarithms, roots, and irrationals to be used
+				while still producing integer results.
+				Logarithms and roots in turn allows for very large numbers, 
+				such as decillion, to be used while still producing small results.
+			</p>
+			<p>The serious version does not claim to produce optimal results like the 
+				other two. The range of options vastly increases with these new
+				operations and numbers, so we only check a small subset that is 
+				expected to be near optimal.
+			</p>
+			<br/>
+			<p class='info-end'>made with love, and without AI</p>
+			<p class='info-end'><a href='https://ko-fi.com/thegraycuber' target='_blank'>leave a tip</a> to support my future creations :)</p>
+			<p class='info-end'><a href='https://github.com/thegraycuber/thegraycuber.github.io/tree/main/fast_numbers' target='_blank'>view the code</a> behind this website</p>
+			<p style='white-space: pre'><br/><br/></p>
+
+			</div>
+		</div>
+
+		<div id='main-holder' class='center-zont'>
+
+			<number-holder id='number-holder-0'>
+				<h1></h1>
+				<desc-holder class='container'>
+				<h3></h3>
+				<h4></h4>
+				</desc-holder>
+			</number-holder>
+
+			<number-holder id='number-holder-1'>
+				<h1></h1>
+				<desc-holder class='container'>
+				<h3></h3>
+				<h4></h4>
+				</desc-holder>
+			</number-holder>
+
+			<number-holder id='number-holder-2'>
+				<h1></h1>
+				<desc-holder class='container'>
+				<h3></h3>
+				<h4></h4>
+				</desc-holder>
+			</number-holder>
+
+			<number-holder id='number-holder-4'>
+				<h1></h1>
+				<desc-holder class='container'>
+				<h3></h3>
+				<h4></h4>
+				</desc-holder>
+			</number-holder>
+
+			<number-holder id='number-holder-5'>
+				<h1></h1>
+				<desc-holder class='container'>
+				<h3></h3>
+				<h4></h4>
+				</desc-holder>
+			</number-holder>
+
+			<number-holder id='number-holder-6'>
+				<h1></h1>
+				<desc-holder class='container'>
+				<h3></h3>
+				<h4></h4>
+				</desc-holder>
+			</number-holder>
+
+			<number-holder id='number-holder-3'>
+				<input id='number-input' value='loading...'></input>
+				<desc-holder class='container'>
+				<h3></h3>
+				<h4></h4>
+				</desc-holder>
+			</number-holder>
+
+
+			<h5 id='input-alert' style='display:none'>enter a whole number<br>between 1 and 1 000 000</h5>
+		</div>
+	</div>
+
+
+	
+</body>
+
+</html>

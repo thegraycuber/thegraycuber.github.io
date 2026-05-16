@@ -1,0 +1,204 @@
+
+#svg-logo{
+	height: 7vmin;
+}
+
+arrow-text{
+	color: var(--color-vivid);
+}
+
+#submitted-note{
+	position: absolute;
+	color: var(--color-mono);
+	padding: 1vmin 2vmin;
+	display: none;
+}
+
+#arrow-function{
+	position: absolute;
+	white-space: pre;
+}
+
+#function-text{
+	color: var(--color-front);
+}
+
+@media (min-aspect-ratio: 4/5){
+	.landscape-hidden{
+		display: none;
+	}
+	
+	body{
+		flex-direction: row;
+	}
+	
+	#menu-holder{
+		flex-direction: column;
+		width: 30vh;
+		min-width: 30vh;
+		gap: 1vh;
+		padding: 1.5vh;
+		border-width: 0 0.5vh 0 0;
+	}
+
+	general-menu{
+		flex-direction: row;
+	}
+
+	
+	arrow-holder{
+		height: 4vh;
+		margin: 0.5vh 1vh 2vh 1vh;
+		font-size: 3vh;
+	}
+	
+	arrow-label{
+		font-size: 1.8vh;
+		margin: 0.5vh 0 0 0;
+	}
+	
+	.icon {
+		margin: 1vh;
+		width: 10vh;
+		height: 6vh;
+		font-size: 1.5vh;
+	}
+	
+	.icon-image {
+		height: 6vh;
+	}
+
+		
+	#menu-hide{
+		top: 1vh;
+		right: -6vh;
+	}
+	
+	#menu-show{
+		top: 1vh;
+		left: 1vh;
+		display: none;
+	}
+
+	.popup{
+		top: 70vh;
+		left: 36vh;
+		width: 34vh;
+		padding: 2vh;
+		border-radius: 3vh;
+	}
+
+	#submitted-note{
+		right: 2vh;
+		top: -1vh;
+	}
+
+	#arrow-function{
+		bottom: 0vh;
+		right: 1vh;
+		width: 43vh;
+	}
+}
+
+
+@media (max-aspect-ratio: 4/5){
+	.portrait-hidden{
+		display: none;
+	}
+	
+	body{
+		flex-direction: column-reverse;
+		justify-content: space-between;
+		height: 100%;
+	}
+	
+	#menu-holder{
+		flex-direction: row;
+		height: 51vw;
+		min-height: 51vw;
+		gap: 2vw;
+		padding: 2vw;
+		border-width: 0.6vw 0 0 0;
+	}
+	
+	general-menu{
+		flex-direction: column;
+		justify-content: space-around;
+		padding-bottom: 4vw;
+	}
+
+	arrow-holder{
+		width: 24vw;
+		height: 4vw;
+		margin: 0.8vw 2vw 2vw 2vw;
+		font-size: 3.6vw;
+	}
+	
+	arrow-label{
+		font-size: 2vw;
+		margin: 0.6vw 0 0 0;
+	}
+	
+
+	icon-menu{
+		padding: 2vw;
+		gap: 4vw 1vw;
+	}
+	
+	.icon {
+		margin: 1vw;
+		height: 9.6vw;
+		font-size: 1.8vw;
+	}
+	
+	.icon-image {
+		height: 8vw;
+	}
+
+	#svg-logo{
+		width: 15vw;
+	}
+
+
+	picker .icon {
+		margin: 1.5vw;
+		width: 5vw;
+		height: 5vw;
+	}
+	
+	#menu-hide {
+		top: -5.5vh;
+		left: 1.5vh;
+	}
+	
+	#menu-show {
+		bottom: 1.5vh;
+		left: 1.5vh;
+		display: none;
+	}
+	
+	.menu-svg{
+		transform: rotate(270deg) translate(-100%, 0%);
+	}
+
+	.popup{
+		top: 15vh;
+		left: 10vw;
+		width: 70vw;
+		padding: 3vw;
+		border-radius: 4vw;
+
+	}	
+
+	#submitted-note{
+		right: 3vw;
+		bottom: 54vw;
+	}
+
+	#arrow-function{
+		top: 2vw;
+		right: 13vw;
+		width: 70vw;
+		font-size: 5vw;
+	}
+}

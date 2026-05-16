@@ -1,0 +1,8 @@
+future:
+
+don't let the particles overlap
+more control over cayley layout
+allow arrow to rearrage order of mult table
+eat a hazelnut
+click/drag on mult table
+use clicking for arrow selection

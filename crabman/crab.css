@@ -1,0 +1,53 @@
+
+html {
+	background-color: var(--color-back);
+}
+
+#svg-holder{
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin: 20px;
+} 
+
+
+#svg-logo{
+	width: 120px;
+}
+
+svg {
+	margin: 8px;
+	width: 60px;
+	height: 60px; 
+  transition: transform .1s;
+}
+
+
+svg:hover {
+  transform: scale(1.06);
+	cursor: pointer;
+}
+
+
+#palette-holder{
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin: 10px;
+}
+
+
+.palette-display{
+	flex-direction: column;
+	border-color: #ffffff55;
+	border-style: solid;
+	border-width: 0.3em;
+	border-radius: 1em;
+	margin: 0.4em;
+	padding: 0.4em;
+}
+.palette-color{
+	margin: 0.4em;
+	padding: 0.4em;
+	text-align: center;
+	border-radius: 0.6em;
+	font-weight: bold;
+}

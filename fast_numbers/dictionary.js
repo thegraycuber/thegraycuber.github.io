@@ -1,45 +1,47 @@
 
 dict = 'en';
-mode = 'main';
+mode = 'original';
 
-messages = {
-	load: {
-		en:"loading...",
-		nl:"laden..."
-	},
-	info1: {
-		en:"what's the fastest way to say each number?",
-		nl:"hoe zeg je getallen het snelste?"
-	},
-	info2: {
-		en:"this page shows the least syllables\nthat can be used to describe a given value,\nusing a certain set of rules.",
-		nl:"dit pagina toont het minimum\nlettergrepen nodig voor elk getal,\nmet een bepaalde reeks regels."
-	},
-	info3: {
-		enmain:"watch our video to learn more!",
-		nlmain:"kijk naar mijn filmpje om meer te leren!",
-		enance:"watch our video to learn more!",
-		enserious:"watch my update video to learn more!"
-	},
-	enter: {
-		en:"enter a whole number\nbetween 0 and 1 000 000",
-		nl:"voer in een geheel getal\ntussen 0 en 1 000 000"
-	},
-	random: {
-		en:"press the die\nto randomize",
-		nl:"druk de dobbelsteen\nte randomiseren"
-	},
-	link: {
-		enmain:"https://youtu.be/Ff8qIBUu4wM",
-		nlmain:"https://youtu.be/Ff8qIBUu4wM",
-		enance:"https://youtu.be/iHrXpLDcICo",
-		enserious:"https://ko-fi.com/post/January-2026-Update-B0B11SMAXZ",
-	},
-};
+var loadText = {
+	en:"loading...",
+	nl:"laden..."
+}
+
+// messages = {
+// 
+// 	info1: {
+// 		en:"what's the fastest way to say each number?",
+// 		nl:"hoe zeg je getallen het snelste?"
+// 	},
+// 	info2: {
+// 		en:"this page shows the least syllables\nthat can be used to describe a given value,\nusing a certain set of rules.",
+// 		nl:"dit pagina toont het minimum\nlettergrepen nodig voor elk getal,\nmet een bepaalde reeks regels."
+// 	},
+// 	info3: {
+// 		enmain:"watch our video to learn more!",
+// 		nlmain:"kijk naar mijn filmpje om meer te leren!",
+// 		enance:"watch our video to learn more!",
+// 		enserious:"watch my update video to learn more!"
+// 	},
+// 	enter: {
+// 		en:"enter a whole number\nbetween 0 and 1 000 000",
+// 		nl:"voer in een geheel getal\ntussen 0 en 1 000 000"
+// 	},
+// 	random: {
+// 		en:"press the die\nto randomize",
+// 		nl:"druk de dobbelsteen\nte randomiseren"
+// 	},
+// 	link: {
+// 		enmain:"https://youtu.be/Ff8qIBUu4wM",
+// 		nlmain:"https://youtu.be/Ff8qIBUu4wM",
+// 		enance:"https://youtu.be/iHrXpLDcICo",
+// 		enserious:"https://ko-fi.com/post/January-2026-Update-B0B11SMAXZ",
+// 	},
+// };
 
 
-name_compress = {
-	enmain:[
+nameCompress = {
+	enoriginal:[
 	["-",";",''],
 	["one","1"],
 	["two","2"],
@@ -96,7 +98,7 @@ name_compress = {
 	["9³","X"],
 	],
 	
-	nlmain:[
+	nloriginal:[
 	["een","1"],
 	["twee","2"],
 	["drie","3"],
@@ -256,8 +258,8 @@ name_compress = {
 	],
 }
 
-equation_compress = {
-	main:[
+equationCompress = {
+	original:[
 		[" "," "],
 		[" + ","+"],
 		[" - ","-"],
@@ -409,10 +411,10 @@ equation_compress = {
 	],
 }
 
-function name_decompress(name_string){
-	let decompressed = name_string;
-	for (let n = name_compress[dict+mode].length-1; n > -1; n--){
-		decompressed = decompressed.replaceAll(name_compress[dict+mode][n][1],name_compress[dict+mode][n][0]);
+function nameDecompress(nameString){
+	let decompressed = nameString;
+	for (let n = nameCompress[dict+mode].length-1; n > -1; n--){
+		decompressed = decompressed.replaceAll(nameCompress[dict+mode][n][1],nameCompress[dict+mode][n][0]);
 	}
 	if (decompressed.length > 20){
 		let d = floor(decompressed.length/2);
@@ -432,10 +434,10 @@ function name_decompress(name_string){
 	return decompressed;
 }
 
-function equation_decompress(eq_string){
-	let decompressed = eq_string;
-	for (let n = equation_compress[mode].length-1; n > -1; n--){
-		decompressed = decompressed.replaceAll(equation_compress[mode][n][1],equation_compress[mode][n][0]);
+function equationDecompress(eqString){
+	let decompressed = eqString;
+	for (let n = equationCompress[mode].length-1; n > -1; n--){
+		decompressed = decompressed.replaceAll(equationCompress[mode][n][1],equationCompress[mode][n][0]);
 	}
 	return decompressed;
 }

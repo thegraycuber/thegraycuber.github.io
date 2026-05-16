@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<link rel='stylesheet' href='palette-sunset.css'>
+	<link rel='stylesheet' href='core.css'>
+	<link rel='stylesheet' href='crab.css'>
+	
+	<script src='https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.js'></script>
+	<script src='crab.js'></script>
+	<script src='palette.js'></script>
+	<script src='toolbox.js'></script>
+</head>
+
+
+<body>
+
+	<h2>crabman here to help :)</h2>
+	<div id="svg-holder" class="container">
+	
+		<svg id='svg-logo'
+			viewBox='0 0 180 100' 
+			stroke-width='4' 
+			stroke-linejoin='round' 
+			font-weight= 'bold'
+			onclick='copyHTML("svg-logo")'
+			>
+			
+		  <polygon class='svg-gray' points='50,12 88,41 73,87 27,87 12,41' fill-opacity='0.15'/>
+		  <polygon class='svg-mono' points='24,19 90,47 32,90' fill-opacity='0.15' />
+		  <polygon class='svg-mono' points='76,19 10,47 68,90' fill-opacity='0.15' />
+		  <text class='svg-mono' x='103' y='31' font-size='24' stroke-opacity='0'>The</text>
+		  <text class='svg-gray' x='98' y='62' font-size='32' stroke-opacity='0'>Gray</text>
+		  <text class='svg-mono' x='101' y='88' font-size='24' stroke-opacity='0'>Cuber</text>
+		</svg>
+		
+		
+		
+		<svg id='svg-thumbnail' viewBox='0 0 100 100' onclick='copyHTML("svg-thumbnail")' alt='thumbnail' class='icon-image'>
+		  <rect class='svg-vivid' width='36' height='20' x='9' y='12' rx='6' ry='6' stroke-opacity='0'/>
+		  <rect class='svg-vivid' width='36' height='20' x='9' y='40' rx='6' ry='6' stroke-opacity='0'/>
+		  <rect class='svg-vivid' width='36' height='20' x='9' y='68' rx='6' ry='6' stroke-opacity='0'/>
+		  <rect class='svg-vivid' width='36' height='20' x='53' y='12' rx='6' ry='6' stroke-opacity='0'/>
+		  <rect class='svg-vivid' width='36' height='20' x='53' y='40' rx='6' ry='6' stroke-opacity='0'/>
+		  <rect class='svg-vivid' width='36' height='20' x='53' y='68' rx='6' ry='6' stroke-opacity='0'/>
+		</svg>
+	
+		
+		<svg id='svg-preview' viewBox='0 0 100 100' onclick='copyHTML("svg-preview")' alt='preview' class='icon-image'>
+		  <rect class='svg-vivid' width='80' height='60' x='10' y='20' rx='6' ry='6' stroke-width='6' fill-opacity='0'/>
+		  <rect class='svg-vivid' width='18' height='18' x='28' y='50' stroke-opacity='0'/>
+		  <circle class='svg-vivid' cx='62' cy='40' r='10' stroke-opacity='0'/>
+		</svg>
+		
+		<svg id='svg-info' viewBox='0 0 100 100' onclick='copyHTML("svg-info")' alt='info' class='icon-image'>
+		  <circle class='svg-vivid' cx='50' cy='50' r='40' stroke-width='8' fill-opacity='0'/>
+		  <rect class='svg-vivid' width='10' height='30' x='45' y='45' stroke-opacity='0'/>
+		  <rect class='svg-vivid' width='14' height='8' x='39' y='45' stroke-opacity='0'/>
+		  <circle class='svg-vivid' cx='49' cy='31' r='4' stroke-width='4' />
+		</svg>
+
+		<svg id='svg-settings' viewBox='0 0 100 100' onclick='copyHTML("svg-settings")' alt='settings' class='icon-image'>
+			<path class='svg-vivid' d='M 86.96 65.31 L 81.73 74.35 L 67.05 72.21 L 60.72 75.87 L 55.22 89.66 L 44.78 89.66 L 39.28 75.87 L 32.95 72.21 L 18.27 74.35 L 13.04 65.31 L 22.24 53.65 L 22.24 46.35 L 13.04 34.69 L 18.27 25.65 L 32.95 27.79 L 39.28 24.13 L 44.78 10.34 L 55.22 10.34 L 60.72 24.13 L 67.05 27.79 L 81.73 25.65 L 86.96 34.69 L 77.76 46.35 L 77.76 53.65 Z'
+			fill-opacity='0' stroke-width='6' stroke-linejoin='round' />
+		  	<circle class='svg-vivid' cx='50' cy='50' r='12' stroke-width='6' fill-opacity='0'/>
+		</svg>
+
+		
+		<svg id='svg-palette' viewBox='0 0 100 100' onclick='copyHTML("svg-palette")' alt='palette' class='icon-image'>
+		  <circle class='svg-vivid' cx='50' cy='35' r='25' stroke-width='6' fill-opacity='0'/>
+		  <circle class='svg-vivid' cx='34' cy='62' r='25' stroke-width='6' fill-opacity='0'/>
+		  <circle class='svg-vivid' cx='66' cy='62' r='25' stroke-width='6' fill-opacity='0'/>
+		</svg>
+		
+		<svg id='svg-hide' viewBox='0 0 100 100' onclick='copyHTML("svg-hide")' alt='hide' class='icon-image'>
+		  <path class='svg-alert' d='M 20 20 L 80 80' fill-opacity='0' stroke-width='10' stroke-linecap='round'/>
+		  <path class='svg-alert' d='M 80 20 L 20 80' fill-opacity='0' stroke-width='10' stroke-linecap='round'/>
+		</svg>
+				
+		<svg id='svg-hex' viewBox='0 0 100 100' onclick='copyHTML("svg-hex")' alt='hex' class='icon-image'>
+			<path class='svg-vivid' d='M 50 10 L 84 30 L 84 70 L 50 90 L 16 70 L 16 30 Z' fill-opacity='0' stroke-width='8' />
+		</svg>
+
+		
+		<svg id='svg-zoom' viewBox='0 0 100 100' onclick='copyHTML("svg-zoom")' alt='zoom' class='icon-image'>
+			<circle class='svg-vivid' cx='40' cy='40' r='25' fill-opacity='0' stroke-width='8'/>
+			<rect class='svg-vivid' width='40' height='10' x='80' y='-4' transform='rotate(45)'/>
+		</svg>
+		
+			
+		<svg id='svg-random' viewBox='0 0 100 100' stroke-linejoin='round' onclick='copyHTML("svg-random")' alt='random' class='icon-image'>
+			
+			<path class='svg-vivid' d='M 50 40 L 18 21 L 50 6 L 82 21  Z' stroke-width='4' />
+			<path class='svg-vivid' d='M 43 52 L 13 34 L 14 70 L 43 90  Z' stroke-width='4' />
+			<path class='svg-vivid' d='M 57 52 L 87 34 L 86 70 L 57 90  Z' stroke-width='4' />
+			
+			<ellipse class='svg-back' cx='50' cy='23' rx='9' ry='7' stroke-opacity='0' />
+			<ellipse class='svg-back' cx='23' cy='54' rx='5' ry='6.5' stroke-opacity='0' />
+			<ellipse class='svg-back' cx='35' cy='71' rx='5' ry='6.5' stroke-opacity='0' />
+			<ellipse class='svg-back' cx='79' cy='49' rx='4.5' ry='5.5' stroke-opacity='0' />
+			<ellipse class='svg-back' cx='72' cy='62.5' rx='4.5' ry='5.5' stroke-opacity='0' />
+			<ellipse class='svg-back' cx='65' cy='76' rx='4.5' ry='5.5' stroke-opacity='0' />
+		</svg>	
+
+		<svg id='svg-slides' viewBox='0 0 100 100' onclick='copyHTML("svg-slides")' alt='slides' class='icon-image'>
+			<defs>
+		    <mask id='mask-slide-page'>
+				<rect fill='#fff' width='100' height='100' x='0' y='0'/>
+				<rect fill='#000' width='60' height='40' x='18' y='30' r='37' stroke-opacity='0'/>
+			</mask>
+			</defs>
+		  <rect class='svg-vivid' width='60' height='40' x='10' y='24' rx='4' ry='4' fill-opacity='0' stroke-width='6' mask='url(#mask-slide-page)'/>
+		  <rect class='svg-vivid' width='60' height='40' x='30' y='40' rx='4' ry='4' fill-opacity='0' stroke-width='6'/>
+		</svg>
+		
+				
+		<svg id='svg-copy' viewBox='0 0 100 100' onclick='copyHTML("svg-copy")' alt='copy' class='icon-image'>
+			<defs>
+		    <mask id='mask-copy-page'>
+				<rect fill='#fff' width='100' height='100' x='0' y='0'/>
+				<rect fill='#000' width='40' height='60' x='30' y='18' r='37' stroke-opacity='0'/>
+			</mask>
+			</defs>
+		  <rect class='svg-vivid' width='40' height='60' x='20' y='12' rx='4' ry='4' fill-opacity='0' stroke-width='6' mask='url(#mask-copy-page)'/>
+		  <rect class='svg-vivid' width='40' height='60' x='40' y='28' rx='4' ry='4' fill-opacity='0' stroke-width='6'/>
+		</svg>
+		
+		<svg id='svg-paste' viewBox='0 0 100 100' onclick='copyHTML("svg-paste")' alt='paste' class='icon-image'>
+			<defs><mask id='mask-paste'>
+				<rect fill='#fff' width='100' height='100' x='0' y='0'/><rect fill='#000' width='30' height='30' x='35' y='0'/>
+			</mask></defs>
+		  <rect class='svg-vivid' width='50' height='70' x='25' y='15' rx='10' ry='10' fill-opacity='0' stroke-width='6' mask='url(#mask-paste)'/>
+		  <rect class='svg-vivid' width='20' height='12' x='40' y='9' rx='4' ry='4' stroke-opacity='0'/>
+		</svg>
+			
+		<svg id='svg-download' viewBox='0 0 100 100' stroke-linecap='round' stroke-width='8' fill-opacity='0' onclick='copyHTML("svg-download")' alt='download' class='icon-image'>
+		  <path class='svg-vivid' d='M 30 85 L 70 85'/>
+		  <path class='svg-vivid' d='M 50 15 L 50 65'/>
+		  <path class='svg-vivid' d='M 30 50 L 50 70 L 70 50'/>
+		</svg>
+			
+		
+		<svg id='svg-reset' viewBox='0 0 100 100' onclick='copyHTML("svg-reset")' alt='reset' class='icon-image'>
+			<path class='svg-vivid' d='M 24 28 A 36 36 0 1 1 40 83' fill-opacity='0' stroke-width='8'  />
+			<path class='svg-vivid' d='M 6 46 L 16 14 L 38 37' stroke-opacity='0'   />
+		</svg>
+		
+		<svg id='svg-favorites' viewBox='0 0 100 100' onclick='copyHTML("svg-favorites")' alt='favorites' class='icon-image'>
+			<defs>
+			  <path id='heart' stroke-opacity='0' d='M 50 45 C 56 37 65 39 68 47 C 69 52 64 60 50 73 C 36 60 31 52 32 47 C 35 39 44 37 50 45' />
+			</defs>
+		
+			
+		  <use href='#heart' class='svg-vivid' x='-22' y='-26' />
+		  <use href='#heart' class='svg-vivid' x='24' y='-20' />
+		  <use href='#heart' class='svg-vivid' x='-2' y='15' />
+		</svg>
+			
+		<svg id='svg-meter' viewBox='0 0 100 100' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill-opacity='0' onclick='copyHTML("svg-meter")' alt='detail' class='icon-image'>
+			<path class='svg-vivid' d='M 14 57 A 42 42 0 0 1 86 57 L 66 73 A 18 18 0 0 0 34 73 Z' />
+			<circle class='svg-vivid' cx='50' cy='79' r='5' />
+			<path class='svg-vivid' d='M 0 0 L 0 53' transform='translate(50 79) rotate(198)' stroke-width='8'/>
+		</svg>
+
+		<svg id='svg-grid' viewBox='0 0 100 100' stroke-width='6' fill-opacity='0' onclick='copyHTML("svg-grid")' alt='grid' class='icon-image'>
+			<path class='svg-vivid' d='M 28 15 L 28 85' />
+			<path class='svg-vivid' d='M 50 15 L 50 85' />
+			<path class='svg-vivid' d='M 72 15 L 72 85' />
+			<path class='svg-vivid' d='M 15 28 L 85 28' />
+			<path class='svg-vivid' d='M 15 50 L 85 50' />
+			<path class='svg-vivid' d='M 15 72 L 85 72' />
+		</svg>
+		
+		<svg id='svg-points' viewBox='0 0 100 100' onclick='copyHTML("svg-points")' alt='points' class='icon-image'>
+			<circle class='svg-vivid' cx='50' cy='25' r='10' stroke-opacity='0' />
+			<circle class='svg-vivid' cx='25' cy='70' r='10' stroke-opacity='0' />
+			<circle class='svg-vivid' cx='75' cy='70' r='10' stroke-opacity='0' />
+			<path class='svg-vivid' d='M 57 39 L 66 56' stroke-width='6' />
+			<path class='svg-vivid' d='M 43 39 L 34 56' stroke-width='6' />
+			<path class='svg-vivid' d='M 41 70 L 59 70' stroke-width='6' />
+		</svg>
+		
+		<svg id='svg-spin' viewBox='0 0 100 100' onclick='copyHTML("svg-spin")' alt='spin' class='icon-image'>
+			<path class='svg-vivid' d='M 10 55 L 61 75 L 49 16 Z' stroke-width='6' fill-opacity='0'/>
+			<path class='svg-vivid' d='M 80 64 A 40 40 0 0 0 73 22 ' stroke-width='6' fill-opacity='0'/>
+			<path class='svg-vivid' d='M 66 29 L 64 12 L 81 18'/>
+		</svg>
+		
+		<svg id='svg-youtube' viewBox='0 0 100 100' onclick='copyHTML("svg-youtube")' alt='YouTube' class='icon-image'>
+			<defs>
+		    <mask id='mask-yt'>
+				<rect fill='#fff' width='100' height='100' x='0' y='0'/>
+				<polygon fill='#000' points='41,37 63,50 41,63'/>
+			</mask>
+			</defs>
+		  <path class='svg-vivid' d='M 50 20 C 90 21 91 20 92 50 C 91 80 90 79 50 80 C 10 79 9 80 8 50 C 9 20 10 21 50 20' 
+			  stroke-opacity='0' mask='url(#mask-yt)'/>
+		</svg>
+			
+		<svg id='svg-open-processing' viewBox='0 0 100 100' onclick='copyHTML("svg-open-processing")' alt='OpenProcessing' class='icon-image'>
+			<defs>
+		    <mask id='mask-left-op'>
+				<rect fill='#fff' width='100' height='100' x='0' y='0'/>
+				<circle fill='#000' cx='58' cy='50' r='37' stroke-opacity='0'/>
+				<rect fill='#000' width='6' height='40' x='21' y='50'/>
+			</mask>
+		    <mask id='mask-right-op'>
+				<rect fill='#fff' width='100' height='100' x='0' y='0'/>
+				<circle fill='#000' cx='42' cy='50' r='37' stroke-opacity='0'/>
+			</mask>
+			</defs>
+		  <circle class='svg-vivid' cx='42' cy='50' r='37' stroke-opacity='0' mask='url(#mask-left-op)'/>
+		  <circle class='svg-vivid' cx='58' cy='50' r='37' stroke-opacity='0' mask='url(#mask-right-op)'/>
+		</svg>
+		
+		<svg id='svg-kofi' viewBox='0 0 100 100' onclick='copyHTML("svg-kofi")' alt='ko-fi' class='icon-image'>
+		  <path class='svg-vivid' stroke-width='6' fill-opacity='0'
+			  d='M 46 21 C 77 21 86 26 88 39 Q 89 55 70 58 Q 66 79 41 80 C 20 78 10 68 9 41 C 11 26 18 22 46 21' />
+		  <path class='svg-vivid' stroke-opacity='0'
+			  d='M 77 40 Q 77 47 70 47 Q 68 47 68 46 V 34 Q 68 33 70 33 Q 77 33 77 40' />
+		  <path class='svg-alert' stroke-opacity='0'
+			  d='M 41 41 C 47 33 56 35 59 43 C 60 48 59 56 41 66 C 23 56 22 48 23 43 C 26 35 35 33 41 41' />
+		</svg>
+		
+			
+		<svg id='svg-up-arrow' viewBox='0 0 100 100' onclick='copyHTML("svg-up-arrow")' alt='up' class='icon-image'>
+			<path class='svg-vivid' d='M 50 20 L 15 75 L 85 75 Z' stroke-width='6' stroke-linejoin='round'/>
+		</svg>
+		
+		<svg id='svg-right-arrow' viewBox='0 0 100 100' onclick='copyHTML("svg-right-arrow")' alt='right' class='icon-image'>
+			<path class='svg-vivid' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+		</svg>
+				
+		<svg id='svg-down-arrow' viewBox='0 0 100 100' onclick='copyHTML("svg-down-arrow")' alt='down' class='icon-image'>
+			<path class='svg-vivid' d='M 50 80 L 15 25 L 85 25 Z' stroke-width='6' stroke-linejoin='round'/>
+		</svg>
+		
+		<svg id='svg-left-arrow' viewBox='0 0 100 100' onclick='copyHTML("svg-left-arrow")' alt='left' class='icon-image'>
+			<path class='svg-vivid' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+		</svg>
+
+		<svg id='svg-pause' viewBox='0 0 100 100' onclick='copyHTML("svg-pause")' alt='pause' class='icon-image'>
+		  <rect class='svg-vivid' width='18' height='70' x='57' y='15' rx='5' ry='5'/>
+		  <rect class='svg-vivid' width='18' height='70' x='25' y='15' rx='5' ry='5'/>
+		</svg>
+		
+		<svg id='svg-new' viewBox='0 0 100 100' onclick='copyHTML("svg-new")' alt='new' class='icon-image'>
+		  <circle class='svg-vivid' cx='50' cy='50' r='40' />
+		  <path class='svg-back' d='M 25 50 L 75 50' fill-opacity='0' stroke-width='12' stroke-linecap='round'/>
+		  <path class='svg-back' d='M 50 25 L 50 75' fill-opacity='0' stroke-width='12' stroke-linecap='round'/>
+		</svg>
+		
+		<svg id='svg-success-circle' viewBox='0 0 100 100' onclick='copyHTML("svg-success-circle")' alt='success' class='icon-image'>
+		  <circle class='svg-vivid' cx='50' cy='50' r='40' />
+		  <path class='svg-back' d='M 30 55 L 45 70 L 70 35' fill-opacity='0' stroke-width='12' stroke-linejoin='round' stroke-linecap='round'/>
+		</svg>
+		
+		<svg id='svg-success-square' viewBox='0 0 100 100' onclick='copyHTML("svg-success-square")' alt='success' class='icon-image'>
+		  <rect class='svg-vivid' width='80' height='80' x='10' y='10' rx='10' ry='10'/>
+		  <path class='svg-back' d='M 30 55 L 45 70 L 70 30' fill-opacity='0' stroke-width='12' stroke-linejoin='round' stroke-linecap='round'/>
+		</svg>
+		
+		<svg id='svg-enter' viewBox='0 0 100 100' onclick='copyHTML("svg-enter")' alt='enter' class='icon-image'>
+		  <rect class='svg-vivid' width='80' height='80' x='10' y='10'70 rx='10' ry='10'/>
+		  <path class='svg-back' d='M 50 25 L 75 50 L 25 50 L 75 50 L 50 75' fill-opacity='0' stroke-width='12' stroke-linejoin='round' stroke-linecap='round'/>
+		</svg>
+		
+		<svg id='svg-template' viewBox='0 0 100 100' onclick='copyHTML("svg-template")' alt='' class='icon-image'>
+		  <rect width='100' height='100' x='0' y='0'  stroke='#bc7ff5' stroke-width='1' fill-opacity='0'/>
+			<path class='svg-vivid' d='M 25 15 L 75 15 L 75 85 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+		</svg>
+
+		
+	</div>
+
+	<div id="palette-holder" class="container">
+	</div>
+
+  </body>
+</html>

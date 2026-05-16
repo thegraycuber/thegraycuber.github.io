@@ -1,0 +1,229 @@
+
+#svg-logo {
+	height: 7vmin;
+}
+
+menu-grouper, desc-menu{
+	flex-direction: column;
+}
+
+
+arrow-holder{
+	width: 100%;
+}
+
+#ring-label{
+	color: var(--color-vivid);
+	vertical-align: top;
+}
+
+desc-menu *{
+	margin: 0px;
+	text-align: center;
+}
+
+
+@media (min-aspect-ratio: 4/5){
+	
+	body{
+		flex-direction: row;
+	}
+	
+	#menu-holder{
+		flex-direction: column;
+		width: 30vh;
+		min-width: 30vh;
+		gap: 1vh;
+		padding: 1.5vh;
+		border-width: 0 0.5vh 0 0;
+	}
+
+
+	general-menu{
+		flex-direction: row;
+	}
+
+	menu-grouper{
+		gap: 1vh;
+	}
+
+
+	arrow-menu{
+		padding: 2vh 1vh 3vh 1vh;
+	}
+	/* arrow-holder{
+		height: 5vh;
+	} */
+
+	arrow-text{
+		font-size: 3.2vh;
+	}
+	arrow-label{
+		margin: 0.5vh;
+		font-size: 1.6vh;
+	}
+	arrow-label + arrow-label{
+		margin-top: 2vh;
+	}
+
+	#ring-label, #arrow-highlight arrow-text{
+		font-size: 2.4vh;
+	}
+
+
+	#svg-logo{
+		width: 10vh;
+	}
+
+	.icon {
+		margin: 1.2vh 0.4vh;
+		height: 7vh;
+		font-size: 1.5vh;
+	}
+
+	icon-menu .icon {
+		width: 10vh;
+	}
+	
+	.icon-image {
+		height: 5vh;
+	}
+
+	desc-menu{
+		font-size: 2.5vh;
+		height: 32vh;
+		padding: 2vh;
+	}
+	desc-menu h1{
+		font-size: 4vh;
+	}
+
+	desc-menu h2{
+		font-size: 2.8vh;
+	}
+	desc-menu h3, desc-menu p{
+		font-size: 2.4vh;
+	}
+
+	#menu-hide{
+		top: 1vh;
+		right: -6vh;
+	}
+	
+	
+	#menu-show{
+		top: 1vh;
+		left: 1vh;
+		display: none;
+	}
+
+}
+
+
+@media (max-aspect-ratio: 4/5){
+	body{
+		flex-direction: column-reverse;
+		justify-content: space-between;
+		height: 100%;
+	}
+	
+	#menu-holder{
+		flex-direction: row;
+		height: 42vw;
+		min-height: 42vw;
+		gap: 2vw;
+		padding: 2vw;
+		border-width: 0.6vw 0 0 0;
+	}
+	
+	general-menu{
+		flex-direction: column;
+		padding: 1vw 1vw 3vw 1vw;
+	}
+
+	general-menu .icon{
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+
+	menu-grouper{
+		width:47vw;
+		gap: 2vw;
+	}
+
+	arrow-menu{
+		padding: 2vw 3vw;
+		height: 22vw;
+	}
+
+	arrow-text{
+		font-size: 4.8vw;
+	}
+	arrow-label{
+		font-size: 2.4vw;
+	}
+	arrow-label + arrow-label{
+		margin-top: 2vw;
+	}
+
+	#ring-label, #arrow-highlight arrow-text{
+		font-size: 3.6vw;
+	}
+
+	icon-menu{
+		padding: 1vw;
+	}
+
+
+	#logo-holder{
+		width: 14vw;
+	}
+
+	.icon {
+		margin: 1vw;
+		width: 9vw;
+		height: 8vw;
+		font-size: 1.6vw;
+	}
+	
+	.icon-image {
+		height: 6.5vw;
+	}
+
+	desc-menu{
+		font-size: 2.4vw;
+		width: 24vw;
+		padding: 2vw;
+	}
+	desc-menu h1{
+		font-size: 4.8vw;
+	}
+
+	desc-menu h2{
+		font-size: 3.2vw;
+	}
+	desc-menu h3, desc-menu p{
+		font-size: 2.8vw;
+	}
+	#save-icon{
+		display: none;
+	}
+
+	#menu-hide {
+		top: -5.5vh;
+		left: 1.5vh;
+	}
+	
+	#menu-show {
+		bottom: 1.5vh;
+		left: 1.5vh;
+		display: none;
+	}
+	
+	.menu-svg{
+		transform: rotate(270deg) translate(-100%, 0%);
+	}
+
+}
+

@@ -1,0 +1,18 @@
+
+
+with internet:
+    check all of the links and test each page
+    check the scrollbars 
+
+
+future improvements SPOILER ALERT:
+
+    consolidate repeated css into core
+    css file with variable aspect ratio for common controls
+    classes for svgs, like "round" (linecap and join)
+    rename 'svg-colorkey'
+    look into best sharealike licenses
+    use svgs from core instead of hardcoded - will this even work?
+    undo palette/random?
+
+

@@ -1,0 +1,8 @@
+
+future:
+
+viewer for special monthly palettes
+store sub-page in history
+palette selector better
+    randomizer
+    locked bright and alert based on hue distance?

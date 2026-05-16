@@ -1,28 +1,346 @@
 <!DOCTYPE html>
-<html>
-    <head>
-	    <title>TheGrayCuber Home Page</title>
-        <link rel="stylesheet" href="mystyle.css">
-        <meta charset="utf-8"/>
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-        <meta name="theme-color" content="#000000">
+<html lang='en'>
 
-        <script src="https://openprocessing.org/openprocessing_sketch.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.js"></script>
-        <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
-    </head>
-    <body>
-        <script src="index/sketch.js"></script>
-        <script src="index/setup.js"></script>
-        <script src="core/color.js"></script>
-        <script src="core/toolbox.js"></script>
-        <script src="index/utilities.js"></script>
-        <script src="index/classes.js"></script>
-        <script src="index/gauss.js"></script>
-        <script src="index/hexponents.js"></script>
-        <script src="index/fastest.js"></script>
-        <script src="index/cursed.js"></script>
-        <script src="index/explorer.js"></script>
-        <script src="index/hypercomplex.js"></script>
-    </body>
+<head>
+	<title>TheGrayCuber Home Page</title>
+	
+	<link rel='stylesheet' href='/crabman/palette-sunset.css'>
+	<link rel='stylesheet' href='crabman/core.css'>
+	<link rel='stylesheet' href='index/style.css'>
+	
+	<script src='https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.js'></script>
+	<script src='crabman/palette.js'></script>
+	<script src='crabman/toolbox.js'></script>
+
+	<script src='index/main.js'></script>
+	<script src='index/preview.js'></script>
+
+
+</head>
+
+<iframe></iframe>
+
+<body>
+
+	<div id='menu-holder' class='container'>
+
+		
+		<div id='preview-icon' onclick='openPreview()' class='container zoom icon'>
+			<svg id='svg-preview' viewBox='0 0 100 100' alt='preview' class='icon-image center-zont'>
+			  <rect class='svg-vivid' width='80' height='60' x='10' y='20' rx='6' ry='6' stroke-width='6' fill-opacity='0'/>
+			  <rect class='svg-vivid' width='18' height='18' x='28' y='50' stroke-opacity='0'/>
+			  <circle class='svg-vivid' cx='62' cy='40' r='10' stroke-opacity='0'/>
+			</svg>
+			<icon-text class='icon-text prevent-select'>preview</icon-text>
+		</div>
+
+		
+		<div id='thumbnail-icon' onclick='openThumbnails()' class='container zoom icon'>
+			<svg id='svg-thumbnail' viewBox='0 0 100 100' alt='projects' class='icon-image center-zont'>
+				<rect class='svg-vivid' width='36' height='20' x='9' y='12' rx='6' ry='6' stroke-opacity='0' />
+				<rect class='svg-vivid' width='36' height='20' x='9' y='40' rx='6' ry='6' stroke-opacity='0' />
+				<rect class='svg-vivid' width='36' height='20' x='9' y='68' rx='6' ry='6' stroke-opacity='0' />
+				<rect class='svg-vivid' width='36' height='20' x='53' y='12' rx='6' ry='6' stroke-opacity='0' />
+				<rect class='svg-vivid' width='36' height='20' x='53' y='40' rx='6' ry='6' stroke-opacity='0' />
+				<rect class='svg-vivid' width='36' height='20' x='53' y='68' rx='6' ry='6' stroke-opacity='0' />
+			</svg>
+			<icon-text class='icon-text prevent-select'>projects</icon-text>
+		</div>
+
+
+
+		<div id='logo-holder' class='container prevent-select'>
+			<svg id='svg-logo' viewBox='0 0 180 100' stroke-width='4' stroke-linejoin='round' font-weight= 'bold'>
+			  <polygon class='svg-gray' points='50,12 88,41 73,87 27,87 12,41' fill-opacity='0.15'/>
+			  <polygon class='svg-mono' points='24,19 90,47 32,90' fill-opacity='0.15' />
+			  <polygon class='svg-mono' points='76,19 10,47 68,90' fill-opacity='0.15' />
+			  <text class='svg-mono' x='103' y='31' font-size='24' stroke-opacity='0'>The</text>
+			  <text class='svg-gray' x='98' y='62' font-size='32' stroke-opacity='0'>Gray</text>
+			  <text class='svg-mono' x='101' y='88' font-size='24' stroke-opacity='0'>Cuber</text>
+			</svg>
+		</div>
+
+		<div id='palette-icon' onclick='openPalette()' class='container zoom icon'>
+			<svg id='svg-palette' viewBox='0 0 100 100' alt='palette' class='icon-image center-zont'>
+				<circle class='svg-vivid' cx='50' cy='35' r='25' stroke-width='6' fill-opacity='0' />
+				<circle class='svg-vivid' cx='34' cy='62' r='25' stroke-width='6' fill-opacity='0' />
+				<circle class='svg-vivid' cx='66' cy='62' r='25' stroke-width='6' fill-opacity='0' />
+			</svg>
+			<icon-text class='icon-text prevent-select'>palette</icon-text>
+		</div>
+
+		
+		<div id='info-icon' onclick='openInfo()' class='container zoom icon'>
+			<svg id='svg-info' viewBox='0 0 100 100' alt='info' class='icon-image center-zont'>
+				<circle class='svg-vivid' cx='50' cy='50' r='40' stroke-width='8' fill-opacity='0' />
+				<rect class='svg-vivid' width='10' height='30' x='45' y='45' stroke-opacity='0' />
+				<rect class='svg-vivid' width='14' height='8' x='39' y='45' stroke-opacity='0' />
+				<circle class='svg-vivid' cx='49' cy='31' r='4' stroke-width='4' />
+			</svg>
+			<icon-text class='icon-text prevent-select'>info</icon-text>
+		</div>
+
+	</div>
+
+	
+	<div>
+		<div id='thumbnail-holder' class='container'>
+
+			<a href='/cursed_equations' class='container thumbnail zoom'>
+				<img src='media/thumbnail_cursed.png' alt='cursed equations thumbnail' class='thumbnail-image'>
+				<thumbnail-text style='background-color:#23d2e8;'>cursed<br>equations</thumbnail-text>
+				<p class='thumbnail-desc'>what if we make equations with shapes instead of numbers?</p>
+			</a>
+
+			<a href='/fast_numbers' class='container thumbnail zoom'>
+				<img src='media/thumbnail_fast.png' alt='fastest numbers thumbnail' class='thumbnail-image'>
+				<thumbnail-text style='background-color:#768FFF;'>fastest<br>numbers</thumbnail-text>
+				<p class='thumbnail-desc'>using arithmetic to make number names more efficient</p>
+			</a>
+
+			<a href='/quadratic_primes' class='container thumbnail zoom'>
+				<img src='media/thumbnail_quadratic.png' alt='quadratic thumbnail' class='thumbnail-image'>
+				<thumbnail-text style='background-color:#f2c76f;'>complex<br>primes</thumbnail-text>
+				<p class='thumbnail-desc'>prime factorizations in the complex numbers and other 2D systems</p>
+			</a>
+
+			<a href='/group_visualizer' class='container thumbnail zoom'>
+				<img src='media/thumbnail_group.png' alt='visual groups thumbnail' class='thumbnail-image'>
+				<thumbnail-text style='background-color:#3fbd75;'>visual<br>groups</thumbnail-text>
+				<p class='thumbnail-desc'>interactive group tables and Cayley diagrams</p>
+			</a>
+
+			<a href='/hypercomplex_grapher' class='container thumbnail zoom'>
+				<img src='media/thumbnail_hypercomplex.png' alt='hypercomplex grapher thumbnail' class='thumbnail-image'>
+				<thumbnail-text style='background-color:#23d2e8;'>hypercomplex<br>grapher</thumbnail-text>
+				<p class='thumbnail-desc'>an exploration of how graphs change if we redefine imaginary numbers</p>
+			</a>
+
+			<a href='/hexponents' class='container thumbnail zoom'>
+				<img src='media/thumbnail_hexponents.png' alt='hexponents thumbnail' class='thumbnail-image'>
+				<thumbnail-text style='background-color:#f2c76f; transform: translate(-50%, 3.9vmin);'>hexponents!</thumbnail-text>
+				<p class='thumbnail-desc'>the satisfying behavior of exponents in modular hexagonal systems</p>
+			</a>
+<!-- 
+			<a href='/grapher' class='container thumbnail zoom'>
+				<img src='media/thumbnail_grapher.png' alt='complex polygons thumbnail' class='thumbnail-image'>
+				<thumbnail-text style='background-color:#23d2e8;'>complex<br>polygons</thumbnail-text>
+				<p class='thumbnail-desc'>what if we take a complex shape as the input of a polynomial?</p>
+			</a> -->
+
+
+		</div>
+
+
+		
+
+		<div id='preview-holder' >
+			
+			<svg id='preview-back' viewBox='0 0 100 100' onclick='movePreview(-1)' class='box preview-mover zoom'>
+				<path class='svg-mono' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+			</svg>
+
+			<svg id='preview-forward' viewBox='0 0 100 100' onclick='movePreview(1)' class='box preview-mover zoom'>
+				<path class='svg-mono' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+			</svg>
+
+			<div id='preview-desc' class='container'>
+				<preview-title class='box center-zont' id='preview-title'></preview-title>
+				<a id='preview-link' class='box center-zont zoom' href=''>visit this page↗</a>
+
+			</div>
+		</div>
+
+
+
+		
+		<div id='palette-holder' class='container'>
+
+			<palette-info>click to choose a preset palette</palette-info>
+			
+			<div id='palette-presets' class='container'>
+				
+				<svg viewBox='0 -4 44 84' alt='forest preset' id='forest-preset' 
+					onclick='setExistingPalette("forest")' stroke-opacity='0' class='zoom palette-svg center-vert'>
+					<rect width='12' height='80' x='0' y='0' rx='6' ry='6' />
+					<circle cx='34' cy='10' r='10' />
+					<circle cx='34' cy='40' r='10' />
+					<circle cx='34' cy='70' r='10' />
+				</svg>
+
+				<svg viewBox='0 0 44 80' alt='electric preset' id='electric-preset' 
+					onclick='setExistingPalette("electric")' stroke-opacity='0' class='zoom palette-svg center-vert'>
+					<rect width='12' height='80' x='0' y='0' rx='6' ry='6' />
+					<circle cx='34' cy='10' r='10' />
+					<circle cx='34' cy='40' r='10' />
+					<circle cx='34' cy='70' r='10' />
+				</svg>
+
+				<svg viewBox='0 0 44 80' alt='sunset preset' id='sunset-preset' 
+					onclick='setExistingPalette("sunset")' stroke-opacity='0' class='zoom palette-svg center-vert'>
+					<rect width='12' height='80' x='0' y='0' rx='6' ry='6' />
+					<circle cx='34' cy='10' r='10' />
+					<circle cx='34' cy='40' r='10' />
+					<circle cx='34' cy='70' r='10' />
+				</svg>
+				
+				<svg viewBox='0 0 44 80' alt='dark preset' id='dark-preset' 
+					onclick='setExistingPalette("dark")' stroke-opacity='0' class='zoom palette-svg center-vert'>
+					<rect width='12' height='80' x='0' y='0' rx='6' ry='6' />
+					<circle cx='34' cy='10' r='10' />
+					<circle cx='34' cy='40' r='10' />
+					<circle cx='34' cy='70' r='10' />
+				</svg>
+				
+				<svg viewBox='0 0 44 80' alt='pastel preset' id='pastel-preset' 
+					onclick='setExistingPalette("pastel")' stroke-opacity='0' class='zoom palette-svg center-vert'>
+					<rect width='12' height='80' x='0' y='0' rx='6' ry='6' />
+					<circle cx='34' cy='10' r='10' />
+					<circle cx='34' cy='40' r='10' />
+					<circle cx='34' cy='70' r='10' />
+				</svg>
+				
+				<svg viewBox='0 0 44 80' alt='paper preset' id='paper-preset' 
+					onclick='setExistingPalette("paper")' stroke-opacity='0' class='zoom palette-svg center-vert'>
+					<rect width='12' height='80' x='0' y='0' rx='6' ry='6' />
+					<circle cx='34' cy='10' r='10' />
+					<circle cx='34' cy='40' r='10' />
+					<circle cx='34' cy='70' r='10' />
+				</svg>
+				
+			</div>
+
+			<palette-info>select a box to customize the palette</palette-info>
+			
+			<div id='palette-customization' class='container'>	
+				
+				<div class='container palette-subcustom'>	
+
+					<palette-picker class='container zoom box' style='background: var(--color-front);'>
+						<h2 class='prevent-select palette-text center-vert'>front</h2>
+						<input type='color' id='picker-front' class='palette-input' onFocus='editPalette("front",this.value);'>
+					</palette-picker>
+					
+					<palette-picker class='container zoom box' style='background: var(--color-background);'>
+						<h2 class='prevent-select palette-text center-vert' style='color: var(--color-half);'>back</h2>
+						<input type='color' id='picker-back' class='palette-input' onChange='editPalette("back",this.value);'>
+					</palette-picker>
+					
+				</div>
+
+				<div class='container palette-subcustom'>	
+
+					<palette-picker class='container zoom box' style='background: var(--color-mono);'>
+						<h2 class='prevent-select palette-text center-vert'>mono</h2>
+						<input type='color' id='picker-mono' class='palette-input' onChange='editPalette("mono",this.value);'>
+					</palette-picker>
+
+					<palette-picker class='container zoom box' style='background: var(--color-vivid);'>
+						<h2 class='prevent-select palette-text center-vert'>vivid</h2>
+						<input type='color' id='picker-vivid' class='palette-input' onChange='editPalette("vivid",this.value);'>
+					</palette-picker>
+
+					<palette-picker class='container zoom box' style='background: var(--color-alert);'>
+						<h2 class='prevent-select palette-text center-vert'>alert</h2>
+						<input type='color' id='picker-alert' class='palette-input' onChange='editPalette("alert",this.value);'>
+					</palette-picker>
+				</div>
+			</div>
+		</div>
+
+
+		
+
+		<div id='info-holder' class='container center-zont'>
+			<div style='width: 75vmin;'>
+				<h1>hello!</h1>
+				<p>I'm TheGrayCuber, a creator of videos and webpages that explore math.
+					My creations prioritize fun and excitement over precision and detail.
+					Check out my <a href='https://youtu.be/1sPAwCZYXDA' target='_blank'>most recent video</a>,
+					or some of <a href='https://youtube.com/playlist?list=PLRcOL8MUr-pfAajalNAu2zqa5tUPApa88&si=F6iBM6lVFtCJ8q7t' target='_blank'>my favorite videos</a>,
+					or a <a id='random-link' href='' target='_blank'>random video</a>!
+				</p>
+	
+				<h2>how i create videos</h2>
+				<p>My videos are made in a custom program.
+					I create slides, which auto-animate between each other.
+					Complicated visuals can be added by writing code,
+					and parameters can be added to each slide, to 
+					animate between different settings of the visual.
+				</p>
+				<p>I am working to make the program more stable and user-friendly,
+					with the intent to open-source whenever that is done.
+					The goals are accessibility, customization, and beauty.
+				</p>
+	
+				<h2>color palettes</h2>
+				<p>Despite my name, I don't actually use much gray. My works are color-coded by topic
+					to help viewers find related content and to spare myself the
+					boredom of only one theme. The categories are roughly:
+				</p>
+				<ul>
+					<li><a href='https://www.youtube.com/playlist?list=PLRcOL8MUr-peOrO0Mapk0cI2OqzOXNQ2f' target='_blank'>blue</a>
+						- weird graphs in continuous systems</li>
+					<li><a href='https://www.youtube.com/playlist?list=PLRcOL8MUr-pfRqFO3myoQL7WDOr3WqowL' target='_blank'>purple</a>
+						- discrete systems and their primes</li>
+					<li><a href='https://www.youtube.com/playlist?list=PLRcOL8MUr-pebSawBouBiqbyiKyVbajQi' target='_blank'>green</a>
+						- visualizing group theory</li>
+					<li>navy - everything else</li>
+				</ul>
+				<p>Of course, this applies primarily to videos. Each webpage will default to 
+					its category, but you can change to whichever scheme you prefer.
+					You can even create your own custom scheme here on the 'palette' tab of my home page!
+				</p>
+				<p>Coming soon: special monthly schemes. This will expand the range of
+					pre-built options. Some will be themed, some just a nice palette.
+				</p>
+
+				<h2>programming</h2>
+				<p>
+					I mainly use <a href='https://p5js.org/' target='_blank'>green</a>, 
+					a fantastic JavaScript library made for visual programming. If you have never written code before,
+					I recommend trying it out :) 	
+				</p>
+				
+				<p>
+					There is a great community on the site 
+					<a href='https://openprocessing.org/' target='_blank'>OpenProcessing</a>.
+					You can browse programs from other creators to learn, to find inspiration,
+					and even to play around with their code and make your own version. Some places you can start:
+				</p>
+				
+				<ul>
+					<li><a href='https://openprocessing.org/sketch/1975225' target='_blank'>Times Table on a Circle</a></li>
+					<li><a href='https://youtu.be/0jX3eOrv8x8' target='_blank'>Chaos Game Tutorial</a></li>
+					<li><a href='https://openprocessing.org/sketch/2658771' target='_blank'>17 Squares</a></li>
+					<li><a href='https://youtu.be/Mm2eYfj0SgA' target='_blank'>Fourier Series Tutorial</a></li>
+					<li><a href='https://openprocessing.org/sketch/2582103' target='_blank'>Complex nth Roots</a></li>
+				</ul>
+
+				<h2>about me</h2>
+				<p>What should this section even say? I am an ape who enjoys math and programming.
+				</p>
+				<p>Trying to find the balance between studying existing knowledge,
+					and exploring new ideas.
+				</p>
+				<p>Trying to find the balance between thoughtful design,
+					and careless fun.
+				</p>
+				<p>Trying to find the balance between appreciating computers, 
+					and appreciating birds, squirrels, worms, fish, and all the other beings.
+				</p>
+	
+				<br/>
+				<p class='info-end'>made with love, and without AI</p>
+				<p class='info-end'><a href='https://ko-fi.com/thegraycuber' target='_blank'>leave a tip</a> to support my future creations :)</p>
+				<p class='info-end'><a href='https://github.com/thegraycuber/thegraycuber.github.io/tree/main/quadratic_primes' target='_blank'>view the code</a> behind this website</p>
+				<p style='white-space: pre'><br/><br/></p>
+			</div>
+		</div>
+
+
+	</div>
+
+</body>
+
 </html>

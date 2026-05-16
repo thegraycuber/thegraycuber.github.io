@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+	<title>Quadratic Primes - TheGrayCuber</title>
+
+	<link rel='stylesheet' href='/crabman/palette-sunset.css'>
+	<link rel='stylesheet' href='/crabman/core.css'>
+	<link rel='stylesheet' href='style.css'>
+	
+	<script src='https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.js'></script>
+	<script src='/crabman/palette.js'></script>
+	<script src='/crabman/toolbox.js'></script>
+	
+	<script src='action.js'></script>
+	<script src='main.js'></script>
+	<script src='math.js'></script>
+	<script src='quadraticInteger.js'></script>
+
+</head>
+
+<iframe></iframe>
+
+<body class='container'>
+	
+
+	<div id='menu-holder' class='container' onmousedown='mouseInMenu = true;'>
+
+
+		<general-menu class='container menu'>
+
+
+			<a href='/index.html' id='logo-holder' class='container zoom icon'>
+				<svg id='svg-logo' viewBox='0 0 180 100' stroke-width='4' class='center-vert' stroke-linejoin='round' font-weight='bold'>
+					<polygon class='svg-gray' points='50,12 88,41 73,87 27,87 12,41' fill-opacity='0.15' />
+					<polygon class='svg-mono' points='24,19 90,47 32,90' fill-opacity='0.15' />
+					<polygon class='svg-mono' points='76,19 10,47 68,90' fill-opacity='0.15' />
+					<text class='svg-mono' x='103' y='31' font-size='24' stroke-opacity='0'>The</text>
+					<text class='svg-gray' x='98' y='62' font-size='32' stroke-opacity='0'>Gray</text>
+					<text class='svg-mono' x='101' y='88' font-size='24' stroke-opacity='0'>Cuber</text>
+				</svg>
+			</a>
+
+			<div id='palette-icon' onclick='changePalette()' class='container zoom icon'>
+				<svg id='svg-palette' viewBox='0 0 100 100' alt='palette' class='icon-image center-vert'>
+					<circle class='svg-front' cx='50' cy='35' r='25' stroke-width='6' fill-opacity='0' />
+					<circle class='svg-front' cx='34' cy='62' r='25' stroke-width='6' fill-opacity='0' />
+					<circle class='svg-front' cx='66' cy='62' r='25' stroke-width='6' fill-opacity='0' />
+				</svg>
+				<icon-text>palette</icon-text>
+			</div>
+
+
+			<div id='info-show' onclick='showHolder("info","inline")' class='container zoom icon'>
+				<svg id='svg-info' viewBox='0 0 100 100' alt='info' class='icon-image center-vert'>
+					<circle class='svg-front' cx='50' cy='50' r='40' stroke-width='8' fill-opacity='0' />
+					<rect class='svg-front' width='10' height='30' x='45' y='45' stroke-opacity='0' />
+					<rect class='svg-front' width='14' height='8' x='39' y='45' stroke-opacity='0' />
+					<circle class='svg-front' cx='49' cy='31' r='4' stroke-width='4' />
+				</svg>
+				<icon-text>info</icon-text>
+			</div>
+			
+			<div id='info-hide' onclick='hideHolder("info")' class='container zoom icon' style='display:none;'>
+				<svg id='svg-hide' viewBox='0 0 100 100' alt='info' class='icon-image center-vert'>
+				  <path class='svg-alert' d='M 20 20 L 80 80' fill-opacity='0' stroke-width='10' stroke-linecap='round'/>
+				  <path class='svg-alert' d='M 80 20 L 20 80' fill-opacity='0' stroke-width='10' stroke-linecap='round'/>
+				</svg>
+				<icon-text>hide</icon-text>
+			</div>
+
+		</general-menu>
+
+
+		<menu-grouper class='container'>
+
+		<arrow-menu class='container menu'>
+			<arrow-holder id='arrow-ring' class='container'>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-ring",-1)' style='left:0;'>
+					<path class='svg-front' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+				<arrow-text class='center-vert'></arrow-text>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-ring",1)' style='right:0;'>
+					<path class='svg-front' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+			</arrow-holder>
+			<arrow-label id='ring-label'></arrow-label>
+			<arrow-label>highlight</arrow-label>
+			<arrow-holder id='arrow-highlight' class='container'>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-highlight",-1)' style='left:0;'>
+					<path class='svg-front' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+				<arrow-text class='center-vert'></arrow-text>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-highlight",1)' style='right:0;'>
+					<path class='svg-front' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+			</arrow-holder>
+		</arrow-menu>
+
+		
+
+		<icon-menu class='container menu'>
+
+			
+			<div id='random-icon' onclick='randomize()' class='container zoom icon'>
+				<svg id='svg-random' viewBox='0 0 100 100' stroke-linejoin='round' alt='randomize' class='icon-image center-zont'>
+					<path class='svg-front' d='M 50 40 L 18 21 L 50 6 L 82 21  Z' stroke-width='4' />
+					<path class='svg-front' d='M 43 52 L 13 34 L 14 70 L 43 90  Z' stroke-width='4' />
+					<path class='svg-front' d='M 57 52 L 87 34 L 86 70 L 57 90  Z' stroke-width='4' />
+					
+					<ellipse class='svg-back' cx='50' cy='23' rx='9' ry='7' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='23' cy='54' rx='5' ry='6.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='35' cy='71' rx='5' ry='6.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='79' cy='49' rx='4.5' ry='5.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='72' cy='62.5' rx='4.5' ry='5.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='65' cy='76' rx='4.5' ry='5.5' stroke-opacity='0' />
+				</svg>
+				<icon-text>randomize</icon-text>
+			</div>
+
+			
+			<div id='grid-icon' onclick='toggle("grid")' class='container zoom icon'>
+				<svg id='svg-grid' viewBox='0 0 100 100' alt='toggle grid' class='icon-image center-zont' stroke-width='6' fill-opacity='0'>
+					<path class='svg-front' d='M 28 15 L 28 85' />
+					<path class='svg-front' d='M 50 15 L 50 85' />
+					<path class='svg-front' d='M 72 15 L 72 85' />
+					<path class='svg-front' d='M 15 28 L 85 28' />
+					<path class='svg-front' d='M 15 50 L 85 50' />
+					<path class='svg-front' d='M 15 72 L 85 72' />
+				</svg>
+				<icon-text>toggle grid</icon-text>
+			</div>
+
+
+			<div id='save-icon' onclick='saveImage()' class='container zoom icon'>
+				<svg id='svg-save' viewBox='0 0 100 100' alt='save image' class='icon-image center-zont' stroke-linecap='round' stroke-width='8' fill-opacity='0'>
+					<path class='svg-front' d='M 30 85 L 70 85'></path>
+					<path class='svg-front' d='M 50 15 L 50 65'></path>
+					<path class='svg-front' d='M 30 50 L 50 70 L 70 50'></path>
+				</svg>
+				<icon-text>save image</icon-text>
+			</div>
+
+
+			<div id='reset-icon' onclick='resetGrid()' class='container zoom icon'>
+				<svg id='svg-reset' viewBox='0 0 100 100' alt='reset' class='icon-image center-zont'>
+					<path class='svg-front' d='M 24 28 A 36 36 0 1 1 40 83' fill-opacity='0' stroke-width='8'></path>
+					<path class='svg-front' d='M 6 46 L 16 14 L 38 37' stroke-opacity='0'></path>
+				</svg>
+				<icon-text>reset</icon-text>
+			</div>
+			
+		</icon-menu>
+
+		</menu-grouper>
+
+
+		<desc-menu class='container menu'>
+		</desc-menu>
+
+		<div id='menu-hide' onclick='hideHolder("menu")' class='menu-control zoom container floater'>
+			<svg viewBox='0 0 100 100'>
+				<path class='svg-mono menu-svg' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+			</svg>
+		</div>
+
+	</div>
+
+
+
+
+	<div id='main-pane' class='container'>
+		<div id='info-holder' class='center-zont'>
+			<h1>quadratic primes</h1>
+			<p>Welcome to the weird world of 2-dimensional primes!</p>
+			<p>These systems are either hexagonal or square, depending on the definition.
+				The colorful shapes denote prime numbers, while composites are left blank.
+				To learn more, keep reading, or check out  
+				<a href='https://youtube.com/playlist?list=PLRcOL8MUr-pd3lhx2Ak0AxExiZctsNpMH' target='_blank'>my video series</a>
+				on the topic.
+			</p>
+
+			<h2>introduction</h2>
+			<p>
+				Let's begin with the complex primes.
+				Consider <a href='https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Elementary_Number_Theory_(Barrus_and_Clark)/01%3A_Chapters/1.13%3A_The_Gaussian_Integers' target='_blank'>the Gaussian Integers</a>
+				- numbers of the form a + bi, where a and b are integers and i² = -1.
+				Each of these numbers has a prime factorization, just like the typical integers. For example:
+			</p>
+
+			<p style="text-align: center;">(9 + 3i) = (1 + i) * (2 - i) * (3)</p>
+
+			<p>The number 9+3i is composite. It can be factored into the primes 1+i, 2-i, and 3. 
+				However, its neighbor 8+3i is prime, since there is no way that it can factor. 
+			</p>
+
+
+			<p>These factorizations can be tricky, since complex numbers are hard to deal with. 
+				This page does all the work for you - simply click on a cell to see its factorization,
+				and if highlight mode is set to 'prime factors', those primes will blink. 
+				But of course, you may want to factor yourself, whether to learn or for fun.
+				Luckily, there is a method to speed things up:
+			</p>
+
+			<h2>the norm</h2>
+
+			<p style="text-align: center;">N(a+bi) = a² + b²</p>
+
+			<p>The formula above defines the <em>norm</em> of a complex number. 
+				The norm is a powerful tool for two reasons.
+				First, norms are always real integers, so they're 
+				easier to work with than the complex integers.
+				Secondly, norms are consistent with multiplication.
+				If x * y = z then N(x) * N(y) = N(z).
+				This means that we can replace any complex integer 
+				multiplication with a simpler norm multiplication.
+				Above we saw the factorization of 9+3i. By substituting norms, we get:
+			</p>
+
+			<p style="text-align: center;">90 = 2 * 5 * 9</p>
+
+			<p>This formula is much easier to verify. Norms can also help to 
+				identify primes. I mentioned above that 8+3i is prime, but I supplied no evidence.
+				The norm of 8+3i is 73, which means that if there is a factorization of 8+3i,
+				then the norms will produce a factorization of 73. 
+				However, 73 is prime, and therefore 8+3i must also be prime.
+			</p>
+
+
+			<h2>beyond complex</h2>
+			<p>We can get similar results by applying these prime and norm ideas,
+				but changing the imaginary unit. 
+				By using any quadratic equation, we get a 2-dimensional system, 
+				which is why these are called quadratic primes and integers.
+			</p>
+			<p>Instead of i² = -1, we could
+				have ω² = -2, or ω² = 23, or ω² = -ω - 1. 
+				It is customary that i always squares to -1, so in all other cases we use omega.
+				Each definition determines a different <em>ring</em> of 
+				<a href='https://en.wikipedia.org/wiki/Quadratic_integer' target='_blank'>quadratic integers</a>.
+				Use the arrow controller to switch between the rings. 
+			</p>
+			
+			<p>The concepts of factorization and norms apply to all of these rings,
+				with some caveats. The norm equation depends on the definiton. If ω² = D then
+			</p>
+			<p style="text-align: center;">N(a+bω) = a² - Db²</p>
+			<p>Factorization doesn't always translate so nicely though. In the real integers and 
+				complex integers, prime factorizations are always unique. This is not the case in
+				most quadratic integer rings. This webpage is limited to only display rings
+				that do have unique factorization, which explains the gaps in the options.
+			</p>
+
+			<h2>about me</h2>
+			<p>I am TheGrayCuber, a creator of mathematical websites and videos!
+			</p>
+			
+			<p>Growing up I wondered how prime factorizations could by applied to negatives,
+				but I never found a good way to deal with -1, since it disappears when squared.
+				Later, while reading Contemporary Abstract Algebra by Joseph A. Gallian, I learned about units and 
+				<a href='https://en.wikipedia.org/wiki/Ideal_(ring_theory)' target='_blank'>ideals</a>.
+				This was one of my most exciting mathematical moments!
+				These concepts provide a great solution to the -1 issue, and they can generalize to define primes 
+				in many other systems, such as the quadratic integers. 
+			</p>
+
+			<p>These primes remain among my favorite topics in math. 
+				They are the perfect intersection of interesting theory and beautiful visualization. 
+				But more than that, I love them for my personal connection.
+			</p>
+
+			<p>
+				This was the first website that I ever made. It taught me a lot about development,
+				and I still have the <a href='/archive/complex_primes/' target='_blank'>original version</a> up today, 
+				even though it has a lot of issues.
+				Also, the video series was a turning point for the channel. It was the first time that I planned
+				a series and prioritized viewer experience, rather than info-dumping my latest math interest.
+				Most importantly, it was purple, marking the start of COLORFUL videos! I've never turned back.
+			</p>
+			<br/>
+			<p class='info-end'>made with love, and without AI</p>
+			<p class='info-end'><a href='https://ko-fi.com/thegraycuber' target='_blank'>leave a tip</a> to support my future creations :)</p>
+			<p class='info-end'><a href='https://github.com/thegraycuber/thegraycuber.github.io/tree/main/quadratic_primes' target='_blank'>view the code</a> behind this website</p>
+			<p style='white-space: pre'><br/><br/></p>
+		</div>
+	</div>
+
+<!-- 
+	'https://oeis.org/wiki/Quadratic_integer_rings'
+	'https://en.wikipedia.org/wiki/Quadratic_integer'
+	 -->
+
+
+	<div id='menu-show' onclick='showHolder("menu")' class='menu-control zoom container floater'>
+		<svg viewBox='0 0 100 100'>
+			<path class='svg-mono menu-svg' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+		</svg>
+	</div>
+	
+</body>
+
+</html>

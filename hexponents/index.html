@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+	<title>hexponents! - TheGrayCuber</title>
+
+	<link rel='stylesheet' href='/crabman/palette-sunset.css'>
+	<link rel='stylesheet' href='/crabman/core.css'>
+	<link rel='stylesheet' href='style.css'>
+	
+	<script src='https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.js'></script>
+	<script src='/crabman/palette.js'></script>
+	<script src='/crabman/toolbox.js'></script>
+	
+	<script src='main.js'></script>
+	<script src='math.js'></script>
+	<script src='action.js'></script>
+
+</head>
+
+<iframe></iframe>
+
+<body class='container'>
+	
+
+	<div id='menu-holder' class='container'>
+
+
+		<general-menu class='container menu'>
+
+
+			<a href='/index.html' id='logo-holder' class='container zoom icon'>
+				<svg id='svg-logo' viewBox='0 0 180 100' stroke-width='4' class='center-vert' stroke-linejoin='round' font-weight='bold'>
+					<polygon class='svg-gray' points='50,12 88,41 73,87 27,87 12,41' fill-opacity='0.15' />
+					<polygon class='svg-mono' points='24,19 90,47 32,90' fill-opacity='0.15' />
+					<polygon class='svg-mono' points='76,19 10,47 68,90' fill-opacity='0.15' />
+					<text class='svg-mono' x='103' y='31' font-size='24' stroke-opacity='0'>The</text>
+					<text class='svg-gray' x='98' y='62' font-size='32' stroke-opacity='0'>Gray</text>
+					<text class='svg-mono' x='101' y='88' font-size='24' stroke-opacity='0'>Cuber</text>
+				</svg>
+			</a>
+
+			<div id='palette-icon' onclick='changePalette()' class='container zoom icon'>
+				<svg id='svg-palette' viewBox='0 0 100 100' alt='palette' class='icon-image center-vert'>
+					<circle class='svg-vivid' cx='50' cy='35' r='25' stroke-width='6' fill-opacity='0' />
+					<circle class='svg-vivid' cx='34' cy='62' r='25' stroke-width='6' fill-opacity='0' />
+					<circle class='svg-vivid' cx='66' cy='62' r='25' stroke-width='6' fill-opacity='0' />
+				</svg>
+				<icon-text>palette</icon-text>
+			</div>
+
+
+			<div id='info-show' onclick='showHolder("info","inline")' class='container zoom icon'>
+				<svg id='svg-info' viewBox='0 0 100 100' alt='info' class='icon-image center-vert'>
+					<circle class='svg-vivid' cx='50' cy='50' r='40' stroke-width='8' fill-opacity='0' />
+					<rect class='svg-vivid' width='10' height='30' x='45' y='45' stroke-opacity='0' />
+					<rect class='svg-vivid' width='14' height='8' x='39' y='45' stroke-opacity='0' />
+					<circle class='svg-vivid' cx='49' cy='31' r='4' stroke-width='4' />
+				</svg>
+				<icon-text>info</icon-text>
+			</div>
+			
+			<div id='info-hide' onclick='hideHolder("info")' class='container zoom icon' style='display:none;'>
+				<svg id='svg-hide' viewBox='0 0 100 100' alt='info' class='icon-image center-vert'>
+				  <path class='svg-alert' d='M 20 20 L 80 80' fill-opacity='0' stroke-width='10' stroke-linecap='round'/>
+				  <path class='svg-alert' d='M 80 20 L 20 80' fill-opacity='0' stroke-width='10' stroke-linecap='round'/>
+				</svg>
+				<icon-text>hide</icon-text>
+			</div>
+
+		</general-menu>
+
+
+		
+		<arrow-menu class='container menu'>
+
+			<arrow-holder id='arrow-ring' class='container'>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-ring",-1)' style='left:0;'>
+					<path class='svg-mono' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+				<arrow-text class='center-vert'></arrow-text>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-ring",1)' style='right:0;'>
+					<path class='svg-mono' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+			</arrow-holder>
+			
+			<arrow-holder id='arrow-modulus' class='container'>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-modulus",-1)' style='left:0;'>
+					<path class='svg-mono' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+				<arrow-text class='center-vert'></arrow-text>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-modulus",1)' style='right:0;'>
+					<path class='svg-mono' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+			</arrow-holder>
+			
+			<arrow-holder id='arrow-orbits' class='container'>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-orbits",-1)' style='left:0;'>
+					<path class='svg-mono' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+				<arrow-text class='center-vert'></arrow-text>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-orbits",1)' style='right:0;'>
+					<path class='svg-mono' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+			</arrow-holder>
+
+		</arrow-menu>
+
+		
+
+		<icon-menu class='container menu'>
+
+			<div id='borders-icon' onclick='toggleBorders()' class='container zoom icon'>
+				<svg id='svg-hex' viewBox='0 0 100 100' alt='highlight' class='icon-image center-zont'>>
+					<path id='border-hex' class='svg-front' d='M 50 10 L 84 30 L 84 70 L 50 90 L 16 70 L 16 30 Z' fill-opacity='0' stroke-width='8' />
+				</svg>
+				<icon-text>animate</icon-text>
+			</div>
+	
+			
+			<div id='random-icon' onclick='randomize()' class='container zoom icon'>
+				<svg id='svg-random' viewBox='0 0 100 100' stroke-linejoin='round' alt='randomize' class='icon-image center-zont'>
+					<path class='svg-vivid' d='M 50 40 L 18 21 L 50 6 L 82 21  Z' stroke-width='4' />
+					<path class='svg-vivid' d='M 43 52 L 13 34 L 14 70 L 43 90  Z' stroke-width='4' />
+					<path class='svg-vivid' d='M 57 52 L 87 34 L 86 70 L 57 90  Z' stroke-width='4' />
+					
+					<ellipse class='svg-back' cx='50' cy='23' rx='9' ry='7' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='23' cy='54' rx='5' ry='6.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='35' cy='71' rx='5' ry='6.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='79' cy='49' rx='4.5' ry='5.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='72' cy='62.5' rx='4.5' ry='5.5' stroke-opacity='0' />
+					<ellipse class='svg-back' cx='65' cy='76' rx='4.5' ry='5.5' stroke-opacity='0' />
+				</svg>
+				<icon-text>randomize</icon-text>
+			</div>
+
+			
+			<div id='favorites-icon' onclick='nextFavorite()' class='container zoom icon'>
+			<svg id='svg-favorites' viewBox='0 0 100 100' stroke-linejoin='round' alt='favorites' class='icon-image center-zont'>
+				<defs>
+				  <path id='heart' stroke-opacity='0' d='M 50 45 C 56 37 65 39 68 47 C 69 52 64 60 50 73 C 36 60 31 52 32 47 C 35 39 44 37 50 45' />
+				</defs>
+			  <use href='#heart' class='svg-alert' x='-22' y='-26' />
+			  <use href='#heart' class='svg-alert' x='24' y='-20' />
+			  <use href='#heart' class='svg-alert' x='-2' y='15' />
+			</svg>	
+				<icon-text>favorites</icon-text>
+			</div>
+
+			<div id='invert-icon' onclick='toggleInvert()' class='container zoom icon'>
+				<svg id='svg-invert' viewBox='0 0 100 100' alt='highlight' class='icon-image center-zont'>>
+					<path class='svg-mono' d='M 50 90 L 16 70 L 16 30 L 50 10 ' fill-opacity='0' stroke-width='8' />
+					<path class='svg-mono' d='M 50 14 L 84 32 L 84 68 L 50 86 Z' stroke-width='0'/>
+				</svg>
+				<icon-text>invert</icon-text>
+			</div>
+			
+
+			<div id='copy-icon' onclick='copyCode()' class='container zoom icon'>
+				<svg id='svg-copy' viewBox='0 0 100 100' alt='copy' class='icon-image center-zont'>
+					<defs>
+				    <mask id='mask-copy-page'>
+						<rect fill='#fff' width='100' height='100' x='0' y='0'/>
+						<rect fill='#000' width='40' height='60' x='30' y='18' r='37' stroke-opacity='0'/>
+					</mask>
+					</defs>
+				  <rect class='svg-mono' width='40' height='60' x='20' y='12' rx='4' ry='4' fill-opacity='0' stroke-width='6' mask='url(#mask-copy-page)'/>
+				  <rect class='svg-mono' width='40' height='60' x='40' y='28' rx='4' ry='4' fill-opacity='0' stroke-width='6'/>
+				</svg>
+				<icon-text>copy code</icon-text>
+			</div>
+
+			<div id='copy-success' class='container zoom icon' style='display:none;'>
+				<svg id='svg-success' viewBox='0 0 100 100'>
+				  <circle class='svg-mono' cx='50' cy='50' r='40'></circle>
+				  <path class='svg-back' d='M 30 55 L 45 70 L 70 35' fill-opacity='0' stroke-width='12' stroke-linejoin='round' stroke-linecap='round'></path>
+				</svg>
+				<icon-text>copy code</icon-text>
+			</div>
+
+			<div id='paste-icon' onclick='pasteShow()' class='container zoom icon'>
+				<svg id='svg-paste' viewBox='0 0 100 100' alt='paste' class='icon-image center-zont'>
+					<defs><mask id='mask-paste'>
+						<rect fill='#fff' width='100' height='100' x='0' y='0'/><rect fill='#000' width='30' height='30' x='35' y='0'/>
+					</mask></defs>
+				  <rect class='svg-mono' width='50' height='70' x='25' y='15' rx='10' ry='10' fill-opacity='0' stroke-width='6' mask='url(#mask-paste)'/>
+				  <rect class='svg-mono' width='20' height='12' x='40' y='9' rx='4' ry='4' stroke-opacity='0'/>
+				</svg>
+				<icon-text>paste code</icon-text>
+			</div>
+			
+		</icon-menu>
+
+
+		<div id='menu-hide' onclick='hideHolder("menu")' class='menu-control zoom container floater'>
+			<svg viewBox='0 0 100 100'>
+				<path class='svg-mono menu-svg' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+			</svg>
+		</div>
+
+	</div>
+
+
+<!-- 	<div id='info-holder' class='container center-zont'> -->
+	
+	
+	<div id='main-pane' class='container'>
+		<div id='info-holder' class='center-zont'>
+			<h1>hexponents!</h1>
+			<p>This page displays the patterns of repeated multiplication in certain hexagonal number systems, 
+				as shown in <a href='https://youtu.be/148N796Qy3g' target='_blank'>my video</a>.
+			</p>
+			<p>You can generate new patterns by changing the settings.
+				Use the die icon to randomize or the hearts icon to see my favorites.
+				If you find something cool, copy the code and paste it as a comment on the video,
+				and I might add it to the list of favorites!
+			</p>
+			<p>
+				There are three primary settings behind each pattern:
+			</p>
+	
+			<h2>crow squared</h2>
+			<p>These calculations are done within 2-dimensional systems of <a href='https://en.wikipedia.org/wiki/Quadratic_integer' target='_blank'>quadratic integers</a>.
+				The horizontal dimension is made up of real numbers, and the diagonal dimension is spanned by c, which is called 'crow' in my video.
+				These are called quadratic integers because c is the root of a quadratic equation. 
+				Changing this equation changes the behavior of the system. 
+			</p>
+			<p>
+				I set this equation to always have the form:
+			</p>
+			<p style="text-align: center;">c² = c + n</p>
+			<p>
+				One could also change the coefficient of the c term, but the resulting 
+				system may then be rectangular instead of hexagonal, so I limited to just that case.
+				
+			</p>
+
+			<h2>modulus</h2>
+			<p>All calculations are done using <a href='https://en.wikipedia.org/wiki/Modular_arithmetic' target='_blank'>modular arithmetic</a>.
+				The purpose of this is to create a system with only finite different values, meaning that repeated 
+				multiplication is forced to enter a cycle. 
+				Changing the modulus will change the length and shape of these cycles.
+				
+			</p>
+
+			<h2>orbits</h2>
+			<p>The core idea of this page is to display <a href='https://en.wikipedia.org/wiki/Group_action#Orbits_and_stabilizers' target='_blank'>orbits</a>. 
+				An orbit is a set of elements that can reach each other through a certain action.
+				For example: if we begin with the value 1 and repeatedly multiply by c, we get all the powers of c.
+				The system only has finite values because we use modular arithmetic, 
+				so these powers of c must eventually repeat, entering a cycle.
+				We say this set of powers is 'the orbit of 1 under multiplication by c'.
+			</p>
+			<p>
+				Given some multiplier x, all values can be partitioned into orbits under multiplication by x.
+				However, instead of allowing you to choose that multiplier x, 
+				I simply allow you to choose of the amount of orbits.
+				This is because there may be multiple multipliers that result in the same amount of orbits, 
+				and if they do, those orbits will be identical (because I have restricted the modulus to be prime).
+				Therefore it is simpler to just choose the desired amount of orbits.
+			</p>
+	
+			<h2>about me</h2>
+			<p>I am TheGrayCuber, a creator of mathematical websites and videos!
+			</p>
+			
+			<p>The 'hexponents!' video that I made on this topic was experimental, 
+				a challenge to write entirely in rhyme.
+				While this was a lot of fun, it lacked depth and clarity of the 
+				underlying mathematics. 
+			</p>
+			<p>Lately I have been grappling with this decision of how to create videos.
+				Ultimately they are meant as entertainment, and so it performed its purpose better 
+				than a serious video 'Orbits of Eisenstein Integers' would have.
+				However, I understand that some viewers would prefer that educational style,
+				so for now I will use these websites as a place to provide more clarity.
+			</p>
+			<p>If you're interested in learning, I recommend that you try calculating some of these orbits by hand. 
+				Use c² = c - 1 with a small modulus such as 5, and try out different multipliers. 
+				This works best when the modulus is prime, so you may find it helpful to 
+				watch <a href='https://youtu.be/s15ut3iDyAQ' target='_blank'>my video on the Eisenstein Primes</a>, 
+				and then utilize my <a href='/quadratic_primes' target='_blank'>visualizer</a> to identify the primes.
+				That's what I did while preparing for this video.
+			</p>
+			<br/>
+			<p class='info-end'>made with love, and without AI</p>
+			<p class='info-end'><a href='https://ko-fi.com/thegraycuber' target='_blank'>leave a tip</a> to support my future creations :)</p>
+			<p class='info-end'><a href='https://github.com/thegraycuber/thegraycuber.github.io/tree/main/hexponents' target='_blank'>view the code</a> behind this website</p>
+			<p style='white-space: pre'><br/><br/></p>
+		</div>
+	</div>
+<!-- 	</div> -->
+
+
+	<div id='menu-show' onclick='showHolder("menu")' class='menu-control zoom container floater'>
+		<svg viewBox='0 0 100 100'>
+			<path class='svg-mono menu-svg' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+		</svg>
+	</div>
+
+	<div id='copy-holder' class='container popup floater' style='display: none'>
+		<textarea id='copy-code'></textarea>
+		<div class='container' style="flex-direction: row;">
+			<p style='text-align:center; color: var(--color-mono)'>copy this code to save the settings</p>
+			<svg id='copy-hide' viewBox='0 0 100 100' class='zoom center-vert popup-button' onclick='hideElement("copy-holder")'>
+			  <rect class='svg-vivid' width='80' height='80' x='10' y='10' rx='10' ry='10'></rect>
+			  <path class='svg-back' d='M 30 55 L 45 70 L 70 30' fill-opacity='0' stroke-width='12' stroke-linejoin='round' stroke-linecap='round'></path>
+			</svg>
+		</div>
+	</div>
+
+	<div id='paste-holder' class='container popup floater' style='display: none'>
+		<textarea id='paste-code'></textarea>
+		<div class='container' style="flex-direction: row;">
+			<svg id='paste-hide' viewBox='0 0 100 100' class='zoom center-vert popup-button' onclick='hideElement("paste-holder")' style='display:none'>
+			  <path class='svg-alert' d='M 20 20 L 80 80' fill-opacity='0' stroke-width='10' stroke-linecap='round'></path>
+			  <path class='svg-alert' d='M 80 20 L 20 80' fill-opacity='0' stroke-width='10' stroke-linecap='round'></path>
+			</svg>
+			<p id='paste-note' style='text-align:center;'>enter a code to change the settings</p>
+			<svg id='paste-enter' viewBox='0 0 100 100' class='zoom center-vert popup-button' onclick='pasteEnter()'>
+			  <rect class='svg-vivid' width='80' height='80' x='10' y='10'70 rx='10' ry='10'/>
+			  <path class='svg-back' d='M 50 25 L 75 50 L 25 50 L 75 50 L 50 75' fill-opacity='0' stroke-width='12' stroke-linejoin='round' stroke-linecap='round'/>
+			</svg>
+		</div>
+	</div>
+
+	
+	<p id='submitted-note' class='floater'></p>
+	
+</body>
+
+</html>

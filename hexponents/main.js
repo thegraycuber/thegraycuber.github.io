@@ -1,75 +1,73 @@
-// dev version of https://thegraycuber.github.io/hexponents
+
+var crowList = [-1,-2,-3,-5,-11,-17,28,27,25,24,23,22,19,18,17,15,14,13,10,9,8,7,5,4,3,1];
 
 var modulus = [11,0]; 
 var orbits = 3; 
-var crow_constant = -1; 
-
+var crowConstant = -1; 
 
 var ticker = -3.14;
 var highlight = 0;
-var last_display = 0;
-var show_borders = true;
+var lastDisplay = 0;
+var hideCanvas = false;
+
 function draw(){
+	iconChecks();
+	
 	background(palette.back);
+	if (hideCanvas){
+		return;
+	}
+
+	
 	translate(origin.x,origin.y);
 	scale(scalar,-scalar);
 
-	//draw the hexagons
-	for (let c of Object.keys(equivalence_classes)){
-		if (c == '0;0'){continue;}
-		onlyFill(palette.orbits[equivalence_classes[c].orbit]);
-		for (let hex of equivalence_classes[c].hexes){
-			hexagon(hex[0],hex[1],0.51);
-		}
-	}
-	
-	//draw the borders
-	if (show_borders){
-		ticker = ticker+(Date.now()-last_display)*0.003;
-		last_display = Date.now();
+	if (showBorders){
+		ticker = ticker+(Date.now()-lastDisplay)*0.003;
+		lastDisplay = Date.now();
 		if (ticker > PI){
 			ticker = -PI;
 			highlight = (highlight + 1) % orbits;
 		}
-		
-		onlyStroke(palette.back,cos(ticker)*0.05+0.05);
-		for (let c of Object.keys(equivalence_classes)){
-			if (equivalence_classes[c].orbit != highlight){continue;}
-			for (let hex of equivalence_classes[c].hexes){
-				hexagon(hex[0],hex[1],0.51);
-			}
-		}	
-	}
-	
-	resetMatrix();
-	textBox.show();
-	iconBox.show();
-	helpBox.show();
 
-	if(pasting){
-		background(palette.backalpha);
+		strokeFill = -cos(ticker)*0.5+0.5;
+		highlightFill = cos(ticker)*0.25+0.75;
+		radiusLerp = -cos(ticker)*0.06+0.45;
 	}
-	
-	stroke(palette.back);
-	if (invalid_text.length > 0){
-		strokeWeight(bigText*0.25);
-		textSize(bigText*2);
-		fill(palette.red);
-		text(invalid_text,origin.x,origin.y);
-		invalid_tick--;
-		if (invalid_tick == 0){
-			invalid_text = "";
+	//draw the hexagons
+
+	for (let c of Object.keys(equivalenceClasses)){
+		if (c == '0;0'){continue;}
+
+		let radius;
+		if (inverted){
+			let strokeLerp = (showBorders && (equivalenceClasses[c].orbit == highlight))?strokeFill:1;
+			stroke(lerpColor(palette.back,palette.orbits[equivalenceClasses[c].orbit],strokeLerp));
+			strokeWeight(0.16*(strokeLerp));
+			radius = (showBorders && (equivalenceClasses[c].orbit == highlight))?0.87-radiusLerp:0.36;
+			let fillLerp = (showBorders && (equivalenceClasses[c].orbit == highlight))?highlightFill:0.5;
+			fill(lerpColor(palette.back,palette.orbits[equivalenceClasses[c].orbit],fillLerp));
+		} else {
+			radius = (showBorders && (equivalenceClasses[c].orbit == highlight))?radiusLerp:0.51;
+			onlyFill(palette.orbits[equivalenceClasses[c].orbit]);
+
+		}
+		
+
+		// let fillLerp = (showBorders && (equivalenceClasses[c].orbit == highlight))?highlightFill:0.7;
+		// onlyFill(lerpColor(palette.back,palette.orbits[equivalenceClasses[c].orbit],fillLerp));
+		// onlyFill(lerpColor(palette.back,palette.orbits[equivalenceClasses[c].orbit],fillLerp));
+		// strokeWeight(0.16);
+		for (let hex of equivalenceClasses[c].hexes){
+			hexagon(hex[0],hex[1],radius);
 		}
 	}
-	if (at_ticker > 0){
-		strokeWeight(bigText*0.16);
-		textSize(bigText);
-		fill(palette.front);
-		text(at_text.substring(0,at_ticker),at_location[0],at_location[1]);
-		at_ticker--;
-	}
-	
+
 }
+
+var highlightFill = 0;
+var strokeFill = 0;
+var radiusLerp = 0;
 
 function hexagon(x,y,radius){
 	beginShape();
@@ -80,4 +78,84 @@ function hexagon(x,y,radius){
 	vertex(x-radius,y+radius*0.58);
 	vertex(x-radius,y-radius*0.58);
 	endShape(CLOSE);
+}
+
+
+var equivalenceClasses;
+var canvas;
+function setup() {
+
+	morningRoutine('sunset');
+
+	let ringList = [];
+	for (let crow = 0; crow < crowList.length; crow++){
+		ringList.push('c² = c '+ (sign(crowList[crow]) == 1? '+ ': '- ') + str(abs(crowList[crow])));
+	}
+	Object.defineProperty(controllers,'arrow-ring',{value: new Controller('arrow-ring',ringList,1,'mono')});
+	Object.defineProperty(controllers,'arrow-modulus',{value: new Controller('arrow-modulus',[''],0,'mono')});
+	Object.defineProperty(controllers,'arrow-orbits',{value: new Controller('arrow-orbits',[''],0,'mono')});
+
+	while (primes.length < 100){
+		addPrime();
+	}
+	processMod();
+	processOrbits();
+	generateHexPrimes();	
+
+
+	setupFonts();
+	
+	favoriteIndex = floor(random(favorites.length));
+	nextFavorite();
+	
+	popupList = ['paste-holder','copy-holder','info-holder','submitted-note','info-hide'];
+	popdownList = ['info-show','menu-hide'];
+}
+
+
+var portrait;
+function setupLayout(){
+	portrait = width*4 < height*3;
+	origin = createVector(width/2, height/2);
+	scalar = 0.4*min(width,height)/max(abs(hexNorm(modulus))**0.5,8);
+
+}
+
+
+var boldFont, regularFont;
+function preload() {
+	boldFont = loadFont('/media/AshkinsonBold_prod.ttf');
+	regularFont = loadFont('/media/AshkinsonRegular_000.ttf');
+}
+
+
+
+
+// pick a good color scheme depending on the number of orbits
+function orbitColorSetup(){
+
+	palette.halfdark = lerpColor(palette.half,palette.back,0.8);
+
+	if (orbits <= 2){
+		palette.orbits = [palette.mono, palette.halfdark];
+		
+	} else if (orbits <= 6){
+		palette.orbits = [palette.vivid,palette.halfdark,palette.mono,palette.front,palette.half,palette.alert];
+		
+	} else if (orbits <= 8){
+		palette.orbits = [palette.front,palette.vivid,palette.alert];
+		for (let c = 3; c < orbits; c++){
+			palette.orbits.push(lerpColor(palette.mono,palette.back,(c-3)/(orbits-3)));
+		}
+	} else {
+		palette.orbits = [];
+		for (let c = 0; c < orbits; c++){
+			palette.orbits.push(lerpColor(palette.mono,palette.back,c/orbits));
+		}
+	}
+}
+
+
+function corePaletteCustom(){
+	orbitColorSetup();
 }
