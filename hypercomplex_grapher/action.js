@@ -35,7 +35,7 @@ function touchEnded(){
 
 function touchMoved(event){
 	if (mouseInMenu || hideCanvas){return;}
-	// event.preventDefault(); 
+	event.preventDefault(); 
 	// if (!inABox && iTouched){
 		updateMovement();
 	// }
@@ -67,6 +67,7 @@ function updateMovement(){
 
 function mouseWheel(event){
 	if (hideCanvas){return;}
+	event.preventDefault(); 
 	
 	// if (!iTouched && !gameMode){
 		updateTouchInfo();
@@ -75,7 +76,6 @@ function mouseWheel(event){
 		var scalarLog = log(scalar);
 		scalarLog -= event.delta/1024; // make this positive to invert scroll
 		scalar = exp(scalarLog);
-		// iconBox.getItem('reset').Active = true;
 
 		updateMovement();
 	// }

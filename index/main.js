@@ -10,6 +10,7 @@ var canvas, unit;
 function setup() {
 
 	morningRoutine('sunset');
+
 	if (paletteNames[paletteIndex]=='custom'){
 		setPaletteURL(paletteToCode());
 	} else if (!defaultPalette){

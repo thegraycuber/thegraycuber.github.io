@@ -38,8 +38,9 @@ function touchEnded(){
 
 
 function touchMoved(event){
+
 	if (mouseInMenu || hideCanvas){return;}
-	// event.preventDefault(); 
+	event.preventDefault(); 
 	updateMovement(); //&& display_state < 2
 }
 
@@ -74,8 +75,9 @@ function updateMovement(){
 
 
 function mouseWheel(event){
-	//if(display_state == 2){return;}
+	
 	if (hideCanvas){return;}
+	event.preventDefault(); 
 	updateTouchInfo();
 	
 	var scalarLog = log(scalar);

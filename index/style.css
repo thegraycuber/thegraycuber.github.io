@@ -52,36 +52,37 @@ icon-text {
 	flex-direction: row; 
 	flex-wrap:wrap; 
 	justify-content:center;
-	gap: 6vmin; 
-	padding: 5vmin 10vmin 5vh 10vmin;
+	padding: 0vmin;
+	padding-bottom: 5vmin;
 	display: none;
 	background-color: var(--color-back);
 }
 
-.thumbnail{
-	flex-direction: column;
-	width: 30vh;
-	height: 30vh;
+thumbnail{
+	display: flex;
+	position: relative;
+	padding: 4vmin 5vmin;
 }
 
+
 .thumbnail-image {
-	width:100% ;
+	width: min(30vh,45vw);
+	height: min(20vh,30vw);
 	box-shadow: 1vmin 1vmin  var(--color-backdark);
-	border-radius: 4vmin;
+	border-radius: min(4vh,6vw);
 }
 
 thumbnail-text {
-	font-size: 2.5vh;
+	font-size: min(2.4vh,3.6vw);
 	position: absolute; 
 	top: 35%;
 	left: 50%;
 	color: #000000cc;
 	
-	transform: translate(-50%, 2.6vmin);
-	line-height: 1.05;
+	transform: translate(-50%, min(4.8vh,7.2vw));
 	
-	padding:  0.5vh 1vh;
-	border-radius: 1.5vh;
+	padding:  0.5vmin 1vmin;
+	border-radius: 1.5vmin;
 	white-space: pre-line;
 	
 	box-shadow: 0.75vh 0.75vh black;
@@ -164,7 +165,7 @@ thumbnail-text {
 palette-info {
 	font-size: min(2.5vh,4vw);
 	padding-top: 2vh;
-	color: var(--color-half);
+	color: var(--color-mono);
 }
 
 #palette-customization {
@@ -197,3 +198,36 @@ palette-picker {
 
 
 
+
+
+@media (min-aspect-ratio: 4/5){
+
+	thumbnail{
+		flex-direction:column;
+	}
+	thumbnail p{
+		width: min(24vh,36vw);
+		font-size: min(3.6vw,1.8vh);
+		display: flex;
+		position: relative;
+		flex-direction: row;
+		margin: 2vh auto;
+	}
+}
+
+@media (max-aspect-ratio: 4/5){
+
+	thumbnail{
+		flex-direction:row;
+	}
+
+	thumbnail p{
+		width: min(30vw,15vh);
+		font-size: min(3.2vw,1.6vh);
+		display: flex;
+		position: relative;
+		flex-direction: row;
+		margin: auto 4vw;
+	}
+
+}

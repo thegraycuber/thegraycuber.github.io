@@ -1,1 +1,4 @@
-NOTHING :)
+
+future:
+
+    save image crops menubar location

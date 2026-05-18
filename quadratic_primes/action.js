@@ -53,7 +53,7 @@ function touchEnded(){
 function touchMoved(event){
 
 	if (mouseInMenu || hideCanvas){return;}
-	// event.preventDefault(); 
+	event.preventDefault(); 
 	// if (infoClick && clickStart.dist(focusPoint()) > 5){
 	// 	infoClick = false;
 	// }
@@ -88,15 +88,14 @@ function updateMovement(){
 
 function mouseWheel(event){
 	
-	// if (autoZoom == false){
 	if (hideCanvas){return;}
+	event.preventDefault(); 
 	updateTouchInfo();
 
 	// scrolling will update scalar logarithmically 
 	var scalarLog = log(scalar);
 	scalarLog -= event.delta/4096; // make this positive to invert scroll
 	scalar = max(scaleMin,exp(scalarLog));
-	// iconBox.getItem('reset').Active = true;
 
 	updateMovement();
 }

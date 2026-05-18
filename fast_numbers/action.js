@@ -6,7 +6,8 @@ var blockScroll = 0;
 function mouseWheel(event){
 	
 	if (hideCanvas){return;}
-	// event.preventDefault();
+	event.preventDefault(); 
+	
 	if (inputBox.value == "" || panning || (Date.now() - blockScroll < 1000)){
 		return;
 	}
@@ -38,7 +39,7 @@ function touchEnded(){
 var panning = false;
 function touchMoved(event){
 	if (mouseInMenu || hideCanvas){return;}
-	// event.preventDefault(); 
+	event.preventDefault(); 
 
 	if (!panning){
 		return;

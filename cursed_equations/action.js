@@ -15,7 +15,9 @@ function touchEnded(){
 }
 
 function touchMoved(event){
+
 	if (mouseInMenu || hideCanvas){return;}
+	event.preventDefault(); 
 	if (autoZoom){
 		toggle('autozoom');
 	}
@@ -39,6 +41,7 @@ function updateMovement(){
 function mouseWheel(event){
 
 	if (hideCanvas){return;}
+	event.preventDefault(); 
 	if (autoZoom){
 		toggle('autozoom');
 	}
