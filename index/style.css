@@ -156,8 +156,8 @@ thumbnail-text {
 	border-style:solid;
 	border-width:0.75vmin;
 	
-	width:5vmin;
-	height:10vmin;
+	width:min(4vh,5vw);
+	height:min(8vh,10vw);
 	
 	box-shadow: 0.75vh 0.75vh var(--color-backdark);
 }
@@ -179,11 +179,11 @@ palette-info {
 
 palette-picker {
 	justify-content:center;
-	height: min(8vh,12vw);
+	height: min(6vh,12vw);
 	margin: 1vh 4vmin;
 }
 .palette-text {
-	font-size: min(6vh,9vw);
+	font-size: min(5vh,9vw);
 	color: var(--color-back);
 }
 
