@@ -110,6 +110,13 @@ function setup() {
 	inputBox.style.setProperty('font-family', 'AshkinsonBold_prod, Helvetica, sans-serif');
 	document.getElementById('version-select').style.setProperty('font-family', 'AshkinsonBold_prod, Helvetica, sans-serif');
 	
+	//https://stackoverflow.com/questions/7060750/detect-the-enter-key-in-a-text-input-field
+	inputBox.addEventListener('keyup', ({key}) => {
+		if (key === 'Enter'){
+			inputBox.blur();
+		}
+	});
+	
 	scalar = 1;
 	yFlip = 1;
 	origin = createVector(0,0);
