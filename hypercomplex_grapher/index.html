@@ -24,7 +24,7 @@
 <body class='container'>
 	
 
-	<div id='menu-holder' class='container' onmousedown='mouseInMenu = true;'>
+	<div id='menu-holder' class='container' onmousedown='mouseInMenu = true;' ontouchstart='mouseInMenu = true;'>
 
 
 		<general-menu class='container menu'>
@@ -81,7 +81,7 @@
 		
 			<desc-menu id='ideal-holder' class='container menu'>
 				<div id='ideal-dragger'>
-					<svg  class='zoom' onmousedown='iDragging=(winTracker>=0);' viewBox='0 0 100 100' alt='i²'>
+					<svg  class='zoom' onmousedown='iDragging=(winTracker>=0);' ontouchstart='iDragging=(winTracker>=0);' viewBox='0 0 100 100' alt='i²'>
 						<circle class='svg-alert' cx='50' cy='50' r='48' />
 						<text class='svg-back' x='25' y='80' font-size='80' stroke-opacity='0'>i²</text>
 					</svg>

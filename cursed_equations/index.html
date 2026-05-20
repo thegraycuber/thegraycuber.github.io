@@ -23,7 +23,7 @@
 <body class='container'>
 	
 
-	<div id='menu-holder' class='container' onmousedown='mouseInMenu = true;'>
+	<div id='menu-holder' class='container' onmousedown='mouseInMenu = true;'  ontouchstart='mouseInMenu = true;'>
 
 
 		<general-menu class='container menu'>
@@ -357,7 +357,7 @@
 		</svg>
 	</div>
 
-	<div id='copy-holder' class='container popup floater' style='display: none' onmousedown='mouseInMenu = true;'>
+	<div id='copy-holder' class='container popup floater' style='display: none' onmousedown='mouseInMenu = true;' ontouchstart='mouseInMenu = true;'>
 		<textarea id='copy-code'></textarea>
 		<div class='container' style="flex-direction: row;">
 			<p style='text-align:center; color: var(--color-mono)'>copy this code to save the settings</p>
@@ -368,7 +368,7 @@
 		</div>
 	</div>
 
-	<div id='paste-holder' class='container popup floater' style='display: none' onmousedown='mouseInMenu = true;'>
+	<div id='paste-holder' class='container popup floater' style='display: none' onmousedown='mouseInMenu = true;' ontouchstart='mouseInMenu = true;'>
 		<textarea id='paste-code'></textarea>
 		<div class='container' style="flex-direction: row;">
 			<svg id='paste-hide' viewBox='0 0 100 100' class='zoom center-vert popup-button' onclick='hideElement("paste-holder")' style='display:none'>
