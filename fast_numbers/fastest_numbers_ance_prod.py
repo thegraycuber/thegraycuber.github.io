@@ -10,18 +10,15 @@ one_names = [
     [["five", 1], ["fifth", 1],["five", 1]],
     [["six", 1], ["sixth", 1],["sixe", 2]],
     [["sven", 1], ["sventh", 1],["sven", 1]],
-    # [["seven", 2], ["seventh", 2],["seven", 2]],
     [["eight", 1], ["eighth", 1],["eight", 1]],
     [["nine", 1], ["ninth", 1],["nine", 1]],
     [["ten", 1], ["tenth", 1],["ten", 1]],
     [["elf", 1], ["elfth", 1],["elve", 1]],
-    # [["eleven", 3], ["eleventh", 3],["eleven", 3]],
     [["twelve", 1], ["twelfth", 1],["twelve", 1]],
     [["thirteen", 2], ["thirteenth", 2],["thirteen", 2]],
     [["fourteen", 2], ["fourteenth", 2],["fourteen", 2]],
     [["fifteen", 2], ["fifteenth", 2],["fifteen", 2]],
     [["sixteen", 2], ["sixteenth", 2],["sixteen", 2]],
-    # [["seventeen", 3], ["seventeenth", 3],["seventeen", 3]],
     [["sventeen", 2], ["sventeenth", 2],["sventeen", 2]],
     [["eighteen", 2], ["eighteenth", 2],["eighteen", 2]],
     [["nineteen", 2], ["nineteenth", 2],["nineteen", 2]],
@@ -35,7 +32,6 @@ ten_names = [
     [["forty", 2], ["fortieth", 3],["fortie", 2]],
     [["fifty", 2], ["fiftieth", 3],["fiftie", 2]],
     [["sixty", 2], ["sixtieth", 3],["sixtie", 2]],
-    # [["seventy", 3], ["seventieth", 4],["seventie", 3]],
     [["sventy", 2], ["sventieth", 3],["sventie", 2]],
     [["eighty", 2], ["eightieth", 3],["eightie", 2]],
     [["ninety", 2], ["ninetieth", 3],["ninetie", 2]],
@@ -46,33 +42,10 @@ large_names = [
     ["thou",1,1000,3,"thousandth",2],
     ["mil",1,1000000,6,"millionth",2],
     ["bil",1,1000000000,9,"billionth",2],
-    # ["tril",1,1,12],
-    # ["quadril",2,1,15],
-    # ["quintil",2,1,18],
-    # ["sextil",2,1,21],
-    # ["septil",2,1,24],
-    # ["octil",2,1,27],
-    # ["nonil",2,1,30],
-    # ["decil",2,1,33],
-    # ["undecil",3,1,36],
-    # ["duodecil",4,1,39],
-    # ["tredecil",3,1,42],
-    # ["quattuordecil",4,1,45],
-    # ["quindecil",3,1,48],
-    # ["sexdecil",3,1,51],
-    # ["septendecil",4,1,54],
-    # ["octodecil",4,1,57],
-    # ["novemdecil",4,1,60],
-    # ["vigintil",3,1,63],
 ]
 
 number_names = []
 huge_numbers = []
-
-# huge_ops = [
-#     { "name": "root", "syllables": 1, "factor": 2},
-#     { "name": "cube root", "syllables": 2, "factor": 3},
-# ]
 
 
 pemdas_count = 6
@@ -171,26 +144,6 @@ def number_names_generator(leave_point,max_number):
                 "level_out": 1
             })
 
-    # for x in range(4,21):
-    #     huge_ops.append({ "name": number_names[x]["names"][0] + " root", "syllables": number_names[x]["syllables"][0] + 1, "factor": x})
-    
-
-    # log_10 = math.log(10)
-    # for x in range(11):
-    #     huge_numbers.append([])
-    # for l in range(2,len(large_names)):
-
-    #     for s in range(1,1000):
-    #         huge_syllables = large_names[l][1] + number_names[s]["syllables"][1]
-    #         if huge_syllables > 10:
-    #             continue
-
-    #         huge_numbers[huge_syllables].append({
-    #             "name": number_names[s]["names"][1] + " " + large_names[l][0],
-    #             "log": math.log(s) + log_10*large_names[l][3],
-    #             "equation": str(s) + "E" + str(large_names[l][3]),
-    #         })
-
     sub_units = [["hundred",100,2],["lakh",100000,1]]
     for u in sub_units:
         for left_2 in range(1,int(min(100,max_number/u[1]))):
@@ -221,24 +174,6 @@ def number_names_generator(leave_point,max_number):
             number_names[rep["value"]]["names"] = [rep["ord_name"]] + [rep["name"]]*(pemdas_count-1)
             number_names[rep["value"]]["equations"] = [rep["ord_equation"]] + [rep["equation"]]*(pemdas_count-1)
             number_names[rep["value"]]["original"] = rep["syllables"]
-
-    # for n in range(2,100):
-    #     root_n = n**0.5
-    #     if round(root_n,5) != round(root_n,0):
-    #         for a in adjust_types:
-    #             unary.append({
-    #                 "id": "adj_irrational", 
-    #                 "syllables": number_names[n]["syllables"][1] + 1 + a["syllables"],
-    #                 "adjust_type": a["type"],
-    #                 "text": " root " + number_names[n]["names"][1],
-    #                 "equation": "√" + number_names[n]["equations"][1],
-    #                 "value": root_n,
-    #                 "pemdas_left": 1,
-    #                 "pemdas_result": 4
-    #             })
-
-    # number_names[2]["syllables"][0] = 1
-    # number_names[2]["names"][0] = "halve"
 
     syllable_key = [[]]
     for u in range(pemdas_count):
@@ -334,34 +269,6 @@ def number_names_generator(leave_point,max_number):
                                     number_names[op_output]["syllables"][u] = s
                                     syllable_key[s][u].append(op_output)
 
-        # for op in huge_ops:
-        #     for a in adjust_types:
-        #         remaining_syllables = s - op["syllables"] - a["syllables"]
-        #         if remaining_syllables < 1:
-        #             continue
-
-        #         for huge in huge_numbers[remaining_syllables]:
-        #             root_log = huge["log"]/op["factor"]
-        #             if root_log > max_log:
-        #                 break
-
-        #             op_output = adjust(a["type"],math.exp(root_log))
-        #             new_name = a["type"] + " " + op["name"] + " " + huge["name"]
-        #             root_super = "" if op["factor"] == 2 else n_to_script(op["factor"])
-        #             new_equation = adjust_equation(a["type"],root_super + "√" + huge["equation"])
-
-        #             for u in range(4,pemdas_count):
-        #                 if number_names[op_output]["syllables"][u] >= s:
-        #                     number_names[op_output]["names"][u] = new_name
-        #                     number_names[op_output]["equations"][u] = new_equation
-        #                     number_names[op_output]["level_out"][u] = op["level_out"]
-
-        #                     if number_names[op_output]["syllables"][u] > s:
-        #                         number_names[op_output]["syllables"][u] = s
-        #                         syllable_key[s][u].append(op_output)
-                
-
-                
 
         for i in range(pemdas_count):
             syllable_key[s][i].sort()
@@ -774,13 +681,6 @@ def adjust_equation(adjust_type, val_to_adjust):
 unary = [
     {"id": "fibonacci", "syllables": 1, "text": " fib",  "pemdas_left": 0, "pemdas_result": 2, "level_in": 0, "level_out": 4},
     {"id": "prime", "syllables": 1, "text": " prime",  "pemdas_left": 0, "pemdas_result": 2, "level_in": 0, "level_out": 4},
-    # {"id": "fibonacci", "syllables": 6, "text": " fibonacci number",  "pemdas_left": 0,"pemdas_result": 2, "level_in": 0, "level_out": 4},
-    # { "id": "adj_tan", "syllables": 1, "adjust_type": "round", "pemdas_left": 1,"pemdas_result": 4},
-    # { "id": "adj_tan", "syllables": 1, "adjust_type": "floor", "pemdas_left": 1,"pemdas_result": 4},
-    # { "id": "adj_tan", "syllables": 2, "adjust_type": "ceiling", "pemdas_left": 1,"pemdas_result": 4},
-    # { "id": "adj_root", "syllables": 1, "adjust_type": "round", "pemdas_left": 1,"pemdas_result": 4},
-    # { "id": "adj_root", "syllables": 1, "adjust_type": "floor", "pemdas_left": 1,"pemdas_result": 4},
-    # { "id": "adj_root", "syllables": 2, "adjust_type": "ceiling", "pemdas_left": 1,"pemdas_result": 4},
 
     {"id": "copies", "syllables": 1, "text": " ream", "plural": "s", "value": 500,  "pemdas_left": 2,"pemdas_result": 2, "level_in": 0, "level_out": 1},
     {"id": "copies", "syllables": 1, "text": " gross", "plural": "", "value": 144,  "pemdas_left": 2,"pemdas_result": 2, "level_in": 0, "level_out": 1},
@@ -801,33 +701,6 @@ unary = [
 ]
 
 
-# irrationals = [
-#     {"syllables": 1, "text": " pi", "equation": "π", "value": 3.1415926536},
-#     {"syllables": 2, "text": " pi squared", "equation": "π²", "value": 9.8696044011},
-#     {"syllables": 2, "text": " pi cubed", "equation": "π³", "value": 31.0062766803},
-#     {"syllables": 1, "text": " tau", "equation": "τ", "value": 6.2831853072},
-#     {"syllables": 2, "text": " tau squared", "equation": "τ²", "value": 39.4784176044},
-#     {"syllables": 2, "text": " tau cubed", "equation": "τ³", "value": 248.0502134424},
-#     {"syllables": 1, "text": " e", "equation": "e", "value": 2.7182818285},
-#     {"syllables": 2, "text": " e squared", "equation": "e²", "value": 7.3890560989},
-#     {"syllables": 2, "text": " e cubed", "equation": "e³", "value": 20.0855369232},
-#     {"syllables": 1, "text": " phi", "equation": "ϕ", "value": 1.6180339887},
-#     {"syllables": 2, "text": " phi squared", "equation": "ϕ²", "value": 2.6180339887},
-#     {"syllables": 3, "text": " phi cubed", "equation": "ϕ³", "value": 4.2360679775},
-# ]
-
-# for i in irrationals:
-#     for a in adjust_types:
-#         unary.append({
-#             "id": "adj_irrational", 
-#             "syllables": i["syllables"] + a["syllables"],
-#             "adjust_type": a["type"],
-#             "text": i["text"],
-#             "equation": i["equation"],
-#             "value": i["value"], 
-#             "pemdas_left": 1,
-#             "pemdas_result": 4
-#         })
 
 binary = [
     { "id": "+", "syllables": 1, "text": " plus ", "pemdas_left": 5,"pemdas_right": 4,"pemdas_result": 5, "level_in": 0, "level_out": 4},
@@ -835,38 +708,12 @@ binary = [
     { "id": "-", "syllables": 1, "text": " take ", "pemdas_left": 5,"pemdas_right": 4,"pemdas_result": 5, "level_in": 0, "level_out": 4},
     { "id": "/", "syllables": 1, "text": " on ", "pemdas_left": 4,"pemdas_right": 3,"pemdas_result": 5, "level_in": 3, "level_out": 4},
     { "id": "^", "syllables": 2, "text": " to the ", "pemdas_left": 2, "pemdas_right": 1,"pemdas_result": 3, "level_in": 2, "level_out": 3},
-    # { "id": "^", "syllables": 1, "text": " pow ", "pemdas_left": 3, "pemdas_right": 2,"pemdas_result": 3, "level_in": 2, "level_out": 3},
     { "id": "C", "syllables": 1, "text": " choose ", "pemdas_left": 3, "pemdas_right": 2,"pemdas_result": 3, "level_in": 2, "level_out": 3},
     { "id": "%", "syllables": 1, "text": " mod ", "pemdas_left": 3, "pemdas_right": 2,"pemdas_result": 3, "level_in": 2, "level_out": 3},
-    # { "id": "adj_fraction", "syllables": 1, "adjust_type": "round", "text": " ", "pemdas_left": 1,"pemdas_right": 0,"pemdas_result": 4},
-    # { "id": "adj_fraction", "syllables": 1, "adjust_type": "floor", "text": " ", "pemdas_left": 1,"pemdas_right": 0,"pemdas_result": 4},
-    # { "id": "adj_fraction", "syllables": 2, "adjust_type": "ceiling", "text": " ", "pemdas_left": 1,"pemdas_right": 0,"pemdas_result": 4},
-    # { "id": "adj_division", "syllables": 2, "adjust_type": "round", "text": " on ", "pemdas_left": 1,"pemdas_right": 1,"pemdas_result": 4},
-    # { "id": "adj_division", "syllables": 2, "adjust_type": "floor", "text": " on ", "pemdas_left": 1,"pemdas_right": 1,"pemdas_result": 4},
-    # { "id": "adj_division", "syllables": 3, "adjust_type": "ceiling", "text": " on ", "pemdas_left": 1,"pemdas_right": 1,"pemdas_result": 4},
     { "id": "b", "syllables": 1, "text": " base ", "suffix": "","pemdas_left": 3, "pemdas_right": 2,"pemdas_result": 3, "level_in": 2, "level_out": 3},
 ]
 
 replacements = [
-    # { "value": 40320, "name": "eight factorial", "syllables": 5, "equation": "8!", 
-    #     "ord_name": "forty thousand three hundred twentieth", "ord_syllables": 10, "ord_equation": "40320"},
-    # { "value": 362880, "name": "nine factorial", "syllables": 5, "equation": "9!", 
-    #     "ord_name": "three hundred sixty-two thousand eight hundred eightieth", "ord_syllables": 14, "ord_equation": "362880"},
-    # { "value": 3628800, "name": "ten factorial", "syllables": 5, "equation": "10!", 
-    #     "ord_name": "three million six hundred twenty-eight thousand eight hundredth", "ord_syllables": 14, "ord_equation": "3628800"},
-    
-    # { "value": 127, "name": "fourth mersenne prime", "syllables": 4, "equation": "M₄", 
-    #     "ord_name": "one hundred twenty-seventh", "ord_syllables": 7, "ord_equation": "127"},
-    # { "value": 8191, "name": "fifth mersenne prime", "syllables": 4, "equation": "M₅", 
-    #     "ord_name": "eight thousand ninety-first", "ord_syllables": 6, "ord_equation": "8191"},
-    # { "value": 131071, "name": "sixth mersenne prime", "syllables": 4, "equation": "M₆", 
-    #     "ord_name": "one hundred thirty-one thousand seventy-first", "ord_syllables": 12, "ord_equation": "131071"},
-    # { "value": 524287, "name": "seventh mersenne prime", "syllables": 5, "equation": "M₇", 
-    #     "ord_name": "five hundred twenty-four thousand two hundred eighty-seventh", "ord_syllables": 15, "ord_equation": "524287"},
-    # { "value": 257, "name": "third fermat prime", "syllables": 4, "equation": "F₃", 
-    #     "ord_name": "two hundred fifty-seventh", "ord_syllables": 7, "ord_equation": "257"},
-    # { "value": 65537, "name": "fourth fermat prime", "syllables": 4, "equation": "F₄", 
-    #     "ord_name": "sixty-five thousand five hundred thirty-seventh", "ord_syllables": 12, "ord_equation": "65537"},
 
     { "value": 24, "name": "FOUR", "syllables": 1, "equation": "4!", 
         "ord_name": "FOURTH", "ord_syllables": 1, "ord_equation": "4!"},
@@ -889,7 +736,6 @@ generate_fibs(upper_limit)
 generate_primes(upper_limit)
 print('primes generated')
 eff_names = number_names_generator(1000000,upper_limit)
-# numbers_out(eff_names, 'fastest_numbers_test.csv')
 numbers_out(eff_names, 'fastest_numbers_ance.csv')
 
 #print(eff_names)
@@ -902,7 +748,6 @@ print([x for x in eff_names if x["syllables"][-1] == max_syl][0])
 
 search_terms = (['plus','times','take','on','squared','cubed','choose','factorial','triangle',
                  'base','mod','bits','prime','doubled','tripled','pow','fib',
-                #  'mersenne','fermat','floor','round','ceiling','pi','phi',' e ','tan','root'
                  ]
 )
 
@@ -911,14 +756,6 @@ for term in search_terms:
     general_term_count = len([x for x in eff_names if x["names"][-1].find(term) != -1])
     print(term,':  ',improved_term_count,general_term_count)
 
-#print([x for x in eff_names if x["syllables"] < x["original"]])
-
 best_improvment = max([x["original"] - x["syllables"][-1] for x in eff_names])
 print(best_improvment)
 print([x for x in eff_names if x["original"] - x["syllables"][-1] == best_improvment][-1])
-
-"""
-TODO
-
-get parentheses
-"""

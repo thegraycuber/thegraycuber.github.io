@@ -9,19 +9,16 @@ one_names = [
     [["four", 1], ["fourth", 1],["four", 1]],
     [["five", 1], ["fifth", 1],["five", 1]],
     [["six", 1], ["sixth", 1],["sixe", 2]],
-    # [["sven", 1], ["sventh", 1],["sven", 1]],
     [["seven", 2], ["seventh", 2],["seven", 2]],
     [["eight", 1], ["eighth", 1],["eight", 1]],
     [["nine", 1], ["ninth", 1],["nine", 1]],
     [["ten", 1], ["tenth", 1],["ten", 1]],
-    # [["elf", 1], ["elfth", 1],["elve", 1]],
     [["eleven", 3], ["eleventh", 3],["eleven", 3]],
     [["twelve", 1], ["twelfth", 1],["twelve", 1]],
     [["thirteen", 2], ["thirteenth", 2],["thirteen", 2]],
     [["fourteen", 2], ["fourteenth", 2],["fourteen", 2]],
     [["fifteen", 2], ["fifteenth", 2],["fifteen", 2]],
     [["sixteen", 2], ["sixteenth", 2],["sixteen", 2]],
-    # [["sventeen", 2], ["sventeenth", 2],["sventeen", 2]],
     [["seventeen", 3], ["seventeenth", 3],["seventeen", 3]],
     [["eighteen", 2], ["eighteenth", 2],["eighteen", 2]],
     [["nineteen", 2], ["nineteenth", 2],["nineteen", 2]],
@@ -35,7 +32,6 @@ ten_names = [
     [["forty", 2], ["fortieth", 3],["fortie", 2]],
     [["fifty", 2], ["fiftieth", 3],["fiftie", 2]],
     [["sixty", 2], ["sixtieth", 3],["sixtie", 2]],
-    # [["sventy", 2], ["sventieth", 3],["sventie", 2]],
     [["seventy", 3], ["seventieth", 4],["seventie", 3]],
     [["eighty", 2], ["eightieth", 3],["eightie", 2]],
     [["ninety", 2], ["ninetieth", 3],["ninetie", 2]],
@@ -455,6 +451,7 @@ equation_cleans = [
     ["*2","T"],
     ["*3","U"],
     ["!)","V"],
+    [["seventy", 3], ["seventieth", 4],["seventie", 3]]
     ["!*","W"],
     ["!+","X"],
     ["!/","Y"],
@@ -586,6 +583,7 @@ def get_second_extremes(op,min_missing,max_number,base_power,left_value):
         return max(2,math.ceil(left_value**base_power)), 9
     elif op["id"] == "%":
         return 12, left_value-11
+    [["seventy", 3], ["seventieth", 4],["seventie", 3]]
     
 def get_output(op,max_number,left_value,right_value=0):
     if op["id"] == "²":
@@ -673,12 +671,6 @@ def get_name(op,left_value,right_value=-1):
     else:
         new_name = (number_names[left_value]["names"][op["pemdas_left"]] 
             + op["text"] + number_names[right_value]["names"][op["pemdas_right"]])
-        # if op["id"] == "multiples" and new_name[-1] == 'x':
-        #     return new_name + "es"
-        # if op["id"] == "multiples" and new_name[-3:] == 'elf':
-        #     return new_name[:-1] + "ves"
-        # elif op["id"] == "fraction" or  op["id"] == "multiples":
-        #     return new_name + "s"
         if op["id"] == "adj_fraction":
             return op["adjust_type"] + " " + new_name + "s"
         elif op["id"] == "adj_division":
@@ -703,7 +695,6 @@ def get_equation(op,left_value,right_value=-1):
         elif op["id"] == "copies" and left_value == 1:
             return str(op["value"])
         elif op["id"] == "copies":
-            # return input_name + " " + str(op["value"]) + "s"
             return input_name + " * " + str(op["value"])
         elif op["id"] in ["ns","nths"]:
             return input_name + op["equation"]
@@ -768,19 +759,6 @@ unary = [
     { "id": "adj_root", "syllables": 2, "adjust_type": "floor", "pemdas_left": 2,"pemdas_result": 3, "level_in": 0, "level_out": 4},
     { "id": "adj_root", "syllables": 3, "adjust_type": "ceiling", "pemdas_left": 2,"pemdas_result": 3, "level_in": 0, "level_out": 4},
 
-    # {"id": "copies", "syllables": 1, "text": " ream", "plural": "s", "value": 500,  "pemdas_left": 2,"pemdas_result": 2, "level_in": 0, "level_out": 1},
-    # {"id": "copies", "syllables": 1, "text": " gross", "plural": "", "value": 144,  "pemdas_left": 2,"pemdas_result": 2, "level_in": 0, "level_out": 1},
-    # {"id": "copies", "syllables": 1, "text": " score", "plural": "", "value": 20,  "pemdas_left": 2,"pemdas_result": 2, "level_in": 0, "level_out": 1},
-    # {"id": "copies", "syllables": 1, "text": " stack", "plural": "s", "value": 64,  "pemdas_left": 2,"pemdas_result": 2, "level_in": 0, "level_out": 1},
-    # {"id": "copies", "syllables": 1, "text": " chest", "plural": "s", "value": 1728,  "pemdas_left": 2,"pemdas_result": 2, "level_in": 0, "level_out": 1},
-    # {"id": "copies", "syllables": 1, "text": " double chest", "plural": "s", "value": 3456,  "pemdas_left": 2,"pemdas_result": 2, "level_in": 0, "level_out": 1},
- 
-    # {"id": "bits", "syllables": 1, "text": " bits", "pemdas_left": 2,"pemdas_result": 2, "level_in": 1, "level_out": 4},
-    # {"id": "trits", "syllables": 1, "text": " trits", "pemdas_left": 2,"pemdas_result": 2, "level_in": 1, "level_out": 4},
-    # {"id": "dits", "syllables": 1, "text": " dits",  "pemdas_left": 2,"pemdas_result": 2, "level_in": 1, "level_out": 4},
-
-    # {"id": "* 2", "syllables": 1, "text": " twice",  "pemdas_left": 2,"pemdas_result": 2, "level_in": 0, "level_out": 1},
-    # {"id": "* 3", "syllables": 1, "text": " thrice",  "pemdas_left": 2,"pemdas_result": 2, "level_in": 0, "level_out": 1},
     {"id": "²", "syllables": 1, "text": " squared", "pemdas_left": 2,"pemdas_result": 2, "level_in": 1, "level_out": 4},
     {"id": "³", "syllables": 1, "text": " cubed",  "pemdas_left": 2,"pemdas_result": 2, "level_in": 1, "level_out": 4},
 ]
@@ -819,7 +797,6 @@ binary = [
     { "id": "-", "syllables": 1, "text": " take ", "pemdas_left": 5,"pemdas_right": 4,"pemdas_result": 5, "level_in": 0, "level_out": 4},
     { "id": "/", "syllables": 1, "text": " on ", "pemdas_left": 4,"pemdas_right": 3,"pemdas_result": 5, "level_in": 3, "level_out": 4},
     { "id": "^", "syllables": 2, "text": " to the ", "pemdas_left": 2, "pemdas_right": 1,"pemdas_result": 3, "level_in": 2, "level_out": 3},
-    # { "id": "^", "syllables": 1, "text": " pow ", "pemdas_left": 3, "pemdas_right": 2,"pemdas_result": 3, "level_in": 2, "level_out": 3},
     { "id": "C", "syllables": 1, "text": " choose ", "pemdas_left": 3, "pemdas_right": 2,"pemdas_result": 3, "level_in": 2, "level_out": 3},
     { "id": "%", "syllables": 1, "text": " mod ", "pemdas_left": 3, "pemdas_right": 2,"pemdas_result": 3, "level_in": 2, "level_out": 3},
     { "id": "adj_fraction", "syllables": 1, "adjust_type": "round", "text": " ", "pemdas_left": 2,"pemdas_right": 0,"pemdas_result": 3, "level_in": 0, "level_out": 4},
@@ -828,7 +805,6 @@ binary = [
     { "id": "adj_division", "syllables": 2, "adjust_type": "round", "text": " on ", "pemdas_left": 2,"pemdas_right": 1,"pemdas_result": 3, "level_in": 0, "level_out": 4},
     { "id": "adj_division", "syllables": 2, "adjust_type": "floor", "text": " on ", "pemdas_left": 2,"pemdas_right": 1,"pemdas_result": 3, "level_in": 0, "level_out": 4},
     { "id": "adj_division", "syllables": 3, "adjust_type": "ceiling", "text": " on ", "pemdas_left": 2,"pemdas_right": 1,"pemdas_result": 3, "level_in": 0, "level_out": 4},
-    # { "id": "b", "syllables": 1, "text": " base ", "suffix": "","pemdas_left": 3, "pemdas_right": 2,"pemdas_result": 3, "level_in": 2, "level_out": 3},
 ]
 
 replacements = [
@@ -858,21 +834,6 @@ replacements = [
         "ord_name": "two hundred forty-eighth", "ord_syllables": 6, "ord_equation": "248"},
     { "value": 249, "name": "ceiling tau cubed", "syllables": 3, "equation": "⌈τ³⌉", 
         "ord_name": "two hundred forty-ninth", "ord_syllables": 6, "ord_equation": "249"},
-
-    # { "value": 24, "name": "FOUR", "syllables": 1, "equation": "4!", 
-    #     "ord_name": "FOURTH", "ord_syllables": 1, "ord_equation": "4!"},
-    # { "value": 120, "name": "FIVE", "syllables": 1, "equation": "5!", 
-    #     "ord_name": "FIFTH", "ord_syllables": 1, "ord_equation": "5!"},
-    # { "value": 720, "name": "SIX", "syllables": 1, "equation": "6!", 
-    #     "ord_name": "SIXTH", "ord_syllables": 1, "ord_equation": "6!"},
-    # { "value": 5040, "name": "SVEN", "syllables": 1, "equation": "7!", 
-    #     "ord_name": "SVENTH", "ord_syllables": 1, "ord_equation": "7!"},
-    # { "value": 40320, "name": "EIGHT", "syllables": 1, "equation": "8!", 
-    #     "ord_name": "EIGHTH", "ord_syllables": 1, "ord_equation": "8!"},
-    # { "value": 362880, "name": "NINE", "syllables": 1, "equation": "9!", 
-    #     "ord_name": "NINTH", "ord_syllables": 1, "ord_equation": "9!"},
-    # { "value": 3628800, "name": "TEN", "syllables": 1, "equation": "10!", 
-    #     "ord_name": "TENTH", "ord_syllables": 1, "ord_equation": "10!"},
 ]
 
 upper_limit = 10000000
@@ -880,7 +841,6 @@ generate_fibs(upper_limit)
 generate_primes(upper_limit)
 print('primes generated')
 eff_names = number_names_generator(1000000,upper_limit)
-# numbers_out(eff_names, 'fastest_numbers_test.csv')
 numbers_out(eff_names, 'fastest_numbers_serious.csv')
 
 #print(eff_names)
@@ -893,7 +853,6 @@ print([x for x in eff_names if x["syllables"][-1] == max_syl][0])
 
 search_terms = (['plus','times','take','on','squared','cubed','choose','factorial','triangle',
                  'base','mod','bits','prime','doubled','tripled','pow','fib',
-                #  'mersenne','fermat','floor','round','ceiling','pi','phi',' e ','tan','root'
                  ]
 )
 
@@ -902,14 +861,6 @@ for term in search_terms:
     general_term_count = len([x for x in eff_names if x["names"][-1].find(term) != -1])
     print(term,':  ',improved_term_count,general_term_count)
 
-#print([x for x in eff_names if x["syllables"] < x["original"]])
-
 best_improvment = max([x["original"] - x["syllables"][-1] for x in eff_names])
 print(best_improvment)
 print([x for x in eff_names if x["original"] - x["syllables"][-1] == best_improvment][-1])
-
-"""
-TODO
-
-get parentheses
-"""
