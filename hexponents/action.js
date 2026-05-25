@@ -133,6 +133,7 @@ var favorites = [
 	['I woke up at 7:04 and ate 2 blueberries','@snadsnad-g7o'],//cool 2
 	['I woke up at 7:04 and ate 48 peaches',''],//lines and diam's
 	['I woke up at 7:19 and ate 165 peaches','@arcie.lastname'], //slow rift
+	['I woke up at 7:07 and ate 180 craisins','@epipene'], //HD pillars
 	['I woke up at 7:04 and ate 2 walnuts','@WPawnToE4'], // tire tracks
 	['I woke up at 7:41 and ate 58 raisins','@adamvagenknecht'], // hex arms
 	['I woke up at 7:07 and ate 2 raisins',''],//smallest legs
