@@ -141,6 +141,7 @@ var favorites = [
 	['I woke up at 7:53 and ate 166 raisins','@leandeflorin'],//triangle glitch
 	['I woke up at 7:33 and ate 194 apples',''],//kerchoo
 	['I woke up at 7:38 and ate 138 grapes','@Kaitte'],//bertzai canyon 
+	['I woke up at 7:35 and ate 100 walnuts','@AScrumptiousTeaBag'],//fade canyon
 	['I woke up at 7:06 and ate 88 cherries',''],//holy lattice
 	['I woke up at 7:04 and ate 5 raisins',''],//zul man
 	['I woke up at 7:00 and ate 4 limes','@ismaelmartinez8639'],//triple lattice
@@ -149,15 +150,18 @@ var favorites = [
 	['I woke up at 7:09 and ate 2 raspberries',''],//squatties
 	['I woke up at 7:08 and ate 168 hazelnuts','@memeing_donkey'], //diamond fields
 	['I woke up at 7:12 and ate 2 blackberries','@leandeflorin'], //large 2
+	['I woke up at 7:50 and ate 76 raisins','@DragonJ555'], //hexes and parallelograms
 	['I woke up at 7:06 and ate 8 grapes',''],//laser
 	['I woke up at 7:39 and ate 47 grapes','@DJruslan4ic'],//cool oval patterns
 	['I woke up at 7:14 and ate 276 strawberries','@unapersonarandom2763'],//energy diamonds
 	['I woke up at 7:19 and ate 2 raisins',''],//za
 	['I woke up at 7:35 and ate 191 pears','@tylerdoesdumbstuff'], //gradients with lines
+	['I woke up at 7:04 and ate 2 plums','@maxmeepmeep991'],//skyrimish
 	['I woke up at 7:12 and ate 140 raisins',''],//layers
 	['I woke up at 7:42 and ate 388 grapefruits','@quocphong6588'], //blades
 	['I woke up at 7:13 and ate 552 blackberries','@T0mPlayes'], //bands over noise
 	['I woke up at 7:09 and ate 3 kiwis','@MatteoDolcin-ye8xm'],//huge mosaic
+	['I woke up at 7:43 and ate 498 pears','@a71_special'],//gradient diamonds
 	['I woke up at 7:31 and ate 2 raisins',''],//very wiggly dartboards
 	['I woke up at 7:05 and ate 90 peanuts','@memeing_donkey'], //overlapping directions 
 	['I woke up at 7:03 and ate 3 grapefruits','@manalu-asya'],//hedges
