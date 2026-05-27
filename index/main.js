@@ -231,6 +231,7 @@ function clearViews(iconName){
 
 
 var videoLinks = [
+	'https://youtu.be/Wnjd0SLXZgs', // say numbers slower
 	'https://youtu.be/1sPAwCZYXDA', // world to the world doesn't work
 	'https://youtu.be/n4UuEJ9jFUE', // apply a function to the world
 	'https://youtu.be/AGh5LM7Jmfk', // math on the globe
