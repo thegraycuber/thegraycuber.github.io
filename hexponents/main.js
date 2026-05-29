@@ -69,17 +69,6 @@ var highlightFill = 0;
 var strokeFill = 0;
 var radiusLerp = 0;
 
-function hexagon(x,y,radius){
-	beginShape();
-	vertex(x,y-radius*1.16);
-	vertex(x+radius,y-radius*0.58);
-	vertex(x+radius,y+radius*0.58);
-	vertex(x,y+radius*1.16);
-	vertex(x-radius,y+radius*0.58);
-	vertex(x-radius,y-radius*0.58);
-	endShape(CLOSE);
-}
-
 
 var equivalenceClasses;
 var canvas;

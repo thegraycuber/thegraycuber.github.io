@@ -19,7 +19,7 @@ function qDiv(qNum, qDenom){
 	if (!divisible){
 		return [];
 	} else {
-		return [round(testProduct[0]/denomNorm,1),round(testProduct[1]/denomNorm,1)]
+		return roundC(scaleC(1/denomNorm,testProduct),1);
 	}
 }
 
@@ -358,6 +358,6 @@ function waluigiSqueegee(point, lineBase){
 function nearestMultiple(a,b){
 	let bNorm = qNorm(b);
 	let unscaled = qMult(a,[b[0],-b[1]]);
-	let roundedDiv = [round(unscaled[0]/bNorm),round(unscaled[1]/bNorm)];
+	let roundedDiv = roundC(scaleC(1/bNorm,unscaled));
 	return qMult(roundedDiv,b);
 }

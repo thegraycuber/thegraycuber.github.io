@@ -21,7 +21,7 @@ function getRepresentative(a){
 function roundedDivision(a, b){
 	let bNorm = hexNorm(b);
 	let unscaled = hexMult(a,[b[0]+b[1],-b[1]]);
-	return [round(unscaled[0]/bNorm),round(unscaled[1]/bNorm)];
+	return roundC(scaleC(1/bNorm,unscaled));
 }
 
 function processMod(){

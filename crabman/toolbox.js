@@ -423,6 +423,18 @@ function drawVertTri(x, y, d) {
 	triangle(x + d * 1.2, y - d, x * 1.2 - d, y - d, x, y + d);
 }
 
+function hexagon(x,y,radius){
+	beginShape();
+	vertex(x,y-radius*1.16);
+	vertex(x+radius,y-radius*0.58);
+	vertex(x+radius,y+radius*0.58);
+	vertex(x,y+radius*1.16);
+	vertex(x-radius,y+radius*0.58);
+	vertex(x-radius,y-radius*0.58);
+	endShape(CLOSE);
+}
+
+
 var isHex = false;
 class Grid {
 	constructor(xMin, yMin, xMax, yMax, sizer, adjust = false, labelColor = 'mono', gridColor = 'backlight') {
@@ -600,6 +612,16 @@ function normC(a) {
 function squareC(a) {
 	return [a[0] ** 2 - a[1] ** 2, 2 * a[0] * a[1]];
 }
+
+function roundC(a, precision = 0){
+	return [round(a[0],precision), round(a[1],precision)];
+}
+
+function closeC(a, b, precision = 6){
+	let roundDelta = roundC(subC(a,b),precision);
+	return(roundDelta[0] == 0) && (roundDelta[1] == 0);
+}
+
 
 function gcd(a, b) {
 

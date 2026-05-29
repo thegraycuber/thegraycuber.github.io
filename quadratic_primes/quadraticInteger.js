@@ -128,21 +128,10 @@ class QInt {
 
 function intShape(re,im){
 	if (isHex){
-		hexagon(re/2,-im*0.866,1);
+		hexagon(re/2,-im*0.866,0.5);
 	} else {
 		rect(re,-im,1);
 	}
-}
-
-function hexagon(xcenter,ycenter,hexrad){
-	beginShape();
-	vertex(xcenter,ycenter-hexrad*0.577);
-	vertex(xcenter+hexrad*0.5,ycenter-hexrad*0.2886);
-	vertex(xcenter+hexrad*0.5,ycenter+hexrad*0.2886);
-	vertex(xcenter,ycenter+hexrad*0.577);
-	vertex(xcenter-hexrad*0.5,ycenter+hexrad*0.2886);
-	vertex(xcenter-hexrad*0.5,ycenter-hexrad*0.2886);
-	endShape(CLOSE);
 }
 
 

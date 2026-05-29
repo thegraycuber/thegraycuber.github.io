@@ -69,7 +69,7 @@ function updateMovement(){
 			
 		} 
 		origin = focusPoint().sub(principalPos.mult(scalar));
-		principalPos = pixelToPrincipal(focusPoint(),1);
+		principalPos = pixelToPrincipal(focusPoint());
 	}
 }
 

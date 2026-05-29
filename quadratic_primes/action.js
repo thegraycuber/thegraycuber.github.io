@@ -23,27 +23,29 @@ function touchEnded(){
 	}
 	
 
-	let rawInfo = pixelToPrincipal(focusPoint(),true);
+	let rawInfo = pixelToPrincipal(focusPoint());
 	
 	if (isHex){
-		let lower = round(floor(rawInfo.x)/2,1);
 
-		let loweroffset = round(lower - floor(lower),1);
-		let lowclosest = [lower,round(rawInfo.y/2+loweroffset)-loweroffset];
-		let highclosest = [lower+0.5,round(rawInfo.y/2+0.5-loweroffset)-0.5+loweroffset];
-		let lowdist = (rawInfo.x/2-lowclosest[0])**2 + ((rawInfo.y/2-lowclosest[1])/1.154)**2;
-		let highdist = (rawInfo.x/2-highclosest[0])**2 + ((rawInfo.y/2-highclosest[1])/1.154)**2;
-		
-		if (lowdist < highdist){
-			rawInfo = [round(lowclosest[0]*2),round(lowclosest[1]*2)];
+		let rowNumber = floor(rawInfo.y+0.335);
+		let xOffset = (modulo(rowNumber,2)==1)?1:0;
+
+		let boxCenter = [round(0.5*(rawInfo.x-xOffset))*2+xOffset,rowNumber];
+		let boxMod = subC(vectorToArray(rawInfo),boxCenter);
+
+		if (boxMod[1] - boxMod[0]/3 > 0.6666){
+			rawInfo = addC(boxCenter,[-1,1]);
+		} else if (boxMod[1] + boxMod[0]/3 > 0.6666){
+			rawInfo = addC(boxCenter,[1,1]);
 		} else {
-			rawInfo = [round(highclosest[0]*2),round(highclosest[1]*2)];
+			rawInfo = boxCenter;
 		}
+
 	} else {
-		rawInfo = [round(rawInfo.x),round(rawInfo.y)];
+		rawInfo = roundC(vectorToArray(rawInfo));
 	}
 	
-	infoInteger = rawInfo[0] == infoInteger[0] && rawInfo[1] == infoInteger[1] ? [] : rawInfo;
+	infoInteger = closeC(rawInfo, infoInteger) ? [] : rawInfo;
 		
 	setInfo();
 	

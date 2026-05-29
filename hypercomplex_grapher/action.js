@@ -201,7 +201,7 @@ function randomize(avoidance){
 
 	}
 	
-	setIdeal([round(random()*2-1,grid.scaleLog+2),round(random()*2-1,grid.scaleLog+2)]);
+	setIdeal(roundC([random()*2-1,random()*2-1],grid.scaleLog+2));
 }
 
 function updateIdeal(){
@@ -228,7 +228,7 @@ function updateIdeal(){
 				ideal = [constrain(ideal[0],-1,1),constrain(ideal[1],-1,1)];
 			}
 		}
-		setIdeal([round(ideal[0],grid.scaleLog+roundAdd),round(ideal[1],grid.scaleLog+roundAdd)]);
+		setIdeal(roundC(ideal,grid.scaleLog+roundAdd));
 	}
 	document.getElementById('ideal-desc').innerHTML = 'i² = ' + text2d(ideal,'i');
 }
