@@ -1,0 +1,19 @@
+
+STOP REFACTORING. WRITE NEW CODE.
+
+call icon checks when actions are done
+delay processing, only get 10 per frame or so
+button to zoom to edit
+favorites and random
+transition smoothly when snapping drag to nearing int
+
+
+possible:
+	autozoom?
+	3 lines on hex grid?
+	cursor type and color change upon hover in edit pane
+	 opacity fill when zoomed out
+
+
+other pages:
+	add new icons to crabman

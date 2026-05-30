@@ -142,20 +142,6 @@ function pasteEnter() {
 
 }
 
-function nextFavorite() {
-	hidePopups();
-
-	favoriteIndex = (favoriteIndex + 1) % favorites.length;
-	codeToSettings(favorites[favoriteIndex][0]);
-
-	if (favorites[favoriteIndex][1].length > 1) {
-		document.getElementById('submitted-note').style.display = 'inline';
-		document.getElementById('submitted-note').innerHTML = 'submitted by ' + favorites[favoriteIndex][1];
-	} else {
-		document.getElementById('submitted-note').style.display = 'none';
-	}
-}
-
 function dummy() {}
 
 var controllers = {};
@@ -262,14 +248,22 @@ function arrowClicked(controllerKey, delta) {
 var origin, scalar, defaultOrigin, defaultScalar
 var yFlip = -1;
 
-function pixelToPrincipal(pixels){
+function pixelToPrincipal(pixels, hexMode = 'half'){
 	// principal = (pixel - origin)/scalar
-	if (isHex){
-		return p5.Vector.sub(pixels,origin).mult(1,yFlip).div(scalar*0.5,scalar*0.866);
-	} else {
+
+	if (!isHex || hexMode == 'raw'){
 		return p5.Vector.sub(pixels,origin).mult(1,yFlip).div(scalar);
 	}
+	
+	if (hexMode == 'half'){
+		return p5.Vector.sub(pixels,origin).mult(1,yFlip).div(scalar*0.5,scalar*0.866);
+	}
+	if (hexMode == 'slant'){	
+		let rawValues = p5.Vector.sub(pixels,origin).mult(1,yFlip).div(scalar,scalar*0.866);
+		return rawValues.add(rawValues.y*0.5,0);
+	} 
 }
+
 
 function principalToPixel(principal){
 	if (isHex){

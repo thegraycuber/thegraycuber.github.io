@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+	<title>Quadratic Bases - TheGrayCuber</title>
+
+	<link rel='stylesheet' href='/crabman/palette-sunset.css'>
+	<link rel='stylesheet' href='/crabman/core.css'>
+	<link rel='stylesheet' href='style.css'>
+	
+	<script src='https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.js'></script>
+	<script src='/crabman/palette.js'></script>
+	<script src='/crabman/toolbox.js'></script>
+	
+	<script src='main.js'></script>
+	<script src='action.js'></script>
+	<script src='math.js'></script>
+
+</head>
+
+<iframe></iframe>
+
+<body class='container'>
+	
+
+	<div id='menu-holder' class='container' 
+		onmousedown='mouseInMenu = true;'  ontouchstart='mouseInMenu = true;'
+		onmouseup='deleteDrop = true;'  ontouchend='deleteDrop = true;' >
+
+
+		<general-menu class='container menu'>
+
+
+			<a href='/index.html' id='logo-holder' class='container zoom icon'>
+				<svg id='svg-logo' viewBox='0 0 180 100' stroke-width='4' class='center-vert' stroke-linejoin='round' font-weight='bold'>
+					<polygon class='svg-gray' points='50,12 88,41 73,87 27,87 12,41' fill-opacity='0.15' />
+					<polygon class='svg-mono' points='24,19 90,47 32,90' fill-opacity='0.15' />
+					<polygon class='svg-mono' points='76,19 10,47 68,90' fill-opacity='0.15' />
+					<text class='svg-mono' x='103' y='31' font-size='24' stroke-opacity='0'>The</text>
+					<text class='svg-gray' x='98' y='62' font-size='32' stroke-opacity='0'>Gray</text>
+					<text class='svg-mono' x='101' y='88' font-size='24' stroke-opacity='0'>Cuber</text>
+				</svg>
+			</a>
+
+			<div id='palette-icon' onclick='changePalette()' class='container zoom icon'>
+				<svg id='svg-palette' viewBox='0 0 100 100' alt='palette' class='icon-image center-vert'>
+					<circle class='svg-front' cx='50' cy='35' r='25' stroke-width='6' fill-opacity='0' />
+					<circle class='svg-front' cx='34' cy='62' r='25' stroke-width='6' fill-opacity='0' />
+					<circle class='svg-front' cx='66' cy='62' r='25' stroke-width='6' fill-opacity='0' />
+				</svg>
+				<icon-text>palette</icon-text>
+			</div>
+
+
+			<div id='info-show' onclick='showHolder("info","inline")' class='container zoom icon'>
+				<svg id='svg-info' viewBox='0 0 100 100' alt='info' class='icon-image center-vert'>
+					<circle class='svg-front' cx='50' cy='50' r='40' stroke-width='8' fill-opacity='0' />
+					<rect class='svg-front' width='10' height='30' x='45' y='45' stroke-opacity='0' />
+					<rect class='svg-front' width='14' height='8' x='39' y='45' stroke-opacity='0' />
+					<circle class='svg-front' cx='49' cy='31' r='4' stroke-width='4' />
+				</svg>
+				<icon-text>info</icon-text>
+			</div>
+			
+			<div id='info-hide' onclick='hideHolder("info")' class='container zoom icon' style='display:none;'>
+				<svg id='svg-hide' viewBox='0 0 100 100' alt='info' class='icon-image center-vert'>
+				  <path class='svg-alert' d='M 20 20 L 80 80' fill-opacity='0' stroke-width='10' stroke-linecap='round'/>
+				  <path class='svg-alert' d='M 80 20 L 20 80' fill-opacity='0' stroke-width='10' stroke-linecap='round'/>
+				</svg>
+				<icon-text>hide</icon-text>
+			</div>
+
+		</general-menu>
+
+
+		
+		<arrow-menu class='container menu'>
+
+			<icon-holder class='container' style='justify-content: space-evenly; flex-wrap: wrap;'>
+				<div id='random-icon' onclick='' class='container zoom icon'>
+					<svg id='svg-random' viewBox='0 0 100 100' stroke-linejoin='round' alt='randomize' class='icon-image center-zont'>
+						<path class='svg-half' d='M 50 40 L 18 21 L 50 6 L 82 21  Z' stroke-width='4' />
+						<path class='svg-half' d='M 43 52 L 13 34 L 14 70 L 43 90  Z' stroke-width='4' />
+						<path class='svg-half' d='M 57 52 L 87 34 L 86 70 L 57 90  Z' stroke-width='4' />
+						
+						<ellipse class='svg-back' cx='50' cy='23' rx='9' ry='7' stroke-opacity='0' />
+						<ellipse class='svg-back' cx='23' cy='54' rx='5' ry='6.5' stroke-opacity='0' />
+						<ellipse class='svg-back' cx='35' cy='71' rx='5' ry='6.5' stroke-opacity='0' />
+						<ellipse class='svg-back' cx='79' cy='49' rx='4.5' ry='5.5' stroke-opacity='0' />
+						<ellipse class='svg-back' cx='72' cy='62.5' rx='4.5' ry='5.5' stroke-opacity='0' />
+						<ellipse class='svg-back' cx='65' cy='76' rx='4.5' ry='5.5' stroke-opacity='0' />
+					</svg>
+					<icon-text>randomize</icon-text>
+				</div>
+	
+				
+				<div id='favorites-icon' onclick='' class='container zoom icon'>
+					<svg id='svg-favorites' viewBox='0 0 100 100' stroke-linejoin='round' alt='favorites' class='icon-image center-zont'>
+						<defs>
+						  <path id='heart' stroke-opacity='0' d='M 50 45 C 56 37 65 39 68 47 C 69 52 64 60 50 73 C 36 60 31 52 32 47 C 35 39 44 37 50 45' />
+						</defs>
+					  <use href='#heart' class='svg-half' x='-22' y='-26' />
+					  <use href='#heart' class='svg-half' x='24' y='-20' />
+					  <use href='#heart' class='svg-half' x='-2' y='15' />
+					</svg>	
+					<icon-text>favorites</icon-text>
+				</div>
+
+					
+				<div id='grid-icon' onclick='toggle("grid")' class='container zoom icon'>
+					<svg id='svg-grid' viewBox='0 0 100 100' alt='toggle grid' class='icon-image center-zont' stroke-width='6' fill-opacity='0'>
+						<path class='svg-front' d='M 28 15 L 28 85' />
+						<path class='svg-front' d='M 50 15 L 50 85' />
+						<path class='svg-front' d='M 72 15 L 72 85' />
+						<path class='svg-front' d='M 15 28 L 85 28' />
+						<path class='svg-front' d='M 15 50 L 85 50' />
+						<path class='svg-front' d='M 15 72 L 85 72' />
+					</svg>
+					<icon-text>toggle grid</icon-text>
+				</div>
+				
+
+				<div id='new-digit-icon' onclick='newDigit()' class='container zoom icon'>
+					<svg id='svg-new' viewBox='0 0 100 100' alt='new digit' class='icon-image'>
+					  <rect class='svg-front' width='80' height='80' x='10' y='10' rx='10' ry='10'></rect>
+					  <path class='svg-back' d='M 25 50 L 75 50' fill-opacity='0' stroke-width='12' stroke-linecap='round'></path>
+					  <path class='svg-back' d='M 50 25 L 50 75' fill-opacity='0' stroke-width='12' stroke-linecap='round'></path>
+					</svg>
+					<icon-text>new digit</icon-text>
+				</div>
+		
+
+
+				
+				<div id='delete-digit-icon' onclick='newDigit()' class='container zoom icon' style='display:none;'>
+					
+					<svg id='svg-delete' viewBox='0 0 100 100' fill-opacity='0' stroke-width='10' stroke-linecap='round' alt='delete digit' class='icon-image'>
+					  
+					  <rect class='svg-alert' width='80' height='80' x='10' y='10' rx='10' ry='10' fill-opacity='1'></rect>
+					  <path class='svg-back' d='M 25 30 L 75 30' ></path>
+					  <path class='svg-back' d='M 46 24 L 54 24'></path>
+					  <path class='svg-back' d='M 30 30 L 37 80 L 63 80 L 70 30 '></path>
+					</svg>
+					<icon-text>delete digit</icon-text>
+				</div>
+						
+					
+
+<!-- 				<div id='edit-icon' onclick='editMode()' class='container zoom icon' style='display:none;'>
+					<svg id='svg-edit' viewBox='0 0 100 100' stroke-linejoin='round' alt='edit' class='icon-image center-zont'>
+						<path class='svg-front' d='M 40 60 L 45 45 L 85 5 L 95 15 L 55 55 Z' stroke-opacity='0'/>
+						<path class='svg-front' d='M 85 50 L 85 85 L 15 85 L 15 15 L 50 15' stroke-linecap='round' stroke-width='8' fill-opacity='0'/>
+						
+					</svg>
+					<icon-text>edit</icon-text>
+				</div> -->
+
+				
+<!-- 				<div id='display-icon' onclick='displayMode()' class='container zoom icon'>
+					<svg id='svg-display' viewBox='0 0 100 100' stroke-linejoin='round' alt='display' class='icon-image center-zont'>
+						<rect class='svg-front' width='80' height='70' x='10' y='15' rx='8' ry='8' stroke-width='6' fill-opacity='0'/>
+						<path class='svg-front' d='M 64 50 L 40 36 L 40 64 Z' stroke-width='6'/>
+					</svg>	
+					<icon-text>display</icon-text>
+				</div> -->
+				
+			</icon-holder>
+
+			
+
+			
+<!-- 			<arrow-label>shape</arrow-label> -->
+			<arrow-holder id='arrow-definition' class='container'>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-definition",-1)' style='left:0;'>
+					<path class='svg-front' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+				<arrow-text class='center-vert'></arrow-text>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-definition",1)' style='right:0;'>
+					<path class='svg-front' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+			</arrow-holder>
+
+			<arrow-label>display limit</arrow-label>
+			<arrow-holder id='arrow-limit' class='container'>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-limit",-1)' style='left:0;'>
+					<path class='svg-front' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+				<arrow-text class='center-vert'></arrow-text>
+				<svg viewBox='0 0 100 100' class='arrow zoom' onClick='arrowClicked("arrow-limit",1)' style='right:0;'>
+					<path class='svg-front' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				</svg>
+			</arrow-holder>
+			
+
+		</arrow-menu>
+
+
+
+		<icon-menu class='container menu'>
+
+
+			<div id='copy-icon' onclick='copyCode()' class='container zoom icon'>
+				<svg id='svg-copy' viewBox='0 0 100 100' alt='copy' class='icon-image center-zont'>
+					<defs>
+				    <mask id='mask-copy-page'>
+						<rect fill='#fff' width='100' height='100' x='0' y='0'/>
+						<rect fill='#000' width='40' height='60' x='30' y='18' r='37' stroke-opacity='0'/>
+					</mask>
+					</defs>
+				  <rect class='svg-front' width='40' height='60' x='20' y='12' rx='4' ry='4' fill-opacity='0' stroke-width='6' mask='url(#mask-copy-page)'/>
+				  <rect class='svg-front' width='40' height='60' x='40' y='28' rx='4' ry='4' fill-opacity='0' stroke-width='6'/>
+				</svg>
+				<icon-text>copy code</icon-text>
+			</div>
+
+			<div id='copy-success' class='container zoom icon' style='display:none;'>
+				<svg id='svg-success' viewBox='0 0 100 100'>
+				  <circle class='svg-front' cx='50' cy='50' r='40'></circle>
+				  <path class='svg-back' d='M 30 55 L 45 70 L 70 35' fill-opacity='0' stroke-width='12' stroke-linejoin='round' stroke-linecap='round'></path>
+				</svg>
+				<icon-text>copy code</icon-text>
+			</div>
+
+			<div id='paste-icon' onclick='pasteShow()' class='container zoom icon'>
+				<svg id='svg-paste' viewBox='0 0 100 100' alt='paste' class='icon-image center-zont'>
+					<defs><mask id='mask-paste'>
+						<rect fill='#fff' width='100' height='100' x='0' y='0'/><rect fill='#000' width='30' height='30' x='35' y='0'/>
+					</mask></defs>
+				  <rect class='svg-front' width='50' height='70' x='25' y='15' rx='10' ry='10' fill-opacity='0' stroke-width='6' mask='url(#mask-paste)'/>
+				  <rect class='svg-front' width='20' height='12' x='40' y='9' rx='4' ry='4' stroke-opacity='0'/>
+				</svg>
+				<icon-text>paste code</icon-text>
+			</div>
+			
+		</icon-menu>
+
+
+		<div id='menu-hide' onclick='hideHolder("menu")' class='menu-control zoom container floater'>
+			<svg viewBox='0 0 100 100'>
+				<path class='svg-mono menu-svg' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+			</svg>
+		</div>
+
+	</div>
+
+
+<!-- 	<div id='info-holder' class='container center-zont'> -->
+	
+	
+	<div id='main-pane' class='container'>
+		<div id='info-holder' class='center-zont'>
+			<h1>quadratic bases</h1>
+			<p>This page and info section are in progress.
+			</p>
+			<p>The rest is still unwritten. <span class='svg-half'> feel the rain on your skin</span>
+			</p>
+
+			<!--
+			<p>We view a 'shape' as a map from the interval [0,1] to the complex plane.
+				I like to think of this as drawing the shape - the point where we 
+				place our pen is A(0), and as we draw, the input increases
+				until we reach the end of the shape at A(1).
+				Using this definition, these shapes can be operated on, by operating the outputs of their maps.
+				For example: the shape A+B is defined by the map (A+B)(x) = A(x)+B(x)
+			</p>
+			<p>I first explored this idea of operating shapes in 
+				<a  href='https://youtu.be/ocDnfeFAsCg' target='_blank'>a video about the quadratic formula</a>
+				.
+				This formula is a great demonstration because it includes all 
+				basic arithmetic operations, as well as a square root.
+				Later I continued this exploration with 
+				<a  href='https://youtu.be/__ncJR7x_sY' target='_blank'>a video on the Pythagorean theorem</a>
+				- both the 
+				typical 2D version and its 3D counterpart.
+			</p>
+	
+			<h2>navigation</h2>
+			<p>The primary interaction with this site is to adjust the equation and the shapes.
+			</p>
+			<p>
+				The current equation is displayed in the <span class="portrait-hidden">lower right</span><span class="landscape-hidden">top center</span>. 
+				Use the arrows on the left and right to try out different equations.
+			</p>
+			<ul>
+				<li><strong>shape</strong>: the number of vertices, or a special definition like 'spiral'</li>
+				<li><strong>step</strong>: the total 'laps' the path makes around the center of the shape</li>
+				<li><strong>animation</strong>: the transformation applied to the shape</li>
+				<li><strong>type</strong>: the path taken between vertices, if using a regular polygon</li>
+			</ul>
+			
+			<h2>about me</h2>
+			<p>I am TheGrayCuber, a creator of mathematical websites and videos!
+			</p>
+			
+			<p>This concept of operating shapes began while reading Galois Theory by Ian Stewart,
+				where I encountered a proof of the Fundamental Theorem of Algebra.
+				The proof uses a circle as the input of a polynomial.
+				After making <a href='https://youtu.be/RBRVL6nP2Dk' target='_blank'>a video</a>
+				about the proof, I was inspired to try taking a circle as an input into 
+				other equations, such as sine and cosine.
+			</p>
+			<br/>
+			<p class='info-end'>made with love, and without AI</p>
+			<p class='info-end'><a href='https://ko-fi.com/thegraycuber' target='_blank'>leave a tip</a> to support my future creations :)</p>
+			<p class='info-end'><a href='https://github.com/thegraycuber/thegraycuber.github.io/tree/main/cursed_equations' target='_blank'>view the code</a> behind this website</p>
+			<p style='white-space: pre'><br/><br/></p>
+			-->
+		</div>
+	</div>
+<!-- 	</div> -->
+
+
+	<div id='menu-show' onclick='showHolder("menu")' class='menu-control zoom container floater'>
+		<svg viewBox='0 0 100 100'>
+			<path class='svg-mono menu-svg' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+		</svg>
+	</div>
+
+	<div id='copy-holder' class='container popup floater' style='display: none' onmousedown='mouseInMenu = true;' ontouchstart='mouseInMenu = true;'>
+		<textarea id='copy-code'></textarea>
+		<div class='container' style="flex-direction: row;">
+			<p style='text-align:center; color: var(--color-mono)'>copy this code to save the settings</p>
+			<svg id='copy-hide' viewBox='0 0 100 100' class='zoom center-vert popup-button' onclick='hideElement("copy-holder")'>
+			  <rect class='svg-front' width='80' height='80' x='10' y='10' rx='10' ry='10'></rect>
+			  <path class='svg-back' d='M 30 55 L 45 70 L 70 30' fill-opacity='0' stroke-width='12' stroke-linejoin='round' stroke-linecap='round'></path>
+			</svg>
+		</div>
+	</div>
+
+	<div id='paste-holder' class='container popup floater' style='display: none' onmousedown='mouseInMenu = true;' ontouchstart='mouseInMenu = true;'>
+		<textarea id='paste-code'></textarea>
+		<div class='container' style="flex-direction: row;">
+			<svg id='paste-hide' viewBox='0 0 100 100' class='zoom center-vert popup-button' onclick='hideElement("paste-holder")' style='display:none'>
+			  <path class='svg-alert' d='M 20 20 L 80 80' fill-opacity='0' stroke-width='10' stroke-linecap='round'></path>
+			  <path class='svg-alert' d='M 80 20 L 20 80' fill-opacity='0' stroke-width='10' stroke-linecap='round'></path>
+			</svg>
+			<p id='paste-note' style='text-align:center;'>enter a code to change the settings</p>
+			<svg id='paste-enter' viewBox='0 0 100 100' class='zoom center-vert popup-button' onclick='pasteEnter()'>
+			  <rect class='svg-front' width='80' height='80' x='10' y='10'70 rx='10' ry='10'/>
+			  <path class='svg-back' d='M 50 25 L 75 50 L 25 50 L 75 50 L 50 75' fill-opacity='0' stroke-width='12' stroke-linejoin='round' stroke-linecap='round'/>
+			</svg>
+		</div>
+	</div>
+
+	
+	<p id='submitted-note' class='floater'></p>
+	
+</body>
+
+</html>
