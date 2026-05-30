@@ -103,7 +103,7 @@ function copyCode() {
 		}
 		hidePopups();
 		document.getElementById('copy-holder').style.display = 'flex';
-		document.getElementById('copy-code').innerHTML = settingsToCode();
+		document.getElementById('copy-code').value = settingsToCode();
 
 	} else {
 		hidePopups();
