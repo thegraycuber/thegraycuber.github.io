@@ -156,6 +156,7 @@ var favorites = [
 	['I woke up at 7:14 and ate 276 strawberries','@unapersonarandom2763'],//energy diamonds
 	['I woke up at 7:19 and ate 2 raisins',''],//za
 	['I woke up at 7:35 and ate 191 pears','@tylerdoesdumbstuff'], //gradients with lines
+	['I woke up at 7:18 and ate 94 peaches','@1ne00dred2wenty4our'], //hexes on gradient
 	['I woke up at 7:04 and ate 2 plums','@maxmeepmeep991'],//skyrimish
 	['I woke up at 7:12 and ate 140 raisins',''],//layers
 	['I woke up at 7:42 and ate 388 grapefruits','@quocphong6588'], //blades
@@ -163,6 +164,7 @@ var favorites = [
 	['I woke up at 7:09 and ate 3 kiwis','@MatteoDolcin-ye8xm'],//huge mosaic
 	['I woke up at 7:43 and ate 498 pears','@a71_special'],//gradient diamonds
 	['I woke up at 7:31 and ate 2 raisins',''],//very wiggly dartboards
+	['I woke up at 7:36 and ate 64 grapes','@humanoid-things'], //overlapping directions 
 	['I woke up at 7:05 and ate 90 peanuts','@memeing_donkey'], //overlapping directions 
 	['I woke up at 7:03 and ate 3 grapefruits','@manalu-asya'],//hedges
 	['I woke up at 7:44 and ate 249 oranges','@snadsnad-g7o'], // wide bolts over stripes
