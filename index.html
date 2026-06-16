@@ -14,6 +14,7 @@
 
 	<script src='index/main.js'></script>
 	<script src='index/preview.js'></script>
+	<script src='index/action.js'></script>
 
 
 </head>
@@ -215,6 +216,91 @@
 					<circle cx='34' cy='70' r='10' />
 				</svg>
 				
+				<svg viewBox='0 0 44 80' alt='custom preset' id='custom-preset' style='display:none'
+					onclick='setExistingPalette("custom")' stroke-opacity='0' class='zoom palette-svg center-vert'>
+					<rect width='12' height='80' x='0' y='0' rx='6' ry='6' />
+					<circle cx='34' cy='10' r='10' />
+					<circle cx='34' cy='40' r='10' />
+					<circle cx='34' cy='70' r='10' />
+				</svg>
+				
+			</div>
+
+			<div id='special-palette-holder' class='container'>
+				<div class='special-palette container'>
+
+					<svg viewBox='0 -4 44 84' alt='contrast preset' id='contrast-preset' 
+						onclick='setExistingPalette("contrast")' stroke-opacity='0' 
+						class='zoom palette-svg center-vert'>
+						<rect width='12' height='80' x='0' y='0' rx='6' ry='6' />
+						<circle cx='34' cy='10' r='10' />
+						<circle cx='34' cy='40' r='10' />
+						<circle cx='34' cy='70' r='10' />
+					</svg>
+					<div class='palette-desc container'>
+						<h2>contrast<span> - june 2026</span></h2>
+						<p>the very first monthly palette!
+							dark mode, accessibility, and rainbow. 
+							what else could you need?
+						</p>
+
+					</div>	
+
+					<!-- <div id='expand-icon' onclick='toggleSpecialPalettes(true)' class='container zoom icon'>
+						<svg id='svg-expand' viewBox='0 0 100 100' alt='expand' class='icon-image'>
+							<path class='svg-front' d='M 15 40 L 50 70 L 85 40' stroke-width='12' stroke-linejoin='round' stroke-linecap='round' fill-opacity='0'/>
+						</svg>
+					</div>
+
+					<div id='collapse-icon' onclick='toggleSpecialPalettes(false)' class='container zoom icon' style='display:none'>
+						<svg id='svg-collapse' viewBox='0 0 100 100' onclick='copyHTML("svg-collapse")' alt='collapse' class='icon-image'>
+							<path class='svg-front' d='M 15 60 L 50 30 L 85 60' stroke-width='12' stroke-linejoin='round' stroke-linecap='round' fill-opacity='0'/>
+						</svg>
+					</div> -->
+
+				</div>	
+<!-- 			
+				<div class='special-palette container' style='display:none'>
+
+					<svg viewBox='0 -4 44 84' alt='tsartnoc preset' id='tsartnoc-preset' 
+						onclick='setExistingPalette("tsartnoc")' stroke-opacity='0' 
+						class='zoom palette-svg center-vert'>
+						<rect width='12' height='80' x='0' y='0' rx='6' ry='6' />
+						<circle cx='34' cy='10' r='10' />
+						<circle cx='34' cy='40' r='10' />
+						<circle cx='34' cy='70' r='10' />
+					</svg>
+					<div class='palette-desc container'>
+						<h2>tsartnoc<span> - july 2026</span></h2>
+						<p>the very first monthly palette!
+							dark mode, accessibility, and rainbow. 
+							what else could you need?
+						</p>
+
+					</div>	
+				</div>	
+
+
+				<div class='special-palette container' style='display:none'>
+
+					<svg viewBox='0 -4 44 84' alt='plum preset' id='plum-preset' 
+						onclick='setExistingPalette("plum")' stroke-opacity='0' 
+						class='zoom palette-svg center-vert'>
+						<rect width='12' height='80' x='0' y='0' rx='6' ry='6' />
+						<circle cx='34' cy='10' r='10' />
+						<circle cx='34' cy='40' r='10' />
+						<circle cx='34' cy='70' r='10' />
+					</svg>
+					<div class='palette-desc container'>
+						<h2>plum<span> - august 2026</span></h2>
+						<p>the very first monthly palette!
+							dark mode, accessibility, and rainbow. 
+							what else could you need?
+						</p>
+
+					</div>	
+				</div>	
+				 -->
 			</div>
 
 			<palette-info>select a box to customize the palette</palette-info>
@@ -223,6 +309,33 @@
 				
 				<div class='container palette-subcustom'>	
 
+					<palette-picker class='container'>	
+						<div id='random-icon' onclick='randomPalette()' class='container zoom icon'>
+							<svg id='svg-random' viewBox='0 0 100 100' stroke-linejoin='round' alt='random' class='icon-image center-zont'>
+								<path class='svg-front' d='M 50 40 L 18 21 L 50 6 L 82 21  Z' stroke-width='4' />
+								<path class='svg-front' d='M 43 52 L 13 34 L 14 70 L 43 90  Z' stroke-width='4' />
+								<path class='svg-front' d='M 57 52 L 87 34 L 86 70 L 57 90  Z' stroke-width='4' />
+								
+								<ellipse class='svg-back' cx='50' cy='23' rx='9' ry='7' stroke-opacity='0' />
+								<ellipse class='svg-back' cx='23' cy='54' rx='5' ry='6.5' stroke-opacity='0' />
+								<ellipse class='svg-back' cx='35' cy='71' rx='5' ry='6.5' stroke-opacity='0' />
+								<ellipse class='svg-back' cx='79' cy='49' rx='4.5' ry='5.5' stroke-opacity='0' />
+								<ellipse class='svg-back' cx='72' cy='62.5' rx='4.5' ry='5.5' stroke-opacity='0' />
+								<ellipse class='svg-back' cx='65' cy='76' rx='4.5' ry='5.5' stroke-opacity='0' />
+							</svg>
+							<icon-text>random</icon-text>
+						</div>
+
+						<div id='undo-icon' onclick='undoPaletteChange()' class='container zoom icon'>
+							<svg id='svg-undo' viewBox='0 0 100 100' alt='undo' class='icon-image'>
+								<path class='svg-half' d='M 40 80 L 55 80 A 27 27 0 1 0 55 24 L 20 24' fill-opacity='0' stroke-width='10'></path>
+								<path class='svg-half' d='M 10 25 L 35 40 L 35 10 Z' stroke-opacity='0'></path>
+							</svg>
+							<icon-text>undo</icon-text>
+						</div>
+					</palette-picker>	
+
+		
 					<palette-picker class='container zoom box' style='background: var(--color-front);'>
 						<h2 class='prevent-select palette-text center-vert'>front</h2>
 						<input type='color' id='picker-front' class='palette-input' onFocus='editPalette("front",this.value);'>
@@ -297,9 +410,6 @@
 				<p>Of course, this applies primarily to videos. Each webpage will default to 
 					its category, but you can change to whichever scheme you prefer.
 					You can even create your own custom scheme here on the 'palette' tab of my home page!
-				</p>
-				<p>Coming soon: special monthly schemes. This will expand the range of
-					pre-built options. Some will be themed, some just a nice palette.
 				</p>
 
 				<h2>programming</h2>

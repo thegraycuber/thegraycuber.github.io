@@ -45,11 +45,28 @@ function changePalette(scheme = ''){
 }
 
 
+function unpackPalette(pName){
+
+	let uPalette = palettes[pName];
+
+	let pCode = uPalette.code.split('-');
+	for (let k = 0; k < paletteKeys.length; k++){
+		let pKey = paletteKeys[k];
+		uPalette[pKey] = color(pCode[k]);
+	}
+	paletteNames.push(pName);
+
+}
+
 var paletteSuffix = '';
 function userPalette(paletteString,initial=false){
 	let customColors = paletteString.split('-');
+	console.log(customColors);
 
-	if (paletteNames.includes(customColors[0])){
+	if (Object.keys(palettes).includes(customColors[0])){
+		if (!paletteNames.includes(customColors[0])){
+			unpackPalette(customColors[0]);
+		}
 		changePalette(customColors[0]);
 		setPaletteURL(customColors[0],initial);
 		defaultPalette = false;
@@ -141,9 +158,14 @@ var palettes = {
 		front: '#663F00',
 		back: '#e9d8c6',
 		mono: '#bf7853',
-		vivid: '#729C0E',
-		alert: '#ad588b'
+		vivid: '#ad588b',
+		alert: '#729C0E'
 	},
+
+	contrast:{
+		code: "#FFFFFF-#000000-#00FFFF-#FFFF00-#FF00FF"
+	},
+
 }
 
 
@@ -166,6 +188,34 @@ function copyColor(colorToCopy){
 
 function colorToHex(colorToConvert){
 	return '#' + hex(int(red(colorToConvert))).substring(6) + hex(int(green(colorToConvert))).substring(6) + hex(int(blue(colorToConvert))).substring(6);
+}
+
+function HSVtoRGB(hue,sat,val){
+	let chroma = val*sat;
+	let hueRegion = modulo(hue,360)/60;
+	let secondary = chroma * (1-abs(hueRegion%2-1));
+
+	let rawRGB;
+	if (hueRegion < 1){
+		rawRGB = [chroma, secondary, 0];
+	} else if (hueRegion < 2){
+		rawRGB = [secondary, chroma, 0];
+	} else if (hueRegion < 3){
+		rawRGB = [0, chroma, secondary];
+	} else if (hueRegion < 4){
+		rawRGB = [0, secondary, chroma];
+	} else if (hueRegion < 5){
+		rawRGB = [secondary, 0, chroma];
+	} else {
+		rawRGB = [chroma, 0, secondary];
+	}
+
+	let adjust = val - chroma;
+	return [
+		round((rawRGB[0]+adjust)*255),
+		round((rawRGB[1]+adjust)*255),
+		round((rawRGB[2]+adjust)*255)
+	];
 }
 		
 /*

@@ -178,4 +178,3 @@ var favorites = [
 	['I woke up at 7:14 and ate 552 cashews',''], //holy argyle
 	['I woke up at 7:22 and ate 67 hazelnuts','@tHe_faNum-taXer'], //gradient bands
 ];
-

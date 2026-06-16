@@ -151,16 +151,57 @@ thumbnail-text {
 }
 
 .palette-svg {
-	padding: 1.6vmin 2.4vmin;
+	padding: 1.6vmin 2vmin;
 	border-radius:3vmin; 
 	border-style:solid;
 	border-width:0.75vmin;
 	
-	width:min(4vh,5vw);
-	height:min(8vh,10vw);
+	width:4vmin;
+	height:8vmin;
 	
 	box-shadow: 0.75vh 0.75vh var(--color-backdark);
 }
+
+#special-palette-holder {
+	background-color: var(--color-backdark);
+	flex-direction: column;
+	width: min(84vw, 76vh);
+	border-radius: 3vmin;
+	padding: 2vmin;
+	margin: 1vmin auto;
+	gap: 3vmin;
+}
+
+.special-palette {
+	flex-direction: row;
+	gap: 2vmin;
+}
+
+#expand-icon, #collapse-icon{
+	margin: 0px 0px 0px auto;
+}
+
+.palette-desc{
+	gap: 0px;
+	flex-direction: column;
+	width:min(36vh,56vw);
+}
+.palette-desc h2{
+	font-size: min(2vh,3vw);
+	color: var(--color-mono);
+	margin: 0.5vmin;
+}
+
+.palette-desc span{
+	color: var(--color-half);
+}
+
+.palette-desc p{
+	font-size: min(1.8vh,2.5vw);
+	color: var(--color-front);
+	margin: 0.5vmin;
+}
+
 
 palette-info {
 	font-size: min(2.5vh,4vw);
@@ -171,17 +212,34 @@ palette-info {
 #palette-customization {
 	flex-wrap:wrap; 
 	justify-content:center;
+	margin-bottom: 4vmin;
 }
 
 .palette-subcustom {
 	flex-direction: column; 
 }
 
+
 palette-picker {
-	justify-content:center;
+	justify-content:space-around;
 	height: min(6vh,12vw);
 	margin: 1vh 4vmin;
+	padding: 0.5vh 0px;
 }
+
+palette-picker .icon {
+	width: min(5.5vh, 9vw);
+	margin: 0px;
+	padding: 0px;
+	font-size: min(1vh, 2.5vw);
+	border-radius: 0px;
+}
+
+palette-picker .icon-image {
+	width: min(4vh, 8vw);
+	height: min(4vh, 8vw);
+}
+
 .palette-text {
 	font-size: min(5vh,9vw);
 	color: var(--color-back);
