@@ -73,7 +73,7 @@ function editPalette(colorType, colorValue) {
 function setExistingPalette(paletteKey) {
 	defaultPalette = false;
 	changePalette(paletteKey);
-	setPaletteURL(paletteKey);
+	setPaletteURL(paletteKey=='custom'?paletteToCode():paletteKey);
 }
 
 function toggleSpecialPalettes(expand){

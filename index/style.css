@@ -184,7 +184,7 @@ thumbnail-text {
 .palette-desc{
 	gap: 0px;
 	flex-direction: column;
-	width:min(36vh,56vw);
+	width:min(44vh,56vw);
 }
 .palette-desc h2{
 	font-size: min(2vh,3vw);
