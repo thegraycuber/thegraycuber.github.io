@@ -15,7 +15,7 @@ function nToBaseB(n,b){
 var ints = [];
 function processInts(){
 
-	if (modulo(d,4) == 1){
+	if (modulo(d[0],4) == 1){
 		isHex = true;
 	}
 	
@@ -101,7 +101,7 @@ class QuadInt {
 		stroke(this.colorValue);
 		fill(this.index<digits.length?this.colorValue:palette.back);
 		// fill(this.fillValue);
-		drawShape(0,0);
+		drawShape(0,0,this.index<digits.length);
 
 		// if (this.index < digits.length){
 		// 	onlyFill(palette.back);
@@ -121,7 +121,11 @@ class QuadInt {
 
 var shapeSize = 0.9;
 var shapeStroke = 0.1;
-function drawShape(x,y){
+var pointSize = 1;
+function drawShape(x,y,isDigit){
+	// if (!snapIsOn && !isDigit){
+	// 	circle(x, y, pointSize);
+	// } else 
 	if (isHex){
 		hexagon(x, y, shapeSize*0.5);	
 	} else {
@@ -167,6 +171,45 @@ function truncatePowers(){
 	for (let dig = 1; dig < digits.length; dig++){
 		digits[dig] = [digits[dig][0]];
 	}
+}
+
+function snapToBest(digitIndex, skipProcessing = false){
+
+	let minDist = 1000000;
+	let bestPoint;
+	let rawPoint = digitIndex == digits.length? base : digits[digitIndex][0];
+	let centerPoint = roundC(rawPoint);
+
+	for (let x = -3; x < 4; x++){
+		for (let y = -3; y < 4; y++){
+			let testPoint = addC(centerPoint,[x,y]);
+			let testDist = normC(subC(coeffsToRaw(testPoint),coeffsToRaw(rawPoint)));
+			if (testDist > minDist){
+				continue;
+			}
+
+			let isDupe = false;
+			for (let dig = 0; dig < digits.length; dig++){
+				if (dig == digitIndex){continue;}
+				if (closeC(digits[dig][0],testPoint)){
+					isDupe = true;
+					break;
+				}
+			}
+			if (digits.length != digitIndex && closeC(base,testPoint)){
+				isDupe = true;
+			}
+
+			if (isDupe){
+				continue;
+			}
+
+			minDist = testDist;
+			bestPoint = testPoint;
+		}
+	}
+
+	setDigit(bestPoint, digitIndex, skipProcessing);
 }
 
 

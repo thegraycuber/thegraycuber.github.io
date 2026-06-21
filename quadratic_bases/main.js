@@ -24,7 +24,7 @@ function draw(){
 	iconChecks();
 
 	if (dragged > -1){
-		setDragged(addC(draggedSubFocus, focusPrincipal));
+		setDigit(addC(draggedSubFocus, focusPrincipal), dragged);
 	}
 	
 	background(palette.back);
@@ -59,7 +59,12 @@ function draw(){
 	scale(scalar,-scalar);
 	
 	for (let i = 0; i < digits.length; i++) {
-		ints[i].show(i != dragged);
+		if (i == dragged){continue;}
+		ints[i].show(true);
+	}
+
+	if (dragged > 0 && dragged < digits.length){
+		ints[dragged].show(false);
 	}
 
 	push();
@@ -69,7 +74,6 @@ function draw(){
 	stroke(palette.back);
 	strokeWeight(0.08);
 	circle(0,0,0.8);
-
 
 	scale(1,-1);
 	onlyFill(palette.back);
@@ -85,7 +89,13 @@ function draw(){
 
 	// }
 
-}
+
+}	  
+					//   <rect class='svg-alert' width='80' height='80' x='10' y='10' rx='10' ry='10' fill-opacity='1'></rect>
+					//   <path class='svg-back' d='M 25 30 L 75 30' ></path>
+					//   <path class='svg-back' d='M 46 24 L 54 24'></path>
+					//   <path class='svg-back' d='M 30 30 L 37 80 L 63 80 L 70 30 '></path>
+					// </svg>
 
 
 var canvas, grid;
@@ -128,6 +138,7 @@ function setup() {
 
 
 var portrait;
+var deleteLimit;
 function setupLayout(){
 	portrait = width*5 < height*4;
 
@@ -146,10 +157,9 @@ function setupLayout(){
 	// 	scaleMin = max(height*0.075,width*0.075)
 	// }
 	
-	defaultScalar = min(width,height)*0.16;
+	defaultScalar = min(width,height*0.6)*0.16;
 	scalar = defaultScalar;
-	scaleMin = min(height*0.005,width*0.005)
-	scaleMin = max(scaleMin,2);
+	scaleMin = 1;
 
 }
 
@@ -160,11 +170,13 @@ function setOriginAndGrid(){
 
 	if (portrait){	
 		defaultOrigin = createVector(width*0.5,height*0.5-(menuHidden?0:width*0.22));
-		grid = new Grid(0,height-(menuHidden?0:width*0.4),width,0,width*0.008,true,'half','backlight');
-		
+		deleteLimit = height-(menuHidden?0:width*0.4);
+		grid = new Grid(0,deleteLimit,width,0,width*0.008,true,'half','backlight');
+
 	} else {
 		defaultOrigin = createVector(width*0.5+(menuHidden?0:height*0.15),height*0.5);
-		grid = new Grid((menuHidden?0:height*0.29),height,width,0,height*0.006,true,'half','backlight');
+		deleteLimit = (menuHidden?0:height*0.29);
+		grid = new Grid(deleteLimit,height,width,0,height*0.006,true,'half','backlight');
 	}
 }
 
@@ -180,21 +192,20 @@ function preload() {
 function corePaletteCustom(){
 
 	let acc = [
-		palette.front,
 		palette.mono,
 		palette.vivid,
 		palette.alert
 	]
 
-	palette.base = [lerpColor(palette.back, palette.mono, 0.35)];
+	palette.base = [lerpColor(palette.back, palette.mono, 0.35),palette.front];
 	for (let a of acc){
 		palette.base.push(lerpColor(a,a,0));
 	}
 	for (let a of acc){
-		palette.base.push(lerpColor(a,palette.front,0.5));
+		palette.base.push(lerpColor(a,palette.front,0.4));
 	}
 	for (let a of acc){
-		palette.base.push(lerpColor(a,palette.back,0.3));
+		palette.base.push(lerpColor(a,palette.back,0.2));
 	}
 
 	palette.backtrans = color(red(palette.back),green(palette.back),blue(palette.back),0);

@@ -23,9 +23,7 @@
 <body class='container'>
 	
 
-	<div id='menu-holder' class='container' 
-		onmousedown='mouseInMenu = true;'  ontouchstart='mouseInMenu = true;'
-		onmouseup='deleteDrop = true;'  ontouchend='deleteDrop = true;' >
+	<div id='menu-holder' class='container' onmousedown='mouseInMenu = true;'  ontouchstart='mouseInMenu = true;'>
 
 
 		<general-menu class='container menu'>
@@ -106,6 +104,16 @@
 					<icon-text>favorites</icon-text>
 				</div>
 
+				<div id='lock-icon' onclick='toggle("lock")' class='container zoom icon'>
+					<svg id='svg-lock' viewBox='0 0 100 100' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' alt='lock' class='icon-image'>
+						<path class='svg-front' d='M 30 40 L 30 35 A 20 20 0 1 1 70 35 L 70 40' fill-opacity='0' stroke-width='8'  />
+						<rect class='svg-front' width='64' height='42' x='18' y='44' rx='10' ry='10'/>
+						<circle class='svg-back' cx='50' cy='59' r='6' />
+						<path class='svg-back' d='M 50 60 L 50 75' fill-opacity='0' stroke-width='10' stroke-linecap='round'/>
+					</svg>
+					<icon-text>lock</icon-text>
+				</div>
+
 					
 				<div id='grid-icon' onclick='toggle("grid")' class='container zoom icon'>
 					<svg id='svg-grid' viewBox='0 0 100 100' alt='toggle grid' class='icon-image center-zont' stroke-width='6' fill-opacity='0'>
@@ -132,7 +140,7 @@
 
 
 				
-				<div id='delete-digit-icon' onclick='newDigit()' class='container zoom icon' style='display:none;'>
+				<div id='delete-digit-icon' class='container zoom icon' style='display:none;'>
 					
 					<svg id='svg-delete' viewBox='0 0 100 100' fill-opacity='0' stroke-width='10' stroke-linecap='round' alt='delete digit' class='icon-image'>
 					  

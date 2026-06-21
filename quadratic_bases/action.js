@@ -67,7 +67,6 @@ function touchEnded(){
 		return;
 	}
 	setFocusPrincipal();
-	
 	// if (page)
 	// infoInteger = rawInfo[0] == infoInteger[0] && rawInfo[1] == infoInteger[1] ? [] : rawInfo;
 
@@ -103,8 +102,8 @@ function touchEnded(){
 
 function touchMoved(event){
 
-	if (mouseInMenu || hideCanvas){return;}
 	event.preventDefault(); 
+	if (mouseInMenu || hideCanvas){return;}
 	setFocusPrincipal();
 	// if (infoClick && clickStart.dist(focusPoint()) > 5){
 	// 	infoClick = false;
@@ -119,6 +118,7 @@ function setFocusPrincipal(){
 }
 
 
+var focusPixel;
 function updateMovement(){
 	
 	if (touches.length == 2){
@@ -135,8 +135,8 @@ function updateMovement(){
 			} else {
 				origin = focusPoint().sub(principalPos.mult(scalar,-scalar));
 			}
-			principalPos = pixelToPrincipal(focusPoint());
 		}
+		principalPos = pixelToPrincipal(focusPoint());
 
 		// if (highlights.length > 0 && highlightMode == 'multiples'){
 		// 	highlightMultiples(infoIntegerTrue);
@@ -155,6 +155,7 @@ function mouseWheel(event){
 	var scalarLog = log(scalar);
 	scalarLog -= event.delta/2048; // make this positive to invert scroll
 	scalar = max(scaleMin,exp(scalarLog));
+	// pointSize = 0.25/(scalar**0.25);
 
 	updateMovement();
 }
@@ -219,72 +220,46 @@ function newDigit(){
 	dragged = -1;
 }
 
-
-var deleteDrop = false;
+var snapIsOn = true;
 function dropDigit(){
 
+	if (digits.length > 2 && dragged < digits.length){
 
-	if (deleteDrop && dragged < digits.length){
-		digits.splice(dragged,1);
-		
-		maxDigitCount = floor(log(desiredLimit)/log(digits.length));
-		controllers['arrow-limit'].giveIndex(maxDigitCount-1,true);
-		
-		processInts();
-		deleteDrop = false;
-		return;
-	}
-
-	
-	let minDist = 1000000;
-	let bestPoint;
-	let rawPoint = dragged == digits.length? base : digits[dragged][0];
-	let centerPoint = roundC(rawPoint);
-
-	for (let x = -3; x < 4; x++){
-		for (let y = -3; y < 4; y++){
-			let testPoint = addC(centerPoint,[x,y]);
-			let testDist = normC(subC(coeffsToRaw(testPoint),coeffsToRaw(rawPoint)));
-			if (testDist > minDist){
-				continue;
-			}
-
-			let isDupe = false;
-			for (let dig = 0; dig < digits.length; dig++){
-				if (dig == dragged){continue;}
-				if (closeC(digits[dig][0],testPoint)){
-					isDupe = true;
-					break;
-				}
-			}
-			if (digits.length != dragged && closeC(base,testPoint)){
-				isDupe = true;
-			}
-
-			if (isDupe){
-				continue;
-			}
-
-			minDist = testDist;
-			bestPoint = testPoint;
+		let pixelPos = principalToPixel(principalPos);
+		let deleteDrop = portrait ? pixelPos.y > deleteLimit : pixelPos.x < deleteLimit;
+		if (deleteDrop){
+			digits.splice(dragged,1);
+			
+			maxDigitCount = floor(log(desiredLimit)/log(digits.length));
+			controllers['arrow-limit'].giveIndex(maxDigitCount-1,true);
+			
+			processInts();
+			deleteDrop = false;
+			return;
 		}
 	}
 
-	setDragged(bestPoint);
+	if (!snapIsOn){
+		return;
+	}
+
+	snapToBest(dragged);
 }
 
 
-function setDragged(newArray){
-	if (dragged < digits.length){
-		digits[dragged] = [newArray];	
+function setDigit(newArray,digitIndex,skipProcessing = false){
+	if (digitIndex < digits.length){
+		digits[digitIndex] = [newArray];	
 		
 	} else {
 		base = newArray;	
 		truncatePowers();
 	}
-	ints[dragged] = new QuadInt(...newArray, 0, dragged);
+	ints[digitIndex] = new QuadInt(...newArray, 0, digitIndex);
 	
-	processInts();	
+	if (!skipProcessing){
+		processInts();	
+	}
 }
 
 
@@ -298,6 +273,15 @@ function toggle(iconName){
 	switch (iconName){
 		case 'grid':
 			grid.visible = !grid.visible;
+			break;
+		case 'lock':
+			snapIsOn = !snapIsOn;
+			if (snapIsOn){
+				for (let dig = 1; dig <= digits.length; dig++){
+					snapToBest(dig,true);
+				}
+				processInts();
+			}
 			break;
 	}
 }

@@ -1,23 +1,20 @@
 
 
-design format
-	button to zoom between edit and full
-	
-bug: click digit to disable -> can't interact with others
-prevent go down to one digit
+button to zoom between edit and full
+button for lock/unlock
 
+show information about setup
+show information about int when clicked 
 
-possible:
-	3 lines on hex grid?
-	transition smoothly when snapping drag to nearing int
-	cursor type and color change upon hover in edit pane
-	 opacity fill when zoomed out
-	get rid of snap to grid?
-	pick any 2d ideal
 
 call icon checks when actions are done
 delay processing, only get 10 per frame or so
 implement favorites and random
+add preview to index
+write info
+
+maybe:
+	cursor type and color change upon hover in edit pane
 
 other pages:
 	add new icons to crabman
