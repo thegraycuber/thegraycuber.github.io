@@ -1,7 +1,4 @@
 
-
-// var pageMode = 'edit';
-
 var base = [1,2];
 var baseRaw = [1,2];
 var digits = [
@@ -15,7 +12,7 @@ var dList = [];
 var d = [-1,0];
 
 
-var lastDisplay = 0;
+var lastFrame;
 var hideCanvas = false;
 
 
@@ -31,14 +28,9 @@ function draw(){
 	if (hideCanvas){
 		return;
 	}
-
-	
 	
 	grid.drawGrid();
 
-
-	// if (pageMode == 'display'){
-		
 	translate(origin.x,origin.y);
 	scale(scalar,-scalar);
 
@@ -85,11 +77,19 @@ function draw(){
 	}
 	pop();
 
-		// ints[dragged].show(false, dragged == digits.length);	
-
-	// }
 
 
+	if (scalarLerp < 2){
+		scalarLerp = min(1, scalarLerp + (Date.now()-lastFrame)/1000);
+		lerpValue = sin((scalarLerp-0.5)*PI)/2+0.5;
+		scalar = lerp(...scalarValues,lerpValue);
+		origin = p5.Vector.lerp(originValues,defaultOrigin,lerpValue);
+
+		if (scalarLerp == 1){
+			scalarLerp = 2;
+		}
+	}
+	lastFrame = Date.now();
 }	  
 					//   <rect class='svg-alert' width='80' height='80' x='10' y='10' rx='10' ry='10' fill-opacity='1'></rect>
 					//   <path class='svg-back' d='M 25 30 L 75 30' ></path>
@@ -98,8 +98,7 @@ function draw(){
 					// </svg>
 
 
-var canvas, grid;
-var verticalUnit = 'k';
+var canvas, grid; 	
 function setup() {
 
 	morningRoutine('sunset');
@@ -144,20 +143,8 @@ function setupLayout(){
 
 	setOriginAndGrid();
 	origin = defaultOrigin.copy();
-
-	// if (pageMode == 'display'){
-	// 	defaultScalar = min(width,height)*0.02;
-	// 	scalar = defaultScalar;
-	// 	scaleMin = max(height*0.5/((primeLimit/abs(d))**0.5),width*0.5/(primeLimit**0.5))
-	// 	scaleMin = constrain(scaleMin,3,min(width,height)*0.01);
-		
-	// } else if (pageMode == 'edit'){
-	// 	defaultScalar = min(width,height)*0.16;
-	// 	scalar = defaultScalar;
-	// 	scaleMin = max(height*0.075,width*0.075)
-	// }
 	
-	defaultScalar = min(width,height*0.6)*0.16;
+	defaultScalar = min(width,height*0.6)*0.10;
 	scalar = defaultScalar;
 	scaleMin = 1;
 

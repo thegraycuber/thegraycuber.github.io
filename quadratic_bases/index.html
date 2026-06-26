@@ -114,6 +114,25 @@
 					<icon-text>lock</icon-text>
 				</div>
 
+				<div id='edit-icon' onclick='editMode()' class='container zoom icon' style='display:none'>
+					<svg id='svg-zoom-out' viewBox='0 0 100 100' alt='edit' class='icon-image' 
+						stroke-width='8' stroke-linejoin='round' stroke-linecap='round' fill-opacity='0'>
+						<path class='svg-front' d='M 16 40 L 40 40 L 40 16 L 40 40 L 12 12' />
+						<path class='svg-front' d='M 84 60 L 60 60 L 60 84 L 60 60 L 88 88' />
+					</svg>
+					<icon-text>edit</icon-text>
+				</div>
+
+				<div id='view-icon' onclick='viewMode()' class='container zoom icon'>
+					<svg id='svg-zoom-in' viewBox='0 0 100 100' alt='view' class='icon-image' 
+						stroke-width='8' stroke-linejoin='round' stroke-linecap='round' fill-opacity='0'>
+						<path class='svg-front' d='M 12 40 L 12 12 L 40 12 L 12 12 L 40 40' />
+						<path class='svg-front' d='M 88 60 L 88 88 L 60 88 L 88 88 L 60 60' />
+					</svg>
+
+					<icon-text>view</icon-text>
+				</div>
+
 					
 				<div id='grid-icon' onclick='toggle("grid")' class='container zoom icon'>
 					<svg id='svg-grid' viewBox='0 0 100 100' alt='toggle grid' class='icon-image center-zont' stroke-width='6' fill-opacity='0'>
@@ -137,9 +156,6 @@
 					<icon-text>new digit</icon-text>
 				</div>
 		
-
-
-				
 				<div id='delete-digit-icon' class='container zoom icon' style='display:none;'>
 					
 					<svg id='svg-delete' viewBox='0 0 100 100' fill-opacity='0' stroke-width='10' stroke-linecap='round' alt='delete digit' class='icon-image'>
@@ -152,26 +168,6 @@
 					<icon-text>delete digit</icon-text>
 				</div>
 						
-					
-
-<!-- 				<div id='edit-icon' onclick='editMode()' class='container zoom icon' style='display:none;'>
-					<svg id='svg-edit' viewBox='0 0 100 100' stroke-linejoin='round' alt='edit' class='icon-image center-zont'>
-						<path class='svg-front' d='M 40 60 L 45 45 L 85 5 L 95 15 L 55 55 Z' stroke-opacity='0'/>
-						<path class='svg-front' d='M 85 50 L 85 85 L 15 85 L 15 15 L 50 15' stroke-linecap='round' stroke-width='8' fill-opacity='0'/>
-						
-					</svg>
-					<icon-text>edit</icon-text>
-				</div> -->
-
-				
-<!-- 				<div id='display-icon' onclick='displayMode()' class='container zoom icon'>
-					<svg id='svg-display' viewBox='0 0 100 100' stroke-linejoin='round' alt='display' class='icon-image center-zont'>
-						<rect class='svg-front' width='80' height='70' x='10' y='15' rx='8' ry='8' stroke-width='6' fill-opacity='0'/>
-						<path class='svg-front' d='M 64 50 L 40 36 L 40 64 Z' stroke-width='6'/>
-					</svg>	
-					<icon-text>display</icon-text>
-				</div> -->
-				
 			</icon-holder>
 
 			
@@ -206,6 +202,9 @@
 
 		<icon-menu class='container menu'>
 
+			<div id='system-desc'>
+
+			</div>
 
 			<div id='copy-icon' onclick='copyCode()' class='container zoom icon'>
 				<svg id='svg-copy' viewBox='0 0 100 100' alt='copy' class='icon-image center-zont'>

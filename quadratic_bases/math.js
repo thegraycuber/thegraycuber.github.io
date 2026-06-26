@@ -40,6 +40,17 @@ function processInts(){
 	}
 	
 	baseRaw = coeffsToRaw(base);
+
+	let descDiv = document.getElementById('system-desc');
+	let htmlString = '<h2 class="svg-front">base ' + text2d(roundC(base,1),verticalUnit) + '</h2>';
+
+	htmlString += '<h2 class="svg-vivid">' + verticalUnit + '² = ' + text2d(d,verticalUnit) + '</h2>';
+	htmlString += '<p class="svg-mono">digits:<br>';
+
+	for (let dig of digits){
+		htmlString += text2d(roundC(dig[0],1),verticalUnit) + ' ,  ';
+	}
+	descDiv.innerHTML = htmlString.substring(0,htmlString.length-3) + '</p>';
 }
 
 
@@ -99,6 +110,11 @@ class QuadInt {
 		translate(this.coords.x, this.coords.y);
 		strokeWeight(shapeStroke);
 		stroke(this.colorValue);
+		// if (this.index<digits.length){
+		// 	fill(this.colorValue);
+		// } else {
+		// 	noFill();
+		// }
 		fill(this.index<digits.length?this.colorValue:palette.back);
 		// fill(this.fillValue);
 		drawShape(0,0,this.index<digits.length);

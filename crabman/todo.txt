@@ -1,13 +1,9 @@
 
-future improvements SPOILER ALERT:
-
-    add a readme
-    consolidate repeated css into core
-    css file with variable aspect ratio for common controls
-    classes for svgs, like "round" (linecap and join)
-    rename 'svg-colorkey'
-    look into best sharealike licenses
-    use svgs from core instead of hardcoded - will this even work?
-    undo palette/random?
+GPL license
+add a readme
+classes for svgs, like "round" (linecap and join)
+use svgs from core instead of hardcoded - will this even work?
+consolidate repeated css into core
+css file with variable aspect ratio for common controls
 
 

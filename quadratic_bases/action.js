@@ -28,6 +28,7 @@ function touchStarted(){
 	let focusRaw = pixelToPrincipal(focusPoint(),'raw');
 
 	if (focusRaw.dist(arrayToVector(baseRaw)) < 0.58){
+		showViewIcon();
 		dragged = digits.length;
 		draggedSubFocus = subC(base,focusPrincipal);
 		return;
@@ -40,6 +41,7 @@ function touchStarted(){
 		// 	break;
 		// }
 		if (ints[dig].coords.dist(focusRaw) < 0.58){
+			showViewIcon();
 			dragged = dig;
 			draggedSubFocus = subC(digits[dig][0],focusPrincipal);
 			break;
@@ -135,6 +137,7 @@ function updateMovement(){
 			} else {
 				origin = focusPoint().sub(principalPos.mult(scalar,-scalar));
 			}
+			showEditIcon();
 		}
 		principalPos = pixelToPrincipal(focusPoint());
 
@@ -150,6 +153,7 @@ function mouseWheel(event){
 	if (hideCanvas){return;}
 	event.preventDefault(); 
 	updateTouchInfo();
+	showEditIcon();
 
 	// scrolling will update scalar logarithmically 
 	var scalarLog = log(scalar);
@@ -168,25 +172,46 @@ function mouseWheel(event){
 //##################################
 
 
-// function displayMode(){
-// 	iconChecks();
-// 	document.getElementById('display-icon').style.display = 'none';
-// 	document.getElementById('edit-icon').style.display = 'flex';
-	
-// 	pageMode = 'display';
-// 	setupLayout();
-// 	processInts();
-// }
 
-// function editMode(){
-// 	iconChecks();
-// 	document.getElementById('edit-icon').style.display = 'none';
-// 	document.getElementById('display-icon').style.display = 'flex';
-	
-// 	pageMode = 'edit';
-// 	setupLayout();
-// }
+function showEditIcon(){
+	document.getElementById('view-icon').style.display = 'none';
+	document.getElementById('edit-icon').style.display = 'flex';
+}
 
+function showViewIcon(){
+	document.getElementById('view-icon').style.display = 'flex';
+	document.getElementById('edit-icon').style.display = 'none';
+}
+
+function editMode(){
+	hidePopups();
+	showViewIcon();
+	setMaxInt(digits.length);
+}
+
+function viewMode(){
+	hidePopups();
+	showEditIcon();	
+	setMaxInt(ints.length);
+
+}
+
+var scalarLerp = 2;
+var scalarValues, originValues;
+function setMaxInt(limitInt){
+
+	let maxSize = base[0]**2 + base[1]**2;
+	for (let i = 0; i < limitInt; i++){
+		let intSize = ints[i].coords.magSq();
+		if (maxSize < intSize){
+			maxSize = intSize;
+		}
+	}
+
+	scalarLerp = 0;
+	scalarValues = [scalar,defaultScalar*4.5/(maxSize**0.5)];
+	originValues = origin.copy();
+}
 
 function iconChecks(){
 	if (Date.now() > copySuccessExpiration){
@@ -208,22 +233,23 @@ function iconChecks(){
 
 
 function newDigit(){
-	digits.push([[0,0]]);
+	hidePopups();
+	digits.push([[random(0.2,1.3),random(-1.2,1.2)]]);
 	ints.splice(digits.length-1,0,[]);
 	dragged = digits.length-1;
 
 	maxDigitCount = floor(log(desiredLimit)/log(digits.length));
 	controllers['arrow-limit'].giveIndex(maxDigitCount-1,true);
 	
-	deleteDrop = false;
-	dropDigit();
+	dropDigit(true);
+	processInts();
 	dragged = -1;
 }
 
 var snapIsOn = true;
-function dropDigit(){
+function dropDigit(digitIsNew = false){
 
-	if (digits.length > 2 && dragged < digits.length){
+	if (digits.length > 2 && dragged < digits.length && !digitIsNew){
 
 		let pixelPos = principalToPixel(principalPos);
 		let deleteDrop = portrait ? pixelPos.y > deleteLimit : pixelPos.x < deleteLimit;
@@ -287,16 +313,8 @@ function toggle(iconName){
 }
 
 
-
-// function toggleShapeLabel(shapeIndex){
-// 	for (let element of document.getElementById('shape-' + letters[shapeIndex]).children){
-// 		element.classList.toggle('svg-' + shapeKeys[shapeIndex]);
-// 		element.classList.toggle('svg-back');
-// 	}
-// }
-
-
 var desiredLimit = 3125;
+var verticalUnit = 'i'
 function arrowHandlerCustom(clickedControl){
 	hidePopups();
 	
@@ -308,6 +326,16 @@ function arrowHandlerCustom(clickedControl){
 			d = [round((dValue-1)/4),-1];
 		} else {
 			d = [dValue,0];
+		}
+
+		if (dValue == -1){
+			verticalUnit = 'i';
+		} else if (dValue == 0){
+			verticalUnit = 'ε';
+		} else if (dValue == -3){
+			verticalUnit = 'ω';
+		} else {
+			verticalUnit = 'k';
 		}
 		
 		truncatePowers();
@@ -354,12 +382,12 @@ function codeToSettings(inputStr){
 function settingsToCode(){
 	let digitArray = [];
 	for (let dig of digits){
-		digitArray.push(dig[0]);
+		digitArray.push(roundC(dig[0],2));
 	}
 	
 	let settingsObjects = {
-		square: dList[controllers['arrow-definition'].index],
 		base: base,
+		square: dList[controllers['arrow-definition'].index],
 		digits: digitArray
 	}
 	return JSON.stringify(settingsObjects);

@@ -1,17 +1,19 @@
 
 
-button to zoom between edit and full
-button for lock/unlock
-
-show information about setup
-show information about int when clicked 
-
-
-call icon checks when actions are done
-delay processing, only get 10 per frame or so
+implement copy/paste
 implement favorites and random
-add preview to index
+make zoom smart in its direction, not always origin at default?
+change grid size when menu is hidden
+grid and lock together?
+
+delay processing, only get 10 per frame or so
+displayLimit upper bound?
+
 write info
+add preview to index
+
+show information about int when hovered? 
+better digit name alignment
 
 maybe:
 	cursor type and color change upon hover in edit pane
