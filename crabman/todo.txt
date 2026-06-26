@@ -1,5 +1,4 @@
 
-GPL license
 add a readme
 classes for svgs, like "round" (linecap and join)
 use svgs from core instead of hardcoded - will this even work?
