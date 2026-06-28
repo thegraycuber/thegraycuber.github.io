@@ -155,6 +155,7 @@ function randomPalette(){
 
 
 var videoLinks = [
+	'https://youtu.be/CmXStCPFbTg', // tetromino fractals
 	'https://youtu.be/Bh7o_Q1O1NA', // base 10, with weird digits
 	'https://youtu.be/Wnjd0SLXZgs', // say numbers slower
 	'https://youtu.be/1sPAwCZYXDA', // world to the world doesn't work
