@@ -234,7 +234,8 @@ function iconChecks(){
 
 function newDigit(){
 	hidePopups();
-	digits.push([[random(0.2,1.3),random(-1.2,1.2)]]);
+
+	digits.push([randomDonut(0.5,1.6)]);
 	ints.splice(digits.length-1,0,[]);
 	dragged = digits.length-1;
 
@@ -350,27 +351,91 @@ function arrowHandlerCustom(clickedControl){
 }
 
 
-// function randomize(){
+function randomize(){
 
-// 	controllers['arrow-function'].randomize();
-// 	if (random() > 0.5){
-// 		toggle('grid');
-// 	}
-// 	if (!autoZoom){toggle('autozoom');}
-// }
+	let randomDefinition = random();
+
+	if (randomDefinition < 0.25){
+		controllers['arrow-definition'].giveIndex(dList.length-1);
+	} else if (randomDefinition < 0.5){
+		controllers['arrow-definition'].giveIndex(dList.length-3);
+	} else if (randomDefinition < 0.6){
+		controllers['arrow-definition'].giveIndex(0);
+	} else if (randomDefinition < 0.7){
+		controllers['arrow-definition'].giveIndex(1);
+	} else if (randomDefinition < 0.8){
+		controllers['arrow-definition'].giveIndex(dList.length-2);
+	} else {
+		controllers['arrow-definition'].randomize();
+	}
+
+
+	setDigit(randomDonut(1.2,2),digits.length,true);
+	snapToBest(digits.length,true);
+
+	let digitCount = max(2,normC(base)**0.5-1);//floor(random(1,1.5)**2));
+	digits = [[0,0]];
+	for (let dig = 0; dig < digitCount; dig++){
+		digits.push([]);
+		setDigit(randomDonut(0.5,1.6),dig+1,true);
+		snapToBest(digits.length-1,true);
+	}
+
+	maxDigitCount = floor(log(desiredLimit)/log(digits.length));
+	controllers['arrow-limit'].giveIndex(maxDigitCount-1,true);
+
+	processInts();
+
+}
+
+function randomDonut(lowerRoot, upperRoot){
+
+	let randomSize = random(lowerRoot,upperRoot)**2;
+	let randomAng = random(TWO_PI);
+	return [randomSize*cos(randomAng),randomSize*sin(randomAng)];
+}
 
 
 
-function codeToSettings(inputStr){
+function codeToSettings(rawInputStr){
 
-	let settingsObject = JSON.parse(inputStr);
-	controllers['arrow-definition'].giveIndex(dList.indexOf(settingsObject.square));
+	let inputStr = rawInputStr.split(' ').join('').split(' ').join('');
+	// let settingsObject = JSON.parse(inputStr);
+	// controllers['arrow-definition'].giveIndex(dList.indexOf(settingsObject.square));
 	
-	base = settingsObject.base;
+	// base = settingsObject.base;
+
+	// digits = [];
+	// for (let dig = 0; dig < settingsObject.digits.length; dig++){
+	// 	digits.push([settingsObject.digits[dig]]);
+	// }
+	let whereIndex = inputStr.search('where');
+	if (whereIndex == -1){
+		return false;
+	}
+
+	let codeUnit = inputStr.substring(whereIndex+5, whereIndex+6);
+	
+	let baseIndex = inputStr.search('base');
+	let digitsIndex = inputStr.search('digits');
+
+	base = textInto2d(inputStr.substring(baseIndex+4,digitsIndex-4),codeUnit);
+	let digitList = inputStr.substring(digitsIndex+6,whereIndex).replace('and','') .split(',');
+	
+	maxDigitCount = floor(log(desiredLimit)/log(digitList.length));
+	controllers['arrow-limit'].giveIndex(maxDigitCount-1,true);
 
 	digits = [];
-	for (let dig = 0; dig < settingsObject.digits.length; dig++){
-		digits.push([settingsObject.digits[dig]]);
+	for (let newDigit of digitList){
+		digits.push([textInto2d(newDigit,codeUnit)]);
+	}
+
+	let pasteD = textInto2d(inputStr.substring(whereIndex+8),codeUnit);
+
+	if (pasteD[1] == 0){
+		controllers['arrow-definition'].giveIndex(dList.indexOf(pasteD[0]));
+	} else {
+		controllers['arrow-definition'].giveIndex(dList.indexOf(pasteD[0]*4+1));
 	}
 
 	setupLayout();
@@ -385,33 +450,49 @@ function settingsToCode(){
 		digitArray.push(roundC(dig[0],2));
 	}
 	
-	let settingsObjects = {
-		base: base,
-		square: dList[controllers['arrow-definition'].index],
-		digits: digitArray
-	}
-	return JSON.stringify(settingsObjects);
+	// let settingsObjects = {
+	// 	base: base,
+	// 	square: dList[controllers['arrow-definition'].index],
+	// 	digits: digitArray
+	// }
+	// return JSON.stringify(settingsObjects);
 	
+	let settingsString = 'base ' + text2d(base,verticalUnit) + ' ';
+
+	settingsString += 'with digits ' ;
+	for (let dig = 0; dig < digits.length; dig++){
+		if (dig + 1 < digits.length){
+			settingsString += text2d(digits[dig][0],verticalUnit) + ' , ';
+		} else {
+			settingsString += 'and ' + text2d(digits[dig][0],verticalUnit);
+		}
+	}
+
+	settingsString += ' where ' + verticalUnit + '² = ' + text2d(d,verticalUnit);
+	return settingsString;
 }
 
 
-// function nextFavorite(){
-// 	hidePopups();
-
-// 	favoriteIndex = (favoriteIndex + 1)%favorites.length;
-// 	codeToSettings(favorites[favoriteIndex][0]);
+function nextFavorite(){
+	hidePopups();
+	favoriteIndex = (favoriteIndex + 1)%favorites.length;
+	codeToSettings(favorites[favoriteIndex][0]);
 	
-// 	if (favorites[favoriteIndex][1].length > 1){
-// 		document.getElementById('submitted-note').style.display = 'inline';
-// 		document.getElementById('submitted-note').innerHTML = 'submitted by ' + favorites[favoriteIndex][1];
-// 	} else {
-// 		document.getElementById('submitted-note').style.display = 'none';
-// 	}
+	if (favorites[favoriteIndex][1].length > 1){
+		document.getElementById('submitted-note').style.display = 'inline';
+		document.getElementById('submitted-note').innerHTML = 'submitted by ' + favorites[favoriteIndex][1];
+	} else {
+		document.getElementById('submitted-note').style.display = 'none';
+	}
 
-// 	if (!autoZoom){toggle('autozoom');}
-// } 
+} 
 
-// var favoriteIndex = 0;
-// var favorites = [
+var favoriteIndex = 0;
 
-// ];
+var favorites = [
+['base -3 + ω with digits 0 , 1 , ω , -1 - ω , -2 - 3ω , 3 + ω , -1 + 2ω , 1 + ω , -ω , -3 - ω , 1 - 2ω , 2 + 3ω , and -1 where ω² = -1 - ω','name'],
+['base -6 - ω with digits 0 , 2 + 4ω , 4ω , 4 + 2ω , -4 - 4ω , -3 , 3 , -3 - 3ω , 3ω , 2 , -1 - ω , -ω , 1 + ω , -1 , 4 , -2ω , -2 , 2 - 2ω , -3ω , -4 , 2 + 2ω , -2 - 2ω , 1 , ω , -2] + 2ω , 3 + 3ω , -2 - 4ω , 2ω , 4 + 4ω , -4ω , and -4 - 2ω where ω² = -1 - ω',''],
+['base 6 + i with digits 0 , 1 , i , -1 , -i , 1 - 4i , 3 + i , -4 + i , 4 , 1 + 4i , -4 , -4 - 2i , -3 - i , 1 - 3i , 4 + 2i , 3 - 2i , -3 + 2i , 1 - i , 1 + i , -1 + 3i , -1 - i , 2 + 3i , 3 + 2i , -1 - 4i , -4 - i , -1 + i , 2 - 4i , -2 + 4i , 2 - 3i , -3 - 2i , -2 - 3i , -2 + 3i , 4 + i , 4i , 4 - i , -1 + 4i , and -4i where i² = -1',''],
+// ['base 1 + 2i with digits 0 , 1 + i , i , -1 , and -i where i² = -1',''],
+// ['base -4 + i with digits 0 , 1 , i , -1 , -i , 1 + i , 1 - i , -2i , 2 , 1 + 2i , 2 + i , -1 + i , -1 - i , 2i , and 2 + 2i where i² = -1','name'],
+];

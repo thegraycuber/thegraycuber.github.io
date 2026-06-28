@@ -57,11 +57,11 @@ function processInts(){
 
 function indexToColor(inputIndex,lerper){
 	let unprocessed = true;
-	let baseColor = copyColor(palette.base[inputIndex%digits.length]);
+	let baseColor = copyColor(palette.base[inputIndex%palette.base.length]);
 	inputIndex = floor(inputIndex/digits.length);
 	
 	while (inputIndex > 0){
-		baseColor = lerpColor(baseColor,palette.base[inputIndex%digits.length],lerper);
+		baseColor = lerpColor(baseColor,palette.base[inputIndex%palette.base.length],lerper);
 		inputIndex = floor(inputIndex/digits.length);
 	}
 

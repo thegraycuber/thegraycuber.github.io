@@ -75,11 +75,11 @@
 		<arrow-menu class='container menu'>
 
 			<icon-holder class='container' style='justify-content: space-evenly; flex-wrap: wrap;'>
-				<div id='random-icon' onclick='' class='container zoom icon'>
+				<div id='random-icon' onclick='randomize()' class='container zoom icon'>
 					<svg id='svg-random' viewBox='0 0 100 100' stroke-linejoin='round' alt='randomize' class='icon-image center-zont'>
-						<path class='svg-half' d='M 50 40 L 18 21 L 50 6 L 82 21  Z' stroke-width='4' />
-						<path class='svg-half' d='M 43 52 L 13 34 L 14 70 L 43 90  Z' stroke-width='4' />
-						<path class='svg-half' d='M 57 52 L 87 34 L 86 70 L 57 90  Z' stroke-width='4' />
+						<path class='svg-front' d='M 50 40 L 18 21 L 50 6 L 82 21  Z' stroke-width='4' />
+						<path class='svg-front' d='M 43 52 L 13 34 L 14 70 L 43 90  Z' stroke-width='4' />
+						<path class='svg-front' d='M 57 52 L 87 34 L 86 70 L 57 90  Z' stroke-width='4' />
 						
 						<ellipse class='svg-back' cx='50' cy='23' rx='9' ry='7' stroke-opacity='0' />
 						<ellipse class='svg-back' cx='23' cy='54' rx='5' ry='6.5' stroke-opacity='0' />
@@ -92,14 +92,14 @@
 				</div>
 	
 				
-				<div id='favorites-icon' onclick='' class='container zoom icon'>
+				<div id='favorites-icon' onclick='nextFavorite()' class='container zoom icon'>
 					<svg id='svg-favorites' viewBox='0 0 100 100' stroke-linejoin='round' alt='favorites' class='icon-image center-zont'>
 						<defs>
 						  <path id='heart' stroke-opacity='0' d='M 50 45 C 56 37 65 39 68 47 C 69 52 64 60 50 73 C 36 60 31 52 32 47 C 35 39 44 37 50 45' />
 						</defs>
-					  <use href='#heart' class='svg-half' x='-22' y='-26' />
-					  <use href='#heart' class='svg-half' x='24' y='-20' />
-					  <use href='#heart' class='svg-half' x='-2' y='15' />
+					  <use href='#heart' class='svg-front' x='-22' y='-26' />
+					  <use href='#heart' class='svg-front' x='24' y='-20' />
+					  <use href='#heart' class='svg-front' x='-2' y='15' />
 					</svg>	
 					<icon-text>favorites</icon-text>
 				</div>

@@ -1,10 +1,10 @@
 
 
-implement copy/paste
-implement favorites and random
+random uses a better norm for digit counts
 make zoom smart in its direction, not always origin at default?
 change grid size when menu is hidden
 grid and lock together?
+copy/paste unlocked and better resistant to bad inputs
 
 delay processing, only get 10 per frame or so
 displayLimit upper bound?

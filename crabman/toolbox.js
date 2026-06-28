@@ -400,6 +400,68 @@ function text2d(values, unit) {
 	}
 }
 
+
+function textInto2d(rawTextString, unit) {
+
+	let textString = rawTextString.split(' ').join('');
+	let unitIndex = textString.search(unit);
+	if (unitIndex == -1){
+		return [float(textString),0];
+	}
+	
+	let addIndex = textString.search(/\+/); 
+	let minusIndex = textString.search(/\-/); 
+
+	if (addIndex > -1){
+		return [
+			float(textString.substring(0,addIndex)),
+			(addIndex+1==unitIndex)?1:float(textString.substring(addIndex+1,unitIndex))
+		];
+	}
+	if (minusIndex > -1){
+
+		let secondMinusIndex = textString.substring(minusIndex+1).search(/\-/)+minusIndex+1;
+		if (secondMinusIndex > minusIndex){
+
+			if (secondMinusIndex+1 == unitIndex){
+				return [
+					float(textString.substring(0,secondMinusIndex)),
+					-1
+				];
+			}
+			return [
+				float(textString.substring(0,secondMinusIndex)),
+				float(textString.substring(secondMinusIndex,unitIndex))
+			];
+		}
+
+		if (textString.length == 2){
+			return [0,-1];
+		}
+		
+		if (minusIndex == 0){
+			return [
+				0,
+				float(textString.substring(0,unitIndex))
+			];
+		}
+		return [
+			float(textString.substring(0,minusIndex)),
+			float((minusIndex+1==unitIndex)?-1:textString.substring(minusIndex,unitIndex))
+		];
+		
+	}
+
+	if (textString.length == 1){
+		return [0,1];
+	}
+
+	return [
+		0,
+		float(textString.substring(0,unitIndex))
+	];
+}
+
 function pre0(timeValue, returnLength = 2) {
 	let rawString = '0' + str(timeValue);
 	return rawString.substring(rawString.length - returnLength);
