@@ -104,6 +104,7 @@ function copyCode() {
 		hidePopups();
 		document.getElementById('copy-holder').style.display = 'flex';
 		document.getElementById('copy-code').value = settingsToCode();
+		document.getElementById('copy-code').select();
 
 	} else {
 		hidePopups();
@@ -369,7 +370,7 @@ function textInBox(textValue, x, y, s, textColor, backColor, borderRadius = 0) {
 	text(textValue, x, y);
 }
 
-function text2d(values, unit) {
+function text2d(values, unit, spaceType = ' ') {
 
 	if (values[0] == 0) {
 		if (values[1] == 0) {
@@ -386,14 +387,14 @@ function text2d(values, unit) {
 	let textOutput = str(values[0]);
 
 	if (values[1] == 1) {
-		return textOutput + ' + ' + unit;
+		return textOutput + spaceType + '+' + spaceType + unit;
 	} else if (values[1] == -1) {
-		return textOutput + ' - ' + unit;
+		return textOutput + spaceType + '-' + spaceType + unit;
 	} else if (values[1] != 0) {
 		if (values[1] >= 0) {
-			return textOutput + ' + ' + str(values[1]) + unit;
+			return textOutput + spaceType + '+' + spaceType + str(values[1]) + unit;
 		} else {
-			return textOutput + ' - ' + str(abs(values[1])) + unit;
+			return textOutput + spaceType + '-' + spaceType + str(abs(values[1])) + unit;
 		}
 	} else {
 		return textOutput;
@@ -403,7 +404,7 @@ function text2d(values, unit) {
 
 function textInto2d(rawTextString, unit) {
 
-	let textString = rawTextString.split(' ').join('');
+	let textString = rawTextString.split(' ').join('').split(' ').join('');
 	let unitIndex = textString.search(unit);
 	if (unitIndex == -1){
 		return [float(textString),0];

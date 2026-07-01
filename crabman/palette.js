@@ -129,7 +129,7 @@ var palettes = {
 	sunset:{
 		front: '#dcd8f1',
 		back: '#2b1752',
-		mono: '#bc7ff5',
+		mono: '#c35dff',
 		vivid: '#f2c76f',
 		alert: '#e5686e'
 	},
@@ -165,6 +165,10 @@ var palettes = {
 	contrast:{
 		code: "#FFFFFF-#000000-#00FFFF-#FFFF00-#FF00FF"
 	},
+	tsartnoc:{
+		code: "#000000-#FFFFFF-#0000FF-#00CC00-#CC0000"
+	},
+
 
 }
 
@@ -221,8 +225,6 @@ function HSVtoRGB(hue,sat,val){
 /*
 OTHER PALETTES (SPINNING TOY SECRET):
 
-#FFFFFF-#000000-#00FFFF-#FFFF00-#FF00FF // contrast
-#000000-#FFFFFF-#0000FF-#00CC00-#CC0000 // tsartnoc
 #F1BCD8-#61074B-#E63F8B-#CD6BFD-#FFF055 // plum
 #18A50F-#AFE0F0-#355BD3-#D6A307-#E2446E // toy
 #C7F0D1-#0C5A4E-#1AFDAF-#B489FF-#FD88BE // sea

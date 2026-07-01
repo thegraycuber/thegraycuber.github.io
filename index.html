@@ -229,6 +229,39 @@
 			<div id='special-palette-holder' class='container'>
 				<div class='special-palette container'>
 
+					<svg viewBox='0 -4 44 84' alt='tsartnoc preset' id='tsartnoc-preset' 
+						onclick='setExistingPalette("tsartnoc")' stroke-opacity='0' 
+						class='zoom palette-svg center-vert'>
+						<rect width='12' height='80' x='0' y='0' rx='6' ry='6' />
+						<circle cx='34' cy='10' r='10' />
+						<circle cx='34' cy='40' r='10' />
+						<circle cx='34' cy='70' r='10' />
+					</svg>
+					<div class='palette-desc container'>
+						<h2>tsartnoc<span> - july 2026</span></h2>
+						<p>the inverse of the contrast palette, 
+							for when you have bad lighting conditions,
+							but still want to have fun with math!
+						</p>
+
+					</div>	
+
+					<div id='expand-icon' onclick='toggleSpecialPalettes(true)' class='container zoom icon'>
+						<svg id='svg-expand' viewBox='0 0 100 100' alt='expand' class='icon-image'>
+							<path class='svg-front' d='M 15 40 L 50 70 L 85 40' stroke-width='12' stroke-linejoin='round' stroke-linecap='round' fill-opacity='0'/>
+						</svg>
+					</div>
+
+					<div id='collapse-icon' onclick='toggleSpecialPalettes(false)' class='container zoom icon' style='display:none'>
+						<svg id='svg-collapse' viewBox='0 0 100 100' onclick='copyHTML("svg-collapse")' alt='collapse' class='icon-image'>
+							<path class='svg-front' d='M 15 60 L 50 30 L 85 60' stroke-width='12' stroke-linejoin='round' stroke-linecap='round' fill-opacity='0'/>
+						</svg>
+					</div>
+
+				</div>	
+
+				<div class='special-palette container' style='display:none'>
+
 					<svg viewBox='0 -4 44 84' alt='contrast preset' id='contrast-preset' 
 						onclick='setExistingPalette("contrast")' stroke-opacity='0' 
 						class='zoom palette-svg center-vert'>
@@ -245,62 +278,9 @@
 						</p>
 
 					</div>	
-
-					<!-- <div id='expand-icon' onclick='toggleSpecialPalettes(true)' class='container zoom icon'>
-						<svg id='svg-expand' viewBox='0 0 100 100' alt='expand' class='icon-image'>
-							<path class='svg-front' d='M 15 40 L 50 70 L 85 40' stroke-width='12' stroke-linejoin='round' stroke-linecap='round' fill-opacity='0'/>
-						</svg>
-					</div>
-
-					<div id='collapse-icon' onclick='toggleSpecialPalettes(false)' class='container zoom icon' style='display:none'>
-						<svg id='svg-collapse' viewBox='0 0 100 100' onclick='copyHTML("svg-collapse")' alt='collapse' class='icon-image'>
-							<path class='svg-front' d='M 15 60 L 50 30 L 85 60' stroke-width='12' stroke-linejoin='round' stroke-linecap='round' fill-opacity='0'/>
-						</svg>
-					</div> -->
-
-				</div>	
-<!-- 			
-				<div class='special-palette container' style='display:none'>
-
-					<svg viewBox='0 -4 44 84' alt='tsartnoc preset' id='tsartnoc-preset' 
-						onclick='setExistingPalette("tsartnoc")' stroke-opacity='0' 
-						class='zoom palette-svg center-vert'>
-						<rect width='12' height='80' x='0' y='0' rx='6' ry='6' />
-						<circle cx='34' cy='10' r='10' />
-						<circle cx='34' cy='40' r='10' />
-						<circle cx='34' cy='70' r='10' />
-					</svg>
-					<div class='palette-desc container'>
-						<h2>tsartnoc<span> - july 2026</span></h2>
-						<p>the very first monthly palette!
-							dark mode, accessibility, and rainbow. 
-							what else could you need?
-						</p>
-
-					</div>	
 				</div>	
 
 
-				<div class='special-palette container' style='display:none'>
-
-					<svg viewBox='0 -4 44 84' alt='plum preset' id='plum-preset' 
-						onclick='setExistingPalette("plum")' stroke-opacity='0' 
-						class='zoom palette-svg center-vert'>
-						<rect width='12' height='80' x='0' y='0' rx='6' ry='6' />
-						<circle cx='34' cy='10' r='10' />
-						<circle cx='34' cy='40' r='10' />
-						<circle cx='34' cy='70' r='10' />
-					</svg>
-					<div class='palette-desc container'>
-						<h2>plum<span> - august 2026</span></h2>
-						<p>the very first monthly palette!
-							dark mode, accessibility, and rainbow. 
-							what else could you need?
-						</p>
-
-					</div>	
-				</div>	
-				 -->
 			</div>
 
 			<palette-info>select a box to customize the palette</palette-info>
