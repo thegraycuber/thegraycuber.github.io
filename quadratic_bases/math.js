@@ -15,6 +15,8 @@ function nToBaseB(n,b){
 var ints = [];
 function processInts(){
 
+	setPaletteBase();
+	
 	if (modulo(d[0],4) == 1){
 		isHex = true;
 	}
@@ -56,6 +58,10 @@ function processInts(){
 
 
 function indexToColor(inputIndex,lerper){
+
+	// let colorIndex = floor(inputIndex/digits.length**(maxDigitCount-1));
+	// return palette.base[colorIndex%palette.base.length];
+	
 	let unprocessed = true;
 	let baseColor = copyColor(palette.base[inputIndex%palette.base.length]);
 	inputIndex = floor(inputIndex/digits.length);
@@ -116,7 +122,7 @@ class QuadInt {
 		// 	noFill();
 		// }
 		fill(this.index<digits.length?this.colorValue:palette.back);
-		// fill(this.fillValue);
+		// fill(this.colorValue);
 		drawShape(0,0,this.index<digits.length);
 
 		// if (this.index < digits.length){
@@ -145,6 +151,7 @@ function drawShape(x,y,isDigit){
 	if (isHex){
 		hexagon(x, y, shapeSize*0.5);	
 	} else {
+		// rect(x, y, shapeSize*1.6,  shapeSize*1.6);// max(0,0.2-shapeStroke));	
 		rect(x, y, shapeSize,  shapeSize, max(0,0.2-shapeStroke));	
 	}		
 }

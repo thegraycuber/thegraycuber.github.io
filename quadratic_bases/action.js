@@ -201,16 +201,24 @@ var scalarValues, originValues;
 function setMaxInt(limitInt){
 
 	let maxSize = base[0]**2 + base[1]**2;
+	let maxDists = [-100000,-100000];
+	let minDists = [100000,100000];
 	for (let i = 0; i < limitInt; i++){
-		let intSize = ints[i].coords.magSq();
-		if (maxSize < intSize){
-			maxSize = intSize;
-		}
+		maxDists[0] = max(maxDists[0],ints[i].coords.x);
+		maxDists[1] = max(maxDists[1],ints[i].coords.y);
+		minDists[0] = min(minDists[0],ints[i].coords.x);
+		minDists[1] = min(minDists[1],ints[i].coords.y);
 	}
 
 	scalarLerp = 0;
-	scalarValues = [scalar,defaultScalar*4.5/(maxSize**0.5)];
-	originValues = origin.copy();
+	let maxDist = max(maxDists[0]-minDists[0], maxDists[1]-minDists[1]);
+	scalarValues = [scalar,max(2,defaultScalar/(maxDist**0.5))];
+	originValues = [ origin.copy(),
+		createVector(
+			defaultOrigin.x - (maxDists[0]+minDists[0])*0.5*scalarValues[1],
+			defaultOrigin.y + (maxDists[1]+minDists[1])*0.5*scalarValues[1],
+		)
+	];
 }
 
 function iconChecks(){
@@ -221,15 +229,15 @@ function iconChecks(){
 	}
 }
 
-// function customToggleHolder(holderType, holderToggle){
-// 	if (holderType == 'info'){
-// 		document.getElementById('arrow-function').style.display = (holderToggle == 'show'? 'none':'flex');
+function customToggleHolder(holderType, holderToggle){
+	if (holderType == 'info'){
+		document.getElementById('arrow-function').style.display = (holderToggle == 'show'? 'none':'flex');
 	
-// 	} else if (holderType == 'menu'){
-// 		setDefaultOrigin();
+	} else if (holderType == 'menu'){
+		setDefaultOrigin();
 		
-// 	}
-// }
+	}
+}
 
 
 function newDigit(){
@@ -373,8 +381,9 @@ function randomize(){
 	setDigit(randomDonut(1.2,2),digits.length,true);
 	snapToBest(digits.length,true);
 
-	let digitCount = max(2,normC(base)**0.5-1);//floor(random(1,1.5)**2));
-	digits = [[0,0]];
+	let baseNorm = isHex ? quadMult(base,[base[0]-base[1],-base[1]]) : quadMult(base,[base[0],-base[1]]);
+	let digitCount = max(2,baseNorm[0]-floor(random(1,1.9)**2));
+	digits = [[[0,0]]];
 	for (let dig = 0; dig < digitCount; dig++){
 		digits.push([]);
 		setDigit(randomDonut(0.5,1.6),dig+1,true);
@@ -385,6 +394,10 @@ function randomize(){
 	controllers['arrow-limit'].giveIndex(maxDigitCount-1,true);
 
 	processInts();
+	setMaxInt(ints.length);
+	scalarLerp = 1;
+
+	showEditIcon();
 
 }
 
@@ -396,7 +409,7 @@ function randomDonut(lowerRoot, upperRoot){
 }
 
 
-
+var goodUnits = ['i','j','k','ω',''];
 function codeToSettings(rawInputStr){
 
 	let inputStr = rawInputStr.split(' ').join('').split(' ').join('');
@@ -409,17 +422,23 @@ function codeToSettings(rawInputStr){
 	// for (let dig = 0; dig < settingsObject.digits.length; dig++){
 	// 	digits.push([settingsObject.digits[dig]]);
 	// }
+	let baseIndex = inputStr.search('base');
+	let digitsIndex = inputStr.search('digits');
 	let whereIndex = inputStr.search('where');
-	if (whereIndex == -1){
+	if (baseIndex == -1 || digitsIndex == -1 || whereIndex == -1){
 		return false;
 	}
 
 	let codeUnit = inputStr.substring(whereIndex+5, whereIndex+6);
-	
-	let baseIndex = inputStr.search('base');
-	let digitsIndex = inputStr.search('digits');
+	if (!goodUnits.includes(codeUnit) == -1){
+		return false;
+	}
 
-	base = textInto2d(inputStr.substring(baseIndex+4,digitsIndex-4),codeUnit);
+	let testBase = textInto2d(inputStr.substring(baseIndex+4,digitsIndex-4),codeUnit);
+	if (isNaN(testBase[0])||isNaN(testBase[1])){
+		return false;
+	}
+	base = [...testBase];
 	let digitList = inputStr.substring(digitsIndex+6,whereIndex).replace('and','') .split(',');
 	
 	maxDigitCount = floor(log(desiredLimit)/log(digitList.length));
@@ -427,11 +446,17 @@ function codeToSettings(rawInputStr){
 
 	digits = [];
 	for (let newDigit of digitList){
-		digits.push([textInto2d(newDigit,codeUnit)]);
+		let testNum = textInto2d(newDigit,codeUnit);
+		if (isNaN(testNum[0])||isNaN(testNum[1])){
+			return false;
+		}
+		digits.push([testNum]);
 	}
 
 	let pasteD = textInto2d(inputStr.substring(whereIndex+8),codeUnit);
-
+	if (isNaN(pasteD[0])||isNaN(pasteD[1])){
+		return false;
+	}
 	if (pasteD[1] == 0){
 		controllers['arrow-definition'].giveIndex(dList.indexOf(pasteD[0]));
 	} else {
@@ -440,6 +465,9 @@ function codeToSettings(rawInputStr){
 
 	setupLayout();
 	processInts();
+	setMaxInt(ints.length);
+	scalarLerp = 1;
+
 	return true;
 }
 
@@ -457,18 +485,18 @@ function settingsToCode(){
 	// }
 	// return JSON.stringify(settingsObjects);
 	
-	let settingsString = 'base ' + text2d(base,verticalUnit) + ' ';
+	let settingsString = 'base ' + text2d(base,verticalUnit,'') + ' ';
 
 	settingsString += 'with digits ' ;
 	for (let dig = 0; dig < digits.length; dig++){
 		if (dig + 1 < digits.length){
-			settingsString += text2d(digits[dig][0],verticalUnit) + ' , ';
+			settingsString += text2d(digits[dig][0],verticalUnit,'') + ', ';
 		} else {
-			settingsString += 'and ' + text2d(digits[dig][0],verticalUnit);
+			settingsString += 'and ' + text2d(digits[dig][0],verticalUnit,'');
 		}
 	}
 
-	settingsString += ' where ' + verticalUnit + '² = ' + text2d(d,verticalUnit);
+	settingsString += ' where ' + verticalUnit + '² = ' + text2d(d,verticalUnit,'');
 	return settingsString;
 }
 
@@ -484,15 +512,16 @@ function nextFavorite(){
 	} else {
 		document.getElementById('submitted-note').style.display = 'none';
 	}
-
+	
+	showEditIcon();
 } 
 
 var favoriteIndex = 0;
 
 var favorites = [
-['base -3 + ω with digits 0 , 1 , ω , -1 - ω , -2 - 3ω , 3 + ω , -1 + 2ω , 1 + ω , -ω , -3 - ω , 1 - 2ω , 2 + 3ω , and -1 where ω² = -1 - ω','name'],
-['base -6 - ω with digits 0 , 2 + 4ω , 4ω , 4 + 2ω , -4 - 4ω , -3 , 3 , -3 - 3ω , 3ω , 2 , -1 - ω , -ω , 1 + ω , -1 , 4 , -2ω , -2 , 2 - 2ω , -3ω , -4 , 2 + 2ω , -2 - 2ω , 1 , ω , -2] + 2ω , 3 + 3ω , -2 - 4ω , 2ω , 4 + 4ω , -4ω , and -4 - 2ω where ω² = -1 - ω',''],
-['base 6 + i with digits 0 , 1 , i , -1 , -i , 1 - 4i , 3 + i , -4 + i , 4 , 1 + 4i , -4 , -4 - 2i , -3 - i , 1 - 3i , 4 + 2i , 3 - 2i , -3 + 2i , 1 - i , 1 + i , -1 + 3i , -1 - i , 2 + 3i , 3 + 2i , -1 - 4i , -4 - i , -1 + i , 2 - 4i , -2 + 4i , 2 - 3i , -3 - 2i , -2 - 3i , -2 + 3i , 4 + i , 4i , 4 - i , -1 + 4i , and -4i where i² = -1',''],
-// ['base 1 + 2i with digits 0 , 1 + i , i , -1 , and -i where i² = -1',''],
-// ['base -4 + i with digits 0 , 1 , i , -1 , -i , 1 + i , 1 - i , -2i , 2 , 1 + 2i , 2 + i , -1 + i , -1 - i , 2i , and 2 + 2i where i² = -1','name'],
+['base -3+ω with digits 0, 1, ω, -1-ω, -2-3ω, 3+ω, -1+2ω, 1+ω, -ω, -3-ω, 1-2ω, 2+3ω, and -1 where ω² = -1-ω','name'],
+['base -6-ω with digits 0, 2+4ω, 4ω, 4+2ω, -4-4ω, -3, 3, -3-3ω, 3ω, 2, -1-ω, -ω, 1+ω, -1, 4, -2ω, -2, 2-2ω, -3ω, -4, 2+2ω, -2-2ω, 1, ω, -2+2ω, 3+3ω, -2-4ω, 2ω, 4+4ω, -4ω, and -4-2ω where ω² = -1-ω',''],
+['base 6+i with digits 0, 1, i, -1, -i, 1-4i, 3+i, -4+i, 4, 1+4i, -4, -4-2i, -3-i, 1-3i, 4+2i, 3-2i, -3+2i, 1-i, 1+i, -1+3i, -1-i, 2+3i, 3+2i, -1-4i, -4-i, -1+i, 2-4i, -2+4i, 2-3i, -3-2i, -2-3i, -2+3i, 4+i, 4i, 4-i, -1+4i, and -4i where i² = -1',''],
+['base -2+2ω with digits 0, 1, -2-2ω, -2, -1-ω, -2+ω, 2ω, ω, -1+2ω, -ω, and -1-2ω where ω² = -1-ω',''],
+['base -2+3ω with digits 0, -ω, -1-ω, ω, -3-ω, 2+2ω, -1+2ω, -2ω, 1, 1-2ω, 3+ω, -2-3ω, -2, -3-3ω, 2+3ω, 3ω, 1+ω, -1, and 3 where ω² = -1-ω',''],
 ];

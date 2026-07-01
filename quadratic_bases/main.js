@@ -20,6 +20,19 @@ function draw(){
 
 	iconChecks();
 
+	if (scalarLerp < 2){
+		scalarLerp = min(1, scalarLerp + (Date.now()-lastFrame)/1000);
+		lerpValue = sin((scalarLerp-0.5)*PI)/2+0.5;
+		scalar = lerp(...scalarValues,lerpValue);
+		origin = p5.Vector.lerp(originValues[0],originValues[1],lerpValue);
+
+		if (scalarLerp == 1){
+			scalarLerp = 2;
+		}
+	}
+	lastFrame = Date.now();
+
+
 	if (dragged > -1){
 		setDigit(addC(draggedSubFocus, focusPrincipal), dragged);
 	}
@@ -41,7 +54,6 @@ function draw(){
 	for (let i = displayLimit-1; i > -1; i--) {
 		ints[i].show();
 	}
-
 	
 	resetMatrix();
 	grid.drawLabels();
@@ -78,18 +90,6 @@ function draw(){
 	pop();
 
 
-
-	if (scalarLerp < 2){
-		scalarLerp = min(1, scalarLerp + (Date.now()-lastFrame)/1000);
-		lerpValue = sin((scalarLerp-0.5)*PI)/2+0.5;
-		scalar = lerp(...scalarValues,lerpValue);
-		origin = p5.Vector.lerp(originValues,defaultOrigin,lerpValue);
-
-		if (scalarLerp == 1){
-			scalarLerp = 2;
-		}
-	}
-	lastFrame = Date.now();
 }	  
 					//   <rect class='svg-alert' width='80' height='80' x='10' y='10' rx='10' ry='10' fill-opacity='1'></rect>
 					//   <path class='svg-back' d='M 25 30 L 75 30' ></path>
@@ -144,7 +144,7 @@ function setupLayout(){
 	setOriginAndGrid();
 	origin = defaultOrigin.copy();
 	
-	defaultScalar = min(width,height*0.6)*0.10;
+	defaultScalar = min(width*1.5,height*0.6)*0.10;
 	scalar = defaultScalar;
 	scaleMin = 1;
 
@@ -178,28 +178,68 @@ function preload() {
 
 function corePaletteCustom(){
 
-	let acc = [
-		palette.mono,
-		palette.vivid,
-		palette.alert
-	]
-
-	palette.base = [lerpColor(palette.back, palette.mono, 0.35),palette.front];
-	for (let a of acc){
-		palette.base.push(lerpColor(a,a,0));
-	}
-	for (let a of acc){
-		palette.base.push(lerpColor(a,palette.front,0.4));
-	}
-	for (let a of acc){
-		palette.base.push(lerpColor(a,palette.back,0.2));
-	}
+	// setPaletteBase();
 
 	palette.backtrans = color(red(palette.back),green(palette.back),blue(palette.back),0);
 
 	for (let i of ints){
 		i.setColor();
 	}
+
 }
 
 
+function setPaletteBase(){
+
+	if (digits.length <= 8){
+		palette.base = [
+			lerpColor(palette.back, palette.mono, 0.5),
+			palette.front,
+			palette.mono,
+			palette.vivid,
+			palette.alert,
+			lerpColor(palette.mono,palette.front,0.4),
+			lerpColor(palette.vivid,palette.front,0.4),
+			lerpColor(palette.alert,palette.front,0.4),
+		];
+
+	} else {
+		palette.base = [lerpColor(palette.back, palette.mono, 0.5)];
+
+		// let maxMag = 0;
+		// let digMags = [0];
+		// for (let dig = 1; dig < digits.length; dig++){
+		// 	let newDigMag = isHex?digits[dig][0][0]**2+digits[dig][0][1]**2-digits[dig][0][0]*digits[dig][0][1]:normC(digits[dig][0]);
+		// 	newDigMag = newDigMag**0.5;
+		// 	maxMag = max(maxMag,newDigMag);
+		// 	digMags.push(newDigMag);
+		// }
+
+		for (let dig = 1; dig < digits.length; dig++){
+			let digArg = isHex?atan2(digits[dig][0][1]*0.866,digits[dig][0][0]-digits[dig][0][1]*0.5):atan2(digits[dig][0][1],digits[dig][0][0]);
+			digArg = digArg*3/PI;
+			let digColor;
+			let digLerp = modulo(digArg,1);
+			if (digArg < -2){
+				digColor = lerpColor(palette.front,palette.alert,digLerp);
+			} else if (digArg < -1){
+				digColor = lerpColor(palette.alert,palette.front,digLerp);
+			} else if (digArg < 0){
+				digColor = lerpColor(palette.front,palette.mono,digLerp);
+			} else if (digArg < 1){
+				digColor = lerpColor(palette.mono,palette.front,digLerp);
+			} else if (digArg < 2){
+				digColor = lerpColor(palette.front,palette.vivid,digLerp);
+			} else if (digArg < 3){
+				digColor = lerpColor(palette.vivid,palette.front,digLerp);
+			} else {
+				digColor = palette.front;
+			} 
+			// let newDigMag = isHex?digits[dig][0][0]**2+digits[dig][0][1]**2-digits[dig][0][0]*digits[dig][0][1]:normC(digits[dig][0]);
+			// let sizeLerp = 1/(1+0.1*newDigMag);
+			// palette.base.push(lerpColor(palette.base[0], digColor, sizeLerp));
+			palette.base.push( digColor);
+			// palette.base.push(lerpColor(palette.base[0], digColor, digMags[dig]/maxMag));
+		}
+	}
+}
