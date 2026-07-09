@@ -35,11 +35,7 @@ function touchStarted(){
 	}
 	
 	for (let dig = digits.length-1; dig > 0 ; dig--){
-		// if (closeC(mouseInt,digits[dig][0])){
-		// 	dragged = dig;
-		// 	draggedSubFocus = subC(digits[dig][0],focusPrincipal);
-		// 	break;
-		// }
+
 		if (ints[dig].coords.dist(focusRaw) < 0.58){
 			showViewIcon();
 			dragged = dig;
@@ -49,8 +45,8 @@ function touchStarted(){
 	}
 
 	if (dragged > -1 && digits.length > 2){
-		document.getElementById('delete-digit-icon').style.display = 'flex';
-		document.getElementById('new-digit-icon').style.display = 'none';
+		document.getElementById('trash-digit-icon').style.display = 'flex';
+		document.getElementById('delete-digit-icon').style.display = 'none';
 	}
 }
 
@@ -60,8 +56,8 @@ function touchEnded(){
 	if (dragged > -1){
 		dropDigit();
 		dragged = -1;
-		document.getElementById('delete-digit-icon').style.display = 'none';
-		document.getElementById('new-digit-icon').style.display = 'flex';
+		document.getElementById('trash-digit-icon').style.display = 'none';
+		document.getElementById('delete-digit-icon').style.display = 'flex';
 	}
 	
 	if (mouseInMenu || hideCanvas){
@@ -150,9 +146,11 @@ function updateMovement(){
 
 function mouseWheel(event){
 	
-	if (hideCanvas){return;}
-	event.preventDefault(); 
+
 	updateTouchInfo();
+
+	if (hideCanvas || mouseOverMenu()){return;} 
+	event.preventDefault(); 
 	showEditIcon();
 
 	// scrolling will update scalar logarithmically 
@@ -200,7 +198,7 @@ var scalarLerp = 2;
 var scalarValues, originValues;
 function setMaxInt(limitInt){
 
-	let maxSize = base[0]**2 + base[1]**2;
+	// let maxSize = base[0]**2 + base[1]**2;
 	let maxDists = [-100000,-100000];
 	let minDists = [100000,100000];
 	for (let i = 0; i < limitInt; i++){
@@ -253,28 +251,47 @@ function newDigit(){
 	dropDigit(true);
 	processInts();
 	dragged = -1;
+
+	if (digits.length == 3){
+		toggle('delete');
+	}
 }
+
+
+function deleteDigit(digitIndex = digits.length-1){
+
+	if (digits.length < 3){
+		return;
+	}
+
+	digits.splice(digitIndex,1);
+	maxDigitCount = floor(log(desiredLimit)/log(digits.length));
+	controllers['arrow-limit'].giveIndex(maxDigitCount-1,true);
+	processInts();
+
+	if (digits.length == 2){
+		toggle('delete');
+	}
+}
+
+function mouseOverMenu(){
+	let pixelPos = principalToPixel(principalPos);
+	return portrait ? pixelPos.y > deleteLimit : pixelPos.x < deleteLimit;
+}
+
 
 var snapIsOn = true;
 function dropDigit(digitIsNew = false){
 
 	if (digits.length > 2 && dragged < digits.length && !digitIsNew){
-
-		let pixelPos = principalToPixel(principalPos);
-		let deleteDrop = portrait ? pixelPos.y > deleteLimit : pixelPos.x < deleteLimit;
-		if (deleteDrop){
-			digits.splice(dragged,1);
-			
-			maxDigitCount = floor(log(desiredLimit)/log(digits.length));
-			controllers['arrow-limit'].giveIndex(maxDigitCount-1,true);
-			
-			processInts();
-			deleteDrop = false;
+		if (mouseOverMenu()){
+			deleteDigit(dragged);
 			return;
 		}
 	}
 
 	if (!snapIsOn){
+		processInts();
 		return;
 	}
 
@@ -282,7 +299,7 @@ function dropDigit(digitIsNew = false){
 }
 
 
-function setDigit(newArray,digitIndex,skipProcessing = false){
+function setDigit(newArray,digitIndex,skipProcessing = false,setDesc = true){
 	if (digitIndex < digits.length){
 		digits[digitIndex] = [newArray];	
 		
@@ -290,10 +307,10 @@ function setDigit(newArray,digitIndex,skipProcessing = false){
 		base = newArray;	
 		truncatePowers();
 	}
-	ints[digitIndex] = new QuadInt(...newArray, 0, digitIndex);
+	ints[digitIndex] = new QuadInt(...newArray, 1, digitIndex, digitIndex);
 	
 	if (!skipProcessing){
-		processInts();	
+		processInts(setDesc);	
 	}
 }
 
@@ -321,67 +338,98 @@ function toggle(iconName){
 	}
 }
 
+function setSystem(vUnit,skipProcessing=false){
+
+	verticalUnit = vUnit;
+	isHex = vUnit == 'ω';
+	d = [-1,isHex?-1:0];
+	truncatePowers();
+
+	if (!skipProcessing){
+		processInts();
+	}
+
+	document.getElementById('iwaginary-icon').style.display = isHex?'none':'flex';
+	document.getElementById('imaginary-icon').style.display = isHex?'flex':'none';
+}
+
+
 
 var desiredLimit = 3125;
 var verticalUnit = 'i'
 function arrowHandlerCustom(clickedControl){
 	hidePopups();
 	
-	if (clickedControl.id == 'arrow-definition'){
-		let dValue = dList[clickedControl.index];
+	// if (clickedControl.id == 'arrow-definition'){
+	// 	let dValue = dList[clickedControl.index];
 		
-		isHex = modulo(dValue,4) == 1;
-		if (isHex){
-			d = [round((dValue-1)/4),-1];
-		} else {
-			d = [dValue,0];
-		}
+	// 	isHex = modulo(dValue,4) == 1;
+	// 	if (isHex){
+	// 		d = [round((dValue-1)/4),-1];
+	// 	} else {
+	// 		d = [dValue,0];
+	// 	}
 
-		if (dValue == -1){
-			verticalUnit = 'i';
-		} else if (dValue == 0){
-			verticalUnit = 'ε';
-		} else if (dValue == -3){
-			verticalUnit = 'ω';
-		} else {
-			verticalUnit = 'k';
-		}
+	// 	verticalUnit = isHex ?  'ω' : 'i';
+
+		// if (dValue == -1){
+		// 	verticalUnit = 'i';
+		// } else if (dValue == 0){
+		// 	verticalUnit = 'ε';
+		// } else if (dValue == -3){
+		// 	verticalUnit = 'ω';
+		// } else {
+		// 	verticalUnit = 'k';
+		// }
 		
-		truncatePowers();
+	// 	truncatePowers();
 		
-	} else if (clickedControl.id == 'arrow-limit'){
+	// } else 
+	if (clickedControl.id == 'arrow-limit'){
 		
 		maxDigitCount = clickedControl.index+1;
 		desiredLimit = digits.length**maxDigitCount;
+		updateColorList();
+		processInts();
+
+	} else if (clickedControl.id == 'arrow-color'){
+		
+		colorType = clickedControl.index;
+		for(let int of ints){
+			int.setColor();
+		}
 	} 
 	
-	processInts();
+	
+}
+
+function updateColorList(){
+	let colorList = [...controllers['arrow-color'].list];
+
+	let colorMax = colorList.length - 2;
+	while (colorMax < maxDigitCount){
+		colorMax++;
+		colorList.push(str(colorMax) + ordinal[colorMax%10] + ' digit');
+	}
+	while (colorList.length - 2 > maxDigitCount){
+		colorList.pop();
+	}
+	controllers['arrow-color'].giveList(colorList,-1,true);
+	colorType = controllers['arrow-color'].index;
 }
 
 
 function randomize(){
 
-	let randomDefinition = random();
+	let deleteToggled = digits.length == 2;
 
-	if (randomDefinition < 0.25){
-		controllers['arrow-definition'].giveIndex(dList.length-1);
-	} else if (randomDefinition < 0.5){
-		controllers['arrow-definition'].giveIndex(dList.length-3);
-	} else if (randomDefinition < 0.6){
-		controllers['arrow-definition'].giveIndex(0);
-	} else if (randomDefinition < 0.7){
-		controllers['arrow-definition'].giveIndex(1);
-	} else if (randomDefinition < 0.8){
-		controllers['arrow-definition'].giveIndex(dList.length-2);
-	} else {
-		controllers['arrow-definition'].randomize();
-	}
-
+	// controllers['arrow-definition'].randomize();
+	setSystem(random()<0.5?'i':'ω',true);
 
 	setDigit(randomDonut(1.2,2),digits.length,true);
 	snapToBest(digits.length,true);
 
-	let baseNorm = isHex ? quadMult(base,[base[0]-base[1],-base[1]]) : quadMult(base,[base[0],-base[1]]);
+	let baseNorm = quadNorm(base);
 	let digitCount = max(2,baseNorm[0]-floor(random(1,1.9)**2));
 	digits = [[[0,0]]];
 	for (let dig = 0; dig < digitCount; dig++){
@@ -392,12 +440,18 @@ function randomize(){
 
 	maxDigitCount = floor(log(desiredLimit)/log(digits.length));
 	controllers['arrow-limit'].giveIndex(maxDigitCount-1,true);
+	updateColorList();
+	controllers['arrow-color'].randomize(true);
 
 	processInts();
 	setMaxInt(ints.length);
 	scalarLerp = 1;
 
 	showEditIcon();
+
+	if (deleteToggled != (digits.length == 2)){
+		toggle('delete');
+	}
 
 }
 
@@ -411,62 +465,83 @@ function randomDonut(lowerRoot, upperRoot){
 
 var goodUnits = ['i','j','k','ω',''];
 function codeToSettings(rawInputStr){
+	let deleteToggled = digits.length == 2;
+
+	let lockIntegers = true;
 
 	let inputStr = rawInputStr.split(' ').join('').split(' ').join('');
-	// let settingsObject = JSON.parse(inputStr);
-	// controllers['arrow-definition'].giveIndex(dList.indexOf(settingsObject.square));
-	
-	// base = settingsObject.base;
 
-	// digits = [];
-	// for (let dig = 0; dig < settingsObject.digits.length; dig++){
-	// 	digits.push([settingsObject.digits[dig]]);
-	// }
+
 	let baseIndex = inputStr.search('base');
 	let digitsIndex = inputStr.search('digits');
-	let whereIndex = inputStr.search('where');
-	if (baseIndex == -1 || digitsIndex == -1 || whereIndex == -1){
+	// let whereIndex = inputStr.search('where');
+
+	if (baseIndex == -1 || digitsIndex == -1){
 		return false;
 	}
 
-	let codeUnit = inputStr.substring(whereIndex+5, whereIndex+6);
-	if (!goodUnits.includes(codeUnit) == -1){
-		return false;
-	}
+	// let codeUnit = inputStr.substring(whereIndex+5, whereIndex+6);
+	// if (!goodUnits.includes(codeUnit) == -1){
+	// 	return false;
+	// }
+
+	let notOmega = inputStr.indexOf('ω') == -1;
+	let codeUnit = notOmega ? 'i' : 'ω';
+
 
 	let testBase = textInto2d(inputStr.substring(baseIndex+4,digitsIndex-4),codeUnit);
 	if (isNaN(testBase[0])||isNaN(testBase[1])){
 		return false;
 	}
-	base = [...testBase];
-	let digitList = inputStr.substring(digitsIndex+6,whereIndex).replace('and','') .split(',');
-	
-	maxDigitCount = floor(log(desiredLimit)/log(digitList.length));
-	controllers['arrow-limit'].giveIndex(maxDigitCount-1,true);
+	lockIntegers = lockIntegers && equalArrays(base,roundC(base,4));
 
-	digits = [];
+	let digitList = inputStr.substring(digitsIndex+6).replace('and','') .split(',');
+	maxDigitCount = floor(log(desiredLimit)/log(digitList.length));
+
+	let newDigits = [];
 	for (let newDigit of digitList){
 		let testNum = textInto2d(newDigit,codeUnit);
 		if (isNaN(testNum[0])||isNaN(testNum[1])){
 			return false;
 		}
-		digits.push([testNum]);
+		newDigits.push([testNum]);
+		lockIntegers = lockIntegers && equalArrays(testNum,roundC(testNum,0));
 	}
 
-	let pasteD = textInto2d(inputStr.substring(whereIndex+8),codeUnit);
-	if (isNaN(pasteD[0])||isNaN(pasteD[1])){
-		return false;
+	base = [...testBase];
+	digits = newDigits;
+	if (notOmega){
+
 	}
-	if (pasteD[1] == 0){
-		controllers['arrow-definition'].giveIndex(dList.indexOf(pasteD[0]));
-	} else {
-		controllers['arrow-definition'].giveIndex(dList.indexOf(pasteD[0]*4+1));
+
+	setSystem(notOmega?'i':'ω',true);
+	// controllers['arrow-definition'].giveIndex(notOmega?0:1);
+	// let pasteD = textInto2d(inputStr.substring(whereIndex+8),codeUnit);
+	// if (isNaN(pasteD[0])||isNaN(pasteD[1])){
+	// 	return false;
+	// }
+	// if (pasteD[1] == 0){
+	// 	controllers['arrow-definition'].giveIndex(dList.indexOf(pasteD[0]));
+	// } else {
+	// 	controllers['arrow-definition'].giveIndex(dList.indexOf(pasteD[0]*4+1));
+	// }
+
+	if (snapIsOn != lockIntegers){
+		toggle('lock');
 	}
+	if (deleteToggled != (digits.length == 2)){
+		toggle('delete');
+	}
+
 
 	setupLayout();
+	controllers['arrow-limit'].giveIndex(maxDigitCount-1,true);
+	updateColorList();
+
 	processInts();
 	setMaxInt(ints.length);
 	scalarLerp = 1;
+
 
 	return true;
 }
@@ -478,25 +553,18 @@ function settingsToCode(){
 		digitArray.push(roundC(dig[0],2));
 	}
 	
-	// let settingsObjects = {
-	// 	base: base,
-	// 	square: dList[controllers['arrow-definition'].index],
-	// 	digits: digitArray
-	// }
-	// return JSON.stringify(settingsObjects);
-	
-	let settingsString = 'base ' + text2d(base,verticalUnit,'') + ' ';
+	let settingsString = 'base ' + text2d(roundC(base,3),verticalUnit,'') + ' ';
 
 	settingsString += 'with digits ' ;
 	for (let dig = 0; dig < digits.length; dig++){
 		if (dig + 1 < digits.length){
-			settingsString += text2d(digits[dig][0],verticalUnit,'') + ', ';
+			settingsString += text2d(roundC(digits[dig][0],3),verticalUnit,'') + ', ';
 		} else {
-			settingsString += 'and ' + text2d(digits[dig][0],verticalUnit,'');
+			settingsString += 'and ' + text2d(roundC(digits[dig][0],3),verticalUnit,'');
 		}
 	}
 
-	settingsString += ' where ' + verticalUnit + '² = ' + text2d(d,verticalUnit,'');
+	// settingsString += ' where ' + verticalUnit + '² = ' + text2d(d,verticalUnit,'');
 	return settingsString;
 }
 
@@ -519,9 +587,9 @@ function nextFavorite(){
 var favoriteIndex = 0;
 
 var favorites = [
-['base -3+ω with digits 0, 1, ω, -1-ω, -2-3ω, 3+ω, -1+2ω, 1+ω, -ω, -3-ω, 1-2ω, 2+3ω, and -1 where ω² = -1-ω','name'],
-['base -6-ω with digits 0, 2+4ω, 4ω, 4+2ω, -4-4ω, -3, 3, -3-3ω, 3ω, 2, -1-ω, -ω, 1+ω, -1, 4, -2ω, -2, 2-2ω, -3ω, -4, 2+2ω, -2-2ω, 1, ω, -2+2ω, 3+3ω, -2-4ω, 2ω, 4+4ω, -4ω, and -4-2ω where ω² = -1-ω',''],
-['base 6+i with digits 0, 1, i, -1, -i, 1-4i, 3+i, -4+i, 4, 1+4i, -4, -4-2i, -3-i, 1-3i, 4+2i, 3-2i, -3+2i, 1-i, 1+i, -1+3i, -1-i, 2+3i, 3+2i, -1-4i, -4-i, -1+i, 2-4i, -2+4i, 2-3i, -3-2i, -2-3i, -2+3i, 4+i, 4i, 4-i, -1+4i, and -4i where i² = -1',''],
-['base -2+2ω with digits 0, 1, -2-2ω, -2, -1-ω, -2+ω, 2ω, ω, -1+2ω, -ω, and -1-2ω where ω² = -1-ω',''],
-['base -2+3ω with digits 0, -ω, -1-ω, ω, -3-ω, 2+2ω, -1+2ω, -2ω, 1, 1-2ω, 3+ω, -2-3ω, -2, -3-3ω, 2+3ω, 3ω, 1+ω, -1, and 3 where ω² = -1-ω',''],
+['base -3+ω with digits 0, 1, ω, -1-ω, -2-3ω, 3+ω, -1+2ω, 1+ω, -ω, -3-ω, 1-2ω, 2+3ω, and -1',''],
+['base -6-ω with digits 0, 2+4ω, 4ω, 4+2ω, -4-4ω, -3, 3, -3-3ω, 3ω, 2, -1-ω, -ω, 1+ω, -1, 4, -2ω, -2, 2-2ω, -3ω, -4, 2+2ω, -2-2ω, 1, ω, -2+2ω, 3+3ω, -2-4ω, 2ω, 4+4ω, -4ω, and -4-2ω',''],
+['base 6+i with digits 0, 1, i, -1, -i, 1-4i, 3+i, -4+i, 4, 1+4i, -4, -4-2i, -3-i, 1-3i, 4+2i, 3-2i, -3+2i, 1-i, 1+i, -1+3i, -1-i, 2+3i, 3+2i, -1-4i, -4-i, -1+i, 2-4i, -2+4i, 2-3i, -3-2i, -2-3i, -2+3i, 4+i, 4i, 4-i, -1+4i, and -4i',''],
+['base -2+2ω with digits 0, 1, -2-2ω, -2, -1-ω, -2+ω, 2ω, ω, -1+2ω, -ω, and -1-2ω',''],
+['base -2+3ω with digits 0, -ω, -1-ω, ω, -3-ω, 2+2ω, -1+2ω, -2ω, 1, 1-2ω, 3+ω, -2-3ω, -2, -3-3ω, 2+3ω, 3ω, 1+ω, -1, and 3',''],
 ];

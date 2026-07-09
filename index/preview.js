@@ -884,7 +884,91 @@ var fav = -1;
 /****************************************************************************************************
 ****************************************************************************************************
 
-									quadratic bases
+									imaginary bases
 
 ****************************************************************************************************
 *****************************************************************************************************/
+
+
+function imaginaryBaseDraw(){
+
+	scale(imaginarySettings.scalar*unit,-imaginarySettings.scalar*unit);
+
+
+	let lerper = 10*previewTimer;
+	let lerpIndex = floor(lerper/3)%3;
+	if (lerper%3 < 1){
+		imaginarySettings.size = imaginarySettings.bases[lerpIndex][0];
+		imaginarySettings.angle = imaginarySettings.bases[lerpIndex][1];
+	} else {
+		let lerpValue = (lerper%3-1)/2;
+		let nextLerp = (lerpIndex+1)%3;
+		imaginarySettings.size = lerpSmooth(imaginarySettings.bases[lerpIndex][0],imaginarySettings.bases[nextLerp][0],lerpValue);
+		imaginarySettings.angle = lerpSmooth(imaginarySettings.bases[lerpIndex][1],imaginarySettings.bases[nextLerp][1],lerpValue);
+	}
+
+	rotate(imaginarySettings.angle*imaginarySettings.slaps);
+	scale(imaginarySettings.size**imaginarySettings.slaps);
+
+	stroke(palette.back);
+	strokeWeight(0.05);
+	
+	let finalScale = imaginarySettings.size**(imaginarySettings.births-imaginarySettings.slaps);
+	let finalRotate = imaginarySettings.angle*(imaginarySettings.births-imaginarySettings.slaps);
+	imaginaryBaseIterate(0,imaginarySettings.births,imaginarySettings,true,finalScale,finalRotate);
+
+}
+
+var imaginarySettings;
+
+function imaginaryBasePrep(){
+	imaginarySettings = {
+		slaps: 3,
+		births: 4,
+		bases: [
+			[2.236,0.4636476],
+			[2.236,2.034443],
+			[2.828,2.3561944],
+		],
+		isHex: false,
+		scalar: 0.06,
+		digits: [
+			[0,0],
+			[1,0],
+			[-1,0],
+			[0,1],
+			[0,-1]
+		]
+	}
+
+
+}
+
+
+function imaginaryBaseIterate(color,level,data,firstLayer,finalScale,finalRotate){
+
+	if (level == 0){
+		scale(finalScale);
+		rotate(finalRotate);
+		fill(palette.base[color]);
+		drawImaginaryBaseShape(data.isHex);
+		return;
+	}
+	let digScale = min(1,level);
+	for (let dig = data.digits.length -1; dig > -1; dig--){
+		push();
+		translate(digScale*data.digits[dig][0],digScale*data.digits[dig][1]);
+		scale(data.size**(-digScale));
+		rotate(-data.angle*digScale);
+		imaginaryBaseIterate(firstLayer?dig:color,level-digScale,data,false,finalScale,finalRotate);
+		pop();
+	}
+}
+
+function drawImaginaryBaseShape(isHex){
+	if (isHex){
+		hexagon(0,0,0.9);
+	} else {
+		rect(0,0, 0.9,  0.9, 0.15);	
+	}		
+}

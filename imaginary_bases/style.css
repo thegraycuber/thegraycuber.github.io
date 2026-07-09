@@ -56,21 +56,34 @@ arrow-text{
 	
 	.icon {
 		margin: 1vh;
-		width: 10vh;
-		height: 6vh;
-		font-size: 1.5vh;
+		width: 7vh;
+		height: 7vh;
+		font-size: 1.2vh;
 	}
 	
 	.icon-image {
+		height: 5vh;
+	}
+
+	icon-menu .icon {
+		margin: 0.8vh;
+		width: 5vh;
 		height: 6vh;
+		font-size: 1.2vh;
+	}
+
+	icon-menu .icon-image {
+		height: 4vh;
 	}
 
 
 	#system-desc{
 		font-size: 2.5vh;
-		height: 20vh;
-		max-height: 24vw;
+		min-width: 18vh;
+		height: 24vh;
+		max-height: 24vh;
 		padding: 2vh;
+		overflow-y: scroll;
 	}
 
 	#system-desc h2{
@@ -158,26 +171,37 @@ arrow-text{
 	
 	.icon {
 		margin: 1vw;
-		height: 9.6vw;
-		font-size: 1.8vw;
+		height: 10vw;
+		font-size: 1.5vw;
 	}
 	
 	.icon-image {
+		height: 7vw;
+	}
+
+	icon-menu .icon {
+		margin: 0.5vw;
 		height: 8vw;
+		font-size: 1.5vw;
+	}
+	
+	icon-menu .icon-image {
+		height: 5.5vw;
 	}
 
 	#system-desc{
 		font-size: 2.4vw;
 		width: 28vw;
+		height: 28vw;
 		max-height: 28vw;
 		padding: 2vw;
-		/* overflow-y: scroll; */
+		overflow-y: scroll;
 	}
 	#system-desc h2{
 		font-size: 3.6vw;
 	}
 	#system-desc p{
-		font-size: 3vw;
+		font-size: 2.5vw;
 		text-align: center;
 	}
 

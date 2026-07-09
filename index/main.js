@@ -77,6 +77,8 @@ function prepPreview(direction = 1) {
 		complexPrimePrep();
 	} else if (previewName == 'cursed equations') {
 		cursedPrep();
+	} else if (previewName == 'imaginary bases') {
+		imaginaryBasePrep();
 	}
 
 
@@ -94,6 +96,7 @@ var previews = [
 	// ['hypercomplex grapher','/hypercomplex_grapher','electric'],
 	['hexponents!', '/hexponents', 'sunset'],
 	['visual groups', '/group_visualizer', 'forest'],
+	// ['imaginary bases', '/imaginary_bases', 'sunset'],
 ];
 var previewName, previewIndex, lastFrame;
 var hidePreview = false;
@@ -125,6 +128,8 @@ function draw() {
 		complexPrimeDraw();
 	} else if (previewName == 'cursed equations') {
 		cursedDraw();
+	} else if (previewName == 'imaginary bases') {
+		imaginaryBaseDraw();
 	}
 
 }
@@ -165,6 +170,23 @@ function corePaletteCustom() {
 	for (let pKey of paletteKeys) {
 		document.getElementById('picker-' + pKey).value = colorToHex(palette[pKey]);
 	}
+
+	palette.base = [
+		// lerpColor(palette.back, palette.mono, 0.6),
+		palette.front,
+		palette.mono,
+		palette.vivid,
+		palette.alert,
+		lerpColor(palette.mono,palette.front,0.4),
+		lerpColor(palette.vivid,palette.front,0.4),
+		lerpColor(palette.alert,palette.front,0.4),
+		lerpColor(palette.mono,palette.front,0.2),
+		lerpColor(palette.vivid,palette.front,0.2),
+		lerpColor(palette.alert,palette.front,0.2),
+		lerpColor(palette.mono,palette.front,0.6),
+		lerpColor(palette.vivid,palette.front,0.6),
+		lerpColor(palette.alert,palette.front,0.6),
+	];
 }
 
 

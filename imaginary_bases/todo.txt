@@ -1,0 +1,18 @@
+
+view/edit works better
+
+nicer formatting on digits description, don't linebreak in middle
+
+explore digit sets for favs
+add preview to index
+write info
+
+good displayLimit upper bound
+
+color type in code
+
+maybe:
+	show information about int when clicked
+
+	cursor type and color change upon hover in edit pane
+	delay processing, only get 10 per frame or so

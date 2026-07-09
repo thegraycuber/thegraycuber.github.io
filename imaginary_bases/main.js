@@ -1,15 +1,13 @@
 
-var base = [1,2];
-var baseRaw = [1,2];
+var base = [-1,2];
+var baseRaw = [-1,2];
 var digits = [
 	[[0,0]],[[1,0]],[[0,1]],[[-1,0]],[[0,-1]],
 	];
 var maxDigitCount = 5;
 
-
-var displayLimit = 100000;
-var dList = [];
 var d = [-1,0];
+var dList = [-1,-3];
 
 
 var lastFrame;
@@ -34,7 +32,7 @@ function draw(){
 
 
 	if (dragged > -1){
-		setDigit(addC(draggedSubFocus, focusPrincipal), dragged);
+		setDigit(addC(draggedSubFocus, focusPrincipal), dragged, false, false);
 	}
 	
 	background(palette.back);
@@ -50,8 +48,7 @@ function draw(){
 	shapeStroke = constrain(log(defaultScalar/scalar)*0.2,0.1,0.5);
 	shapeSize = 0.9-shapeStroke*0.8;
 	
-	displayLimit = ints.length;
-	for (let i = displayLimit-1; i > -1; i--) {
+	for (let i = ints.length-1; i > -1; i--) {
 		ints[i].show();
 	}
 	
@@ -91,11 +88,6 @@ function draw(){
 
 
 }	  
-					//   <rect class='svg-alert' width='80' height='80' x='10' y='10' rx='10' ry='10' fill-opacity='1'></rect>
-					//   <path class='svg-back' d='M 25 30 L 75 30' ></path>
-					//   <path class='svg-back' d='M 46 24 L 54 24'></path>
-					//   <path class='svg-back' d='M 30 30 L 37 80 L 63 80 L 70 30 '></path>
-					// </svg>
 
 
 var canvas, grid; 	
@@ -112,24 +104,26 @@ function setup() {
 	popdownList = ['info-show','menu-hide'];
 
 	
-	for (let di = 0; di < 11; di++){
-		dList.push(di);
-	}
-	for (let di = -10; di < 0; di++){
-		dList.push(di);
-	}
+	// for (let di = 0; di < 11; di++){
+	// 	dList.push(di);
+	// }
+	// for (let di = -10; di < 0; di++){
+	// 	dList.push(di);
+	// }
 	
-	let ringList = ['dual','split'];
-	for (let dIndex = 2; dIndex < dList.length; dIndex++){
-		ringList.push('O√'+str(dList[dIndex]));
-	}
-	ringList[ringList.length-1] = 'complex';
-	ringList[ringList.length-3] = 'eisenstein';
-	Object.defineProperty(controllers,'arrow-definition',{value: new Controller('arrow-definition',ringList,ringList.length-1)});
+	// let ringList = ['dual','split'];
+	// for (let dIndex = 2; dIndex < dList.length; dIndex++){
+	// 	ringList.push('O√'+str(dList[dIndex]));
+	// }
+	// ringList[ringList.length-1] = 'complex';
+	// ringList[ringList.length-3] = 'eisenstein';
+	// Object.defineProperty(controllers,'arrow-definition',{value: new Controller('arrow-definition',['imaginary','iωaginary'],0)});
 	Object.defineProperty(controllers,'arrow-limit',{value: new Controller('arrow-limit',[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],maxDigitCount-1)});
+	Object.defineProperty(controllers,'arrow-color',{value: new Controller('arrow-color',['aggregate','leading digit','1st digit','2nd digit','3rd digit','4th digit','5th digit'],0)});
 
 	setupLayout();
 	processInts();
+
 	// favoriteIndex = floor(random(favorites.length));
 	// nextFavorite();
 }
@@ -157,12 +151,12 @@ function setOriginAndGrid(){
 
 	if (portrait){	
 		defaultOrigin = createVector(width*0.5,height*0.5-(menuHidden?0:width*0.22));
-		deleteLimit = height-(menuHidden?0:width*0.4);
+		deleteLimit = height-(menuHidden?0:width*0.51);
 		grid = new Grid(0,deleteLimit,width,0,width*0.008,true,'half','backlight');
 
 	} else {
 		defaultOrigin = createVector(width*0.5+(menuHidden?0:height*0.15),height*0.5);
-		deleteLimit = (menuHidden?0:height*0.29);
+		deleteLimit = (menuHidden?0:height*0.3);
 		grid = new Grid(deleteLimit,height,width,0,height*0.006,true,'half','backlight');
 	}
 }
@@ -178,10 +172,10 @@ function preload() {
 
 function corePaletteCustom(){
 
-	// setPaletteBase();
 
 	palette.backtrans = color(red(palette.back),green(palette.back),blue(palette.back),0);
 
+	setPaletteBase();
 	for (let i of ints){
 		i.setColor();
 	}

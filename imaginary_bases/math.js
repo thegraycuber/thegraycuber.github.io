@@ -13,7 +13,7 @@ function nToBaseB(n,b){
 
 
 var ints = [];
-function processInts(){
+function processInts(updateDesc = true){
 
 	setPaletteBase();
 	
@@ -21,9 +21,15 @@ function processInts(){
 		isHex = true;
 	}
 	
-	ints = [];
-	ints.push(new QuadInt(0,0,0,0));
+	digPowers = [];
+	let newPower = 1;
+	while (newPower < 10000000000){
+		digPowers.push(newPower);
+		newPower *= digits.length;
+	}
 
+	ints = [];
+	ints.push(new QuadInt(0,0,1,0,0));
 	for (let dig = 0; dig < digits.length; dig++){
 		while (digits[dig].length <= maxDigitCount){
 			digits[dig].push(quadMult(base,digits[dig][digits[dig].length-1]));
@@ -38,49 +44,37 @@ function processInts(){
 			newInt[0] += digits[nb[newDigit]][newDigit][0];
 			newInt[1] += digits[nb[newDigit]][newDigit][1];
 		}
-		ints.push(new QuadInt(newInt[0], newInt[1],  nb.length-1 % palette.base.length, ints.length));
+		ints.push(new QuadInt(newInt[0], newInt[1], nb.length, nb[nb.length-1], ints.length));
 	}
 	
 	baseRaw = coeffsToRaw(base);
 
 	let descDiv = document.getElementById('system-desc');
-	let htmlString = '<h2 class="svg-front">base ' + text2d(roundC(base,1),verticalUnit) + '</h2>';
+	if (updateDesc){
+		let htmlString = '<h2 class="svg-front">base ' + text2d(roundC(base,1),verticalUnit) + '</h2>';
 
-	htmlString += '<h2 class="svg-vivid">' + verticalUnit + '² = ' + text2d(d,verticalUnit) + '</h2>';
-	htmlString += '<p class="svg-mono">digits:<br>';
+		htmlString += '<p class="svg-mono">scaling factor: √' + round(quadNorm(base)[0],1) + '</p>';
 
-	for (let dig of digits){
-		htmlString += text2d(roundC(dig[0],1),verticalUnit) + ' ,  ';
+
+		// htmlString += '<h2 class="svg-vivid">' + verticalUnit + '² = ' + text2d(d,verticalUnit) + '</h2>';
+		htmlString += '<p class="svg-front">digits:<br>';
+
+		for (let dig of digits){
+			htmlString += text2d(roundC(dig[0],1),verticalUnit) + ' ,  ';
+		}
+		descDiv.innerHTML = htmlString.substring(0,htmlString.length-3) + '</p>';
+	} else {
+		descDiv.innerHTML = '';
 	}
-	descDiv.innerHTML = htmlString.substring(0,htmlString.length-3) + '</p>';
+	
 }
 
 
 
-function indexToColor(inputIndex,lerper){
-
-	// let colorIndex = floor(inputIndex/digits.length**(maxDigitCount-1));
-	// return palette.base[colorIndex%palette.base.length];
-	
-	let unprocessed = true;
-	let baseColor = copyColor(palette.base[inputIndex%palette.base.length]);
-	inputIndex = floor(inputIndex/digits.length);
-	
-	while (inputIndex > 0){
-		baseColor = lerpColor(baseColor,palette.base[inputIndex%palette.base.length],lerper);
-		inputIndex = floor(inputIndex/digits.length);
-	}
-
-	// while (baseList.length < digits){
-	// 	baseList.push(0);
-	// }
-	return baseColor;
-}
-	
-var indexLookup = [];
-
+var colorType = 0;
+var digPowers = [1,5,25,125,625,3125,15625];
 class QuadInt {
-	constructor(real,omega,color,index) {
+	constructor(real,omega,size,lead,index) {
 
 		this.real = real;
 		this.omega = omega;
@@ -93,42 +87,42 @@ class QuadInt {
 		}
 			
 		// this.color = color;
+		this.size = size;
+		this.lead = lead;
 		this.index = index
+		this.dropLead = this.index-this.lead*digPowers[this.size-1];
+
 		this.setColor();
-		// this.basedIndices = indexToBase(this.index);
 
 	}
 
 	setColor(){
-		this.colorValue = indexToColor(this.index,0.8);
-		// this.fillValue = indexToColor(this.index,0.5);
+
+		if (colorType == 1 || (this.size == 1 && colorType == 0)){
+			
+			this.colorValue = palette.base[this.lead];
+	
+		} else if (colorType == 0){
+			this.colorValue = lerpColor(ints[this.dropLead].colorValue,palette.base[this.lead],0.8);
+			
+		} else {
+			
+			let placeDigit = floor(this.index/digPowers[colorType-2])%digits.length;
+			this.colorValue = palette.base[placeDigit];
+
+		}
 	}
 	
 	show(drawLabel = false) {
-
-		// let dFact = displayBase?1.2:1;
-		// if (displayBase){
-		// 	strokeWeight(0.08);
-		// 	fill(palette.back);
-		// 	stroke(palette.front);
 
 		push();
 		translate(this.coords.x, this.coords.y);
 		strokeWeight(shapeStroke);
 		stroke(this.colorValue);
-		// if (this.index<digits.length){
-		// 	fill(this.colorValue);
-		// } else {
-		// 	noFill();
-		// }
-		fill(this.index<digits.length?this.colorValue:palette.back);
-		// fill(this.colorValue);
-		drawShape(0,0,this.index<digits.length);
 
-		// if (this.index < digits.length){
-		// 	onlyFill(palette.back);
-		// 	drawShape(0,0,1);
-		// } 
+		fill(this.index<digits.length?this.colorValue:palette.back);
+
+		drawShape(0,0,this.index<digits.length);
 		
 		if (drawLabel){
 			scale(1,-1);
@@ -143,15 +137,10 @@ class QuadInt {
 
 var shapeSize = 0.9;
 var shapeStroke = 0.1;
-var pointSize = 1;
 function drawShape(x,y,isDigit){
-	// if (!snapIsOn && !isDigit){
-	// 	circle(x, y, pointSize);
-	// } else 
 	if (isHex){
 		hexagon(x, y, shapeSize*0.5);	
-	} else {
-		// rect(x, y, shapeSize*1.6,  shapeSize*1.6);// max(0,0.2-shapeStroke));	
+	} else {	
 		rect(x, y, shapeSize,  shapeSize, max(0,0.2-shapeStroke));	
 	}		
 }
@@ -159,6 +148,10 @@ function drawShape(x,y,isDigit){
 
 function quadMult(a, b){
 	return [a[0]*b[0]+d[0]*a[1]*b[1], a[1]*b[0]+a[0]*b[1]+d[1]*a[1]*b[1]];
+}
+
+function quadNorm(a){
+	return isHex ? quadMult(a,[a[0]-a[1],-a[1]]) : quadMult(a,[a[0],-a[1]]);
 }
 
 function quadPower(a ,e){

@@ -1,3 +1,8 @@
+
+/*
+⁰¹²³⁴√
+*/
+
 /*####################################
 
               HTML handling
@@ -133,6 +138,7 @@ function pasteShow() {
 
 function pasteEnter() {
 	let successfulPaste = codeToSettings(document.getElementById('paste-code').value);
+	// console.log(successfulPaste);
 	if (successfulPaste) {
 		document.getElementById('paste-holder').style.display = 'none';
 	} else {
@@ -159,6 +165,7 @@ class Controller {
 	}
 
 	giveIndex(indexValue, skipCustom = false, disabledOverride = false) {
+
 		if (this.disabled && !disabledOverride){
 			return;
 		}
@@ -195,8 +202,8 @@ class Controller {
 		}
 	}
 
-	randomize() {
-		this.giveIndex(floor(random(this.list.length)),false,true);
+	randomize(skipCustom = false) {
+		this.giveIndex(floor(random(this.list.length)),skipCustom,true);
 	}
 
 	value() {
@@ -326,8 +333,32 @@ function morningRoutine(paletteName='electric'){
 	}
 }
 
+function equalArrays(a,b,rounding = -1){
 
+	if (Array.isArray(a)){
+		if (!Array.isArray(b)){
+			return false;
+		}
+		
+		if (a.length != b.length){
+			return false;
+		}
 
+		for (let i = 0; i < a.length; i++){
+			if (equalArrays(a[i],b[i],rounding) == false){
+				return false;
+			}
+		}
+		return true;
+
+	} else if (rounding == -1) {
+		return a == b;
+	} else {
+		return round(a-b, rounding) == 0;
+	}
+}
+
+var ordinal = ['th','st','nd','rd','th','th','th','th','th','th'];
 
 var superscripts = ['⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹'];
 var subscripts = ['₀', '₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉'];
@@ -478,6 +509,10 @@ function drawTri(x, y, d) {
 
 function drawVertTri(x, y, d) {
 	triangle(x + d * 1.2, y - d, x * 1.2 - d, y - d, x, y + d);
+}
+
+function lerpSmooth(a,b,l){
+	return lerp(a,b,(sin((l-0.5)*PI)+1)/2);
 }
 
 function hexagon(x,y,radius){
