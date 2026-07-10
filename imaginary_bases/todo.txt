@@ -1,18 +1,16 @@
 
-view/edit works better
+grid issue
 
-nicer formatting on digits description, don't linebreak in middle
+after video:
 
-explore digit sets for favs
-add preview to index
-write info
+	add preview to index
+	write info
+	good displayLimit upper bound
 
-good displayLimit upper bound
+	cursor type and color change upon hover in edit pane
 
-color type in code
+	delay processing, only get 10 per frame or so
 
 maybe:
 	show information about int when clicked
 
-	cursor type and color change upon hover in edit pane
-	delay processing, only get 10 per frame or so

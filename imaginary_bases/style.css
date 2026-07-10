@@ -53,10 +53,10 @@ arrow-text{
 		font-size: 1.8vh;
 		margin: 0.5vh 0 0 0;
 	}
-	
+
 	.icon {
 		margin: 1vh;
-		width: 7vh;
+		max-width: 10vh;
 		height: 7vh;
 		font-size: 1.2vh;
 	}

@@ -12,10 +12,9 @@ var dList = [-1,-3];
 
 var lastFrame;
 var hideCanvas = false;
-
+var toProcess = false;
 
 function draw(){
-
 	iconChecks();
 
 	if (scalarLerp < 2){
@@ -32,12 +31,17 @@ function draw(){
 
 
 	if (dragged > -1){
-		setDigit(addC(draggedSubFocus, focusPrincipal), dragged, false, false);
+		setDigit(addC(draggedSubFocus, focusPrincipal), dragged);
 	}
 	
 	background(palette.back);
 	if (hideCanvas){
 		return;
+	}
+
+	if (toProcess){
+		processInts(dragged == -1);
+		toProcess = false;
 	}
 	
 	grid.drawGrid();
@@ -90,7 +94,10 @@ function draw(){
 }	  
 
 
-var canvas, grid; 	
+var canvas;
+var grid = {
+	visible:true
+}; 	
 function setup() {
 
 	morningRoutine('sunset');
@@ -120,12 +127,13 @@ function setup() {
 	// Object.defineProperty(controllers,'arrow-definition',{value: new Controller('arrow-definition',['imaginary','iωaginary'],0)});
 	Object.defineProperty(controllers,'arrow-limit',{value: new Controller('arrow-limit',[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],maxDigitCount-1)});
 	Object.defineProperty(controllers,'arrow-color',{value: new Controller('arrow-color',['aggregate','leading digit','1st digit','2nd digit','3rd digit','4th digit','5th digit'],0)});
-
+	
+	lastFrame = Date.now();
 	setupLayout();
-	processInts();
+	favoriteIndex = floor(random(favorites.length));
+	nextFavorite();
 
-	// favoriteIndex = floor(random(favorites.length));
-	// nextFavorite();
+
 }
 
 
@@ -152,12 +160,12 @@ function setOriginAndGrid(){
 	if (portrait){	
 		defaultOrigin = createVector(width*0.5,height*0.5-(menuHidden?0:width*0.22));
 		deleteLimit = height-(menuHidden?0:width*0.51);
-		grid = new Grid(0,deleteLimit,width,0,width*0.008,true,'half','backlight');
+		grid = new Grid(0,deleteLimit,width,0,width*0.008,true,'half','backlight',grid.visible);
 
 	} else {
 		defaultOrigin = createVector(width*0.5+(menuHidden?0:height*0.15),height*0.5);
 		deleteLimit = (menuHidden?0:height*0.3);
-		grid = new Grid(deleteLimit,height,width,0,height*0.006,true,'half','backlight');
+		grid = new Grid(deleteLimit,height,width,0,height*0.006,true,'half','backlight',grid.visible);
 	}
 }
 

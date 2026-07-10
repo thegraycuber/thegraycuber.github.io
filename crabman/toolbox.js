@@ -138,7 +138,7 @@ function pasteShow() {
 
 function pasteEnter() {
 	let successfulPaste = codeToSettings(document.getElementById('paste-code').value);
-	// console.log(successfulPaste);
+
 	if (successfulPaste) {
 		document.getElementById('paste-holder').style.display = 'none';
 	} else {
@@ -358,7 +358,14 @@ function equalArrays(a,b,rounding = -1){
 	}
 }
 
-var ordinal = ['th','st','nd','rd','th','th','th','th','th','th'];
+var ordinalSuffix = ['th','st','nd','rd','th','th','th','th','th','th'];
+function ordinal(n){
+	let nMod100 = n%100;
+	if (n == 11 || n == 12){
+		return str(n) + 'th';
+	}
+	return str(n) + ordinalSuffix[n%10];
+}
 
 var superscripts = ['⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹'];
 var subscripts = ['₀', '₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉'];
@@ -529,12 +536,12 @@ function hexagon(x,y,radius){
 
 var isHex = false;
 class Grid {
-	constructor(xMin, yMin, xMax, yMax, sizer, adjust = false, labelColor = 'mono', gridColor = 'backlight') {
+	constructor(xMin, yMin, xMax, yMax, sizer, adjust = false, labelColor = 'mono', gridColor = 'backlight', visible = true) {
 		this.gridMin = createVector(xMin, yMin);
 		this.gridMax = createVector(xMax, yMax);
 		this.wid = createVector(abs(xMax - xMin), abs(yMax - yMin));
 		this.mid = createVector(0.5 * (xMax + xMin), 0.5 * (yMax + yMin));
-		this.visible = true;
+		this.visible = visible;
 		this.sizer = sizer;
 		this.adjust = adjust;
 		this.labelColor = labelColor;

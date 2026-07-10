@@ -207,16 +207,24 @@ function setMaxInt(limitInt){
 		minDists[0] = min(minDists[0],ints[i].coords.x);
 		minDists[1] = min(minDists[1],ints[i].coords.y);
 	}
+	
+	maxDists[0] = max(maxDists[0],baseRaw[0]);
+	maxDists[1] = max(maxDists[1],baseRaw[1]);
+	minDists[0] = min(minDists[0],baseRaw[0]);
+	minDists[1] = min(minDists[1],baseRaw[1]);
+
 
 	scalarLerp = 0;
+
+	maxDists = addC([2,2],maxDists);
+	minDists = addC([-2,-2],minDists);
+
 	let maxDist = max(maxDists[0]-minDists[0], maxDists[1]-minDists[1]);
-	scalarValues = [scalar,max(2,defaultScalar/(maxDist**0.5))];
+	scalarValues = [scalar,min(grid.wid.x,grid.wid.y)/maxDist];
 	originValues = [ origin.copy(),
-		createVector(
-			defaultOrigin.x - (maxDists[0]+minDists[0])*0.5*scalarValues[1],
-			defaultOrigin.y + (maxDists[1]+minDists[1])*0.5*scalarValues[1],
-		)
+		createVector(...scaleC(-0.6*scalarValues[1],addC(maxDists,minDists))).mult(1,-1).add(defaultOrigin) 
 	];
+
 }
 
 function iconChecks(){
@@ -246,10 +254,10 @@ function newDigit(){
 	dragged = digits.length-1;
 
 	maxDigitCount = floor(log(desiredLimit)/log(digits.length));
-	controllers['arrow-limit'].giveIndex(maxDigitCount-1,true);
-	
 	dropDigit(true);
-	processInts();
+	controllers['arrow-limit'].giveIndex(maxDigitCount-1,true);
+	updateColorList();
+	
 	dragged = -1;
 
 	if (digits.length == 3){
@@ -267,7 +275,9 @@ function deleteDigit(digitIndex = digits.length-1){
 	digits.splice(digitIndex,1);
 	maxDigitCount = floor(log(desiredLimit)/log(digits.length));
 	controllers['arrow-limit'].giveIndex(maxDigitCount-1,true);
-	processInts();
+	updateColorList();
+
+	toProcess = true;
 
 	if (digits.length == 2){
 		toggle('delete');
@@ -283,6 +293,7 @@ function mouseOverMenu(){
 var snapIsOn = true;
 function dropDigit(digitIsNew = false){
 
+	toProcess = true;
 	if (digits.length > 2 && dragged < digits.length && !digitIsNew){
 		if (mouseOverMenu()){
 			deleteDigit(dragged);
@@ -290,16 +301,14 @@ function dropDigit(digitIsNew = false){
 		}
 	}
 
-	if (!snapIsOn){
-		processInts();
-		return;
+	if (snapIsOn){
+		snapToBest(dragged);
 	}
 
-	snapToBest(dragged);
 }
 
 
-function setDigit(newArray,digitIndex,skipProcessing = false,setDesc = true){
+function setDigit(newArray,digitIndex){
 	if (digitIndex < digits.length){
 		digits[digitIndex] = [newArray];	
 		
@@ -309,9 +318,7 @@ function setDigit(newArray,digitIndex,skipProcessing = false,setDesc = true){
 	}
 	ints[digitIndex] = new QuadInt(...newArray, 1, digitIndex, digitIndex);
 	
-	if (!skipProcessing){
-		processInts(setDesc);	
-	}
+	toProcess = true;
 }
 
 
@@ -332,22 +339,20 @@ function toggle(iconName){
 				for (let dig = 1; dig <= digits.length; dig++){
 					snapToBest(dig,true);
 				}
-				processInts();
+				toProcess = true;
 			}
 			break;
 	}
 }
 
-function setSystem(vUnit,skipProcessing=false){
+function setSystem(vUnit){
 
 	verticalUnit = vUnit;
 	isHex = vUnit == 'ω';
 	d = [-1,isHex?-1:0];
 	truncatePowers();
 
-	if (!skipProcessing){
-		processInts();
-	}
+	toProcess = true;
 
 	document.getElementById('iwaginary-icon').style.display = isHex?'none':'flex';
 	document.getElementById('imaginary-icon').style.display = isHex?'flex':'none';
@@ -390,7 +395,7 @@ function arrowHandlerCustom(clickedControl){
 		maxDigitCount = clickedControl.index+1;
 		desiredLimit = digits.length**maxDigitCount;
 		updateColorList();
-		processInts();
+		toProcess = true;
 
 	} else if (clickedControl.id == 'arrow-color'){
 		
@@ -409,7 +414,7 @@ function updateColorList(){
 	let colorMax = colorList.length - 2;
 	while (colorMax < maxDigitCount){
 		colorMax++;
-		colorList.push(str(colorMax) + ordinal[colorMax%10] + ' digit');
+		colorList.push(ordinal(colorMax) + ' digit');
 	}
 	while (colorList.length - 2 > maxDigitCount){
 		colorList.pop();
@@ -420,13 +425,14 @@ function updateColorList(){
 
 
 function randomize(){
+	hidePopups();
 
 	let deleteToggled = digits.length == 2;
 
 	// controllers['arrow-definition'].randomize();
-	setSystem(random()<0.5?'i':'ω',true);
+	setSystem(random()<0.5?'i':'ω');
 
-	setDigit(randomDonut(1.2,2),digits.length,true);
+	setDigit(randomDonut(1.2,2),digits.length);
 	snapToBest(digits.length,true);
 
 	let baseNorm = quadNorm(base);
@@ -434,7 +440,7 @@ function randomize(){
 	digits = [[[0,0]]];
 	for (let dig = 0; dig < digitCount; dig++){
 		digits.push([]);
-		setDigit(randomDonut(0.5,1.6),dig+1,true);
+		setDigit(randomDonut(0.5,1.6),dig+1);
 		snapToBest(digits.length-1,true);
 	}
 
@@ -474,6 +480,7 @@ function codeToSettings(rawInputStr){
 
 	let baseIndex = inputStr.search('base');
 	let digitsIndex = inputStr.search('digits');
+	let colorIndex = inputStr.search('colorby');
 	// let whereIndex = inputStr.search('where');
 
 	if (baseIndex == -1 || digitsIndex == -1){
@@ -495,7 +502,8 @@ function codeToSettings(rawInputStr){
 	}
 	lockIntegers = lockIntegers && equalArrays(base,roundC(base,4));
 
-	let digitList = inputStr.substring(digitsIndex+6).replace('and','') .split(',');
+	let digitsEnd = colorIndex == -1 ? inputStr.length : colorIndex;
+	let digitList = inputStr.substring(digitsIndex+6,digitsEnd).replace('and','') .split(',');
 	maxDigitCount = floor(log(desiredLimit)/log(digitList.length));
 
 	let newDigits = [];
@@ -510,11 +518,9 @@ function codeToSettings(rawInputStr){
 
 	base = [...testBase];
 	digits = newDigits;
-	if (notOmega){
 
-	}
 
-	setSystem(notOmega?'i':'ω',true);
+	setSystem(notOmega?'i':'ω');
 	// controllers['arrow-definition'].giveIndex(notOmega?0:1);
 	// let pasteD = textInto2d(inputStr.substring(whereIndex+8),codeUnit);
 	// if (isNaN(pasteD[0])||isNaN(pasteD[1])){
@@ -534,15 +540,30 @@ function codeToSettings(rawInputStr){
 	}
 
 
+	let newColorType = 0;
+	if (colorIndex != -1 && inputStr.search('lead') != -1){
+		newColorType = 1;
+	} else if (colorIndex != -1){
+		colorIndex += 7;
+		if (isNaN(inputStr.substring(colorIndex,colorIndex+1))){
+			newColorType = 0;
+		} else if (isNaN(inputStr.substring(colorIndex+1,colorIndex+2))){
+			newColorType = int(inputStr.substring(colorIndex,colorIndex+1))+1;
+		} else {
+			newColorType = int(inputStr.substring(colorIndex,colorIndex+2))+1;
+		}
+	}
+	maxDigitCount = max(maxDigitCount,newColorType-1)
+
 	setupLayout();
 	controllers['arrow-limit'].giveIndex(maxDigitCount-1,true);
 	updateColorList();
+	controllers['arrow-color'].giveIndex(newColorType);
+	// toProcess = true;
 
 	processInts();
 	setMaxInt(ints.length);
 	scalarLerp = 1;
-
-
 	return true;
 }
 
@@ -564,6 +585,13 @@ function settingsToCode(){
 		}
 	}
 
+	if (colorType == 1){
+		settingsString += ' color by lead'
+	} else if (colorType > 1){
+		settingsString += ' color by ' + ordinal(colorType-1);
+	}
+
+
 	// settingsString += ' where ' + verticalUnit + '² = ' + text2d(d,verticalUnit,'');
 	return settingsString;
 }
@@ -572,6 +600,7 @@ function settingsToCode(){
 function nextFavorite(){
 	hidePopups();
 	favoriteIndex = (favoriteIndex + 1)%favorites.length;
+
 	codeToSettings(favorites[favoriteIndex][0]);
 	
 	if (favorites[favoriteIndex][1].length > 1){
@@ -588,8 +617,14 @@ var favoriteIndex = 0;
 
 var favorites = [
 ['base -3+ω with digits 0, 1, ω, -1-ω, -2-3ω, 3+ω, -1+2ω, 1+ω, -ω, -3-ω, 1-2ω, 2+3ω, and -1',''],
+['base -1+ω with digits 0, 1, and 1+ω',''],
+['base -2+3i with digits 0, 1, i, -1, -i, 2+3i, -2-3i, -3+2i, 2, -2, -2i, 3-2i, and 2i',''],
 ['base -6-ω with digits 0, 2+4ω, 4ω, 4+2ω, -4-4ω, -3, 3, -3-3ω, 3ω, 2, -1-ω, -ω, 1+ω, -1, 4, -2ω, -2, 2-2ω, -3ω, -4, 2+2ω, -2-2ω, 1, ω, -2+2ω, 3+3ω, -2-4ω, 2ω, 4+4ω, -4ω, and -4-2ω',''],
-['base 6+i with digits 0, 1, i, -1, -i, 1-4i, 3+i, -4+i, 4, 1+4i, -4, -4-2i, -3-i, 1-3i, 4+2i, 3-2i, -3+2i, 1-i, 1+i, -1+3i, -1-i, 2+3i, 3+2i, -1-4i, -4-i, -1+i, 2-4i, -2+4i, 2-3i, -3-2i, -2-3i, -2+3i, 4+i, 4i, 4-i, -1+4i, and -4i',''],
-['base -2+2ω with digits 0, 1, -2-2ω, -2, -1-ω, -2+ω, 2ω, ω, -1+2ω, -ω, and -1-2ω',''],
-['base -2+3ω with digits 0, -ω, -1-ω, ω, -3-ω, 2+2ω, -1+2ω, -2ω, 1, 1-2ω, 3+ω, -2-3ω, -2, -3-3ω, 2+3ω, 3ω, 1+ω, -1, and 3',''],
+['base 6+i with digits 0, 1, i, -1, -i, 1-4i, 3+i, -4+i, 4, 1+4i, -4, -4-2i, -3-i, 1-3i, 4+2i, 3-2i, -3+2i, 1-i, 1+i, -1+3i, -1-i, 2+3i, 3+2i, -1-4i, -4-i, -1+i, 2-4i, -2+4i, 2-3i, -3-2i, -2-3i, -2+3i, 4+i, 4i, 4-i, -1+4i, and -4i color by 1st',''],
+['base -3+ω with digits 0, 1, 1+ω, ω, -1, 1-ω, -1-2ω, -ω, 1+2ω, 2+ω, -2-ω, -1-ω, and -1+ω color by 2nd',''],
+['base 3i with digits 0, 1, i, -1, -i, 2+2i, -2-2i, 2-2i, and -2+2i color by 3rd',''],
+['base -2+3ω with digits 0, -ω, -1-ω, ω, -3-ω, 2+2ω, -1+2ω, -2ω, 1, 1-2ω, 3+ω, -2-3ω, -2, -3-3ω, 2+3ω, 3ω, 1+ω, -1, and 3 color by 2nd',''],
+['base -1+2i with digits 0, 1, i, -1, and -i',''],
+['base -2+3ω with digits 0, 1, ω, -5-3ω, 2+5ω, -1-ω, 3-2ω, 4+3ω, 3+ω, 2ω, -2-3ω, 3+2ω, -1+2ω, 2, -2+ω, -1-3ω, -2-2ω, -1-4ω, and -3+ω color by 2nd',''],
+['base -4+i with digits 0, 2, -2, 4+3i, 2+2i, -1-i, 2-2i, -4-3i, 2i, -2-2i, 1+i, -3+4i, -2+2i, -1+i, -2i, 3-4i, and 1-i color by lead',''],
 ];

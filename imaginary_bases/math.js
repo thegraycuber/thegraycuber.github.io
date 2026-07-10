@@ -30,6 +30,7 @@ function processInts(updateDesc = true){
 
 	ints = [];
 	ints.push(new QuadInt(0,0,1,0,0));
+
 	for (let dig = 0; dig < digits.length; dig++){
 		while (digits[dig].length <= maxDigitCount){
 			digits[dig].push(quadMult(base,digits[dig][digits[dig].length-1]));
@@ -58,9 +59,16 @@ function processInts(updateDesc = true){
 
 		// htmlString += '<h2 class="svg-vivid">' + verticalUnit + '² = ' + text2d(d,verticalUnit) + '</h2>';
 		htmlString += '<p class="svg-front">digits:<br>';
+		let digitLineLength = 0;
 
 		for (let dig of digits){
-			htmlString += text2d(roundC(dig[0],1),verticalUnit) + ' ,  ';
+			let digitString = text2d(roundC(dig[0],1),verticalUnit) + ' , '
+			if (digitString.length + digitLineLength > 22){
+				htmlString += '<br>';
+				digitLineLength = 0;
+			}
+			htmlString += digitString;
+			digitLineLength += digitString.length;
 		}
 		descDiv.innerHTML = htmlString.substring(0,htmlString.length-3) + '</p>';
 	} else {
@@ -117,8 +125,8 @@ class QuadInt {
 
 		push();
 		translate(this.coords.x, this.coords.y);
-		strokeWeight(shapeStroke);
-		stroke(this.colorValue);
+		strokeWeight(drawLabel?0.1:shapeStroke);
+		stroke(drawLabel?palette.base[this.lead]:this.colorValue);
 
 		fill(this.index<digits.length?this.colorValue:palette.back);
 
@@ -126,7 +134,7 @@ class QuadInt {
 		
 		if (drawLabel){
 			scale(1,-1);
-			onlyFill(this.index == 0?palette.mono:palette.back);
+			onlyFill(this.index == 0?palette.mono:(drawLabel&&colorType>2?palette.base[this.lead]:palette.back));
 			let labelValue = text2d(roundC([this.real,this.omega],1),verticalUnit);
 			textLimited(labelValue,0,0,0.5,0.6);
 		}
@@ -189,7 +197,7 @@ function truncatePowers(){
 	}
 }
 
-function snapToBest(digitIndex, skipProcessing = false){
+function snapToBest(digitIndex){
 
 	let minDist = 1000000;
 	let bestPoint;
@@ -225,7 +233,7 @@ function snapToBest(digitIndex, skipProcessing = false){
 		}
 	}
 
-	setDigit(bestPoint, digitIndex, skipProcessing);
+	setDigit(bestPoint, digitIndex);
 }
 
 
