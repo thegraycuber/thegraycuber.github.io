@@ -220,9 +220,9 @@ function setMaxInt(limitInt){
 	minDists = addC([-2,-2],minDists);
 
 	let maxDist = max(maxDists[0]-minDists[0], maxDists[1]-minDists[1]);
-	scalarValues = [scalar,min(grid.wid.x,grid.wid.y)/maxDist];
+	scalarValues = [scalar,0.9*min(grid.wid.x,grid.wid.y)/maxDist];
 	originValues = [ origin.copy(),
-		createVector(...scaleC(-0.6*scalarValues[1],addC(maxDists,minDists))).mult(1,-1).add(defaultOrigin) 
+		createVector(...scaleC(-0.5*scalarValues[1],addC(maxDists,minDists))).mult(1,-1).add(defaultOrigin) 
 	];
 
 }

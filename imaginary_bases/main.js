@@ -158,7 +158,7 @@ function setOriginAndGrid(){
 	let menuHidden = (window.getComputedStyle(menuHolder).display == 'none');
 
 	if (portrait){	
-		defaultOrigin = createVector(width*0.5,height*0.5-(menuHidden?0:width*0.22));
+		defaultOrigin = createVector(width*0.5,height*0.5-(menuHidden?0:width*0.26));
 		deleteLimit = height-(menuHidden?0:width*0.51);
 		grid = new Grid(0,deleteLimit,width,0,width*0.008,true,'half','backlight',grid.visible);
 
