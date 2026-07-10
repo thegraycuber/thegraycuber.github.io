@@ -240,7 +240,7 @@ function customToggleHolder(holderType, holderToggle){
 		document.getElementById('arrow-function').style.display = (holderToggle == 'show'? 'none':'flex');
 	
 	} else if (holderType == 'menu'){
-		setDefaultOrigin();
+		setOriginAndGrid();
 		
 	}
 }
