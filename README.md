@@ -1,11 +1,11 @@
 # hello :)
-##this is my personal website! 
+## this is my personal website! 
 
 i've been meaning to make a good readme doc, but i keep procrastinating, so for now i'm doing a quick one, since something is better than nothing
 
 i suggest looking at the highest level index.html, which is my main page, or the hexponents/index.html, which is the simplest of the project pages.
 
-###the files are structured as follows:
+### the files are structured as follows:
 
   archive/ - old pages that i still want to be live, but haven't updated to my current framework.
   
