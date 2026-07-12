@@ -112,8 +112,8 @@ function touchEnded(){
 
 function touchMoved(event){
 
-	event.preventDefault(); 
 	if (mouseInMenu || hideCanvas){return;}
+	event.preventDefault(); 
 	setFocusPrincipal();
 	// if (infoClick && clickStart.dist(focusPoint()) > 5){
 	// 	infoClick = false;
