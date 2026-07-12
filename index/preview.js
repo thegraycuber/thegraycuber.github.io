@@ -922,24 +922,133 @@ function imaginaryBaseDraw(){
 var imaginarySettings;
 
 function imaginaryBasePrep(){
-	imaginarySettings = {
-		slaps: 3,
-		births: 4,
-		bases: [
-			[2.236,0.4636476],
-			[2.236,2.034443],
-			[2.828,2.3561944],
-		],
-		isHex: false,
-		scalar: 0.06,
-		digits: [
-			[0,0],
-			[1,0],
-			[-1,0],
-			[0,1],
-			[0,-1]
-		]
+
+	let randomBase = floor(random()*6);
+
+	if (randomBase == 0){
+
+		imaginarySettings = {
+			slaps: 3,
+			births: 4,
+			bases: [
+				[2.236,0.4636476],
+				[2.236,2.034443],
+				[2.828,2.3561944],
+			],
+			isHex: false,
+			scalar: 0.06,
+			digits: [
+				[0,0],
+				[1,0],
+				[-1,0],
+				[0,1],
+				[0,-1]
+			]
+		}
+	} else if (randomBase == 1){
+
+		imaginarySettings = {
+			slaps: 3,
+			births: 4,
+			bases: [
+				[2.236,1.10714871],
+				[3,0],
+				[2.236,-1.10714871],
+			],
+			isHex: false,
+			scalar: 0.055,
+			digits: [
+				[0,0],
+				[1,0],
+				[-1,1],
+				[-1,0],
+				[1,-1]
+			]
+		}
+	} else if (randomBase == 2){
+
+		imaginarySettings = {
+			slaps: 5,
+			births: 6,
+			bases: [
+				[3**0.5,PI*7/6],
+				[2,PI*2/3],
+				[2,PI],
+			],
+			isHex: true,
+			scalar: 0.03,
+			digits: [
+				[0,0],
+				[2,0],
+				[1,1.7320508]
+			]
+		}
+	} else if (randomBase == 3){
+
+		imaginarySettings = {
+			slaps: 3,
+			births: 4,
+			bases: [
+				[3,0],
+				[8**0.5,PI/4],
+				[3,PI/2],
+			],
+			isHex: false,
+			scalar: 0.027,
+			digits: [
+				[0,0],
+				[1,0],
+				[-1,0],
+				[1,1],
+				[-1,1],
+				[1,-1],
+				[-1,-1]
+			]
+		}
+	} else if (randomBase == 4){
+
+		imaginarySettings = {
+			slaps: 3,
+			births: 4,
+			bases: [
+				[3,PI/3],
+				[7**0.5,1.7609219301],
+				[8**0.5,PI*5/6],
+			],
+			isHex: true,
+			scalar: 0.027,
+			digits: [
+				[0,0],
+				[2,0],
+				[-2,0],
+				[1,1.7320508],
+				[-1,1.7320508],
+				[1,-1.7320508],
+				[-1,-1.7320508]
+			]
+		}
+	} else if (randomBase == 5){
+
+		imaginarySettings = {
+			slaps: 4,
+			births: 5,
+			bases: [
+				[2,PI/3],
+				[2,0],
+				[7**0.5,-0.7137243789],
+			],
+			isHex: true,
+			scalar: 0.02,
+			digits: [
+				[0,0],
+				[2,0],
+				[-1,1.7320508],
+				[-1,-1.7320508]
+			]
+		}
 	}
+	
+	
 
 
 }

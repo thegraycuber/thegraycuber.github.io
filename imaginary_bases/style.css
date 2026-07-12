@@ -19,6 +19,10 @@ arrow-text{
 	white-space: pre;
 }
 
+body {
+	cursor: default;
+}
+
 
 @media (min-aspect-ratio: 4/5){
 	.landscape-hidden{

@@ -96,7 +96,7 @@ var previews = [
 	// ['hypercomplex grapher','/hypercomplex_grapher','electric'],
 	['hexponents!', '/hexponents', 'sunset'],
 	['visual groups', '/group_visualizer', 'forest'],
-	// ['imaginary bases', '/imaginary_bases', 'sunset'],
+	['imaginary bases', '/imaginary_bases', 'sunset'],
 ];
 var previewName, previewIndex, lastFrame;
 var hidePreview = false;

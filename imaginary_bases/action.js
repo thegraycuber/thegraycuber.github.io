@@ -25,29 +25,41 @@ function touchStarted(){
 		return;
 	}
 
-	let focusRaw = pixelToPrincipal(focusPoint(),'raw');
+	dragged = getMouseInt();
 
-	if (focusRaw.dist(arrayToVector(baseRaw)) < 0.58){
+	if (dragged > -1){
 		showViewIcon();
-		dragged = digits.length;
-		draggedSubFocus = subC(base,focusPrincipal);
-		return;
-	}
-	
-	for (let dig = digits.length-1; dig > 0 ; dig--){
-
-		if (ints[dig].coords.dist(focusRaw) < 0.58){
-			showViewIcon();
-			dragged = dig;
-			draggedSubFocus = subC(digits[dig][0],focusPrincipal);
-			break;
+		if (dragged == digits.length){
+			draggedSubFocus = subC(base,focusPrincipal);
+			return;
+		} else {
+			draggedSubFocus = subC(digits[dragged][0],focusPrincipal);
 		}
+
 	}
 
 	if (dragged > -1 && digits.length > 2){
 		document.getElementById('trash-digit-icon').style.display = 'flex';
 		document.getElementById('delete-digit-icon').style.display = 'none';
 	}
+}
+
+function getMouseInt(){
+
+	let focusRaw = pixelToPrincipal(focusPoint(),'raw');
+
+	if (focusRaw.dist(arrayToVector(baseRaw)) < 0.58){
+		return digits.length;
+	}
+
+	for (let dig = digits.length-1; dig > 0 ; dig--){
+
+		if (ints[dig].coords.dist(focusRaw) < 0.58){
+			return dig;
+		}
+	}
+
+	return -1;
 }
 
 
@@ -117,7 +129,7 @@ function setFocusPrincipal(){
 
 
 var focusPixel;
-function updateMovement(){
+function updateMovement(applyDrag = true){
 	
 	if (touches.length == 2){
 		var newDist = dist(touches[0].x,touches[0].y,touches[1].x,touches[1].y);
@@ -127,7 +139,7 @@ function updateMovement(){
 	}
 	
 	if (touches.length <= 2){
-		if (dragged == -1){
+		if (dragged == -1 && applyDrag){
 			if (isHex){
 				origin = focusPoint().sub(principalPos.mult(scalar*0.5,-scalar*0.866));
 			} else {
@@ -159,7 +171,7 @@ function mouseWheel(event){
 	scalar = max(scaleMin,exp(scalarLog));
 	// pointSize = 0.25/(scalar**0.25);
 
-	updateMovement();
+	updateMovement(false);
 }
 
 
@@ -236,10 +248,7 @@ function iconChecks(){
 }
 
 function customToggleHolder(holderType, holderToggle){
-	if (holderType == 'info'){
-		document.getElementById('arrow-function').style.display = (holderToggle == 'show'? 'none':'flex');
-	
-	} else if (holderType == 'menu'){
+	if (holderType == 'menu'){
 		setOriginAndGrid();
 		
 	}
@@ -360,7 +369,7 @@ function setSystem(vUnit){
 
 
 
-var desiredLimit = 3125;
+var desiredLimit = 6000;
 var verticalUnit = 'i'
 function arrowHandlerCustom(clickedControl){
 	hidePopups();

@@ -30,14 +30,21 @@ function draw(){
 	lastFrame = Date.now();
 
 
+	updateMovement(false);
 	if (dragged > -1){
 		setDigit(addC(draggedSubFocus, focusPrincipal), dragged);
+		document.body.style.cursor = 'grabbing';
+	} else if (!mouseOverMenu() && getMouseInt()>0){
+		document.body.style.cursor = 'grab';
+	} else {
+		document.body.style.cursor = 'default';
 	}
 	
 	background(palette.back);
 	if (hideCanvas){
 		return;
 	}
+
 
 	if (toProcess){
 		processInts(dragged == -1);
@@ -105,6 +112,7 @@ function setup() {
 	setupFonts();
 	textFont(mainFont);
 	textAlign(CENTER, CENTER);
+	principalPos = createVector(0,0);
 
 	
 	popupList = ['info-holder','info-hide','paste-holder','copy-holder','submitted-note'];

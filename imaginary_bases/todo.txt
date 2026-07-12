@@ -1,16 +1,8 @@
 
-grid issue
+	add links
 
-after video:
 
-	add preview to index
-	write info
-	good displayLimit upper bound
-
-	cursor type and color change upon hover in edit pane
-
-	delay processing, only get 10 per frame or so
-
-maybe:
-	show information about int when clicked
+maybe later:
+	
+	show representation of int when clicked
 
