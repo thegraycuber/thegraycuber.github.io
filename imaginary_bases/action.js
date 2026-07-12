@@ -25,7 +25,7 @@ function touchStarted(){
 		return;
 	}
 
-	dragged = getMouseInt();
+	dragged = getMouseInt(focusPoint);
 
 	if (dragged > -1){
 		showViewIcon();
@@ -129,7 +129,7 @@ function setFocusPrincipal(){
 
 
 var focusPixel;
-function updateMovement(applyDrag = true){
+function updateMovement(){
 	
 	if (touches.length == 2){
 		var newDist = dist(touches[0].x,touches[0].y,touches[1].x,touches[1].y);
@@ -139,7 +139,7 @@ function updateMovement(applyDrag = true){
 	}
 	
 	if (touches.length <= 2){
-		if (dragged == -1 && applyDrag){
+		if (dragged == -1){
 			if (isHex){
 				origin = focusPoint().sub(principalPos.mult(scalar*0.5,-scalar*0.866));
 			} else {
@@ -171,7 +171,7 @@ function mouseWheel(event){
 	scalar = max(scaleMin,exp(scalarLog));
 	// pointSize = 0.25/(scalar**0.25);
 
-	updateMovement(false);
+	updateMovement();
 }
 
 

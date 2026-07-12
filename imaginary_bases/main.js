@@ -30,7 +30,7 @@ function draw(){
 	lastFrame = Date.now();
 
 
-	updateMovement(false);
+	// updateMovement(false);
 	if (dragged > -1){
 		setDigit(addC(draggedSubFocus, focusPrincipal), dragged);
 		document.body.style.cursor = 'grabbing';
