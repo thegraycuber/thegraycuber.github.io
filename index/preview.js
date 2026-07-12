@@ -257,8 +257,8 @@ function visualGroupPrep(){
 
 function visualGroupDraw(){
 	
-	inTheta += 0.0061;
-	outTheta += 0.0103;
+	inTheta = previewTimer*2.331;
+	outTheta = previewTimer*0.802;
 	
 	for (let el of mainList){
 		el.update();
