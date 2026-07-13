@@ -626,16 +626,23 @@ var favoriteIndex = 0;
 
 var favorites = [
 ['base -3+ω with digits 0, 1, ω, -1-ω, -2-3ω, 3+ω, -1+2ω, 1+ω, -ω, -3-ω, 1-2ω, 2+3ω, and -1',''],
+['base 2+2i with digits 0, i, 1, -1, -i, 6, 1-i, and -1-i color by 1st','@1ne00dred2wenty4our'],
 ['base -1+ω with digits 0, 1, and 1+ω',''],
+['base 2ω with digits 0, -1, -1+2ω, and -1-ω color by 1st','@a71_special'],
 ['base -2+3i with digits 0, 1, i, -1, -i, 2+3i, -2-3i, -3+2i, 2, -2, -2i, 3-2i, and 2i',''],
-['base 2+2ω with digits 0, -ω, 1, and -3ω','@a71_special'],
+['base -2 with digits 0, 1, ω, and -1-ω','@Amipotsophspond'],
 ['base -6-ω with digits 0, 2+4ω, 4ω, 4+2ω, -4-4ω, -3, 3, -3-3ω, 3ω, 2, -1-ω, -ω, 1+ω, -1, 4, -2ω, -2, 2-2ω, -3ω, -4, 2+2ω, -2-2ω, 1, ω, -2+2ω, 3+3ω, -2-4ω, 2ω, 4+4ω, -4ω, and -4-2ω',''],
 ['base 6+i with digits 0, 1, i, -1, -i, 1-4i, 3+i, -4+i, 4, 1+4i, -4, -4-2i, -3-i, 1-3i, 4+2i, 3-2i, -3+2i, 1-i, 1+i, -1+3i, -1-i, 2+3i, 3+2i, -1-4i, -4-i, -1+i, 2-4i, -2+4i, 2-3i, -3-2i, -2-3i, -2+3i, 4+i, 4i, 4-i, -1+4i, and -4i color by 1st',''],
 ['base -3+ω with digits 0, 1, 1+ω, ω, -1, 1-ω, -1-2ω, -ω, 1+2ω, 2+ω, -2-ω, -1-ω, and -1+ω color by 2nd',''],
+['base 3 with digits 0, 1, 1+i, -1, -i, i, 1-i, -1-i, and -1+i color by 3rd','@theoverlordofforksofficial'],
 ['base 3i with digits 0, 1, i, -1, -i, 2+2i, -2-2i, 2-2i, and -2+2i color by 3rd',''],
+['base -2-2ω with digits 0, 1+ω, -ω, and -1 color by 2nd','@kshamasharma4725'],
+['base 5 with digits 0, 1, 1+ω, -1, -ω, ω, -1-2ω, 2+2ω, 2+ω, -1-ω, -2, -1+ω, 2ω, 2, -2ω, 1-ω, -2-ω, -2-2ω, -2-3ω, -2-4ω, and -1-3ω color by 2nd','@noesenard6649'],
 ['base -2+3ω with digits 0, -ω, -1-ω, ω, -3-ω, 2+2ω, -1+2ω, -2ω, 1, 1-2ω, 3+ω, -2-3ω, -2, -3-3ω, 2+3ω, 3ω, 1+ω, -1, and 3 color by 2nd',''],
 ['base -1+2i with digits 0, 1, i, -1, and -i',''],
+['base 2+2ω with digits 0, -ω, 1, and -3ω','@a71_special'],
 ['base -2+3ω with digits 0, 1, ω, -5-3ω, 2+5ω, -1-ω, 3-2ω, 4+3ω, 3+ω, 2ω, -2-3ω, 3+2ω, -1+2ω, 2, -2+ω, -1-3ω, -2-2ω, -1-4ω, and -3+ω color by 2nd',''],
 ['base -4+i with digits 0, 2, -2, 4+3i, 2+2i, -1-i, 2-2i, -4-3i, 2i, -2-2i, 1+i, -3+4i, -2+2i, -1+i, -2i, 3-4i, and 1-i color by lead',''],
+['base 7 with digits 0, 1, -ω, -5, -2+ω, -1-ω, 4ω, -1-2ω, -1, -3, 2+5ω, -1+3ω, 1+4ω, -2, 2+4ω, -6+ω, ω, -2+2ω, 1+6ω, -6+2ω, -5+2ω, -5+ω, -4, -4+ω, -1+ω, 5ω, 1+5ω, -7+2ω, -6+3ω, -7+3ω, -8+2ω, -3+ω, -3+2ω, -2+3ω, -1+4ω, -2+5ω, -2+6ω, -2+4ω, -3+3ω, -4+2ω, -3+4ω, -4+3ω, 2+3ω, -4+4ω, -3+5ω, -3+6ω, -4+5ω, -4+6ω, and -5+6ω color by lead','@ymperal4663'],
 ];
 
