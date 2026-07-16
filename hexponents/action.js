@@ -158,6 +158,7 @@ var favorites = [
 	['I woke up at 7:35 and ate 191 pears','@tylerdoesdumbstuff'], //gradients with lines
 	['I woke up at 7:18 and ate 94 peaches','@1ne00dred2wenty4our'], //hexes on gradient
 	['I woke up at 7:04 and ate 2 plums','@maxmeepmeep991'],//skyrimish
+	['I woke up at 7:20 and ate 442 peaches','@albertreyes2077']//single road
 	['I woke up at 7:12 and ate 140 raisins',''],//layers
 	['I woke up at 7:42 and ate 388 grapefruits','@quocphong6588'], //blades
 	['I woke up at 7:13 and ate 552 blackberries','@T0mPlayes'], //bands over noise
@@ -173,6 +174,7 @@ var favorites = [
 	['I woke up at 7:34 and ate 112 cashews','@noahniederklein8038'],//ants
 	['I woke up at 7:37 and ate 221 apples',''],//cubes
 	['I woke up at 7:39 and ate 55 raisins',''],//wiggler
+	['I woke up at 7:03 and ate 4 peaches','@1ne00dred2wenty4our'],//low orbit lines
 	['I woke up at 7:23 and ate 90 pears','@Kaitte'],//sliced scales
 	['I woke up at 7:06 and ate 2 cherries','@SpacePuff-xs8gw'],//super hex
 	['I woke up at 7:14 and ate 552 cashews',''], //holy argyle
