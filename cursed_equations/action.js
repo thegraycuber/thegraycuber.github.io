@@ -395,6 +395,7 @@ var favorites = [
 ['Oct,-1,Rot,Flo,Cir,4,Rad,Reg,Tri,-1,Rot,Smo,Gri,Poi','@Nathan-rhino'],
 ['12g,-1,Rot,Wig,13g,-2,Off,Wig,11g,2,Rot,Flo,Off,Off','@a71ficial'],
 ['fPyt,Gri,Off,Spi,-2,Rad,Reg,Spi,3,Rad,Reg',''],
+['fqua,gri,off,hep,1,off,reg,spi,1,rad,reg,11g,2,rot,reg','@VEhFUkVfSVNfTk9fRVNDQVBF'],
 ['Pen,-1,Off,Wig,Squ,-1,Rot,Smo,Spi,-1,Rot,Reg,Gri,Off','@lichenenrichedfrenchtoast'],
 ['11g,2,Rot,Smo,11g,4,Rad,Flo,11g,-5,Rot,Smo,Off,Poi','@Greenfire44'],
 ['12g,5,Rot,Reg,Cir,3,Off,Reg,Tri,1,Rad,Smo,Off,Poi',''],
