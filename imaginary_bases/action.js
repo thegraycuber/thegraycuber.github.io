@@ -649,6 +649,7 @@ var favorites = [
 ['base 4 with digits 0, 2+2ω, ω, 1+ω, 3+ω, 1, -1-ω, -ω, 1-ω, -2ω, -1, -2-ω, 2, 1+2ω, -2+ω, and -1-2ω','@Slaydrik'],
 ['base -1+2i with digits 0, 1, i, -1, and -i',''],
 ['base 2+2ω with digits 0, -ω, 1, and -3ω','@a71_special'],
+['base 2 with digits 0, 1, 3+ω, and 2+3ω color by 5th','@not_threadbox'],
 ['base -2+3ω with digits 0, 1, ω, -5-3ω, 2+5ω, -1-ω, 3-2ω, 4+3ω, 3+ω, 2ω, -2-3ω, 3+2ω, -1+2ω, 2, -2+ω, -1-3ω, -2-2ω, -1-4ω, and -3+ω color by 2nd',''],
 ['base 10+10i with digits 0, 2, -2, 3+i, 2+2i, -1-i, 2-2i, -3+i, 2i, -2-2i, 1+i, -1+3i, -2+2i, -1+i, -2i, 1+3i, 1-i, -3-i, -1-3i, 1-3i, 3-i, 4i, -4, -4i, 4, -i, i, -1, 1, -3i, 3i, 3, and -3 color by lead','@KesseliYT-tauloud2'],
 ['base -4+i with digits 0, 2, -2, 4+3i, 2+2i, -1-i, 2-2i, -4-3i, 2i, -2-2i, 1+i, -3+4i, -2+2i, -1+i, -2i, 3-4i, and 1-i color by lead',''],
