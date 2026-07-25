@@ -150,6 +150,9 @@ function corePaletteCustom() {
 	for (let pName of paletteNames) {
 
 		let presetSvg = document.getElementById(pName + '-preset');
+		if (presetSvg == null){
+			continue;
+		}
 		if (pName == paletteNames[paletteIndex]) {
 			// presetSvg.style.borderStyle = 'solid';
 			presetSvg.style.borderColor = palette.mono;

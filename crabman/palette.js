@@ -169,6 +169,17 @@ var palettes = {
 		code: "#000000-#FFFFFF-#0000FF-#00CC00-#CC0000"
 	},
 
+	// balancedTernary:{
+	// 	code: "#f5dbff-#18092a-#af57ea-#fed76c-#e78fff"
+	// },
+
+	// openCover:{
+	// 	code: "#d67d00-#fff3a8-#ffbb00-#d85aaa-#3dbdd6"
+	// },
+	// openCover:{
+	// 	code: '#ACE3F4-#0B52A8-#01C0DA-#C1EB4A-#F191F8'
+	// },
+
 
 }
 
