@@ -19,7 +19,6 @@ function createPaletteDisplays(paletteList){
 		}
 
 		outerString += '</div>';
-	--color-half: #288856;
 			
 		document.getElementById('palette-holder').appendChild(paletteDisplay);
 		paletteDisplay.outerHTML = outerString;
