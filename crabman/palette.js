@@ -7,10 +7,14 @@ var paletteKeys = ['front','back','mono','vivid','alert'];
 // vivid is my goto wordle starting word btw ^
 
 function changePalette(scheme = ''){
+	
 
 	let root = document.documentElement;
 	
 	if (scheme.length > 0){
+		if (!paletteNames.includes(scheme)){
+			unpackPalette(scheme);
+		}
 		paletteIndex = paletteNames.indexOf(scheme);
 	} else {
 		paletteIndex = (paletteIndex+1)%paletteNames.length;
@@ -143,7 +147,7 @@ var palettes = {
 	dark:{
 		front: '#c8caf4',
 		back: '#20213f',
-		mono: '#768FFF',//'#8498ef',
+		mono: '#768FFF',
 		vivid: '#2cda9d',
 		alert: '#f168a0'
 	},
@@ -168,17 +172,6 @@ var palettes = {
 	tsartnoc:{
 		code: "#000000-#FFFFFF-#0000FF-#00CC00-#CC0000"
 	},
-
-	// balancedTernary:{
-	// 	code: "#f5dbff-#18092a-#af57ea-#fed76c-#e78fff"
-	// },
-
-	// openCover:{
-	// 	code: "#d67d00-#fff3a8-#ffbb00-#d85aaa-#3dbdd6"
-	// },
-	// openCover:{
-	// 	code: '#ACE3F4-#0B52A8-#01C0DA-#C1EB4A-#F191F8'
-	// },
 
 
 }

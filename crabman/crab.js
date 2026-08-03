@@ -38,16 +38,16 @@ function paletteToCode(paletteInput){
 function setup(){
 	createPaletteDisplays(palettes);
 	
-	changePalette('sunset');
+	changePalette('forest');
 
-	let settingString = 'M '
+	// let settingString = 'M '
 
-	for (let i = 1; i < 25; i++){
-		let dist = ((int((i+1)/2)%2)==1)? 40 : 28;
-		settingString += str(round(50+dist*cos((i+0.5)*TWO_PI/24),2));
-		settingString += ' ' + str(round(50+dist*sin((i+0.5)*TWO_PI/24),2)) + ' L ';
-	}
-	console.log(settingString);
+	// for (let i = 1; i < 25; i++){
+	// 	let dist = ((int((i+1)/2)%2)==1)? 40 : 28;
+	// 	settingString += str(round(50+dist*cos((i+0.5)*TWO_PI/24),2));
+	// 	settingString += ' ' + str(round(50+dist*sin((i+0.5)*TWO_PI/24),2)) + ' L ';
+	// }
+	// console.log(settingString);
 	
 	// createPaletteDisplays(customPalettes);
 
@@ -60,4 +60,5 @@ function setup(){
 	// console.log(colorToHex(palette.backlight));
 	// console.log(colorToHex(palette.backdark));
 	// console.log(colorToHex(palette.gray));
+	// console.log(colorToHex(palette.half));
 }

@@ -1,7 +1,4 @@
 
-favorites backwards
-
-
 classes for svgs, like "round" (linecap and join)
 use svgs from core instead of hardcoded - will this even work?
 consolidate repeated css into core
@@ -10,3 +7,4 @@ custom highlight color
 no flashbang when loading sites
 improve the readme
 rename Controller
+favorites backwards
