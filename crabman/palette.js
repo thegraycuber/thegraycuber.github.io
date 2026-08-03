@@ -172,6 +172,9 @@ var palettes = {
 	tsartnoc:{
 		code: "#000000-#FFFFFF-#0000FF-#00CC00-#CC0000"
 	},
+	plum:{
+		code: "#F1BCD8-#5D0344-#E63F8B-#E456FB-#FFC148"
+	},
 
 
 }
@@ -229,7 +232,6 @@ function HSVtoRGB(hue,sat,val){
 /*
 OTHER PALETTES (SPINNING TOY SECRET):
 
-#F1BCD8-#61074B-#E63F8B-#CD6BFD-#FFF055 // plum
 #18A50F-#AFE0F0-#355BD3-#D6A307-#E2446E // toy
 #C7F0D1-#0C5A4E-#1AFDAF-#B489FF-#FD88BE // sea
 
