@@ -233,20 +233,56 @@ function randomize(){
 }
 
 
-
+var functionCodes = ['fqua','fpyt','fpy3'];
+var shapeCodes = ['cir','tri','squ','pen','hex','hep','oct','9go','10g','11g','12g','13g','spi','roc'];
 function codeToSettings(inputStr){
 
-	inputStr = inputStr.trim().toLowerCase();
+	inputStr = inputStr.trim().toLowerCase().split(' ').join('');
 	if (inputStr.length < 39){
 		return false;
 	}
-
-	if (inputStr.substring(0,1) != 'f'){
-		let cut = inputStr.length - 8;
-		inputStr = 'fqua' + inputStr.substring(cut,inputStr.length) + ',' + inputStr.substring(0,cut);
+ 
+	let typeIndex = 1000000;
+	for (let fCode of functionCodes){
+		let testIndex = inputStr.search(fCode);
+		if (testIndex > -1){
+			typeIndex = min(typeIndex,testIndex);
+		}
 	}
+
+	let inputValues;
+	if (typeIndex == 1000000){
+		let shapeIndex = 1000000;
+		for (let sCode of shapeCodes){
+			let testIndex = inputStr.search(sCode);
+			if (testIndex > -1){
+				shapeIndex = min(shapeIndex,testIndex);
+			}
+		}
+
+		if (shapeIndex == 1000000){
+			return false;
+		}
+
+		inputValues = inputStr.substring(shapeIndex).split(',');
+		if (inputValues.length < 14){
+			return false;
+		}
+		inputValues.unshift(inputValues[13].substring(0,3));
+		inputValues.unshift(inputValues[13]);
+		inputValues.unshift('fqua');
+
+	} else {
+		inputValues = inputStr.substring(typeIndex).split(',');
+		let finalIndex = inputValues[0] == 'fpyt' ? 10 : 14;
+		inputValues[finalIndex] = inputValues[finalIndex].substring(0,3);
+	}
+
+	// if (inputStr.substring(0,1) != 'f'){
+	// 	let cut = inputStr.length - 8;
+	// 	inputStr = 'fqua' + inputStr.substring(cut,inputStr.length) + ',' + inputStr.substring(0,cut);
+	// }
 	
-	let inputValues = inputStr.split(',');
 	let funkIndex = funkCodes.indexOf(inputValues[0]);
 	if (funkIndex < 0 || funkIndex >= funkShapes.length){
 		return false;
@@ -255,7 +291,7 @@ function codeToSettings(inputStr){
 	controllers['arrow-function'].giveIndex(funkIndex);
 	let shapeCount = funkShapes[funkIndex];
 	
-	if (3 + shapeCount*4 != inputValues.length){
+	if (3 + shapeCount*4 > inputValues.length){
 		return false;
 	}
 
