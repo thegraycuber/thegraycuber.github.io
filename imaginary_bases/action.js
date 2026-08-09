@@ -632,7 +632,7 @@ var favorites = [
 ['base 9+8ω with digits 0, 2, -2, 2ω, 3+3ω, -2ω, -2-2ω, 3ω, -1+2ω, -2+2ω, 1+4ω, 2+2ω, 2+4ω, 2+3ω, 4+3ω, 3+ω, 3, 4+2ω, 3-ω, 2-2ω, 1-2ω, -3ω, -1-4ω, -3-3ω, -2-3ω, -2-4ω, -4-3ω, -3-ω, -4-2ω, -3, -3+ω, -1-5ω, 5+4ω, and -4+ω color by 2nd','@agravitraxpro5933'],
 ['base -2-2i with digits 0, 1+i, -i, -1, 1, 2+i, and -1+i color by 3rd','@Not14Redmi-t5o'],
 ['base -1+ω with digits 0, 1, and 1+ω',''],
-['base 10 with digits 0, -109, 22, 13, 4, 5, 86, -3013, 88, -1','@StephenjamesRidge'],
+// ['base 10 with digits 0, -109, 22, 13, 4, 5, 86, -3013, 88, -1','@StephenjamesRidge'],
 ['base 7 with digits 0, 2+ω, 1+ω, 1+2ω, -1-ω, 1, -1, ω, -1+ω, -ω, -1-2ω, 1-ω, -2-ω, 3, 4+2ω, 3+3ω, 3ω, -3, -3-3ω, -3ω, -2+2ω, 2+4ω, -2-4ω, 2-2ω, -4-2ω, 1-2ω, -2+ω, -3-ω, 3+2ω, 1+3ω, -2-3ω, -2, 3+ω, and 2-ω','@NaTra2019'],
 ['base 7i with digits 0, i, -1, -3i, -i, 1, -2i, 2, -2, -1+i, 1+i, 2i, and -4i color by lead','@dargorioxthekobold'],
 ['base -2+2i with digits 0, 2, -2, -1, 1, i, -2i, -i, and 2i color by lead','@KesseliYT-tauloud2'],
