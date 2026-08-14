@@ -312,9 +312,13 @@ function focusPoint(){
 ####################################*/
 
 
-function morningRoutine(paletteName='electric'){
+function morningRoutine(paletteName='electric',is3d = false){
 
-	canvas = createCanvas(innerWidth, innerHeight);
+	if (is3d){
+		canvas = createCanvas(innerWidth, innerHeight, WEBGL);
+	} else {
+		canvas = createCanvas(innerWidth, innerHeight);
+	}
 	smooth();
 	frameRate(30);
 	if (typeof setupLayout == 'function'){setupLayout()};
@@ -799,4 +803,16 @@ function addPrime() {
 			return;
 		}
 	}
+}
+
+
+function evaluatePolynomial(polynomialArray, inputValue){
+
+	let inputPower = 1;
+	let polynomialOutput = polynomialArray[0];
+	for (let p = 1; p < polynomialArray.length; p++){
+		inputPower *= inputValue;
+		polynomialOutput += inputPower*polynomialArray[p];
+	}
+	return polynomialOutput;
 }

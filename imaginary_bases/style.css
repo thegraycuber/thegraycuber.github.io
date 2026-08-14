@@ -14,11 +14,6 @@ arrow-text{
 	display: none;
 }
 
-#arrow-function{
-	position: absolute;
-	white-space: pre;
-}
-
 body {
 	cursor: default;
 }

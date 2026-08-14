@@ -65,7 +65,7 @@ function draw(){
 				for (let o = 0; o < out.length; o++){
 					if (outputVertices[o] == s){
 						fill(palette.accent[s]);
-						circle(out[o][0],-out[o][1],15/scalar);
+						circle(out[o][0],-out[o][1],20/scalar);
 					}
 				}
 			}

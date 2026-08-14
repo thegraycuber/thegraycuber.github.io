@@ -4,7 +4,6 @@ use svgs from core instead of hardcoded - will this even work?
 consolidate repeated css into core
 css file with variable aspect ratio for common controls
 custom highlight color
-no flashbang when loading sites
 improve the readme
 rename Controller
 favorites backwards

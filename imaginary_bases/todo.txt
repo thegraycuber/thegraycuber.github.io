@@ -1,4 +1,5 @@
 
+bug: we should not have grab cursor when the info text is open
 
 maybe later:
 	

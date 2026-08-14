@@ -198,8 +198,32 @@ function copyColor(colorToCopy){
 }
 
 function colorToHex(colorToConvert){
-	return '#' + hex(int(red(colorToConvert))).substring(6) + hex(int(green(colorToConvert))).substring(6) + hex(int(blue(colorToConvert))).substring(6);
+
+	let hexCode = '#' + hex(int(red(colorToConvert))).substring(6) + hex(int(green(colorToConvert))).substring(6) + hex(int(blue(colorToConvert))).substring(6);
+	if (alpha(colorToConvert) == 255){
+		return hexCode;
+	}
+	return hexCode + hex(int(alpha(colorToConvert))).substring(6);
 }
+
+function colorToVector(colorToConvert){
+	return [
+			red(colorToConvert)/255,
+			green(colorToConvert)/255,
+			blue(colorToConvert)/255,
+			alpha(colorToConvert)/255
+	];
+}
+
+function colorWithAlpha(colorToConvert,alphaValue){
+	return color(
+		red(colorToConvert),
+		green(colorToConvert),
+		blue(colorToConvert),
+		alphaValue
+	);
+}
+
 
 function HSVtoRGB(hue,sat,val){
 	let chroma = val*sat;
