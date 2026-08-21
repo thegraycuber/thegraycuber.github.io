@@ -155,6 +155,7 @@ function randomPalette(){
 
 
 var videoLinks = [
+	'https://youtu.be/VKeg2NtzJAo', // ellipses with 3 foci
 	'https://youtu.be/SbYee_gWLv0', // 3d bases
 	'https://youtu.be/d6agN416onM', // imaginary bases
 	'https://youtu.be/CmXStCPFbTg', // tetromino fractals
