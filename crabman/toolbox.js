@@ -506,8 +506,11 @@ function textInto2d(rawTextString, unit) {
 }
 
 function pre0(timeValue, returnLength = 2) {
-	let rawString = '0' + str(timeValue);
-	return rawString.substring(rawString.length - returnLength);
+	let rawString = str(timeValue);
+	while (rawString.length < returnLength){
+		rawString = '0' + rawString;
+	}
+	return rawString;
 }
 
 function nowString() {
