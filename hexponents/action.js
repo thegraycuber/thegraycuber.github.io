@@ -41,8 +41,8 @@ var showBorders = true;
 function toggleBorders(){
 	hidePopups();
 	
-	document.getElementById('border-hex').classList.toggle('svg-front');
-	document.getElementById('border-hex').classList.toggle('svg-half');
+	document.getElementById('svg-hex').classList.toggle('svg-front');
+	document.getElementById('svg-hex').classList.toggle('svg-half');
 	showBorders = !showBorders;
 	ticker = -PI;
 }

@@ -123,6 +123,8 @@ thumbnail-text {
 	position: absolute;
 	background-color: var(--color-backlight);
 	width: 3vmin;	
+	fill: var(--color-mono);
+	stroke: var(--color-mono);
 }
 
 

@@ -10,6 +10,10 @@
 	display: none;
 }
 
+.left-arrow, .right-arrow{
+	fill: var(--color-mono);
+	stroke: var(--color-mono);
+}
 
 
 @media (min-aspect-ratio: 3/4){
@@ -132,7 +136,7 @@
 	}
 	
 	.menu-svg{
-		transform: rotate(270deg) translate(-100%, 0%);
+		transform: rotate(270deg);
 	}
 
 	.popup{

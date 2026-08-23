@@ -70,6 +70,48 @@ html {
 }
 
 
+svg{
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.not-outlined{
+	stroke-opacity: 0;
+}
+.thin-outlined{
+	stroke-width: 6;
+	stroke-opacity: 1;
+	fill-opacity: 0;
+}
+.mid-outlined{
+	stroke-width: 9;
+	stroke-opacity: 1;
+	fill-opacity: 0;
+}
+.thick-outlined{
+	stroke-width: 12;
+	stroke-opacity: 1;
+	fill-opacity: 0;
+}
+
+.thin-filled{
+	stroke-width: 6;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+.mid-filled{
+	stroke-width: 9;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+.thick-filled{
+	stroke-width: 12;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+
+
 
 .center-vert{
   display: block;
@@ -220,10 +262,18 @@ arrow-label{
 	vertical-align: bottom;
 }
 
-.arrow{
+.arrow, .left-arrow, .right-arrow{
 	position:absolute;
 	height:3vmin;
 	top:0.5vmin;
+}
+
+.left-arrow{
+	left: 0px;
+}
+
+.right-arrow{
+	right: 0px;
 }
 
 icon-menu{

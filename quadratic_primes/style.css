@@ -12,6 +12,11 @@ arrow-holder{
 	width: 100%;
 }
 
+.left-arrow, .right-arrow{
+	fill: var(--color-front);
+	stroke: var(--color-front);
+}
+
 #ring-label{
 	color: var(--color-vivid);
 	vertical-align: top;
@@ -222,7 +227,7 @@ desc-menu *{
 	}
 	
 	.menu-svg{
-		transform: rotate(270deg) translate(-100%, 0%);
+		transform: rotate(270deg);
 	}
 
 }

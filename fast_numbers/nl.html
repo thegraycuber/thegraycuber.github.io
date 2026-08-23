@@ -28,7 +28,7 @@
 
 
 			<a id='logo-holder' class='container icon'>
-				<svg id='svg-logo' viewBox='0 0 180 100' stroke-width='4' class='center-vert' stroke-linejoin='round' font-weight='bold'>
+				<svg id='svg-logo' viewBox='0 0 180 100' stroke-width='4' class='center-vert' font-weight='bold'>
 					<polygon class='svg-gray' points='50,12 80,26 87,58, 66,84 34,84 13,58 20,26' fill-opacity='0.15' />
 					<polygon class='svg-mono' points='66,16 71,81 12,53' fill-opacity='0.15' />
 					<polygon class='svg-mono' points='34,16 29,81 88,53' fill-opacity='0.15' />
@@ -39,26 +39,15 @@
 			</a>
 
 			<div id='palette-icon' onclick='changePalette()' class='container zoom icon'>
-				<svg id='svg-palette' viewBox='0 0 100 100' alt='thema' class='icon-image center-vert'>
-					<circle class='svg-vivid' cx='50' cy='35' r='25' stroke-width='6' fill-opacity='0' />
-					<circle class='svg-vivid' cx='34' cy='62' r='25' stroke-width='6' fill-opacity='0' />
-					<circle class='svg-vivid' cx='66' cy='62' r='25' stroke-width='6' fill-opacity='0' />
+				<svg id='svg-palette' viewBox='0 0 100 100' alt='thema' class='icon-image center-vert svg-vivid'>
+					<use href='#def-palette'/>
 				</svg>
 				<icon-text>thema</icon-text>
 			</div>
 
 			<div id='random-icon' onclick='randomize()' class='container zoom icon'>
-				<svg id='svg-random' viewBox='0 0 100 100' stroke-linejoin='round' alt='randomiseren' class='icon-image center-zont'>
-					<path class='svg-front' d='M 50 40 L 18 21 L 50 6 L 82 21  Z' stroke-width='4' />
-					<path class='svg-front' d='M 43 52 L 13 34 L 14 70 L 43 90  Z' stroke-width='4' />
-					<path class='svg-front' d='M 57 52 L 87 34 L 86 70 L 57 90  Z' stroke-width='4' />
-					
-					<ellipse class='svg-back' cx='50' cy='23' rx='9' ry='7' stroke-opacity='0' />
-					<ellipse class='svg-back' cx='23' cy='54' rx='5' ry='6.5' stroke-opacity='0' />
-					<ellipse class='svg-back' cx='35' cy='71' rx='5' ry='6.5' stroke-opacity='0' />
-					<ellipse class='svg-back' cx='79' cy='49' rx='4.5' ry='5.5' stroke-opacity='0' />
-					<ellipse class='svg-back' cx='72' cy='62.5' rx='4.5' ry='5.5' stroke-opacity='0' />
-					<ellipse class='svg-back' cx='65' cy='76' rx='4.5' ry='5.5' stroke-opacity='0' />
+				<svg id='svg-random' viewBox='0 0 100 100' stroke-linejoin='round' alt='randomiseren' class='icon-image center-zont svg-front'>
+					<use href='#def-random' />
 				</svg>
 				<icon-text>randomiseren</icon-text>
 			</div>
@@ -145,5 +134,117 @@
 
 	
 </body>
+
+
+<svg id='core-defs' style='display:none'>
+	<defs>
+		<g id='def-logo' font-weight='bold' stroke-width='4'>
+			<polygon class='svg-gray' points='50,12 88,41 73,87 27,87 12,41' fill-opacity='0.15'/>
+			<polygon class='svg-mono' points='24,19 90,47 32,90' fill-opacity='0.15' />
+			<polygon class='svg-mono' points='76,19 10,47 68,90' fill-opacity='0.15' />
+			<text class='svg-mono' x='115' y='30' font-size='22' stroke-opacity='0'>The</text>
+			<text class='svg-gray' x='98' y='62' font-size='36' stroke-opacity='0'>Gray</text>
+			<text class='svg-mono' x='107' y='86' font-size='22' stroke-opacity='0'>Cuber</text>
+		</g>
+		<g id='def-info' >
+			<circle class='thin-outlined' cx='50' cy='50' r='40'/>
+			<rect width='8' height='28' x='46' y='46' />
+			<rect width='12' height='6' x='40' y='46' />
+			<circle cx='49' cy='31' r='6'/>
+		</g>
+		<g id='def-palette' class='thin-outlined'>
+			<circle cx='50' cy='35' r='25' />
+			<circle cx='34' cy='62' r='25' />
+			<circle cx='66' cy='62' r='25' />
+		</g>
+		<g id='def-random'>
+			<g class='thin-filled'>
+				<path d='M 50 39 L 19 21 L 50 7 L 81 21  Z'/>
+				<path d='M 42 52 L 13 35 L 14 70 L 42 90  Z'/>
+				<path d='M 58 52 L 87 35 L 86 70 L 58 90  Z'/>
+			</g>
+			<g class='svg-back not-outlined'>
+				<ellipse cx='50' cy='23' rx='9' ry='7' />
+				<ellipse cx='22' cy='54' rx='5' ry='6.5' />
+				<ellipse cx='34' cy='71' rx='5' ry='6.5' />
+				<ellipse cx='80' cy='49' rx='4.5' ry='5.5' />
+				<ellipse cx='72' cy='62.5' rx='4.5' ry='5.5' />
+				<ellipse cx='65' cy='76' rx='4.5' ry='5.5' />
+			</g>
+		</g>
+		<path id='def-heart' d='M 50 45 C 56 37 65 39 68 47 C 69 52 64 60 50 73 C 36 60 31 52 32 47 C 35 39 44 37 50 45'/>
+		<g id='def-favorites' class='not-outlined'>
+			<use href='#def-heart' x='-22' y='-26' />
+			<use href='#def-heart' x='24' y='-20' />
+			<use href='#def-heart' x='-2' y='15' />
+		</g>
+		<g id='def-copy'  viewBox='0 0 100 100' class='thin-outlined'>
+			<rect width='40' height='60' x='20' y='12' rx='4' ry='4' mask='url(#mask-copy)'/>
+			<rect width='40' height='60' x='40' y='28' rx='4' ry='4' />
+		</g>
+		<g id='def-paste' >
+			<rect class='thin-outlined' width='50' height='70' x='25' y='15' rx='10' ry='10' mask='url(#mask-paste)'/>
+			<rect class='not-outlined' width='20' height='12' x='40' y='9' rx='4' ry='4'/>
+		</g>
+		<g id='def-x' class='thick-outlined'>
+			<path d='M 20 20 L 80 80' />
+			<path d='M 80 20 L 20 80' />
+		</g>
+		<g id='def-zoom' >
+			<circle class='mid-outlined' cx='40' cy='40' r='25'/>
+			<path class='thick-outlined' d='M 60 60 L 85 85'/>
+		</g>
+		<g id='def-hex' class='mid-outlined'>
+			<path d='M 50 10 L 84 30 L 84 70 L 50 90 L 16 70 L 16 30 Z' />
+		</g>
+		<g id='def-download' class='mid-outlined'>
+			<path d='M 30 85 L 70 85'/>
+			<path d='M 50 15 L 50 65'/>
+			<path d='M 30 50 L 50 70 L 70 50'/>
+		</g>
+		<g id='def-grid' class='thin-outlined'>
+			<path d='M 28 15 L 28 85' />
+			<path d='M 50 15 L 50 85' />
+			<path d='M 72 15 L 72 85' />
+			<path d='M 15 28 L 85 28' />
+			<path d='M 15 50 L 85 50' />
+			<path d='M 15 72 L 85 72' />
+		</g>
+		<g id='def-up-arrow' class='thin-filled'>
+			<path d='M 50 20 L 15 75 L 85 75 Z'/>
+		</g>
+		<g id='def-right-arrow' class='thin-filled'>
+			<path d='M 80 50 L 25 15 L 25 85 Z'/>
+		</g>
+		<g id='def-down-arrow' class='thin-filled'>
+			<path d='M 50 80 L 15 25 L 85 25 Z'/>
+		</g>
+		<g id='def-left-arrow' class='thin-filled'>
+			<path d='M 20 50 L 75 15 L 75 85 Z'/>
+		</g>
+		<g id='def-pause' class='not-outlined'>
+			<rect width='18' height='70' x='57' y='15' rx='5' ry='5'/>
+			<rect width='18' height='70' x='25' y='15' rx='5' ry='5'/>
+		</g>
+		<g id='def-success'>
+			<circle class='not-outlined' cx='50' cy='50' r='40' />
+			<path class='svg-back thick-outlined' d='M 30 55 L 45 70 L 70 35'/>
+		</g>
+		<g id='def-enter'>
+			<rect class='not-outlined' width='80' height='80' x='10' y='10' rx='10' ry='10'/>
+			<path class='svg-back thick-outlined' d='M 50 25 L 75 50 L 25 50 L 75 50 L 50 75'/>
+		</g>
+		<g id='def-finished'>
+		  <rect class='not-outlined' width='80' height='80' x='10' y='10' rx='10' ry='10'/>
+		  <path class='svg-back thick-outlined' d='M 30 55 L 45 70 L 70 30'/>
+		</g>
+		<g id='def-reset'>
+			<path class='thick-outlined' d='M 24 28 A 34 34 0 1 1 40 81'/>
+			<path class='thin-filled' d='M 6 46 L 16 14 L 38 37 Z'/>
+		</g>
+	</defs>
+</svg>
+
+
 
 </html>

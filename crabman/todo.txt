@@ -7,3 +7,5 @@ custom highlight color
 improve the readme
 rename Controller
 favorites backwards
+crabman cleans the string when you click an icon
+crabman remove onclicks?

@@ -15,6 +15,11 @@ arrow-text{
 	color: var(--color-mono);
 }
 
+.left-arrow, .right-arrow{
+	fill: var(--color-front);
+	stroke: var(--color-front);
+}
+
 #ideal-desc{
 	color: var(--color-alert);
 }
@@ -260,10 +265,6 @@ desc-menu p{
 		bottom: 1.5vh;
 		left: 1.5vh;
 		display: none;
-	}
-	
-	.menu-svg{
-		transform: rotate(270deg) translate(-100%, 0%);
 	}
 
 	#arrow-function{

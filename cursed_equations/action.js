@@ -96,11 +96,11 @@ function toggleMeter(){
 
 function toggle(iconName){
 	hidePopups();
-	for (let svgElement of document.getElementById('svg-' + iconName).children){
-		svgElement.classList.toggle('svg-front');
-		svgElement.classList.toggle('svg-half');
-	}
 
+	let svgElement = document.getElementById('svg-' + iconName);
+	svgElement.classList.toggle('svg-front');
+	svgElement.classList.toggle('svg-half');
+	
 	switch (iconName){
 		case 'grid':
 			grid.visible = !grid.visible;

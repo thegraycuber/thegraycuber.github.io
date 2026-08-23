@@ -112,10 +112,10 @@ function setDisplayState(newDisplayValue){
 
 function toggleDisplayIcon(displayIndex){
 	let displayElement = document.getElementById('display-' + str(displayIndex));
-	for (let e of displayElement.children){
-		e.classList.toggle('svg-half');
-		e.classList.toggle('svg-front');
-	}
+
+	displayElement.classList.toggle('svg-front');
+	displayElement.classList.toggle('svg-half');
+	
 }
 
 

@@ -5,16 +5,16 @@
 	<title>TheGrayCuber Home Page</title>
 	
 	<link rel='stylesheet' href='/crabman/palette-sunset.css'>
-	<link rel='stylesheet' href='crabman/core.css'>
-	<link rel='stylesheet' href='index/style.css'>
+	<link rel='stylesheet' href='/crabman/core.css'>
+	<link rel='stylesheet' href='/index/style.css'>
 	
 	<script src='https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.js'></script>
-	<script src='crabman/palette.js'></script>
-	<script src='crabman/toolbox.js'></script>
+	<script src='/crabman/palette.js'></script>
+	<script src='/crabman/toolbox.js'></script>
 
-	<script src='index/main.js'></script>
-	<script src='index/preview.js'></script>
-	<script src='index/action.js'></script>
+	<script src='/index/main.js'></script>
+	<script src='/index/preview.js'></script>
+	<script src='/index/action.js'></script>
 
 
 </head>
@@ -27,23 +27,23 @@
 
 		
 		<div id='preview-icon' onclick='openPreview()' class='container zoom icon'>
-			<svg id='svg-preview' viewBox='0 0 100 100' alt='preview' class='icon-image center-zont'>
-			  <rect class='svg-vivid' width='80' height='60' x='10' y='20' rx='6' ry='6' stroke-width='6' fill-opacity='0'/>
-			  <rect class='svg-vivid' width='18' height='18' x='28' y='50' stroke-opacity='0'/>
-			  <circle class='svg-vivid' cx='62' cy='40' r='10' stroke-opacity='0'/>
+			<svg id='svg-preview' viewBox='0 0 100 100' alt='preview' class='icon-image center-zont svg-vivid'>
+				<rect class='thin-outlined' width='80' height='60' x='10' y='20' rx='6' ry='6' />
+				<rect width='16' height='16' x='28' y='50' />
+				<circle cx='62' cy='42' r='9' />
 			</svg>
 			<icon-text class='icon-text prevent-select'>preview</icon-text>
 		</div>
 
 		
 		<div id='thumbnail-icon' onclick='openThumbnails()' class='container zoom icon'>
-			<svg id='svg-thumbnail' viewBox='0 0 100 100' alt='projects' class='icon-image center-zont'>
-				<rect class='svg-vivid' width='36' height='20' x='9' y='12' rx='6' ry='6' stroke-opacity='0' />
-				<rect class='svg-vivid' width='36' height='20' x='9' y='40' rx='6' ry='6' stroke-opacity='0' />
-				<rect class='svg-vivid' width='36' height='20' x='9' y='68' rx='6' ry='6' stroke-opacity='0' />
-				<rect class='svg-vivid' width='36' height='20' x='53' y='12' rx='6' ry='6' stroke-opacity='0' />
-				<rect class='svg-vivid' width='36' height='20' x='53' y='40' rx='6' ry='6' stroke-opacity='0' />
-				<rect class='svg-vivid' width='36' height='20' x='53' y='68' rx='6' ry='6' stroke-opacity='0' />
+			<svg id='svg-thumbnail' viewBox='0 0 100 100' alt='projects' class='icon-image center-zont svg-vivid not-outlined'>
+				<rect width='36' height='20' x='9' y='12' rx='6' ry='6' />
+				<rect width='36' height='20' x='9' y='40' rx='6' ry='6' />
+				<rect width='36' height='20' x='9' y='68' rx='6' ry='6' />
+				<rect width='36' height='20' x='53' y='12' rx='6' ry='6' />
+				<rect width='36' height='20' x='53' y='40' rx='6' ry='6' />
+				<rect width='36' height='20' x='53' y='68' rx='6' ry='6' />
 			</svg>
 			<icon-text class='icon-text prevent-select'>projects</icon-text>
 		</div>
@@ -51,32 +51,22 @@
 
 
 		<div id='logo-holder' class='container prevent-select'>
-			<svg id='svg-logo' viewBox='0 0 180 100' stroke-width='4' stroke-linejoin='round' font-weight= 'bold'>
-			  <polygon class='svg-gray' points='50,12 88,41 73,87 27,87 12,41' fill-opacity='0.15'/>
-			  <polygon class='svg-mono' points='24,19 90,47 32,90' fill-opacity='0.15' />
-			  <polygon class='svg-mono' points='76,19 10,47 68,90' fill-opacity='0.15' />
-			  <text class='svg-mono' x='103' y='31' font-size='24' stroke-opacity='0'>The</text>
-			  <text class='svg-gray' x='98' y='62' font-size='32' stroke-opacity='0'>Gray</text>
-			  <text class='svg-mono' x='101' y='88' font-size='24' stroke-opacity='0'>Cuber</text>
+			<svg id='svg-logo' viewBox='0 0 180 100' font-weight= 'bold'>
+			  <use href='#def-logo'/>
 			</svg>
 		</div>
 
 		<div id='palette-icon' onclick='openPalette()' class='container zoom icon'>
-			<svg id='svg-palette' viewBox='0 0 100 100' alt='palette' class='icon-image center-zont'>
-				<circle class='svg-vivid' cx='50' cy='35' r='25' stroke-width='6' fill-opacity='0' />
-				<circle class='svg-vivid' cx='34' cy='62' r='25' stroke-width='6' fill-opacity='0' />
-				<circle class='svg-vivid' cx='66' cy='62' r='25' stroke-width='6' fill-opacity='0' />
+			<svg id='svg-palette' viewBox='0 0 100 100' alt='palette' class='icon-image center-zont svg-vivid'>
+				<use href='#def-palette'/>
 			</svg>
 			<icon-text class='icon-text prevent-select'>palette</icon-text>
 		</div>
 
 		
 		<div id='info-icon' onclick='openInfo()' class='container zoom icon'>
-			<svg id='svg-info' viewBox='0 0 100 100' alt='info' class='icon-image center-zont'>
-				<circle class='svg-vivid' cx='50' cy='50' r='40' stroke-width='8' fill-opacity='0' />
-				<rect class='svg-vivid' width='10' height='30' x='45' y='45' stroke-opacity='0' />
-				<rect class='svg-vivid' width='14' height='8' x='39' y='45' stroke-opacity='0' />
-				<circle class='svg-vivid' cx='49' cy='31' r='4' stroke-width='4' / - >
+			<svg id='svg-info' viewBox='0 0 100 100' alt='info' class='icon-image center-zont svg-vivid'>
+				<use href='#def-info'/>
 			</svg>
 			<icon-text class='icon-text prevent-select'>info</icon-text>
 		</div>
@@ -153,17 +143,16 @@
 		<div id='preview-holder' >
 			
 			<svg id='preview-back' viewBox='0 0 100 100' onclick='movePreview(-1)' class='box preview-mover zoom'>
-				<path class='svg-mono' d='M 20 50 L 75 15 L 75 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				<use href='#def-left-arrow'/>
 			</svg>
 
 			<svg id='preview-forward' viewBox='0 0 100 100' onclick='movePreview(1)' class='box preview-mover zoom'>
-				<path class='svg-mono' d='M 80 50 L 25 15 L 25 85 Z' stroke-width='6' stroke-linejoin='round'/>
+				<use href='#def-right-arrow'/>
 			</svg>
 
 			<div id='preview-desc' class='container'>
 				<preview-title class='box center-zont' id='preview-title'></preview-title>
 				<a id='preview-link' class='box center-zont zoom' href=''>visit this page</a>
-
 			</div>
 		</div>
 
@@ -237,8 +226,6 @@
 			<div id='special-palette-holder' class='container'>
 				<div class='special-palette container'>
 
-
-
 					<svg viewBox='0 -4 44 84' alt='plum preset' id='plum-preset' 
 						onclick='setExistingPalette("plum")' stroke-opacity='0' 
 						class='zoom palette-svg center-vert'>
@@ -256,14 +243,14 @@
 					</div>
 
 					<div id='expand-icon' onclick='toggleSpecialPalettes(true)' class='container zoom icon'>
-						<svg id='svg-expand' viewBox='0 0 100 100' alt='expand' class='icon-image'>
-							<path class='svg-front' d='M 15 40 L 50 70 L 85 40' stroke-width='12' stroke-linejoin='round' stroke-linecap='round' fill-opacity='0'/>
+						<svg id='svg-expand' viewBox='0 0 100 100' alt='expand' class='icon-image svg-front'>
+							<path class='thick-outlined' d='M 15 40 L 50 70 L 85 40' stroke-width='12'/>
 						</svg>
 					</div>
 
 					<div id='collapse-icon' onclick='toggleSpecialPalettes(false)' class='container zoom icon' style='display:none'>
-						<svg id='svg-collapse' viewBox='0 0 100 100' onclick='copyHTML("svg-collapse")' alt='collapse' class='icon-image'>
-							<path class='svg-front' d='M 15 60 L 50 30 L 85 60' stroke-width='12' stroke-linejoin='round' stroke-linecap='round' fill-opacity='0'/>
+						<svg id='svg-collapse' viewBox='0 0 100 100' alt='collapse' class='icon-image svg-front'>
+							<path class='thick-outlined' d='M 15 60 L 50 30 L 85 60' stroke-width='12' fill-opacity='0'/>
 						</svg>
 					</div>
 
@@ -321,25 +308,16 @@
 
 					<palette-picker class='container'>	
 						<div id='random-icon' onclick='randomPalette()' class='container zoom icon'>
-							<svg id='svg-random' viewBox='0 0 100 100' stroke-linejoin='round' alt='random' class='icon-image center-zont'>
-								<path class='svg-front' d='M 50 40 L 18 21 L 50 6 L 82 21  Z' stroke-width='4' />
-								<path class='svg-front' d='M 43 52 L 13 34 L 14 70 L 43 90  Z' stroke-width='4' />
-								<path class='svg-front' d='M 57 52 L 87 34 L 86 70 L 57 90  Z' stroke-width='4' />
-								
-								<ellipse class='svg-back' cx='50' cy='23' rx='9' ry='7' stroke-opacity='0' />
-								<ellipse class='svg-back' cx='23' cy='54' rx='5' ry='6.5' stroke-opacity='0' />
-								<ellipse class='svg-back' cx='35' cy='71' rx='5' ry='6.5' stroke-opacity='0' />
-								<ellipse class='svg-back' cx='79' cy='49' rx='4.5' ry='5.5' stroke-opacity='0' />
-								<ellipse class='svg-back' cx='72' cy='62.5' rx='4.5' ry='5.5' stroke-opacity='0' />
-								<ellipse class='svg-back' cx='65' cy='76' rx='4.5' ry='5.5' stroke-opacity='0' />
+							<svg id='svg-random' viewBox='0 0 100 100' alt='random' class='icon-image center-zont svg-front'>
+								<use href='#def-random'/>
 							</svg>
 							<icon-text>random</icon-text>
 						</div>
 
 						<div id='undo-icon' onclick='undoPaletteChange()' class='container zoom icon'>
-							<svg id='svg-undo' viewBox='0 0 100 100' alt='undo' class='icon-image'>
-								<path class='svg-half' d='M 40 80 L 55 80 A 27 27 0 1 0 55 24 L 20 24' fill-opacity='0' stroke-width='10'></path>
-								<path class='svg-half' d='M 10 25 L 35 40 L 35 10 Z' stroke-opacity='0'></path>
+							<svg id='svg-undo' viewBox='0 0 100 100' alt='undo' class='icon-image svg-mono'>
+								<path class='thick-outlined' d='M 40 80 L 55 80 A 27 27 0 1 0 55 24 L 20 24'></path>
+								<path class='thin-filled' d='M 10 25 L 35 40 L 35 10 Z'></path>
 							</svg>
 							<icon-text>undo</icon-text>
 						</div>
@@ -469,5 +447,135 @@
 	</div>
 
 </body>
+
+
+<svg id='helper-defs' style='width:0px; height:0px;'>
+	<mask id='mask-copy'>
+		<rect fill='#fff' width='100' height='100' x='0' y='0'/>
+		<rect fill='#000' width='40' height='60' x='30' y='18' r='37' stroke-opacity='0'/>
+	</mask>
+	<mask id='mask-paste'>
+		<rect fill='#fff' width='100' height='100' x='0' y='0'/>
+		<rect fill='#000' width='30' height='30' x='35' y='0'/>
+	</mask>
+</svg>
+<svg id='core-defs' style='display:none'>
+	<defs>
+		<g id='def-logo' font-weight='bold' stroke-width='4'>
+			<polygon class='svg-gray' points='50,12 88,41 73,87 27,87 12,41' fill-opacity='0.15'/>
+			<polygon class='svg-mono' points='24,19 90,47 32,90' fill-opacity='0.15' />
+			<polygon class='svg-mono' points='76,19 10,47 68,90' fill-opacity='0.15' />
+			<text class='svg-mono' x='115' y='30' font-size='22' stroke-opacity='0'>The</text>
+			<text class='svg-gray' x='98' y='62' font-size='36' stroke-opacity='0'>Gray</text>
+			<text class='svg-mono' x='107' y='86' font-size='22' stroke-opacity='0'>Cuber</text>
+		</g>
+		<g id='def-info' >
+			<circle class='thin-outlined' cx='50' cy='50' r='40'/>
+			<rect width='8' height='28' x='46' y='46' />
+			<rect width='12' height='6' x='40' y='46' />
+			<circle cx='49' cy='31' r='6'/>
+		</g>
+		<g id='def-palette' class='thin-outlined'>
+			<circle cx='50' cy='35' r='25' />
+			<circle cx='34' cy='62' r='25' />
+			<circle cx='66' cy='62' r='25' />
+		</g>
+		<g id='def-random'>
+			<g class='thin-filled'>
+				<path d='M 50 39 L 19 21 L 50 7 L 81 21  Z'/>
+				<path d='M 42 52 L 13 35 L 14 70 L 42 90  Z'/>
+				<path d='M 58 52 L 87 35 L 86 70 L 58 90  Z'/>
+			</g>
+			<g class='svg-back not-outlined'>
+				<ellipse cx='50' cy='23' rx='9' ry='7' />
+				<ellipse cx='22' cy='54' rx='5' ry='6.5' />
+				<ellipse cx='34' cy='71' rx='5' ry='6.5' />
+				<ellipse cx='80' cy='49' rx='4.5' ry='5.5' />
+				<ellipse cx='72' cy='62.5' rx='4.5' ry='5.5' />
+				<ellipse cx='65' cy='76' rx='4.5' ry='5.5' />
+			</g>
+		</g>
+		<path id='def-heart' d='M 50 45 C 56 37 65 39 68 47 C 69 52 64 60 50 73 C 36 60 31 52 32 47 C 35 39 44 37 50 45'/>
+		<g id='def-favorites' class='not-outlined'>
+			<use href='#def-heart' x='-22' y='-26' />
+			<use href='#def-heart' x='24' y='-20' />
+			<use href='#def-heart' x='-2' y='15' />
+		</g>
+		<g id='def-copy'  viewBox='0 0 100 100' class='thin-outlined'>
+			<rect width='40' height='60' x='20' y='12' rx='4' ry='4' mask='url(#mask-copy)'/>
+			<rect width='40' height='60' x='40' y='28' rx='4' ry='4' />
+		</g>
+		<g id='def-paste' >
+			<rect class='thin-outlined' width='50' height='70' x='25' y='15' rx='10' ry='10' mask='url(#mask-paste)'/>
+			<rect class='not-outlined' width='20' height='12' x='40' y='9' rx='4' ry='4'/>
+		</g>
+		<g id='def-x' class='thick-outlined'>
+			<path d='M 20 20 L 80 80' />
+			<path d='M 80 20 L 20 80' />
+		</g>
+		<g id='def-zoom' >
+			<circle class='mid-outlined' cx='40' cy='40' r='25'/>
+			<path class='thick-outlined' d='M 60 60 L 85 85'/>
+		</g>
+		<g id='def-hex' class='mid-outlined'>
+			<path d='M 50 10 L 84 30 L 84 70 L 50 90 L 16 70 L 16 30 Z' />
+		</g>
+		<g id='def-download' class='mid-outlined'>
+			<path d='M 30 85 L 70 85'/>
+			<path d='M 50 15 L 50 65'/>
+			<path d='M 30 50 L 50 70 L 70 50'/>
+		</g>
+		<g id='def-grid' class='thin-outlined'>
+			<path d='M 28 15 L 28 85' />
+			<path d='M 50 15 L 50 85' />
+			<path d='M 72 15 L 72 85' />
+			<path d='M 15 28 L 85 28' />
+			<path d='M 15 50 L 85 50' />
+			<path d='M 15 72 L 85 72' />
+		</g>
+		<g id='def-up-arrow' class='thin-filled'>
+			<path d='M 50 20 L 15 75 L 85 75 Z'/>
+		</g>
+		<g id='def-right-arrow' class='thin-filled'>
+			<path d='M 80 50 L 25 15 L 25 85 Z'/>
+		</g>
+		<g id='def-down-arrow' class='thin-filled'>
+			<path d='M 50 80 L 15 25 L 85 25 Z'/>
+		</g>
+		<g id='def-left-arrow' class='thin-filled'>
+			<path d='M 20 50 L 75 15 L 75 85 Z'/>
+		</g>
+		<g id='def-pause' class='not-outlined'>
+			<rect width='18' height='70' x='57' y='15' rx='5' ry='5'/>
+			<rect width='18' height='70' x='25' y='15' rx='5' ry='5'/>
+		</g>
+		<g id='def-success'>
+			<circle class='not-outlined' cx='50' cy='50' r='40' />
+			<path class='svg-back thick-outlined' d='M 30 55 L 45 70 L 70 35'/>
+		</g>
+		<g id='def-enter'>
+			<rect class='not-outlined' width='80' height='80' x='10' y='10' rx='10' ry='10'/>
+			<path class='svg-back thick-outlined' d='M 50 25 L 75 50 L 25 50 L 75 50 L 50 75'/>
+		</g>
+		<g id='def-finished'>
+		  <rect class='not-outlined' width='80' height='80' x='10' y='10' rx='10' ry='10'/>
+		  <path class='svg-back thick-outlined' d='M 30 55 L 45 70 L 70 30'/>
+		</g>
+		<g id='def-reset'>
+			<path class='mid-outlined' d='M 24 28 A 34 34 0 1 1 40 81'/>
+			<path class='not-outlined' d='M 6 46 L 16 14 L 38 37 Z'/>
+		</g>
+		<g id='def-plus'>
+			<rect width='80' height='80' x='10' y='10' rx='10' ry='10'/>
+			<path class='svg-back thick-outlined' d='M 50 25 L 50 75'/>
+			<path class='svg-back thick-outlined' d='M 25 50 L 75 50'/>
+		</g>
+		<g id='def-minus'>
+			<rect width='80' height='80' x='10' y='10' rx='10' ry='10'/>
+			<path class='svg-back thick-outlined' d='M 25 50 L 75 50'/>
+		</g>
+	</defs>
+</svg>
+
 
 </html>

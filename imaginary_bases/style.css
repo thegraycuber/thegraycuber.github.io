@@ -7,6 +7,11 @@ arrow-text{
 	color: var(--color-vivid);
 }
 
+.left-arrow, .right-arrow{
+	fill: var(--color-mono);
+	stroke: var(--color-m,ono);
+}
+
 #submitted-note{
 	position: absolute;
 	color: var(--color-mono);
@@ -220,7 +225,7 @@ body {
 	}
 	
 	.menu-svg{
-		transform: rotate(270deg) translate(-100%, 0%);
+		transform: rotate(270deg);
 	}
 
 	.popup{

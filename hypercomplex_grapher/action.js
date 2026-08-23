@@ -101,21 +101,6 @@ function customToggleHolder(holderType, holderToggle){
 
 
 var resolution = 840;
-// var resolutionList = [420,840,1260,2520,5040];
-// function toggleMeter(){
-// 	hidePopups();
-// 	let resolutionIndex = modulo(resolutionList.indexOf(resolution)+1, 5);
-// 	resolution = resolutionList[resolutionIndex];
-// 	document.getElementById('meter-dial').setAttribute ('transform','translate(50 79) rotate(' + str(144+18*resolutionIndex) + ')');
-
-// 	shape = new Shape(shape.vertices, shape.step, shape.type);
-
-// 	if (gameMode){
-// 		targetShape = new Shape(targetShape.vertices,targetShape.step,targetShape.type);
-// 	}
-		
-// }
-
 
 function disableIcon(iconName,disabledValue){
 	if (document.getElementById('reset-icon').disabled != disabledValue){
@@ -126,10 +111,11 @@ function disableIcon(iconName,disabledValue){
 
 function toggle(iconName){
 	hidePopups();
-	for (let svgElement of document.getElementById('svg-' + iconName).children){
-		svgElement.classList.toggle('svg-front');
-		svgElement.classList.toggle('svg-half');
-	}
+
+	let svgElement = document.getElementById('svg-' + iconName);
+	svgElement.classList.toggle('svg-front');
+	svgElement.classList.toggle('svg-half');
+	
 
 	if (iconName == 'spin'){
 		spinShape = !spinShape;
