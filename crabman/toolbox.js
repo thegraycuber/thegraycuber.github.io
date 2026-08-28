@@ -529,6 +529,10 @@ function lerpSmooth(a,b,l){
 	return lerp(a,b,(sin((l-0.5)*PI)+1)/2);
 }
 
+function randomCircle(radiusMax){
+	return angleC(random(TWO_PI),random(radiusMax));
+}
+
 function hexagon(x,y,radius){
 	beginShape();
 	vertex(x,y-radius*1.16);
@@ -718,6 +722,15 @@ function normC(a) {
 function squareC(a) {
 	return [a[0] ** 2 - a[1] ** 2, 2 * a[0] * a[1]];
 }
+
+function angleC(arg, mag = 1) {
+	return [cos(arg)*mag,sin(arg)*mag];
+}
+
+function distC(a,b) {
+	return normC(subC(a,b))**0.5;
+}
+
 
 function roundC(a, precision = 0){
 	return [round(a[0],precision), round(a[1],precision)];

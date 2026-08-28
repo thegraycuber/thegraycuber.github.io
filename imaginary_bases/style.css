@@ -9,7 +9,7 @@ arrow-text{
 
 .left-arrow, .right-arrow{
 	fill: var(--color-mono);
-	stroke: var(--color-m,ono);
+	stroke: var(--color-mono);
 }
 
 #submitted-note{
