@@ -95,11 +95,8 @@
 				</div>
 		
 				<div id='trash-digit-icon' class='container zoom icon' style='display:none;'>
-					<svg id='svg-trash' viewBox='0 0 100 100' fill-opacity='0' stroke-width='10'  alt='delete digit' class='icon-image'>
-					  <rect class='svg-alert' width='80' height='80' x='10' y='10' rx='10' ry='10' fill-opacity='1'></rect>
-					  <path class='svg-back' d='M 25 30 L 75 30' ></path>
-					  <path class='svg-back' d='M 46 24 L 54 24'></path>
-					  <path class='svg-back' d='M 30 30 L 37 80 L 63 80 L 70 30 '></path>
+					<svg id='svg-trash' viewBox='0 0 100 100' fill-opacity='0' stroke-width='10'  alt='delete digit' class='icon-image svg-alert'>
+						<use href='#def-trash' />
 					</svg>
 					<icon-text>delete digit</icon-text>
 				</div>
@@ -490,8 +487,15 @@
 			<rect width='80' height='80' x='10' y='10' rx='10' ry='10'/>
 			<path class='svg-back thick-outlined' d='M 25 50 L 75 50'/>
 		</g>
+		<g id='def-trash'>
+			<rect class='mid-filled' width='80' height='80' x='10' y='10' rx='10' ry='10'></rect>
+			<path class='svg-back mid-outlined' d='M 25 28 L 32 80 L 68 80 L 75 28 M 46 22 L 54 22 M 20 28 L 80 28' />
+			<path class='svg-back thin-outlined' d='M 42 41 L 44 67 M 58 41 L 56 67' />
+		</g>
 	</defs>
 </svg>
 
+
+		
 
 </html>

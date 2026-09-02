@@ -225,17 +225,8 @@ var functionList = [
 ]; 
 
 
-function idealLocation(mobileLocation){
-	// if (mobileLocation){
-	// 	let xPerc = (ideal[0]*scalar+origin.x-defaultOrigin.x)/scalar;
-	// 	let yPerc = (-ideal[1]*scalar+origin.y-defaultOrigin.y)/scalar;
-	// 	if (abs(xPerc) > 1.05 || abs(yPerc) > 1.05){
-	// 	return [];
-	// 	}
-	// 	return [];//addC(dot(scaleC(0.4,[xPerc,yPerc]),mobileBox.Size),mobileBox.Coords);
-	// } else {
-		return [ideal[0]*scalar+origin.x, -ideal[1]*scalar+origin.y];
-	// }
+function idealLocation(){
+	return [ideal[0]*scalar+origin.x, -ideal[1]*scalar+origin.y];
 }
 
 

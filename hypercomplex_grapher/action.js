@@ -10,7 +10,7 @@ function touchStarted(){
 	if (mouseInMenu || hideCanvas){return;}
 	
 	if (!portrait){
-		let iLoc = idealLocation(portrait);
+		let iLoc = idealLocation();
 		let iSqVar = createVector(mouseX, mouseY).sub(createVector(iLoc[0], iLoc[1]));
 		if (iSqVar.mag() < circleWidth*3){
 			iDragging = true;

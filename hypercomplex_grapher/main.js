@@ -98,7 +98,7 @@ function draw(){
 		dragAlert.style.fontSize = str(3.6+cos(millis()/300)*0.4) + 'vw';
 	}
 
-	let iLoc = idealLocation(portrait);
+	let iLoc = idealLocation();
 	if (iLoc.length > 0){
 		strokeWeight(circleWidth*0.15);
 		stroke(palette.back);

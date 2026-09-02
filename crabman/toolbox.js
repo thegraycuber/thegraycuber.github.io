@@ -517,14 +517,6 @@ function nowString() {
 	return pre0(year()) + pre0(month()) + pre0(day()) + '_' + pre0(hour()) + pre0(minute()) + pre0(second());
 }
 
-function drawTri(x, y, d) {
-	triangle(x + d, y, x - d, y + d * 1.2, x - d, y - d * 1.2);
-}
-
-function drawVertTri(x, y, d) {
-	triangle(x + d * 1.2, y - d, x * 1.2 - d, y - d, x, y + d);
-}
-
 function lerpSmooth(a,b,l){
 	return lerp(a,b,(sin((l-0.5)*PI)+1)/2);
 }
@@ -544,6 +536,25 @@ function hexagon(x,y,radius){
 	endShape(CLOSE);
 }
 
+function path(g,pathPoints,closePath=true){
+	g.beginShape();
+	for (let pathPoint of pathPoints){
+		g.vertex(...pathPoint);
+	}
+
+	g.endShape(closePath?CLOSE:0);
+}
+
+function vectorToArray(vectorInput, hasZ = false) {
+	if (hasZ) {
+		return [vectorInput.x, vectorInput.y, vectorInput.z];
+	}
+	return [vectorInput.x, vectorInput.y];
+}
+
+function arrayToVector(arrayInput) {
+	return createVector(...arrayInput);
+}
 
 var isHex = false;
 class Grid {
@@ -687,61 +698,6 @@ class Grid {
 
 ####################################*/
 
-function scaleC(c, a) {
-	return [c * a[0], c * a[1]];
-}
-
-function addC(a, b) {
-	return [a[0] + b[0], a[1] + b[1]];
-}
-
-function subC(a, b) {
-	return [a[0] - b[0], a[1] - b[1]];
-}
-
-function multC(a, b) {
-	return [a[0] * b[0] - a[1] * b[1], a[0] * b[1] + a[1] * b[0]];
-}
-
-function divC(a, b) {
-	return multC(a, invC(b));
-}
-
-function invC(a) {
-	let aNorm = normC(a);
-	if (aNorm == 0) {
-		return (100000000, 100000000);
-	}
-	return [a[0] / aNorm, -a[1] / aNorm];
-}
-
-function normC(a) {
-	return a[0] ** 2 + a[1] ** 2;
-}
-
-function squareC(a) {
-	return [a[0] ** 2 - a[1] ** 2, 2 * a[0] * a[1]];
-}
-
-function angleC(arg, mag = 1) {
-	return [cos(arg)*mag,sin(arg)*mag];
-}
-
-function distC(a,b) {
-	return normC(subC(a,b))**0.5;
-}
-
-
-function roundC(a, precision = 0){
-	return [round(a[0],precision), round(a[1],precision)];
-}
-
-function closeC(a, b, precision = 6){
-	let roundDelta = roundC(subC(a,b),precision);
-	return(roundDelta[0] == 0) && (roundDelta[1] == 0);
-}
-
-
 function gcd(a, b) {
 
 	if (a < b) {
@@ -759,6 +715,14 @@ function gcd(a, b) {
 	return b;
 }
 
+function magnitude(a){
+	let squareSum = 0;
+	for (let coord of a){
+		squareSum += coord**2;
+	}
+	return squareSum**0.5;
+}
+
 function modulo(a, b) {
 	return (a % b + b) % b;
 }
@@ -773,15 +737,14 @@ function sign(signInput) {
 	}
 }
 
-function vectorToArray(vectorInput, hasZ = false) {
-	if (hasZ) {
-		return [vectorInput.x, vectorInput.y, vectorInput.z];
-	}
-	return [vectorInput.x, vectorInput.y];
+function slopeIntercept(a,b){
+	let slope = (a[1]-b[1])/(a[0]-b[0]);
+	return [slope,a[1]-a[0]*slope];
 }
 
-function arrayToVector(arrayInput) {
-	return createVector(...arrayInput);
+function intersection(l1, l2){
+	let xInt = (l1[1]-l2[1])/(l2[0]-l1[0]);
+	return [xInt,l1[0]*xInt+l1[1]];
 }
 
 function quadratic(a, b, c) {
@@ -831,4 +794,163 @@ function evaluatePolynomial(polynomialArray, inputValue){
 		polynomialOutput += inputPower*polynomialArray[p];
 	}
 	return polynomialOutput;
+}
+
+/*####################################
+
+        Complex Numbers
+
+####################################*/
+
+
+function scaleC(c, a) {
+	return [c * a[0], c * a[1]];
+}
+
+function addC(a, b) {
+	return [a[0] + b[0], a[1] + b[1]];
+}
+
+function subC(a, b) {
+	return [a[0] - b[0], a[1] - b[1]];
+}
+
+function multC(a, b) {
+	return [a[0] * b[0] - a[1] * b[1], a[0] * b[1] + a[1] * b[0]];
+}
+
+function divC(a, b) {
+	return multC(a, invC(b));
+}
+
+function invC(a) {
+	let aNorm = normC(a);
+	if (aNorm == 0) {
+		return (100000000, 100000000);
+	}
+	return [a[0] / aNorm, -a[1] / aNorm];
+}
+
+function normC(a) {
+	return a[0] ** 2 + a[1] ** 2;
+}
+
+function squareC(a) {
+	return [a[0] ** 2 - a[1] ** 2, 2 * a[0] * a[1]];
+}
+
+function angleC(arg, mag = 1) {
+	return [cos(arg)*mag,sin(arg)*mag];
+}
+
+function distC(a,b) {
+	return normC(subC(a,b))**0.5;
+}
+
+function roundC(a, precision = 0){
+	return [round(a[0],precision), round(a[1],precision)];
+}
+
+function closeC(a, b, precision = 6){
+	let roundDelta = roundC(subC(a,b),precision);
+	return(roundDelta[0] == 0) && (roundDelta[1] == 0);
+}
+
+
+/*####################################
+
+            Matrices
+
+####################################*/
+
+
+// THESE MATRICES ARE WEIRD
+// we use the transpose so that a vector is A[0] instead of some complicated googly moogly
+function multM(A, rawB, asVector = ''){
+	let B = asVector == 'vec' ? [[...rawB]] : rawB;
+	let AB = [];
+
+	if (A.length != B[0].length){
+		console.log('AHHHHH MATRIX SIZES DONT MATCH');
+		return [];
+	}
+	
+	for (let i = 0; i < B.length; i++){
+		AB.push([]);
+		for (let j = 0; j < A[0].length; j++){
+			let newTerm = 0;
+			for (let k = 0; k < B[0].length; k++){
+				newTerm += A[k][j]*B[i][k];
+			}
+
+			AB[i].push(newTerm);
+		}
+	}
+
+	if (asVector == 'vec'){
+		return AB[0];
+	}
+	return AB;
+}
+
+function identityM(size){
+	let outMatrix = [];
+	for (let r = 0; r < size; r++){
+		
+		outMatrix.push([]);
+		for (let c = 0; c < size; c++){
+			outMatrix[r].push(c==r?1:0);
+			
+		}
+	}
+	return outMatrix;
+}
+
+
+function rotationM(size,axis1,axis2,angle){
+	
+	let outMatrix = [];
+	for (let r = 0; r < size; r++){
+		outMatrix.push([]);
+		for (let c = 0; c < size; c++){
+			
+			if (r == c){
+				if (r == axis1 || r == axis2){
+					outMatrix[r].push(cos(angle));
+				} else {
+					outMatrix[r].push(1);
+				}
+				
+			} else {
+				if (r == axis1 && c == axis2){
+					outMatrix[r].push(-sin(angle));
+				} else if (r == axis2 && c == axis1){
+					outMatrix[r].push(sin(angle));
+				} else {
+					outMatrix[r].push(0);
+				}
+				
+			}
+			
+		}
+	}
+	return outMatrix;
+}
+
+
+function roundM(A,diggies=0){
+	let roundedM = [];
+
+	for (let r = 0; r < A.length; r++){
+		roundedM.push([]);
+
+		if (A[r].length != A[0].length){
+			console.log('AHHHHH MATRIX IS NOT RECTANGLE');
+			return [];
+		}
+		for (let c = 0; c < A[0].length; c++){
+			roundedM[r].push(round(A[r][c],diggies));
+		}
+	}
+	return roundedM; 
 }
