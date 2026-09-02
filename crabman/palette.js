@@ -175,10 +175,12 @@ var palettes = {
 	plum:{
 		code: "#F1BCD8-#5D0344-#E63F8B-#E456FB-#FFC148"
 	},
+	seascape:{
+		code: "#ADEFE8-#003D41-#1AFDAF-#B489FF-#FD88BE"
+	},
 
 
 }
-
 
 
 
@@ -254,9 +256,5 @@ function HSVtoRGB(hue,sat,val){
 }
 		
 /*
-OTHER PALETTES (SPINNING TOY SECRET):
-
 #18A50F-#AFE0F0-#355BD3-#D6A307-#E2446E // toy
-#C7F0D1-#0C5A4E-#1AFDAF-#B489FF-#FD88BE // sea
-
 */
