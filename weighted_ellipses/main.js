@@ -65,7 +65,7 @@ function draw(){
 		ellipseShader.setUniform("origin", [origin.x,height-origin.y]);
 		ellipseShader.setUniform("scalar", scalar);
 	} else {
-		ellipseShader.setUniform("origin", [origin.x/2,(2*defaultOrigin.y-origin.y)/2]);
+		ellipseShader.setUniform("origin", [origin.x*2,(2*defaultOrigin.y-origin.y)*2]);
 		ellipseShader.setUniform("scalar", scalar*2);
 	}
 
