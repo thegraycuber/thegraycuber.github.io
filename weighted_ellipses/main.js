@@ -61,8 +61,13 @@ function draw(){
 	colorToUniform(ellipseShader,"back");
 	colorToUniform(ellipseShader,"mono");
 
-	ellipseShader.setUniform("origin", [origin.x*2,-origin.y*2]);
-	ellipseShader.setUniform("scalar", scalar);
+	if (isFirefox){
+		ellipseShader.setUniform("origin", [origin.x,height-origin.y]);
+		ellipseShader.setUniform("scalar", scalar);
+	} else {
+		ellipseShader.setUniform("origin", [origin.x*2,(2*defaultOrigin.y-origin.y)*2]);
+		ellipseShader.setUniform("scalar", scalar/2);
+	}
 
 	let distance = getTost(border,points,weights);
 	ellipseShader.setUniform("distance", distance);
@@ -114,7 +119,7 @@ function draw(){
 }
 
 var canvas, shaderCanvas;
-var ellipseShader;
+var ellipseShader, isFirefox;
 function setup() {
 
 	morningRoutine('electric',false);
@@ -132,6 +137,10 @@ function setup() {
 	prepareVectors();
 	disablePointEdit();
 	lastFrame = Date.now();
+
+	isFirefox = (navigator.userAgent.search('Firefox') > -1);
+
+	randomize(10);
 }
 
 

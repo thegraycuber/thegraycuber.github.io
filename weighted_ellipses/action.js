@@ -288,14 +288,14 @@ function arrowHandlerCustom(clickedControl){
 }
 
 
-function randomize(){
+function randomize(fixedPointCount = -1){
 	hidePopups();
 	disablePointEdit();
 
 	points = [];
 	weights = [];
 
-	let pointCount = floor(random(6,18));
+	let pointCount = (fixedPointCount == -1) ? floor(random(6,18)) : fixedPointCount;
 	let unplaced = pointCount;
 	let zoomFactor = defaultScalar/scalar;
 	while (unplaced > 0){
