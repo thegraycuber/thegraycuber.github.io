@@ -61,7 +61,7 @@ function draw(){
 	colorToUniform(ellipseShader,"back");
 	colorToUniform(ellipseShader,"mono");
 
-	ellipseShader.setUniform("origin", [origin.x*2,origin.y*2]);
+	ellipseShader.setUniform("origin", [origin.x*2,-origin.y*2]);
 	ellipseShader.setUniform("scalar", scalar);
 
 	let distance = getTost(border,points,weights);
