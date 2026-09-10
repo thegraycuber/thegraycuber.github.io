@@ -152,14 +152,14 @@ function setupLayout(){
 	scalar = defaultScalar;
 	scaleMin = 1;
 
-
+	console.log(innerWidth);
 	let canvasList = document.getElementsByTagName('canvas');
 	for (let c of canvasList){
-		c.width = canvas.width;
-		c.height = canvas.height;
+		c.width = innerWidth;
+		c.height = innerHeight;
 	}
 
-	shaderCanvas.resizeCanvas(canvas.width, canvas.height);
+	shaderCanvas.resizeCanvas(innerWidth, innerHeight);
 }
 
 function setOriginAndGrid(){
