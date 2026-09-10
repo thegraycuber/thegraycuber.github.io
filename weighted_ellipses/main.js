@@ -61,8 +61,8 @@ function draw(){
 	colorToUniform(ellipseShader,"back");
 	colorToUniform(ellipseShader,"mono");
 
-	ellipseShader.setUniform("origin", [origin.x,height-origin.y]);
-	ellipseShader.setUniform("scalar", scalar);
+	ellipseShader.setUniform("origin", [origin.x/canvasAdjust,(height-origin.y)/canvasAdjust]);
+	ellipseShader.setUniform("scalar", scalar*canvasAdjust);
 
 	let distance = getTost(border,points,weights);
 	ellipseShader.setUniform("distance", distance);
@@ -142,6 +142,7 @@ function setup() {
 
 
 var portrait;
+var canvasAdjust = 1;
 function setupLayout(){
 	portrait = width*5 < height*4;
 
@@ -152,14 +153,16 @@ function setupLayout(){
 	scalar = defaultScalar;
 	scaleMin = 1;
 
-	console.log(innerWidth);
-	let canvasList = document.getElementsByTagName('canvas');
-	for (let c of canvasList){
-		c.width = innerWidth;
-		c.height = innerHeight;
-	}
-
 	shaderCanvas.resizeCanvas(innerWidth, innerHeight);
+
+	let canvasList = document.getElementsByTagName('canvas');
+	canvasAdjust = canvasList[0].width/width;
+	console.log('canvas width',canvasList[0].width,'p5 width',width);
+	// for (let c of canvasList){
+	// 	c.width = innerWidth;
+	// 	c.height = innerHeight;
+	// }
+
 }
 
 function setOriginAndGrid(){

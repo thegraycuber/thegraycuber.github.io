@@ -31,7 +31,6 @@ function draw(){
 
 
 	// updateMovement(false);
-	console.log(mouseOverMenu(),menuLimit);
 	if (dragged > -1){
 		setDigit(addC(draggedSubFocus, focusPrincipal), dragged);
 		document.body.style.cursor = 'grabbing';
