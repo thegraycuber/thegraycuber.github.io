@@ -61,13 +61,13 @@ function draw(){
 	colorToUniform(ellipseShader,"back");
 	colorToUniform(ellipseShader,"mono");
 
-	if (isFirefox){
+	// if (isFirefox){
 		ellipseShader.setUniform("origin", [origin.x,height-origin.y]);
 		ellipseShader.setUniform("scalar", scalar);
-	} else {
-		ellipseShader.setUniform("origin", [origin.x*2,(2*defaultOrigin.y-origin.y)*2]);
-		ellipseShader.setUniform("scalar", scalar*2);
-	}
+	// } else {
+	// 	ellipseShader.setUniform("origin", [origin.x*2,(2*defaultOrigin.y-origin.y)*2]);
+	// 	ellipseShader.setUniform("scalar", scalar*2);
+	// }
 
 	let distance = getTost(border,points,weights);
 	ellipseShader.setUniform("distance", distance);
@@ -118,11 +118,14 @@ function draw(){
 
 }
 
-var canvas, shaderCanvas;
-var ellipseShader, isFirefox;
+var canvas, shaderCanvas, ellipseShader;
+// var isFirefox;
 function setup() {
 
+	shaderCanvas = createGraphics(1, 1, WEBGL);
 	morningRoutine('electric',false);
+
+	ellipseShader = new p5.Shader(this.renderer, basicVert, threellipseFrag);
 
 	principalPos = createVector(0,0);
 
@@ -138,7 +141,7 @@ function setup() {
 	disablePointEdit();
 	lastFrame = Date.now();
 
-	isFirefox = (navigator.userAgent.search('Firefox') > -1);
+	// isFirefox = (navigator.userAgent.search('Firefox') > -1);
 
 	randomize(10);
 }
@@ -156,8 +159,7 @@ function setupLayout(){
 	scalar = defaultScalar;
 	scaleMin = 1;
 
-	shaderCanvas = createGraphics(width, height, WEBGL);
-	ellipseShader = new p5.Shader(this.renderer, basicVert, threellipseFrag);
+	shaderCanvas.resizeCanvas(canvas.width, canvas.height);
 
 }
 
