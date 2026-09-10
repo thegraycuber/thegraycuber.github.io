@@ -10,7 +10,7 @@ var pointVec, weightVec;
 var border = [2,0];
 var center = [0,0];
 var bands = 6;
-var gradient = 20;
+var gradient = 40;
 var radius = 0.18;
 
 var hideCanvas = false;
@@ -61,13 +61,8 @@ function draw(){
 	colorToUniform(ellipseShader,"back");
 	colorToUniform(ellipseShader,"mono");
 
-	// if (isFirefox){
-		ellipseShader.setUniform("origin", [origin.x,height-origin.y]);
-		ellipseShader.setUniform("scalar", scalar);
-	// } else {
-	// 	ellipseShader.setUniform("origin", [origin.x*2,(2*defaultOrigin.y-origin.y)*2]);
-	// 	ellipseShader.setUniform("scalar", scalar*2);
-	// }
+	ellipseShader.setUniform("origin", [origin.x,height-origin.y]);
+	ellipseShader.setUniform("scalar", scalar);
 
 	let distance = getTost(border,points,weights);
 	ellipseShader.setUniform("distance", distance);
@@ -119,7 +114,6 @@ function draw(){
 }
 
 var canvas, shaderCanvas, ellipseShader;
-// var isFirefox;
 function setup() {
 
 	shaderCanvas = createGraphics(1, 1, WEBGL);
@@ -141,7 +135,6 @@ function setup() {
 	disablePointEdit();
 	lastFrame = Date.now();
 
-	// isFirefox = (navigator.userAgent.search('Firefox') > -1);
 
 	randomize(10);
 }
@@ -159,8 +152,14 @@ function setupLayout(){
 	scalar = defaultScalar;
 	scaleMin = 1;
 
-	shaderCanvas.resizeCanvas(canvas.width, canvas.height);
 
+	let canvasList = document.getElementsByTagName('canvas');
+	for (let c of canvasList){
+		c.width = canvas.width;
+		c.height = canvas.height;
+	}
+
+	shaderCanvas.resizeCanvas(canvas.width, canvas.height);
 }
 
 function setOriginAndGrid(){
