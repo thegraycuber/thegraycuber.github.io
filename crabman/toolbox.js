@@ -67,7 +67,7 @@ function showHolder(holderType, displayType = 'flex') {
 }
 
 function windowResized() {
-	resizeCanvas(windowWidth, windowHeight);
+	resizeCanvas(innerWidth, innerHeight);
 
 	if (typeof setupLayout === 'function') {
 		setupLayout();

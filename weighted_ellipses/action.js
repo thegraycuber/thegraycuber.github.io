@@ -306,7 +306,7 @@ function randomize(fixedPointCount = -1){
 
 		for (let c = 0; c < copies; c++){
 			weights.push(random(-1,1));
-			points.push([randomDonut(0.5*zoomFactor,2.5*zoomFactor)]);
+			points.push([randomDonut(0.5*zoomFactor,4*zoomFactor)]);
 			updateRepeats(points.length-1,0,repeater);
 		}
 	}
