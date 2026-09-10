@@ -61,7 +61,7 @@ function draw(){
 	colorToUniform(ellipseShader,"back");
 	colorToUniform(ellipseShader,"mono");
 
-	ellipseShader.setUniform("origin", [origin.x/canvasAdjust,(height-origin.y)/canvasAdjust]);
+	ellipseShader.setUniform("origin", [origin.x*canvasAdjust,(height-origin.y)*canvasAdjust]);
 	ellipseShader.setUniform("scalar", scalar*canvasAdjust);
 
 	let distance = getTost(border,points,weights);
@@ -155,13 +155,7 @@ function setupLayout(){
 
 	shaderCanvas.resizeCanvas(innerWidth, innerHeight);
 
-	let canvasList = document.getElementsByTagName('canvas');
-	canvasAdjust = canvasList[0].width/width;
-	console.log('canvas width',canvasList[0].width,'p5 width',width);
-	// for (let c of canvasList){
-	// 	c.width = innerWidth;
-	// 	c.height = innerHeight;
-	// }
+	canvasAdjust = document.getElementsByTagName('canvas')[0].width/width;
 
 }
 
