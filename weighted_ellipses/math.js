@@ -6,6 +6,14 @@ function getDistance(pointA, pointB){
 	return abs(delta[0]**2 + delta[1]**2)**0.5;
 }
 
+function getPointCount(){
+	let pointAmount = 0;
+	for (let p of points){
+		pointAmount += p.length;
+	}
+	return pointAmount;
+}
+
 function getTost(tostPoint, focusPoints=points, focusweights=weights){
 
 	tostValue = 0;
@@ -17,53 +25,26 @@ function getTost(tostPoint, focusPoints=points, focusweights=weights){
 	return tostValue;
 }
 
-// function smoothPoints(){
-// 	let reach = 100;
-// 	let step = 12;
+function prepareVectors(){
+	pointVec = [];
+	weightVec = [];
+	for (let p = 0; p < points.length; p++){
+		for (let q = 0; q < points[p].length; q++){
+			pointVec.push(...points[p][q]);	
+			weightVec.push(weights[p]);
+		}
+	}
+}
 
-// 	let p0 = [...points[0]];
-
-// 	let currentTosts = [];
-// 	for (let k = 0; k < step; k++){
-// 		currentTosts.push(getTost(angleC(TWO_PI*k/step)));
-// 	}
-
-// 	points[0] = addC(points[0],[-0.02,0]);
-// 	let zontTosts = [];
-// 	for (let k = 0; k < step; k++){
-// 		zontTosts.push(getTost(angleC(TWO_PI*k/step)));
-// 	}
-
-// 	points[0] = addC(points[0],[0.02,-0.02]);
-// 	let vertTosts = [];
-// 	for (let k = 0; k < step; k++){
-// 		vertTosts.push(getTost(angleC(TWO_PI*k/step)));
-// 	}
-
-// 	points[0] = addC(points[0],[0,0.02]);
-
-// 	let currentStd = standardDev(currentTosts);
-// 	let adder = [
-// 		constrain(-(standardDev(zontTosts)-currentStd)/currentStd,-0.02,0.02),
-// 		constrain(-(standardDev(vertTosts)-currentStd)/currentStd,-0.02,0.02),
-// 	];
-// 	points[0] = addC(points[0],adder);
-// }
-
-// function standardDev(stdValues){
-// 	let meanValue = 0;
-// 	for (let s of stdValues){
-// 		meanValue += s;
-// 	}
-// 	meanValue /= stdValues.length;
-
-// 	let stdDev = 0;
-// 	for (let s of stdValues){
-// 		stdDev += (s-meanValue)**2;
-// 	}
-// 	return (stdDev/stdValues.length)**0.5;
-// }
-
+function updateRepeats(p, q, r = -1){
+	let repeat = (r == -1) ? points[p].length : r;
+	let diff = subC(points[p][q], center);
+	let spinner = angleC(TWO_PI/repeat);
+	for (let k = 1; k < repeat; k++){
+		diff = multC(spinner,diff);
+		points[p][modulo(q+k,repeat)] = [...addC(diff,center)];
+	}
+}
 
 
 const basicVert = `
@@ -119,9 +100,3 @@ void main(){
 }
 `;
 
-
-function colorToUniform(shader,colorKey){
-	shader.setUniform(colorKey,
-		 colorToVector(palette[colorKey])
-	);
-}

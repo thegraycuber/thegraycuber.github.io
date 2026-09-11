@@ -1,2 +1,3 @@
 
-NOTHING :)
+
+pan and zoom

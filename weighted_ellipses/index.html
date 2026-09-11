@@ -177,91 +177,63 @@
 	
 	<div id='main-pane' class='container'>
 		<div id='info-holder' class='center-zont'>
-			<h1>header</h1>
-			<p>Text goes here 
+			<h1>weighted ellipses</h1>
+			<p>Applying weights to an ellipses can create amazing patterns!
 			</p>
-			<p>Other text goes here
-			</p>
-			<!-- <p>Press the hearts button to cycle through a curated set of systems. 
-				This is open for submissions, so if you find a cool setup,
-				use the copy button to get the code, and paste it in a comment
-				on <a href='https://youtu.be/d6agN416onM' target='_blank'>my video</a> about the topic.
-				I'll add my favorite ones to this page :)
-			</p>
-			<p>Special thanks to <a href='https://youtu.be/MM0Sbfvf2Hw' target='_blank'>Combo Class</a> for introducing me to 
-				base i - 1, and <a href='https://thomaskaldahl.com/' target='_blank'>Thomas Kaldahl</a> for introducing me to
-				the Eisenstein bases!
+			<p>An ellipse can be defined as the set of all points having some total distance from two focal points.
+				We generalize by allowing for more than two points, and by applying a weight to the distance from each focus.
+				I explain this more thoroughly in <a href='' target='_blank'>my video on the topic</a>.
 			</p>
 
-			<h2>into the math</h2>
-			<p>As a quick recap of base systems, let's take a look at our typical system - base 10.
-				To find the value of a number, we can first split the digits apart:
+			<h2>controls</h2>
+			<p>Start by pressing the die to randomize! This is an easy way to interact with the page.
 			</p>
-			<p style="text-align: center;">1234 = 1000 + 200 + 30 + 4</p>
-			<p>Each of these components is the product of a single digit and a power of the base, determined by the number of zeroes:
+			<p>To add points, press either the + for a positive weight or - for negative.
+				You can click and drag each of the points to position them as desired.
+				This can be tricky while they're spinning, so use the play/pause to toggle spin.
 			</p>
-			<p style="text-align: center;">1000 = 1 * 10³</p>
-			<p style="text-align: center;">200 = 2 * 10²</p>
-			<p>This idea can be applied to other natural bases, such as base 2, or base 12, but what if we make the base imaginary?
+			<p>Each point has some 'repetition', controlled by the arrows. This is 1 by default, but higher values are more interesting.
+				If a point has 5, there will be duplicate points that form a regular pentagon around the center.
+				The center is shown on-screen as a small plus.
+				Try dragging it around! The duplicates will move accordingly, which looks very cool.
 			</p>
-			<h2>base i</h2>
-			<p>Let's replace our base 10 with imaginary number i, which has the property i² = -1. We can calculate the value 1234 as follows:
+			<p>Each point also has some 'weight', which can be controlled by the slider. 
+				The left is -1 and the right is 1. Weights near the center are near 0,
+				meaning that the points will have little effect upon the resulting shape.
+				You can automatically set all weights by pressing the scales.
+				This often produces nice patterns, since it removes tendencies towards a single distance.
 			</p>
-			<p style="text-align: center;">1234 = 1000 + 200 + 30 + 4</p>
-			<p style="text-align: center;">= 1 * i³  +  2 * i²  +  3 * i  +  4</p>
-			<p style="text-align: center;">= -i - 2 + 3i + 4</p>
-			<p style="text-align: center;">= 2i + 2</p>
-			<p>This base technically works, but it has the problem of duplicates:
+			<p>The background is controlled by the gradient slider that determines the 
+				spacing between the bars, and by the on-screen square that determines the reference distance.
 			</p>
-			<p style="text-align: center;">10000 = 1 * i⁴ = (i²)² = (-1)² = 1</p>
-			<p>There are multiple ways to write 1. A well-behaved base system should have a unique representation for each number.
-				Instead we can use base -1+i, which does represent each value uniquely. Paste the following code to see the base:
-			</p>		
-			<p style="text-align: center;">base -1+i with digits 0, and 1</p>
-
-			<h2>base ω-1</h2>
-			<p>Instead of the imaginary unit, which produce a square grid, we can create a hexagonal grid by using ω (omega).
-				It can be defined using either of the following equations. 
-				As an exercise, show that the second implies the first.
-			</p>
-			<p style="text-align: center;">ω² = -ω-1</p>
-			<p style="text-align: center;">ω = (√3i-1)/2</p>
-			<p>Just like i, ω does not work well as a base. However, ω-1 works quite well. Use the following code to check it out:
-			</p>
-			<p style="text-align: center;">base -1+ω with digits 0, 1, and 1+ω</p>
 			
 			<h2>about me</h2>
-			<p>I am TheGrayCuber, a creator of mathematical websites and videos
+			<p>I am TheGrayCuber, a creator of mathematical websites and videos :)
+			</p>
+
+			<p>I hope you enjoy this page! 
+				I had some trouble making the associated video. 
+				Often my intent is to teach a certain mathematical topic. 
+				The task is to create an engaging script and visuals about that topic.
+				However, this concept was just born out of my curiousity 
+				of 'what would happen if we generalize ellipses?', 
+				so the end result is based on whichever settings led to the most interesting pictures.
+				It feels lacking of some deeper meaning, but it's really fun to explore, 
+				so I figure that is meaning enough.
 			</p>
 			
-			<p>This is the first project that I've made since my transition to this new website framework.
-				I welcome suggestions for improvements, so let me know what you think!
+			<p>This is the first project that I've made using shaders.
+				Please let me know if you encounter any issues. It took a lot of fiddling to get working
+				across all my devices and I'm still not sure if it will be broadly supported.
+				Shaders can expand the possibility of future visualizations,
+				but I'm hesitant to use them again if they cause problems for users.
 			</p>
 			
-			<p>My intent behind this page is to offer you a method to easily explore imaginary bases -
-				quickly making adjustments with live feedback - so that you can get the feeling of these 
-				systems without worrying about the mathematical details going on behind the scenes.
-			</p>
-			
-			<p>This reflects my ongoing shift in focus to the experience that we get by engaging with mathematics,
-				as opposed to the precision that we get by doing it 'correctly'. 
-				Of course, building models correctly often leads to positive experiences,
-				but I think it's important to allow for messiness and mistakes, 
-				because they too can provide interesting and novel insights. 
-			</p>
-			
-			<p>Is it worthwhile for beings to spend their time solving dozens of exercises of the same form?
-				Should I value a theory based on its applications, even though so many of those
-				applications have accelerated the issues that cause pain to so many earthlings?
-				I am trying to stop viewing math as a tool to solve problems, 
-				because open communication and critical thinking will generally provide better solutions.
-				Instead, I'll share my love for mathematics as entertainment.
-				A topic that we think about shrimply because it's fun to think about.
-			</p> -->
+
 			<br/>
 			<p class='info-end'>made with love, and without AI</p>
 			<p class='info-end'><a href='https://ko-fi.com/thegraycuber' target='_blank'>leave a tip</a> to support my future creations :)</p>
-			<p class='info-end'><a href='https://github.com/thegraycuber/thegraycuber.github.io/tree/main/weighted_ellipse' target='_blank'>view the code</a> behind this website</p>
+			<p class='info-end'><a href='https://github.com/thegraycuber/thegraycuber.github.io/tree/main/weighted_ellipses' target='_blank'>view the code</a> behind this website</p>
 			<p style='white-space: pre'><br/><br/></p>
 
 		</div>

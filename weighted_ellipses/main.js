@@ -25,6 +25,17 @@ function draw(){
 		return;
 	}
 
+	if (movement){
+		let moveAmount = Date.now() - lastFrame;
+		for (let p = 0; p < points.length; p++){
+			let multer = angleC(moveAmount*0.0003*sin(noise(p*1000+Date.now()*0.0001)*TWO_PI));
+			for (let q = 0; q < points[p].length; q++){
+				points[p][q] = addC(multC(multer,subC(points[p][q],center)),center);
+			}
+		}
+	}
+	lastFrame = Date.now();
+
 	if (draggingItem()){
 		setPoint(addC(draggedSubFocus, focusPrincipal), dragged);
 		document.body.style.cursor = 'grabbing';
@@ -34,16 +45,6 @@ function draw(){
 		document.body.style.cursor = 'default';
 	}
 	
-	if (movement){
-		let moveAmount = Date.now() - lastFrame;
-		for (let p = 0; p < points.length; p++){
-			let multer = angleC(moveAmount*0.0005*sin(noise(p*1000+Date.now()*0.0001)*TWO_PI));
-			for (let q = 0; q < points[p].length; q++){
-				points[p][q] = addC(multC(multer,subC(points[p][q],center)),center);
-			}
-		}
-	}
-	lastFrame = Date.now();
 
 	if (balancing){
 		let balanceLerp = min((Date.now()-balanceStart)*0.001,1);
@@ -54,7 +55,6 @@ function draw(){
 
 		balancing = balanceLerp < 1;
 	}
-	// smoothPoints();
 
 	shaderCanvas.shader(ellipseShader);
 
@@ -100,10 +100,12 @@ function draw(){
 
 	strokeWeight(radius*0.1);
 	fill(palette.mono);
-	circle(...border,radius);	
-
-
+	rect(...border,radius,radius,radius*0.2);	
 	noStroke();
+	fill(palette.half);
+	rect(...border,radius*0.5,radius*0.5,radius*0.1);	
+
+
 	fill(palette.back);
 	rect(...center,radius*0.4,radius,radius*0.4);	
 	rect(...center,radius,radius*0.4,radius*0.4);	
@@ -152,6 +154,7 @@ function setupLayout(){
 	defaultScalar = min(width*1.5,height*0.6)*0.13;
 	scalar = defaultScalar;
 	scaleMin = 1;
+	radius = 0.18;
 
 	shaderCanvas.resizeCanvas(innerWidth, innerHeight);
 
@@ -172,6 +175,12 @@ function setOriginAndGrid(){
 		defaultOrigin = createVector(width*0.5+(menuHidden?0:height*0.15),height*0.5);
 		menuLimit = (menuHidden?0:height*0.3);
 	}
+}
+
+function colorToUniform(shader,colorKey){
+	shader.setUniform(colorKey,
+		 colorToVector(palette[colorKey])
+	);
 }
 
 var mainFont, regularFont;

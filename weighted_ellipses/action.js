@@ -129,12 +129,12 @@ function mouseWheel(event){
 		scalarLog -= event.delta/2048; // make this positive to invert scroll
 		scalar = max(scaleMin,exp(scalarLog));
 		radius = 0.18*defaultScalar/scalar;
-	} 
-	
-	// else if (dragged[0] < points.length) {
-	// 	weights[dragged[0]] -= event.delta/(keyIsDown(SHIFT)?8192:512); 
-	// 	document.getElementById('indicator').innerHTML = str(round(weights[dragged[0]],2));
-	// }	
+
+	} else if (dragged[0] > -1) {
+		let newWeight = round(constrain(weights[dragged[0]] - event.delta/2048,-1,1)*100);
+		document.getElementById('slider-weight').value = round(newWeight);
+		setWeight(newWeight);
+	}	
 
 	updateMovement();
 }
@@ -148,7 +148,6 @@ function mouseWheel(event){
 
 
 function iconChecks(){
-
 }
 
 function customToggleHolder(holderType, holderToggle){
@@ -199,7 +198,6 @@ function setPoint(newPoint,pointIndex){
 			updateRepeats(p,0);
 		}
 	}
-	// findMinimum();
 }
 
 
@@ -218,25 +216,23 @@ function setWeight(weightRaw){
 }
 
 let repetitionList = [1,2,3,4,5,6,7,8];
+let selectedColor = 'backlight';
 function enablePointEdit(newSelected){
 
 	let pointIcon = document.getElementById('svg-point');
-	if (selected[0] > -1){
-		pointIcon.classList.toggle('svg-' + (weights[selected[0]] > 0 ? 'front' : 'alert'));
-	} else {
-		pointIcon.classList.toggle('svg-backlight');
-	}
-	
+	pointIcon.classList.toggle('svg-' + selectedColor);
+
 	selected = [...newSelected];
-	let pointColor = weightToColor(weights[selected[0]]);
-	pointIcon.classList.toggle('svg-' + pointColor);
+	selectedColor = weightToColor(weights[selected[0]]);
+	pointIcon.classList.toggle('svg-' + selectedColor);
+
 
 	let maxRepeat = min(8,pointCountLimit-getPointCount()+points[selected[0]].length);
 	controllers['arrow-repetition'].enable();
 	controllers['arrow-repetition'].giveList(repetitionList.slice(0,maxRepeat),points[selected[0]].length-1);
 
 
-	document.documentElement.style.setProperty('--color-slider', palette[pointColor]);
+	document.documentElement.style.setProperty('--color-slider', palette[selectedColor]);
 	document.getElementById('slider-weight').disabled = false;
 
 	document.getElementById('slider-weight').value = round(weights[selected[0]]*100);
@@ -249,12 +245,10 @@ function weightToColor(pointWeight){
 
 function disablePointEdit(){
 
-	if (selected[0] > -1){
-		let pointIcon = document.getElementById('svg-point');
-		pointIcon.classList.toggle('svg-backlight');
-		pointIcon.classList.toggle('svg-' + (weights[selected[0]] > 0 ? 'front' : 'alert'));
-
-	}
+	let pointIcon = document.getElementById('svg-point');
+	pointIcon.classList.toggle('svg-' + selectedColor);
+	selectedColor = 'backlight';
+	pointIcon.classList.toggle('svg-' + selectedColor);
 
 	selected = [-1,-1];
 	controllers['arrow-repetition'].disable();
@@ -311,6 +305,8 @@ function randomize(fixedPointCount = -1){
 		}
 	}
 
+	border = randomCircle(3*zoomFactor);
+
 	pointChange();
 	balance();
 	balanceStart = 0;
@@ -320,7 +316,7 @@ var balancing = false;
 var balanceStart;
 var balanceValues;
 function balance(){
-	if (balancing){return;}
+	if (balancing || points.length == 1){return;}
 
 	balancing = true;
 	balanceStart = Date.now();
@@ -331,6 +327,7 @@ function balance(){
 	}
 
 	avgWeight /= getPointCount();
+	
 
 	balanceValues = [];
 	let maxSize = 0;
@@ -339,8 +336,16 @@ function balance(){
 		maxSize = max(maxSize, abs(balanceValues[p][1]));
 	}
 
-	for (let p = 0; p < weights.length; p++){
-		balanceValues[p][1] /= maxSize;
+	if (maxSize == 0){
+		for (let p = 0; p < weights.length; p++){
+			weights[p] += random(-0.02,0.02);
+		}
+		balancing = false;
+		balance();
+	} else {
+		for (let p = 0; p < weights.length; p++){
+			balanceValues[p][1] /= maxSize;
+		}
 	}
 }
 
@@ -352,17 +357,6 @@ function getDragged(){
 		return border;
 	} else {
 		return center;
-	}
-}
-
-
-function updateRepeats(p, q, r = -1){
-	let repeat = (r == -1) ? points[p].length : r;
-	let diff = subC(points[p][q], center);
-	let spinner = angleC(TWO_PI/repeat);
-	for (let k = 1; k < repeat; k++){
-		diff = multC(spinner,diff);
-		points[p][modulo(q+k,repeat)] = [...addC(diff,center)];
 	}
 }
 
@@ -386,25 +380,6 @@ function pointChange(){
 		addEnabled = !addEnabled;
 	}
 
-}
-
-function prepareVectors(){
-	pointVec = [];
-	weightVec = [];
-	for (let p = 0; p < points.length; p++){
-		for (let q = 0; q < points[p].length; q++){
-			pointVec.push(...points[p][q]);	
-			weightVec.push(weights[p]);
-		}
-	}
-}
-
-function getPointCount(){
-	let pointAmount = 0;
-	for (let p of points){
-		pointAmount += p.length;
-	}
-	return pointAmount;
 }
 
 function randomDonut(lowerRoot, upperRoot){

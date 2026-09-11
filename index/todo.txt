@@ -1,4 +1,3 @@
 
 link to slides video
-new hexponents image
 use local storage for palettes
