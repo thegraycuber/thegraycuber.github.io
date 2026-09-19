@@ -1,2 +1,2 @@
 
-NOTHING :)
+load a small file when first open
