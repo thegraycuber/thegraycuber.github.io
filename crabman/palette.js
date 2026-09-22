@@ -178,7 +178,10 @@ var palettes = {
 	seascape:{
 		code: "#ADEFE8-#003D41-#1AFDAF-#B489FF-#FD88BE"
 	},
-
+	// toby:{
+	// 	code: "#FFE5B6-#13001D-#FC833E-#A945F8-#FFFFFF"
+	// 	code: "#FFCA99-#13001D-#FC843F-#9531E3-#D53434"
+	// },
 
 }
 

@@ -174,13 +174,13 @@ function addPoint(pointWeight){
 function deletePoint(){
 
 	if (!trashEnabled){return;}
-	disablePointEdit();
 
 	let deleteIndex = (selected[0] == -1) ? points.length - 1 : selected[0];
 
 	points.splice(deleteIndex,1);
 	weights.splice(deleteIndex,1);
 	
+	disablePointEdit();
 	pointChange();
 }
 
@@ -289,7 +289,7 @@ function randomize(fixedPointCount = -1){
 	points = [];
 	weights = [];
 
-	let pointCount = (fixedPointCount == -1) ? floor(random(6,18)) : fixedPointCount;
+	let pointCount = (fixedPointCount == -1) ? floor(random(5,16)) : fixedPointCount;
 	let unplaced = pointCount;
 	let zoomFactor = defaultScalar/scalar;
 	while (unplaced > 0){
