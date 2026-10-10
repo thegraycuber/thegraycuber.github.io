@@ -155,6 +155,7 @@ function randomPalette(){
 
 
 var videoLinks = [
+	'https://youtu.be/32SyhSNtGew', // hiking in imaginary numbers
 	'https://youtu.be/S9-S7knul30', // negative ellipses
 	'https://youtu.be/VKeg2NtzJAo', // ellipses with 3 foci
 	'https://youtu.be/SbYee_gWLv0', // 3d bases
