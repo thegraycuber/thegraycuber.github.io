@@ -70,6 +70,7 @@ html {
 }
 
 
+
 svg{
 	stroke-linecap: round;
 	stroke-linejoin: round;
@@ -339,6 +340,39 @@ icon-menu{
 
 
 
+.hover-alert:hover {
+	color: var(--color-alert) !important;
+	fill: var(--color-alert) !important;
+	stroke: var(--color-alert) !important;
+}
+.hover-vivid:hover {
+	color: var(--color-vivid) !important;
+	fill: var(--color-vivid) !important;
+	stroke: var(--color-vivid) !important;
+}
+.hover-mono:hover {
+	color: var(--color-mono) !important;
+	fill: var(--color-mono) !important;
+	stroke: var(--color-mono) !important;
+}
+.hover-front:hover {
+	color: var(--color-front) !important;
+	fill: var(--color-front) !important;
+	stroke: var(--color-front) !important;
+}
+.hover-back:hover {
+	color: var(--color-back) !important;
+	fill: var(--color-back) !important;
+	stroke: var(--color-back) !important;
+}
+.hover-half:hover {
+	color: var(--color-half) !important;
+	fill: var(--color-half) !important;
+	stroke: var(--color-half) !important;
+}
+
+
+
 .slider {
   -webkit-appearance: none;
   height: 6px; 
@@ -376,5 +410,4 @@ icon-menu{
   background: var(--color-backlight);
   cursor: auto;
 }
-
 

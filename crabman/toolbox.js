@@ -394,6 +394,10 @@ function superscriptInt(superVal, isExponent = true) {
 	return superString;
 }
 
+function copyObject(objectToCopy){
+	return JSON.parse(JSON.stringify(objectToCopy));
+}
+
 
 function textLimited(textValue, x, y, s, maxSize) {
 

@@ -2,3 +2,5 @@
 future:
 
     save image crops menubar location
+
+    options to drop markers to highlight multiples

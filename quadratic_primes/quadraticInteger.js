@@ -129,8 +129,16 @@ class QInt {
 function intShape(re,im){
 	if (isHex){
 		hexagon(re/2,-im*0.866,0.5);
-	} else {
+	} else {	
 		rect(re,-im,1);
+		// push();
+		// translate(re,-im);
+		// rect(0,0,1,0.1);
+		// rect(0,0,0.1,1);
+		// rotate(PI/4);
+		// rect(0,0,1.4,0.1);
+		// rect(0,0,0.1,1.4);
+		// pop();
 	}
 }
 

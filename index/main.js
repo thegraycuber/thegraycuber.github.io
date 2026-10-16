@@ -92,7 +92,7 @@ function prepPreview(direction = 1) {
 var previews = [
 	['cursed equations', '/cursed_equations', 'electric'],
 	['complex primes', '/quadratic_primes', 'sunset'],
-	['fastest numbers', '/fast_numbers', 'dark'],
+	// ['fastest numbers', '/fast_numbers', 'dark'],
 	// ['hypercomplex grapher','/hypercomplex_grapher','electric'],
 	['hexponents!', '/hexponents', 'sunset'],
 	['visual groups', '/group_visualizer', 'forest'],
