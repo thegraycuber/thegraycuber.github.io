@@ -1,6 +1,7 @@
 
 custom highlight color
 improve the readme
+remove iframes?
 rename Controller
 favorites backwards
 consolidate repeated css into core

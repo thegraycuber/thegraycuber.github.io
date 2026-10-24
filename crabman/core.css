@@ -14,8 +14,8 @@ html, body {
 	 
 	scrollbar-color: var(--color-half);
 	scrollbar-width: thin;
-}
-html {
+} 
+body {
 	background-color: var(--color-back);
 }
 
