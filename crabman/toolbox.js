@@ -398,6 +398,29 @@ function copyObject(objectToCopy){
 	return JSON.parse(JSON.stringify(objectToCopy));
 }
 
+function copyThing(thingToCopy,thingType = null){
+
+	if (thingType == 'vector'){
+		return thingToCopy.copy();
+	} else if (thingType == 'color'){
+		return copyColor(thingToCopy);
+	}
+
+	if (Array.isArray(thingToCopy)){
+		let copiedArray = [];
+		for (let a of thingToCopy){
+			copiedArray.push(copyThing(a));
+		}
+		return copiedArray;
+	}
+
+	if (typeof thingToCopy == 'object'){
+		return copyObject(thingToCopy);
+	}
+	return thingToCopy;
+}	
+
+
 
 function textLimited(textValue, x, y, s, maxSize) {
 
