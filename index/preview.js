@@ -249,8 +249,10 @@ function visualGroupPrep(){
 
 function visualGroupDraw(){
 	
-	inTheta = previewTimer*2.331;
-	outTheta = previewTimer*0.802;
+	let timeChange = (Date.now()-lastDisplay);
+	lastDisplay = Date.now();
+	inTheta += timeChange*0.000253;
+	outTheta += timeChange*0.000129;
 	
 	for (let el of mainList){
 		el.update();
